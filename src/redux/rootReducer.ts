@@ -4,6 +4,8 @@ import { reducer as dashboard } from './Dashboard';
 import { reducer as game } from './Game';
 import { reducer as settings } from './Settings';
 import { reducer as header } from './Header';
+import { reducer as user } from './User';
+import { reducer as opponent } from './Opponent';
 
 const rootReducer = combineReducers({
   app,
@@ -11,6 +13,8 @@ const rootReducer = combineReducers({
   game,
   settings,
   header,
+  user,
+  opponent,
 });
 
 export default rootReducer;

@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import useStyles from './styles';
 import { useSelector } from 'react-redux';
 import {
   dashboardSelector,
@@ -8,24 +7,23 @@ import {
 import InGameDashboard from './components/InGameDashboard';
 import MainScreenDashboard from './components/MainScreenDashboard';
 import SettingsDashboard from './components/SettingsDashboard';
+import OpponentDashboard from './components/OpponentDashboard';
 
 export const Dashboard: FC = () => {
-  const classes = useStyles({});
   const { type } = useSelector(dashboardSelector);
 
-  return (
-    <nav id={'dashboard'} className={classes.root}>
-      {type === DashboardTypes.MainScreen && (
-        <MainScreenDashboard/>
-      )}
-      {type === DashboardTypes.InGame && (
-        <InGameDashboard/>
-      )}
-      {type === DashboardTypes.Settings && (
-        <SettingsDashboard/>
-      )}
-    </nav>
-  );
+  switch (type) {
+    case DashboardTypes.MainScreen:
+      return <MainScreenDashboard/>;
+    case DashboardTypes.InGame:
+      return <InGameDashboard/>;
+    case DashboardTypes.Settings:
+      return <SettingsDashboard/>;
+    case DashboardTypes.SetUpOpponent:
+      return <OpponentDashboard/>;
+    default:
+      return null;
+  }
 };
 
 export default Dashboard;

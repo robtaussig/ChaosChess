@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import useStyles from './styles';
 import Header from '../Header/';
 import Board from '../Board/';

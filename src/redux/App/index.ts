@@ -2,7 +2,7 @@ import appReducer from './reducer';
 import { RootState } from '../types';
 
 export const {
-  nameSubmitted,
+  returnHome,
 } = appReducer.actions;
 
 export const reducer = appReducer.reducer;

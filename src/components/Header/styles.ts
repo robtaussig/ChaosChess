@@ -9,5 +9,14 @@ export default makeStyles((theme: Theme) => ({
     padding: '15px 0',
     paddingBottom: 0,
     justifyContent: 'center',
+    position: 'relative',
+  },
+  homeButton: {
+    backgroundColor: 'transparent',
+    color: 'white',
+    position: 'absolute',
+    right: 30,
+    top: '50%',
+    '--ggs': 1.5,
   },
 }));

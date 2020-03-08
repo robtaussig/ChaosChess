@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HeaderText } from './types';
-import { gameStarted } from '../Game';
+import { gameStarted, setUpVsAI, setUpVsHuman } from '../Game';
 import { settingsOpened } from '../Settings';
+import { returnHome } from '../App';
 
-const INITIAL_STATE: HeaderText = HeaderText.ChaosChess;
+const INITIAL_STATE: string = HeaderText.ChaosChess;
 
 export default createSlice({
   name: 'header',
@@ -12,11 +13,20 @@ export default createSlice({
 
   },
   extraReducers: {
+    [setUpVsAI.type]: (_state) => {
+      return 'Setup Game';
+    },
+    [setUpVsHuman.type]: (_state) => {
+      return 'Find Opponent';
+    },
     [gameStarted.type]: (_state, action) => {
-      return `vs ${action.payload.opponent}` as any;
+      return `vs ${action.payload.opponent}`;
     },
     [settingsOpened.type]: () => {
       return HeaderText.Settings;
+    },
+    [returnHome.type]: () => {
+      return HeaderText.ChaosChess;
     },
   },
 });

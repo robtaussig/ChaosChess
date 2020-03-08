@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import useStyles from './styles';
 import { useSelector } from 'react-redux';
 import { headerSelector } from '../../redux/Header';
+import 'css.gg/icons/home.css';
 
 export const Header: FC = () => {
   const classes = useStyles({});
