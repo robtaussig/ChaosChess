@@ -16,11 +16,25 @@ html {
 
 #root {
 	background: rgb(76,76,82);
-	background: linear-gradient(133deg, rgba(76,76,82,1) 0%, rgba(63,63,227,1) 50%, rgba(125,210,135,1) 100%);
+	background: linear-gradient(
+		133deg, 
+		rgba(76,76,82,1) 0%, 
+		rgba(63,63,227,1) 50%, 
+		rgba(125,210,135,1) 100%
+	);
 }
 
 #header {
 	font-family: 'Oxanium';
+	background: linear-gradient(
+		133deg, 
+		rgba(125,210,135,1) 0%,
+		rgba(239,239,255,1) 50%, 
+		rgba(125,210,135,1) 100%
+	);
+	-webkit-background-clip: text;
+	background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 

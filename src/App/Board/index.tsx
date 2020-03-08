@@ -9,9 +9,9 @@ export const Board: FC<BoardProps> = () => {
   const classes = useStyles({});
 
   return (
-    <div id={'board'} className={classes.root}>
+    <main id={'board'} className={classes.root}>
 
-    </div>
+    </main>
   );
 };
 

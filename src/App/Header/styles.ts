@@ -5,7 +5,8 @@ export const useStyles = makeStyles((theme: any) => ({
     color: '#212121',
     fontSize: 50,
     display: 'flex',
-    padding: '20px 0',
+    padding: '15px 0',
+    paddingBottom: 0,
     justifyContent: 'center',
   },
 }));

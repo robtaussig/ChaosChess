@@ -9,9 +9,9 @@ export const Header: FC<HeaderProps> = () => {
   const classes = useStyles({});
 
   return (
-    <div id={'header'} className={classes.root}>
+    <h1 id={'header'} className={classes.root}>
       ChaosChess
-    </div>
+    </h1>
   );
 };
 
