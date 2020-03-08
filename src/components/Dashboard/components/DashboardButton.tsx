@@ -6,7 +6,7 @@ interface DashboardButtonProps {
   classes: any;
   className: string;
   icon: string;
-  onClick: () => void;
+  onClick: (event: any) => void;
   disabled?: boolean;
 }
 
@@ -19,6 +19,11 @@ export const DashboardButton: FC<DashboardButtonProps> = ({
   disabled,
 }) => {
 
+  const handleClick = (e: any) => {
+    navigator.vibrate(50);
+    onClick(e);
+  };
+
   return (
     <button
       className={classNames(
@@ -26,7 +31,7 @@ export const DashboardButton: FC<DashboardButtonProps> = ({
         className,
       )}
       aria-label={label}
-      onClick={onClick}
+      onClick={handleClick}
       disabled={Boolean(disabled)}
     >
       <i className={`gg-${icon}`}/>
