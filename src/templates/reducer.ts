@@ -1,11 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../redux/rootReducer';
 
+export interface ReducerNameState {
+  name: string;
+}
+
+const INITIAL_STATE: ReducerNameState = {
+  name: 'Rob',
+};
+
 const reducerName = createSlice({
   name: 'reducerName',
-  initialState: 0 as number,
+  initialState: INITIAL_STATE,
   reducers: {
-    actionType: state => state + 1,
+    actionType: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
+    },
   },
 });
 

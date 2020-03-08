@@ -10,7 +10,7 @@ export const Header: FC<HeaderProps> = () => {
 
   return (
     <div id={'header'} className={classes.root}>
-
+      ChaosChess
     </div>
   );
 };

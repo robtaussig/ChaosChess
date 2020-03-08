@@ -3,8 +3,22 @@ import { Theme } from '../theme';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.background,
     height: '100%',
     width: '100%',
+    display: 'grid',
+    gridTemplateAreas: `"header"
+                        "board"
+                        "dashboard"`,
+    gridTemplateRows: 'max-content 100vw 1fr',
+    gridTemplateColumns: '1fr',
+    '& #header': {
+      gridArea: 'header',
+    },
+    '& #board': {
+      gridArea: 'board',
+    },
+    '& #dashboard': {
+      gridArea: 'dashboard',
+    },
   },
 }));
