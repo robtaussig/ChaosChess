@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/styles';
+import { Theme } from '../../theme';
 
-export const useStyles = makeStyles((theme: any) => ({
+export default makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: '#ffffff59',
     margin: 15,

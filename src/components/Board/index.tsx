@@ -1,11 +1,7 @@
 import React, { FC } from 'react';
-import { useStyles } from './styles';
+import useStyles from './styles';
 
-interface BoardProps {
-  
-}
-
-export const Board: FC<BoardProps> = () => {
+export const Board: FC = () => {
   const classes = useStyles({});
 
   return (

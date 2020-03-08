@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { useStyles } from './styles';
-import Header from './Header/';
-import Board from './Board/';
-import Dashboard from './Dashboard/';
+import useStyles from './styles';
+import Header from '../Header/';
+import Board from '../Board/';
+import Dashboard from '../Dashboard/';
 
 interface AppProps {
   children?: any,
