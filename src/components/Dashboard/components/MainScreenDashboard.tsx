@@ -24,7 +24,6 @@ export const MainScreenDashboard: FC = () => {
       <DashboardButton
         classes={classes}
         className={'vs-human'}
-        disabled
         label={'vs Human'}
         icon={'games'}
         onClick={() => dispatch(setUpVsHuman())}

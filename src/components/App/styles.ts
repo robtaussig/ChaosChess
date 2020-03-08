@@ -7,7 +7,7 @@ export default makeStyles((theme: Theme) => ({
     width: '100%',
     display: 'grid',
     gridTemplateAreas: `"header"
-                        "board"
+                        "main"
                         "dashboard"`,
     gridTemplateRows: 'max-content 100vw 1fr',
     gridTemplateColumns: '1fr',
@@ -15,7 +15,16 @@ export default makeStyles((theme: Theme) => ({
       gridArea: 'header',
     },
     '& #board': {
-      gridArea: 'board',
+      gridArea: 'main',
+    },
+    '& #rules': {
+      gridArea: 'main',
+    },
+    '& #settings': {
+      gridArea: 'main',
+    },
+    '& #friend-finder': {
+      gridArea: 'main',
     },
     '& #dashboard': {
       gridArea: 'dashboard',

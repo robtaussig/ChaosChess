@@ -20,7 +20,7 @@ export const DashboardButton: FC<DashboardButtonProps> = ({
 }) => {
 
   const handleClick = (e: any) => {
-    navigator.vibrate(50);
+    navigator.vibrate(10);
     onClick(e);
   };
 

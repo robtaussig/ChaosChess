@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import useStyles from './styles';
 import Header from '../Header/';
-import Board from '../Board/';
+import Main from '../Main/';
 import Dashboard from '../Dashboard/';
 
 interface AppProps {
@@ -14,7 +14,7 @@ export const App: FC<AppProps> = () => {
   return (
     <div id={'app'} className={classes.root}>
       <Header/>
-      <Board/>
+      <Main/>
       <Dashboard/>
     </div>
   );
