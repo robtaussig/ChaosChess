@@ -1,7 +1,7 @@
 import './style.scss';
 import React from 'react';
 import { render } from 'react-dom';
-import { App } from '~/App';
+import { App } from '~/components/App';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme';
 import { Provider } from 'react-redux';
