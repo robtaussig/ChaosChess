@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "$(npm bin)/jest",
-    "build": "npm test && $(npm bin)/parcel build ./src/index.html --no-source-maps",
+    "build": "$(npm bin)/parcel build ./src/index.html --no-source-maps",
     "start": "$(npm bin)/tsc --noEmit --watch & $(npm bin)/parcel ./src/index.html"
   },
   "author": "",
