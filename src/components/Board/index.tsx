@@ -19,8 +19,9 @@ import {
   legalMovesReceived,
 } from '../../redux/Chess';
 import { userSelector } from '../../redux/User';
-
-const getChaoticBoard = (): string => DEFAULT_BOARD;
+import {
+  getChaoticBoard,
+} from './util';
 
 export const Board: FC = () => {
   const classes = useStyles({});
@@ -41,10 +42,10 @@ export const Board: FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const getBoardState = () => {
+    const getBoardState = async () => {
       const startingBoard = type === GameTypes.Regular ?
         DEFAULT_BOARD :
-        getChaoticBoard();
+        await getChaoticBoard();
       
       dispatch(gameInitialized(startingBoard));
     };
@@ -84,7 +85,6 @@ export const Board: FC = () => {
     }
   }, [stage, board, userColor, dispatch]);
 
-  console.log(legalMoves)
   return (
     <main ref={rootRef} id={'board'} className={classes.root}>
       <CanvasChess

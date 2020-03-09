@@ -10,6 +10,7 @@ import {
   flipBit,
   movePiece,
   getValidPiecesToMoveFromLegalMoveList,
+  removeMoveThatCapturesKing,
 } from './util';
 
 const INITIAL_STATE: ChessState = {
@@ -19,6 +20,7 @@ const INITIAL_STATE: ChessState = {
   validPiecesToMove: [],
   lastRejectedMove: null,
   nodesExplored: null,
+  turnsElapsed: 0,
 };
 
 //TODO check for check on moveAttempted
@@ -51,6 +53,7 @@ export default createSlice({
           lastRejectedMove: null,
           legalMoves: [],
           validPiecesToMove: [],
+          turnsElapsed: state.turnsElapsed + 1,
         };
       } else {
         return {
@@ -82,14 +85,28 @@ export default createSlice({
       };
     },
     legalMovesReceived: (state, action: PayloadAction<ChessResponse>) => {
+      if (state.turnsElapsed === 0) {
+        const legalMovesWithoutKingCapture = removeMoveThatCapturesKing(
+          action.payload.legalMoves,
+          state.board,
+        );
         return {
           ...state,
-          isCheck: action.payload.isCheck,
-          legalMoves: action.payload.legalMoves,
+          isCheck: false,
+          legalMoves: legalMovesWithoutKingCapture,
           validPiecesToMove: getValidPiecesToMoveFromLegalMoveList(
-            action.payload.legalMoves,
+            legalMovesWithoutKingCapture,
           ),
         };
+      }
+      return {
+        ...state,
+        isCheck: action.payload.isCheck,
+        legalMoves: action.payload.legalMoves,
+        validPiecesToMove: getValidPiecesToMoveFromLegalMoveList(
+          action.payload.legalMoves,
+        ),
+      };
     },
   },
   extraReducers: {

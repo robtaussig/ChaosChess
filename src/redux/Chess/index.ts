@@ -12,8 +12,13 @@ export const reducer = chessReducer.reducer;
 
 export const chessSelector = (state: RootState) => state.chess;
 
-export { ChessState, ChessResponse } from './types';
+export {
+  ChessState,
+  ChessResponse,
+  WhitePieces,
+  BlackPieces,
+} from './types';
 
-export { DEFAULT_BOARD, CONSTANTS } from './constants';
+export { DEFAULT_BOARD, CONSTANTS, EMPTY_BOARD } from './constants';
 
 export { getValidPiecesToMoveFromLegalMoveList } from './util';

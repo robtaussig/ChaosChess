@@ -5,6 +5,7 @@ export interface ChessState {
   validPiecesToMove: string[];
   lastRejectedMove: string;
   nodesExplored: number;
+  turnsElapsed: number;
 }
 
 export interface ChessResponse {
@@ -27,4 +28,22 @@ export type InitializeGamePayload = {
 export type MoveAttemptedPayload = {
   from: number;
   to: number;
+}
+
+export enum WhitePieces {
+  King = 'k',
+  Queen = 'q',
+  Rook = 'r',
+  Bishop = 'b',
+  Knight = 'n',
+  Pawn = 'p',
+};
+
+export enum BlackPieces {
+  King = 'K',
+  Queen = 'Q',
+  Rook = 'R',
+  Bishop = 'B',
+  Knight = 'N',
+  Pawn = 'P',
 }

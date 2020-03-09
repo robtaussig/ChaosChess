@@ -1,4 +1,5 @@
 export const DEFAULT_BOARD = '00000000000rnbqkbnr00pppppppp00--------00--------00--------00--------00PPPPPPPP00RNBQKBNR0000000000000000000000';
+export const EMPTY_BOARD = '00000000000--------00--------00--------00--------00--------00--------00--------00--------0000000000000000000000';
 
 const EMPTY_SQUARE = '-';
 const BLACK_ROOK = 'r';
