@@ -53,6 +53,7 @@ export default createSlice({
           lastRejectedMove: null,
           legalMoves: [],
           validPiecesToMove: [],
+          isCheck: false,
           turnsElapsed: state.turnsElapsed + 1,
         };
       } else {
