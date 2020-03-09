@@ -9,6 +9,7 @@ export enum GameStages {
   SettingUpAI = 'SettingUpAI',
   SettingUpHuman = 'SettingUpHuman',
   Started = 'Started',
+  InProgress = 'InProgress',
 }
 
 export enum GameTypes {

@@ -7,4 +7,10 @@ export enum Avatar {
 export interface UserState {
   avatar: Avatar;
   name: string;
+  color: Color;
+}
+
+export enum Color {
+  White = '0',
+  Black = '1',
 }

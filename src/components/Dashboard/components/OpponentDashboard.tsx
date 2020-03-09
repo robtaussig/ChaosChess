@@ -10,16 +10,17 @@ import {
   gameSelector,
   GameTypes,
   gameTypeSelected,
+  gameStarted,
 } from '../../../redux/Game';
-import {
-  returnHome
-} from '../../../redux/App';
+import { returnHome } from '../../../redux/App';
+import { opponentSelector } from '../../../redux/Opponent';
 import classNames from 'classnames';
 
 export const OpponentDashboard: FC = () => {
   const classes = useOpponentDashboardStyles({});
   const dispatch = useDispatch();
   const { type } = useSelector(gameSelector);
+  const { type: opponentType } = useSelector(opponentSelector);
 
   return (
     <div className={classes.root}>      
@@ -55,7 +56,7 @@ export const OpponentDashboard: FC = () => {
         className={'ready'}
         label={'Ready'}
         icon={'check'}
-        onClick={() => dispatch(returnHome())}
+        onClick={() => dispatch(gameStarted({ opponent: opponentType }))}
       />
     </div>
   );

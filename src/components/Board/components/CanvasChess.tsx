@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useRef } from 'react';
-import Game from '../../game';
+import Game from '../../../game';
 
 interface CanvasChessProps {
-  onMove: (from: string, to: string) => void;
+  onMove: (from: number, to: number) => void;
   board: string;
   legalMoves: string[];
   validPiecesToMove: string[];
@@ -82,11 +82,9 @@ export const CanvasChess: FC<CanvasChessProps> = ({
 
   useEffect(() => {
     gameRef.current.updateLegalMoves(legalMoves);
-  }, [legalMoves]);
-
-  useEffect(() => {
     gameRef.current.updateValidPieces(validPiecesToMove);
-  }, [validPiecesToMove]);
+    gameRef.current.updateBoard(board);
+  }, [legalMoves, validPiecesToMove, board]);
 
   return (
     <canvas

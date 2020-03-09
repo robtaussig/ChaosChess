@@ -6,6 +6,7 @@ import {
   GameStartedPayload,
 } from './types';
 import { returnHome } from '../App';
+import { gameInitialized } from '../Chess';
 
 const INITIAL_STATE: GameState = {
   stage: GameStages.NotStarted,
@@ -36,6 +37,9 @@ export default createSlice({
   extraReducers: {
     [returnHome.type]: state => {
       state.stage = GameStages.NotStarted;
+    },
+    [gameInitialized.type]: state => {
+      state.stage = GameStages.InProgress;
     },
   },
 });

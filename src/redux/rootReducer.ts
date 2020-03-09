@@ -6,6 +6,7 @@ import { reducer as settings } from './Settings';
 import { reducer as header } from './Header';
 import { reducer as user } from './User';
 import { reducer as opponent } from './Opponent';
+import { reducer as chess } from './Chess';
 
 const rootReducer = combineReducers({
   app,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   header,
   user,
   opponent,
+  chess,
 });
 
 export default rootReducer;

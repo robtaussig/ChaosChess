@@ -3,6 +3,7 @@
     "moduleResolution": "node",
     "baseUrl": "src",
     "esModuleInterop": true,
+    "downlevelIteration": true,
     "noImplicitAny": true,
     "jsx": "react",
     "paths": {
