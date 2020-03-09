@@ -61,11 +61,7 @@ export const Board: FC = () => {
         `https://robtaussig.com/chess/${board}?withBestMove=true`
       ).then(res => res.json());
 
-      if (response.bestMove) {
-        dispatch(moveReceived(response));
-      } else {
-        throw new Error('No best move received');
-      }
+      dispatch(moveReceived(response))
     };
 
     const getAvailableMoves = async () => {

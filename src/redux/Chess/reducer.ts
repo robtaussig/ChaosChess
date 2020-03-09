@@ -69,7 +69,18 @@ export default createSlice({
       }
     },
     moveReceived: (state, action: PayloadAction<ChessResponse>) => {
-      const { isCheck, bestMove, nodesExplored } = action.payload;
+      const { isCheck, bestMove, nodesExplored, legalMoves } = action.payload;
+
+      if (isCheck && legalMoves.length === 0) {
+        return {
+          ...state,
+          isCheck,
+          nodesExplored,
+          legalMoves,
+          lastRejectedMove: null,
+        };
+      }
+
       const [from, to] = bestMove.split('-').map(Number);
 
       return {

@@ -63,15 +63,24 @@ export const useMainScreenDashboardStyles = makeStyles((theme: Theme) => ({
 export const useInGameDashboard = makeStyles((theme: Theme) => ({
   root: {
     ...rootStyles(theme),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    display: 'grid',
+    gridTemplateAreas: `"text-left text-right"
+                        "start-over start-over"`,
+    gridTemplateRows: '1fr 1fr',
+    gridTemplateColumns: '1fr max-content',
+    gridGap: '20px',
+    padding: 20,
+    '& .start-over': {
+      gridArea: 'start-over',
+    },
   },
   dashboardButton: {
     ...buttonStyles(theme),
   },
   inGameDashboardText: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     fontSize: 30,
     fontFamily: "Oxanium",
   },
