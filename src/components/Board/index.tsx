@@ -1,27 +1,28 @@
-import React, { FC, useCallback, useState, useRef } from 'react';
+import React, { FC, useRef, useCallback, useState } from 'react';
 import useStyles from './styles';
 import {CanvasChess} from './CanvasChess';
-import { DEFAULT_BOARD } from './constants';
+import { DEFAULT_BOARD, BOARD_MARGIN } from './constants';
 
 export const Board: FC = () => {
   const classes = useStyles({});
+  const rootRef = useRef(null);
   const [board, setBoard] = useState<string>(DEFAULT_BOARD);
-  const [legalMoves, setLegalMoves] = useState<string[]>(['75-55']);
-  const [validPiecesToMove, setValidPiecesToMove] = useState<string[]>(['75']);
+  const [legalMoves, setLegalMoves] = useState<string[]>([]);
+  const [validPiecesToMove, setValidPiecesToMove] = useState<string[]>([]);
 
   const handleMove = useCallback((from: string, to: string) => {
 
   }, []);
 
   return (
-    <main id={'board'} className={classes.root}>
+    <main ref={rootRef} id={'board'} className={classes.root}>
       <CanvasChess
         onMove={handleMove}
         board={board}
         legalMoves={legalMoves}
         validPiecesToMove={validPiecesToMove}
-        canvasWidth={`${window.innerWidth - 30}px`}
-        canvasHeight={`${window.innerWidth - 30}px`}
+        canvasWidth={`${window.innerWidth - (BOARD_MARGIN * 2)}px`}
+        canvasHeight={`${window.innerWidth - (BOARD_MARGIN * 2)}px`}
       />
     </main>
   );

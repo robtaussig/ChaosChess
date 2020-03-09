@@ -1,12 +1,13 @@
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from '../../theme';
+import { BOARD_MARGIN } from '../Board/constants';
 
 export default makeStyles((theme: Theme) => ({
   root: {
     color: '#212121',
     fontSize: 50,
     display: 'flex',
-    padding: '15px 0',
+    paddingTop: BOARD_MARGIN,
     paddingBottom: 0,
     justifyContent: 'center',
     position: 'relative',
