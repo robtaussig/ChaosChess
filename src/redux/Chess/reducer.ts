@@ -92,7 +92,7 @@ export default createSlice({
         );
         return {
           ...state,
-          isCheck: false,
+          isCheck: action.payload.isCheck,
           legalMoves: legalMovesWithoutKingCapture,
           validPiecesToMove: getValidPiecesToMoveFromLegalMoveList(
             legalMovesWithoutKingCapture,

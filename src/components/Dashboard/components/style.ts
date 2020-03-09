@@ -63,9 +63,17 @@ export const useMainScreenDashboardStyles = makeStyles((theme: Theme) => ({
 export const useInGameDashboard = makeStyles((theme: Theme) => ({
   root: {
     ...rootStyles(theme),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   dashboardButton: {
     ...buttonStyles(theme),
+  },
+  inGameDashboardText: {
+    fontSize: 30,
+    fontFamily: "Oxanium",
   },
 }));
 
