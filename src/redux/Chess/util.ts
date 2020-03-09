@@ -13,6 +13,11 @@ export const movePiece = (board: string, from: number, to: number) => {
   return board.split('').map((char, idx) => {
     if (idx === from) return CONSTANTS.EMPTY_SQUARE;
     if (idx === to) return board[from];
+    if (idx === CONSTANTS.LAST_MOVE_FROM_TENS) return String(from)[0];
+    if (idx === CONSTANTS.LAST_MOVE_FROM_ONES) return String(from)[1];
+    if (idx === CONSTANTS.LAST_MOVE_TO_TENS) return String(to)[0];
+    if (idx === CONSTANTS.LAST_MOVE_TO_ONES) return String(to)[1];
+
     return char;
   }).join('');
 };
