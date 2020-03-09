@@ -25,6 +25,8 @@ const INITIAL_STATE: ChessState = {
 
 //TODO check for check on moveAttempted
 //TODO check for castle when king moves >1 space
+//TODO Update board meta information, such as king moving for first time
+//TODO handle pawn promotion, make sure AI considers pawn promotion
 
 export default createSlice({
   name: 'chess',
