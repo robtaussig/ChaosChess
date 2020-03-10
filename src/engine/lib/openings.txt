@@ -1,0 +1,1419 @@
+GIUOCO PIANO
+OPEN VARIATION
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-c4 Bf8-c5
+4. c2-c3 Ng8-f6
+5. d2-d4 e5xd4
+6. c3xd4 Bc5-b4+
+SCOTCH GAME
+4... Nf6 VARIATION
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. d2-d4 e5xd4
+4. Nf3xd4 Ng8-f6
+5. Nd4xc6 b7xc6
+6. e4-e5 Qd8-e7
+PHILIDOR DEFENCE
+1. e2-e4 e7-e5
+2. Ng1-f3 d7-d6
+3. d2-d4 Ng8-f6
+4. Nb1-c3 Nb8-d7
+5. Bf1-c4 Bf8-e7
+6. 0-0 0-0
+GIUOCO PIANO
+MODERN CLOSED VARIATION
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-c4 Bf8-c5
+4. c2-c3 Ng8-f6
+5. d2-d3 d7-d6
+SCOTCH GAME
+4... Bc5 VARIATION
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. d2-d4 e5xd4
+4. Nf3xd4 Bf8-c5
+5. Nd4-b3 Bc5-b6
+6. a2-a4 a7-a6
+VIENNA GAME
+1. e2-e4 e7-e5
+2. Nb1-c3 Ng8-f6
+3. f2-f4 d7-d5
+4. f4xe5 Nf6xe4
+5. Ng1-f3 Bf8-e7
+EVANS GAMBIT
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-c4 Bf8-c5
+4. b2-b4 Bc5xb4
+5. c2-c3 Bb4-a5
+6. d2-d4 d7-d6
+GORING GAMBIT
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. d2-d4 e5xd4
+4. c2-c3 d4xc3
+5. Nb1xc3 Bf8-b4
+6. Bf1-c4 d7-d6
+KING'S GAMBIT ACCEPTED
+KIESERITZKY GAMBIT
+1. e2-e4 e7-e5
+2. f2-f4 e5xf4
+3. Ng1-f3 g7-g5
+4. h2-h4 g5-g4
+5. Nf3-e5 Ng8-f6
+6. d2-d4 d7-d6
+TWO KNIGHTS DEFENCE
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-c4 Ng8-f6
+4. Nf3-g5 d7-d5
+5. e4xd5 Nc6-a5
+6. Bc4-b5+ c7-c6
+7. d5xc6 b7xc6
+SCOTCH FOUR KNIGHTS
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Nb1-c3 Ng8-f6
+4. d2-d4 e5xd4
+5. Nf3xd4 Bf8-b4
+6. Nd4xc6 b7xc6
+KING'S GAMBIT ACCEPTED
+3... d5 DEFENCE
+1. e2-e4 e7-e5
+2. f2-f4 e5xf4
+3. Ng1-f3 d7-d5
+4. e4xd5 Ng8-f6
+5. Bf1-c4 Nf6xd5
+TWO KNIGHTS DEFENCE
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-c4 Ng8-f6
+4. d2-d4 e5xd4
+5. 0-0 Nf6xe4
+6. Rf1-e1 d7-d5
+SPANISH FOUR KNIGHTS
+RUBINSTEIN VARIATION
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Nb1-c3 Ng8-f6
+4. Bf1-b5 Nc6-d4
+5. Bb5-a4 Bf8-c5
+6. Nf3xe5 0-0
+KING'S GAMBIT DECLINED
+1. e2-e4 e7-e5
+2. f2-f4 Bf8-c5
+3. Ng1-f3 d7-d6
+4. Nb1-c3 Ng8-f6
+5. Bf1-c4 Nb8-c6
+6. d2-d3 Bc8-g4
+TWO KNIGHTS DEFENCE
+MAX LANGE ATTACK
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-c4 Ng8-f6
+4. d2-d4 e5xd4
+5. 0-0 Bf8-c5
+6. e4-e5 d7-d5
+7. e5xf6 d5xc4
+PETROFF DEFENCE
+3. Nxe5 VARIATION
+1. e2-e4 e7-e5
+2. Ng1-f3 Ng8-f6
+3. Nf3xe5 d7-d6
+4. Ne5-f3 Nf6xe4
+5. d2-d4 d7-d5
+DANISH GAMBIT
+1. e2-e4 e7-e5
+2. d2-d4 e5xd4
+3. c2-c3 d4xc3
+4. Bf1-c4 c3xb2
+5. Bc1xb2 d7-d5
+RUY LOPEZ
+STEINITZ DEFENCE
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 d7-d6
+4. d2-d4 æc8-d7
+5. Nb1-c3 e5xd4
+6. Nf3xd4 Ng8-f6
+RUY LOPEZ
+SCHLIEMANN DEFENCE (2)
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 f7-f5
+4. d2-d3 f5xe4
+5. d3xe4 Ng8-f6
+6. 0-0 Bf8-c5
+RUY LOPEZ DELAYED
+CLASSICAL DEFENCE
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5-a4 Ng8-f6
+5. 0-0 Bf8-c5
+6. Nf3xe5 Nc6xe5
+RUY LOPEZ
+BIRD'S DEFENCE
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 Nc6-d4
+4. Nf3xd4 e5xd4
+5. 0-0 c7-c6
+RUY LOPEZ
+EXCHANGE VARIATION (1)
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5xc6 d7xc6
+5. 0-0 f7-f6
+6. d2-d4 e5xd4
+RUY LOPEZ
+ARCHANGELSK VARIATION
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5-a4 Ng8-f6
+5. 0-0 b7-b5
+6. Ba4-b3 Bc8-b7
+7. Rf1-e1 Bf8-c5
+RUY LOPEZ
+SMYSLOV DEFENCE
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 g7-g6
+4. d2-d4 e5xd4
+5. Bc1-g5 f7-f6
+6. Bg5-h4 Bf8-g7
+RUY LOPEZ
+EXCHANGE VARIATION (2)
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5xc6 d7xc6
+5. d2-d4 e5xd4
+6. Qd1xd4 Qd8xd4
+RUY LOPEZ
+OPEN VARIATION
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5-a4 Ng8-f6
+5. 0-0 Nf6xe4
+6. d2-d4 b7-b5
+7. Ba4-b3 d7-d5
+RUY LOPEZ
+CLASSICAL DEFENCE
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 Bf8-c5
+4. c2-c3 Ng8-e7
+5. 0-0 Bc5-b6
+6. d2-d4 e5xd4
+RUY LOPEZ STEINITZ DEFENCE
+DEFERRED (1)
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5-a4 d7-d6
+5. Ba4xc6+ b7xc6
+6. d2-d4 f7-f6
+RUY LOPEZ DOUBLE DELAYED
+EXCHANGE VARIATION
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5-a4 Ng8-f6
+5. 0-0 Bf8-e7
+6. Ba4xc6 d7xc6
+RUY LOPEZ
+BERLIN DEFENCE
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 Ng8-f6
+4. 0-0 Nf6xe4
+5. d2-d4 Ne4-d6
+RUY LOPEZ STEINITZ
+DEFENCE DEFERRED (2)
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5-a4 d7-d6
+5. c2-c3 f7-f5
+6. e4xf5 Bc8xf5
+RUY LOPEZ MARSHALL ATTACK
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5-a4 Ng8-f6
+5. 0-0 Bf8-e7
+6. Rf1-e1 b7-b5
+7. Ba4-b3 0-0
+8. c2-c3 d7-d5
+RUY LOPEZ
+SCHLIEMANN DEFENCE (1)
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 f7-f5
+4. Nb1-c3 f5xe4
+5. Nc3xe4 d7-d5
+RUY LOPEZ
+CENTRE ATTACK
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5-a4 Ng8-f6
+5. d2-d4 e5xd4
+6. 0-0 Bf8-e7
+RUY LOPEZ CLOSED DEFENCE
+1. e2-e4 e7-e5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 a7-a6
+4. Bb5-a4 Ng8-f6
+5. 0-0 Bf8-e7
+6. Rf1-e1 b7-b5
+7. Ba4-b3 d7-d6
+8. c2-c3 0-0
+FRENCH DEFENCE
+EXCHANGE VARIATION
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. e4xd5 e6xd5
+4. Ng1-f3 Ng8-f6
+5. Bf1-d3 Bf8-d6
+FRENCH DEFENCE
+CLASSICAL VARIATION
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 Ng8-f6
+4. Bc1-g5 Bf8-e7
+5. e4-e5 Nf6-d7
+6. Bg5xe7 Qd8xe7
+7. f2-f4 0-0
+FRENCH DEFENCE
+WINAWER VARIATION 4. a3
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 Bf8-b4
+4. a2-a3 Bb4xc3+
+5. b2xc3 d5xe4
+6. Qd1-g4 Ng8-f6
+7. Qg4xg7 Rh8-g8
+FRENCH DEFENCE
+ADVANCE VARIATION
+MAIN LINE
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. e4-e5 c7-c5
+4. c2-c3 Nb8-c6
+5. Ng1-f3 Qd8-b6
+6. Bf1-e2 c5xd4
+FRENCH DEFENCE
+ALEKHINE-CHATARD GAMBIT
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 Ng8-f6
+4. Bc1-g5 Bf8-e7
+5. e4-e5 Nf6-d7
+6. h2-h4 Be7xg5
+7. h4xg5 Qd8xg5
+FRENCH DEFENCE
+WINAWER VARIATION 4. Ne2
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 Bf8-b4
+4. Ng1-e2 d5xe4
+5. a2-a3 Bb4-e7
+6. Nc3xe4 Ng8-f6
+FRENCH DEFENCE
+ADVANCE VARIATION
+MILNER-BARRY GAMBIT
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. e4-e5 c7-c5
+4. c2-c3 Nb8-c6
+5. Ng1-f3 Qd8-b6
+6. Bf1-d3 c5xd4
+FRENCH DEFENCE
+McCUTCHEON VARIATION
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 Ng8-f6
+4. Bc1-g5 Bf8-b4
+5. e4-e5 h7-h6
+FRENCH DEFENCE
+TARRASCH VAR. 3... Nf6 (1)
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-d2 Ng8-f6
+4. e4-e5 Nf6-d7
+5. Bf1-d3 c7-c5
+6. c2-c3 Nb8-c6
+7. Ng1-e2 c5xd4
+FRENCH DEFENCE
+RUBINSTEIN VARIATION
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 d5xe4
+4. Nc3xe4 Nb8-d7
+5. Ng1-f3 Ng8-f6
+6. Ne4xf6 Nd7xf6
+7. Bf1-d3 Bf8-e7
+FRENCH DEFENCE
+WINAWER: PAWN SNATCH
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 Bf8-b4
+4. e4-e5 c7-c5
+5. a2-a3 Bb4xc3+
+6. b2xc3 Ng8-e7
+7. Qd1-g4 Qd8-c7
+FRENCH DEFENCE
+TARRASCH VAR. 3... Nf6 (2)
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-d2 Ng8-f6
+4. e4-e5 Nf6-d7
+5. f2-f4 c7-c5
+6. c2-c3 Nb8-c6
+7. Nd2-f3 Qd8-b6
+FRENCH DEFENCE
+STEINITZ VARIATION
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 Ng8-f6
+4. e4-e5 Nf6-d7
+5. f2-f4 c7-c5
+6. Ng1-f3 Nb8-c6
+FRENCH DEFENCE
+WINAWER: POSITIONAL LINE
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 Bf8-b4
+4. e4-e5 c7-c5
+5. a2-a3 Bb4xc3+
+6. b2xc3 Ng8-e7
+7. Ng1-f3 Qd8-a5
+FRENCH DEFENCE
+TARRASCH VAR. 3...c5 (1)
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-d2 c7-c5
+4. e4xd5 e6xd5
+5. Ng1-f3 Nb8-c6
+6. Bc1-b5 Bf8-d6
+FRENCH DEFENCE
+BURN VARIATION
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 Ng8-f6
+4. Bc1-g5 d5xe4
+5. Nc3xe4 Bf8-e7
+6. Bg5xf6 Be7xf6
+7. Ng1-f3 Nb8-d7
+FRENCH DEFENCE
+WINAWER: FINGERSLIP LINE
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-c3 Bf8-b4
+4. Bc1-d2 d5xe4
+5. Qd1-g4 Ng8-f6
+6. Qg4xg7 Rh8-g8
+FRENCH DEFENCE
+TARRASCH VAR. 3...c5 (2)
+1. e2-e4 e7-e6
+2. d2-d4 d7-d5
+3. Nb1-d2 c7-c5
+4. e4xd5 Qd8xd5
+5. Ng1-f3 c5xd4
+6. Bf1-c4 Qd5-d6
+SICILIAN DEFENCE
+DRAGON VARIATION
+1. e2-e4 c7-c5
+2. Ng1-f3 d7-d6
+3. d2-d4 c5xd4
+4. Nf3xd4 Ng8-f6
+5. Nb1-c3 g7-g6
+SICILIAN DEFENCE
+MAROCZY BIND
+1. e2-e4 c7-c5
+2. Ng1-f3 e7-e6
+3. d2-d4 c5xd4
+4. Nf3xd4 a7-a6
+5. c2-c4 Ng8-f6
+SICILIAN DEFENCE
+MOSCOW VARIATION
+1. e2-e4 c7-c5
+2. Ng1-f3 d7-d6
+3. Bf1-b5+ Bc8-d7
+4. Bb5xd7+ Qd8xd7
+5. 0-0 Nb8-c6
+SICILIAN DEFENCE
+NAJDORF VARIATION
+1. e2-e4 c7-c5
+2. Ng1-f3 d7-d6
+3. d2-d4 c5xd4
+4. Nf3xd4 Ng8-f6
+5. Nb1-c3 a7-a6
+SICILIAN DEFENCE
+ACCELERATED DRAGON
+1. e2-e4 c7-c5
+2. Ng1-f3 Nb8-c6
+3. d2-d4 c5xd4
+4. Nf3xd4 g7-g6
+5. c2-c4 Bf8-g7
+SICILIAN DEFENCE
+ALAPIN VARIATION (1)
+1. e2-e4 c7-c5
+2. c2-c3 Ng8-f6
+3. e4-e5 Nf6-d5
+4. d2-d4 c5xd4
+5. Ng1-f3 Nb8-c6
+SICILIAN DEFENCE
+RICHTER-RAUZER ATTACK
+1. e2-e4 c7-c5
+2. Ng1-f3 d7-d6
+3. d2-d4 c5xd4
+4. Nf3xd4 Ng8-f6
+5. Nb1-c3 Nb8-c6
+6. Bc1-g5
+SICILIAN DEFENCE
+SVESHNIKOV VARIATION
+1. e2-e4 c7-c5
+2. Ng1-f3 Nb8-c6
+3. d2-d4 c5xd4
+4. Nf3xd4 Ng8-f6
+5. Nb1-c3 e7-e5
+SICILIAN DEFENCE
+ALAPIN VARIATION (2)
+1. e2-e4 c7-c5
+2. c2-c3 d7-d5
+3. e4xd5 Qd8xd5
+4. d2-d4 e7-e6
+5. Ng1-f3 Ng8-f6
+SICILIAN DEFENCE
+SOZIN-VELIMIROVIC ATTACK
+1. e2-e4 c7-c5
+2. Ng1-f3 d7-d6
+3. d2-d4 c5xd4
+4. Nf3xd4 Ng8-f6
+5. Nb1-c3 Nb8-c6
+6. Bf1-c4
+SICILIAN DEFENCE
+MORRA GAMBIT
+1. e2-e4 c7-c5
+2. d2-d4 c5xd4
+3. c2-c3 d4xc3
+4. Nb1xc3 Nb8-c6
+5. Ng1-f3 d7-d6
+SICILIAN DEFENCE
+CLOSED VARIATION
+1. e2-e4 c7-c5
+2. Nb1-c3 Nb8-c6
+3. g2-g3 g7-g6
+4. Bf1-g2 Bf8-g7
+5. d2-d3 d7-d6
+SICILIAN DEFENCE
+SCHEVENINGEN VARIATION
+1. e2-e4 c7-c5
+2. Ng1-f3 e7-e6
+3. d2-d4 c5xd4
+4. Nf3xd4 Ng8-f6
+5. Nb1-c3 d7-d6
+SICILIAN DEFENCE
+QUEEN CAPTURE VARIATION
+1. e2-e4 c7-c5
+2. Ng1-f3 d7-d6
+3. d2-d4 c5xd4
+4. Qd1xd4 Nb8-c6
+5. Bf1-b5 Bc8-d7
+SICILIAN DEFENCE
+GRAND PRIX ATTACK (1)
+1. e2-e4 c7-c5
+2. f2-f4 Nb8-c6
+3. Nb1-c3 d7-d6
+4. Ng1-f3 g7-g6
+5. Bf1-c4 Bf8-g7
+SICILIAN DEFENCE
+TAIMANOV VARIATION
+1. e2-e4 c7-c5
+2. Ng1-f3 e7-e6
+3. d2-d4 c5xd4
+4. Nf3xd4 Nb8-c6
+5. Nb1-c3 a7-a6
+SICILIAN DEFENCE
+ROSSOLIMO VARIATION
+1. e2-e4 c7-c5
+2. Ng1-f3 Nb8-c6
+3. Bf1-b5 g7-g6
+4. 0-0 Bf8-g7
+5. c2-c3 Ng8-f6
+SICILIAN DEFENCE
+GRAND PRIX ATTACK (2)
+1. e2-e4 c7-c5
+2. f2-f4 e7-e6
+3. Ng1-f3 d7-d5
+4. e4xd5 e6xd5
+5. Bf1-b5+ Bc8-d
+CARO-KANN DEFENCE
+ADVANCE VARIATION
+1. e2-e4 c7-c6
+2. d2-d4 d7-d5
+3. e4-e5 Bc8-f5
+4. Ng1-f3 e7-e6
+5. Bf1-e2 c6-c5
+PIRC DEFENCE
+CLASSICAL VARIATION
+1. e2-e4 d7-d6
+2. d2-d4 Ng8-f6
+3. Nb1-c3 g7-g6
+4. Ng1-f3 Bf8-g7
+5. Bf1-e2 0-0
+ALEKHINE'S DEFENCE
+FOUR PAWNS ATTACK
+1. e2-e4 Ng8-f6
+2. e4-e5 Nf6-d5
+3. c2-c4 Nd5-b6
+4. d2-d4 d7-d6
+5. f2-f4 d6xe5
+6. f4xe5 Nb8-c6
+CARO-KANN DEFENCE
+EXCHANGE VARIATION
+1. e2-e4 c7-c6
+2. d2-d4 d7-d5
+3. e4xd5 c6xd5
+4. Bf1-d3 Nb8-c6
+5. c2-c3 Ng8-f6
+PIRC DEFENCE
+AUSTRIAN ATTACK
+1. e2-e4 d7-d6
+2. d2-d4 Ng8-f6
+3. Nb1-c3 g7-g6
+4. f2-f4 Bf8-g7
+5. Ng1-f3 0-0
+6. Bf1-d3 Nb8-c6
+ALEKHINE'S DEFENCE
+MODERN VARIATION
+1. e2-e4 Ng8-f6
+2. e4-e5 Nf6-d5
+3. d2-d4 d7-d6
+4. Ng1-f3 Bc8-g4
+5. Bf1-e2 e7-e6
+6. 0-0 Bf8-e7
+CARO-KANN DEFENCE
+PANOV-BOTVINNIK ATTACK
+1. e2-e4 c7-c6
+2. d2-d4 d7-d5
+3. e4xd5 c6xd5
+4. c2-c4 Ng8-f6
+5. Nb2-c3 e7-e6
+PIRC DEFENCE
+f3+Be3 VARIATION
+1. e2-e4 d7-d6
+2. d2-d4 Ng8-f6
+3. Nb1-c3 g7-g6
+4. f2-f3 Bf8-g7
+5. Bc1-e3 c7-c6
+6. Qd1-d2 b7-b5
+SCANDINAVIAN DEFENCE
+2... Qxd5 VARIATION
+1. e2-e4 d7-d5
+2. e4xd5 Qd8xd5
+3. Nb1-c3 Qd8-a5
+4. d2-d4 Ng8-f6
+5. Ng1-f3 Bc8-g4
+CARO-KANN DEFENCE
+Bf5 VARIATION
+1. e2-e4 c7-c6
+2. d2-d4 d7-d5
+3. Nb1-c3 d5xe4
+4. Nc3xe4 Bc8-f5
+5. Ne4-g3 Bf5-g6
+6. Ng1-f3 Nb8-d7
+MODERN DEFENCE
+c4 v Nc6 VARIATION
+1. e2-e4 g7-g6
+2. d2-d4 Bf8-g7
+3. c2-c4 d7-d6
+4. Nb1-c3 Nb8-c6
+5. Bc1-e3 e7-e5
+6. d4-d5 Nc6-e7
+SCANDINAVIAN DEFENCE
+2... Nf6 VARIATION
+1. e2-e4 d7-d5
+2. e4xd5 Ng8-f6
+3. d2-d4 Nf6xd5
+4. c2-c4 Nd5-b6
+5. Ng1-f3 g7-g6
+CARO-KANN DEFENCE
+Nd7 VARIATION
+1. e2-e4 c7-c6
+2. d2-d4 d7-d5
+3. Nb1-c3 d5xe4
+4. Nc3xe4 Nb8-d7
+5. Bf1-c4 Ng8-f6
+6. Ne4-g5 e7-e6
+MODERN DEFENCE
+f4 v c6 VARIATION
+1. e2-e4 g7-g6
+2. d2-d4 Bf8-g7
+3. Nb1-c3 d7-d6
+4. f2-f4 c7-c6
+5. Ng1-f3 Bc8-g4
+6. Bc1-e3 Qd8-b6
+NIMZOWITSCH DEFENCE
+ADVANCE VARIATION
+1. e2-e4 Nb8-c6
+2. d2-d4 d7-d5
+3. e4-e5 Bc8-f5
+4. Ng1-e2 e7-e6
+5. Ne2-g3 Bf5-g6
+CARO-KANN DEFENCE
+Nf6 VARIATION
+1. e2-e4 c7-c6
+2. d2-d4 d7-d5
+3. Nb1-c3 d5xe4
+4. Nc3xe4 Ng8-f6
+5. Ne4xf6 g7xf6
+MODERN DEFENCE
+GURGENIDZE SYSTEM
+1. e2-e4 g7-g6
+2. d2-d4 Bf8-g7
+3. Nb1-c3 c7-c6
+4. f2-f4 d7-d5
+5. e4-e5 h7-h5
+NIMZOWITSCH DEFENCE
+Nc3 VARIATION
+1. e2-e4 Nb8-c6
+2. d2-d4 d7-d5
+3. Nb1-c3 d5xe4
+4. d4-d5 Nc6-e5
+5. Bc1-f4 Ne5-g6
+6. Bf4-g3 f7-f5
+QUEEN'S GAMBIT DECLINED
+ORTHODOX DEFENCE
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. Nb1-c3 Ng8-f6
+4. Bc1-g5 Bf8-e7
+5. e2-e3 0-0
+6. Ng1-f3 Nb8-d7
+QUEEN'S GAMBIT DECLINED
+VIENNA VARIATION
+2. c2-c4 e7-e6
+3. Nb1-c3 Ng8-f6
+4. Ng1-f3 Bf8-b4
+5. Bc1-g5 d5xc4
+6. e2-e4 c7-c5
+QUEEN'S GAMBIT DECLINED
+SLAV DEFENCE
+CZECH VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 c7-c6
+3. Ng1-f3 Ng8-f6
+4. Nb1-c3 d5xc4
+5. a2-a4 Bc8-f5
+QUEEN'S GAMBIT DECLINED
+LASKER VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. Nb1-c3 Ng8-f6
+4. Bc1-g5 Bf8-e7
+5. e2-e3 0-0
+6. Ng1-f3 h7-h6
+7. Bg5-h4 Nf6-e4
+QUEEN'S GAMBIT DECLINED
+SEMI-TARRASCH DEFENCE
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. Nb1-c3 Ng8-f6
+4. Ng1-f3 c7-c5
+5. c4xd5 Nf6xd5
+QUEEN'S GAMBIT DECLINED
+SLAV DEFENCE
+EXCHANGE VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 c7-c6
+3. Ng1-f3 Ng8-f6
+4. c4xd5 c6xd5
+5. Nb1-c3 Nb8-c6
+QUEEN'S GAMBIT DECLINED
+TARTAKOWER VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. Nb1-c3 Ng8-f6
+4. Bc1-g5 Bf8-e7
+5. e2-e3 0-0
+6. Ng1-f3 h7-h6
+7. Bg5-h4 b7-b6
+QUEEN'S GAMBIT DECLINED
+EXCHANGE VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. Nb1-c3 Ng8-f6
+4. c4xd5 e6xd5
+5. Bc1-g5 Bf8-e7
+6. e2-e3 c7-c6
+QUEEN'S GAMBIT ACCEPTED
+MAIN LINE
+1. d2-d4 d7-d5
+2. c2-c4 d5xc4
+3. Ng1-f3 Ng8-f6
+4. e2-e3 e7-e6
+5. Bf1xc4 c7-c5
+6. 0-0 a7-a6
+QUEEN'S GAMBIT DECLINED
+BISHOP EXCHANGE LINE
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. Nb1-c3 Ng8-f6
+4. Bc1-g5 Bf8-e7
+5. e2-e3 0-0
+6. Ng1-f3 h7-h6
+7. Bg5xf6 Be7xf6
+QUEEN'S GAMBIT DECLINED
+TARRASCH DEFENCE
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. Nb1-c3 c7-c5
+4. c4xd5 e6xd5
+5. Ng1-f3 Nb8-c6
+6. g2-g3 Ng8-f6
+QUEEN'S GAMBIT ACCEPTED
+e4 VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 d5xc4
+3. e2-e4 e7-e5
+4. Ng1-f3 Bf8-b4+
+5. Bc1-d2 Bb4xd2+
+QUEEN'S GAMBIT DECLINED
+Bf4 VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. Nb1-c3 Ng8-f6
+4. Ng1-f3 Bf8-e7
+5. Bc1-f4 0-0
+QUEEN'S GAMBIT DECLINED
+SEMI-SLAV DEFENCE
+MERAN VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 c7-c6
+3. Ng1-f3 Ng8-f6
+4. Nb1-c3 e7-e6
+5. e2-e3 Nb8-d7
+6. Bf1-d3 d5xc4
+7. Bd3xc4 b7-b5
+QUEEN'S GAMBIT
+CHIGORIN DEFENCE
+1. d2-d4 d7-d5
+2. c2-c4 Nb8-c6
+3. Ng1-f3 Bc8-g4
+4. c4xd5 Bg4xf3
+5. d5xc6 Bf3xc6
+QUEEN'S GAMBIT DECLINED
+CAMBRIDGE SPRINGS
+DEFENCE
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. Nb1-c3 Ng8-f6
+4. Bc1-g5 Nb8-d7
+5. e2-e3 c7-c6
+6. Ng1-f3 Qd8-a5
+QUEEN'S GAMBIT DECLINED
+SEMI-SLAV DEFENCE
+BOTVINNIK VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 c7-c6
+3. Ng1-f3 Ng8-f6
+4. Nb1-c3 e7-e6
+5. Bc1-g5 d5xc4
+6. e2-e4 b7-b5
+QUEEN'S GAMBIT
+ALBIN COUNTER-GAMBIT
+1. d2-d4 d7-d5
+2. c2-c4 e7-e5
+3. d4xe5 d5-d4
+4. Ng1-f3 Nb8-c6
+5. g2-g3 Bc8-e6
+NIMZO-INDIAN DEFENCE
+RUBINSTEIN VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. e2-e3 0-0
+5. Bf1-d3 d7-d5
+6. Ng1-f3 c7-c5
+NIMZO-INDIAN DEFENCE
+SAEMISCH VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. a2-a3 Bb4xc3+
+5. b2xc3 c7-c5
+6. e2-e3 Nb8-c6
+QUEEN'S INDIAN DEFENCE
+CLASSICAL VARIATION 2
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Ng1-f3 b7-b6
+4. g2-g3 Bc8-a6
+5. b2-b3 Bf8-b4+
+6. Bc1-d2 Bb4-e7
+NIMZO-INDIAN DEFENCE
+HUEBNER VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. e2-e3 c7-c5
+5. Bf1-d3 Nb8-c6
+6. Ng1-f3 Bb4xc3+
+7. b2xc3 d7-d6
+NIMZO-INDIAN DEFENCE
+SHIROV VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. f2-f3 d7-d5
+5. a2-a3 Bb4xc3+
+6. b2xc3 c7-c5
+QUEEN'S INDIAN DEFENCE
+PETROSIAN VARIATION 1
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Ng1-f3 b7-b6
+4. a2-a3 Bc8-b7
+5. Nb1-c3 d7-d5
+6. c4xd5 e6xd5
+NIMZO-INDIAN DEFENCE
+NIMZOWITSCH VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. e2-e3 b7-b6
+5. Bf1-d3 Bc8-b7
+6. Ng1-f3 Nf6-e4
+NIMZO-INDIAN DEFENCE
+ROMANISHIN VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. g2-g3 c7-c5
+5. Ng1-f3 Nb8-c6
+6. Bf1-g2 Nf6-e4
+QUEEN'S INDIAN DEFENCE
+PETROSIAN VARIATION 2
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Ng1-f3 b7-b6
+4. a2-a3 Bc8-b7
+5. Nb1-c3 d7-d5
+6. c4xd5 Nf6xd5
+NIMZO-INDIAN DEFENCE
+CLASSICAL VARIATION 1
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. Qd1-c2 0-0
+5. a2-a3 Bb4xc3+
+6. Qc2xc3 b7-b6
+NIMZO-INDIAN DEFENCE
+LENINGRAD VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. Bc1-g5 c7-c5
+5. d4-d5 h7-h6
+6. Bg5-h4 d7-d6
+7. e2-e3 Bb4xc3+
+QUEEN'S INDIAN DEFENCE
+4. e3 VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Ng1-f3 b7-b6
+4. e2-e3 Bc8-b7
+5. Bf1-d3 d7-d5
+6. 0-0 Bf8-d6
+NIMZO-INDIAN DEFENCE
+CLASSICAL VARIATION 2
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. Qd1-c2 c7-c5
+5. d4xc5 Nb8-a6
+6. a2-a3 Bb4xc3+
+7. Qc2xc3 Na6xc5
+NIMZO-INDIAN DEFENCE
+NIMZO-QUEENS HYBRID
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. Ng1-f3 b7-b6
+5. Bc1-g5 Bc8-b7
+6. e2-e3 h7-h6
+7. Bg5-h4 g7-g5
+BOGO-INDIAN DEFENCE
+4. Bd2 VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Ng1-f3 Bf8-b4+
+4. Bc1-d2 Qd8-e7
+5. g2-g3 0-0
+6. Bf1-g2 Bb4xd2+
+ NIMZO-INDIAN DEFENCE
+SPIELMANN VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Nb1-c3 Bf8-b4
+4. Qd1-b3 c7-c5
+5. d4xc5 Nb8-c6
+6. Ng1-f3 Nf6-e4
+QUEEN'S INDIAN DEFENCE
+CLASSICAL VARIATION 1
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Ng1-f3 b7-b6
+4. g2-g3 Bc8-b7
+5. Bf1-g2 Bf8-e7
+6. 0-0 0-0
+7. Nb1-c3 Nf6-e4
+BOGO-INDIAN DEFENCE
+4. Nbd2 VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e6
+3. Ng1-f3 Bf8-b4+
+4. Nb1-d2 b7-b6
+5. a2-a3 Bb4xd2+
+6. Bc1xd2 Bc8-b7
+KING'S INDIAN DEFENCE
+CLASSICAL VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Nb1-c3 Bf8-g7
+4. e2-e4 d7-d6
+5. Ng1-f3 0-0
+6. Bf1-e2 e7-e5
+7. 0-0 Nb8-c6
+KING'S INDIAN DEFENCE
+CLASSICAL FIANCHETTO
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Ng1-f3 Bf8-g7
+4. g2-g3 d7-d6
+5. Bf1-g2 0-0
+6. 0-0 Nb8-d7
+7. Nb1-c3 e7-e5
+GRUENFELD DEFENCE
+Bf4 VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Nb1-c3 d7-d5
+4. Ng1-f3 Bf8-g7
+5. Bc1-f4 0-0
+6. e2-e3 c7-c5
+KING'S INDIAN DEFENCE
+PETROSIAN VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Nb1-c3 Bf8-g7
+4. e2-e4 d7-d6
+5. Ng1-f3 0-0
+6. Bf1-e2 e7-e5
+7. d4-d5 a7-a5
+KING'S INDIAN DEFENCE
+YUGOSLAV VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Ng1-f3 Bf8-g7
+4. g2-g3 d7-d6
+5. Bf1-g2 0-0
+6. 0-0 c7-c5
+7. Nb1-c3 Nb8-c6
+GRUENFELD DEFENCE
+SCHLECHTER-SLAV
+VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. g2-g3 d7-d5
+4. Bf1-g2 Bf8-g7
+5. Ng1-f3 0-0
+6. 0-0 c7-c6
+KING'S INDIAN DEFENCE
+AVERBAKH VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Nb1-c3 Bf8-g7
+4. e2-e4 d7-d6
+5. Bf1-e2 0-0
+6. Bc1-g5 c7-c5
+KING'S INDIAN DEFENCE
+PANNO VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Ng1-f3 Bf8-g7
+4. g2-g3 d7-d6
+5. Bf1-g2 0-0
+6. 0-0 Nb8-c6
+7. Nb1-c3 a7-a6
+MODERN BENONI DEFENCE
+MAIN LINE
+1. d2-d4 Ng8-f6
+2. c2-c4 c7-c5
+3. d4-d5 e7-e6
+4. Nb1-c3 e6xd5
+5. c4xd5 d7-d6
+6. e2-e4 g7-g6
+7. Ng1-f3 Bf8-g7
+KING'S INDIAN DEFENCE
+FOUR PAWNS ATTACK
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Nb1-c3 Bf8-g7
+4. e2-e4 d7-d6
+5. f2-f4 0-0
+6. Ng1-f3 c7-c5
+GRUENFELD DEFENCE
+CLASSICAL EXCHANGE
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Nb1-c3 d7-d5
+4. c4xd5 Nf6xd5
+5. e2-e4 Nd5xc3
+6. b2xc3 Bf8-g7
+7. Bf1-c4 c7-c5
+MODERN BENONI DEFENCE
+MIKENAS VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 c7-c5
+3. d4-d5 e7-e6
+4. Nb1-c3 e6xd5
+5. c4xd5 d7-d6
+6. e2-e4 g7-g6
+7. f2-f4 Bf8-g7
+KING'S INDIAN DEFENCE
+ORTHODOX SAEMISCH
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Nb1-c3 Bf8-g7
+4. e2-e4 d7-d6
+5. f2-f3 0-0
+6. Bc1-e3 e7-e5
+GRUENFELD DEFENCE
+MODERN EXCHANGE
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Nb1-c3 d7-d5
+4. c4xd5 Nf6xd5
+5. e2-e4 Nd5xc3
+6. b2xc3 Bf8-g7
+7. Ng1-f3 0-0
+MODERN BENONI DEFENCE
+FIANCHETTO VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 c7-c5
+3. d4-d5 e7-e6
+4. Nb1-c3 e6xd5
+5. c4xd5 d7-d6
+6. Ng1-f3 g7-g6
+7. g2-g3 Bf8-g7
+KING'S INDIAN DEFENCE
+SAEMISCH PANNO
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Nb1-c3 Bf8-g7
+4. e2-e4 d7-d6
+5. f2-f3 0-0
+6. Bc1-e3 Nb8-c6
+7. Ng1-e2 a7-a6
+GRUENFELD DEFENCE
+SMYSLOV VARIATION
+1. d2-d4 Ng8-f6
+2. c2-c4 g7-g6
+3. Nb1-c3 d7-d5
+4. Ng1-f3 Bf8-g7
+5. Qd1-b3 d5xc4
+6. Qb3xc4 0-0
+BENKO GAMBIT
+MAIN LINE
+1. d2-d4 Ng8-f6
+2. c2-c4 c7-c5
+3. d4-d5 b7-b5
+4. c4xb5 a7-a6
+5. b5xa6 Bb8xa6
+6. Nb1-c3 d7-d6
+7. Ng1-f3 g7-g6
+DUTCH DEFENCE
+CLASSICAL VARIATION
+1. d2-d4 f7-f5
+2. g2-g3 Ng8-f6
+3. Bf1-g2 e7-e6
+4. Ng1-f3 Bf8-e7
+5. c2-c4 0-0
+6. 0-0 d7-d6
+DUTCH DEFENCE
+STAUNTON GAMBIT
+1. d2-d4 f7-f5
+2. e2-e4 f5xe4
+3. Nb1-c3 Ng8-f6
+4. Bc1-g5 Nb8-c6
+5. d4-d5 Nc6-e5
+6. Qd1-d4 Ne5-f7
+TROMPOWSKY ATTACK (2)
+1. d2-d4 Ng8-f6
+2. Bc1-g5 Nf6-e4
+3. Bg5-f4 c7-c5
+4. d4-d5 Qd8-b6
+5. Bf4-c1 e7-e6
+6. f2-f3 Qb6-a5+
+7. c2-c3 Ne4-f6
+DUTCH DEFENCE
+STONEWALL VARIATION
+1. d2-d4 f7-f5
+2. g2-g3 Ng8-f6
+3. Bf1-g2 e7-e6
+4. Ng1-f3 d7-d5
+5. c2-c4 c7-c6
+6. 0-0 Bf8-d6
+COLLE SYSTEM
+1. d2-d4 d7-d5
+2. Ng1-f3 Ng8-f6
+3. e2-e3 e7-e6
+4. Bf1-d3 c7-c5
+5. c2-c3 Nb8-d7
+6. Nb1-d2 Bf8-d6
+TROMPOWSKY ATTACK (3)
+1. d2-d4 Ng8-f6
+2. Bc1-g5 e7-e6
+3. e2-e4 h7-h6
+4. Bg5xf6 Qd8xf6
+5. Ng1-f3 b7-b6
+6. Bf1-d3 Bc8-b7
+DUTCH DEFENCE
+LENINGRAD VARIATION
+1. d2-d4 f7-f5
+2. g2-g3 Ng8-f6
+3. Bf1-g2 g7-g6
+4. Ng1-f3 Bf8-g7
+5. c2-c4 0-0
+6. 0-0 d7-d6
+TORRE ATTACK (1)
+1. d2-d4 d7-d5
+2. Ng1-f3 Ng8-f6
+3. Bc1-g5 e7-e6
+4. e2-e3 c7-c5
+5. Nb1-d2 Bf8-e7
+6. c2-c3 Nb8-d7
+BUDAPEST GAMBIT
+1. d2-d4 Ng8-f6
+2. c2-c4 e7-e5
+3. d4xe5 Nf6-g4
+4. Bc1-f4 Nb8-c6
+5. Ng1-f3 Bf8-b4+
+6. Nb1-d2 Qd8-e7
+DUTCH DEFENCE
+DUTCH INDIAN VARIATION
+1. d2-d4 f7-f5
+2. c2-c4 Ng8-f6
+3. g2-g3 e7-e6
+4. Bf1-g2 Bf8-b4+
+5. Bc1-d2 Qd8-e7
+6. Ng1-f3 0-0
+TORRE ATTACK (2)
+1. d2-d4 d7-d5
+2. Ng1-f3 Ng8-f6
+3. Bc1-g5 g7-g6
+4. e2-e3 Bf8-g7
+5. Nb1-d2 0-0
+6. Bf1-d3 c7-c5
+OLD INDIAN DEFENCE
+1. d2-d4 Ng8-f6
+2. c2-c4 d7-d6
+3. Nb1-c3 Nb8-d7
+4. Ng1-f3 e7-e5
+5. e2-e4 c7-c6
+6. Bf1-e2 Bf8-e7
+7. 0-0 0-0
+DUTCH DEFENCE
+2. Nc3 VARIATION
+1. d2-d4 f7-f5
+2. Nb1-c3 d7-d5
+3. Bc1-g5 Ng8-f6
+4. Bg5xf6 e7xf6
+5. e2-e3 c7-c6
+6. Bf1-d3 Bf8-d6
+RICHTER-VERESOV ATTACK
+1. d2-d4 d7-d5
+2. Nb1-c3 Ng8-f6
+3. Bc1-g5 Nb8-d7
+4. f2-f3 c7-c5
+5. e2-e4 c5xd4
+6. Bg5xf6 d4xc3
+7. Bf6xc3 d5xe4
+CATALAN SYSTEM
+OPEN VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. g2-g3 Ng8-f6
+4. Bf1-g2 d5xc4
+5. Ng1-f3 Bf8-e7
+6. 0-0 0-0
+7. Qd1-c2 a7-a6
+DUTCH DEFENCE
+2. Bg5 VARIATION
+1. d2-d4 f7-f5
+2. Bc1-g5 g7-g6
+3. h2-h4 Bf8-g7
+4. Nb1-c3 d7-d5
+5. e2-e3 c7-c6
+6. Qd1-f3 Bc8-e6
+TROMPOWSKY ATTACK (1)
+1. d2-d4 Ng8-f6
+2. Bc1-g5 Nf6-e4
+3. Bg5-h4 c7-c5
+4. f2-f3 g7-g5
+5. f3xe4 g5xh4
+6. e2-e3 Bf8-h6
+CATALAN SYSTEM
+CLOSED VARIATION
+1. d2-d4 d7-d5
+2. c2-c4 e7-e6
+3. g2-g3 Ng8-f6
+4. Bf1-g2 Bf8-e7
+5. Ng1-f3 0-0
+6. 0-0 Nb8-d7
+ENGLISH OPENING
+e5 4 KNIGHTS: 4. g3 Bb4
+1. c2-c4 e7-e5
+2. Nb1-c3 Nb8-c6
+3. Ng1-f3 Ng8-f6
+4. g2-g3 Bf8-b4
+5. Bf1-g2 0-0
+ENGLISH OPENING
+BOTVINNIK v SYMMETRICAL
+1. c2-c4 c7-c5
+2. Nb1-c3 Nb8-c6
+3. g2-g3 g7-g6
+4. Bf1-g2 Bf8-g7
+5. e2-e4 e7-e6
+6. Ng1-e2 Ng8-e7
+RETI OPENING
+1. Ng1-f3 d7-d5
+2. c2-c4 d5xc4
+3. Nb1-a3 c7-c5
+4. Na3xc4 Nb8-c6
+5. b2-b3 f7-f6
+6. Bc1-b2 e7-e5
+ENGLISH OPENING
+REVERSE DRAGON
+1. c2-c4 e7-e5
+2. Nb1-c3 Nb8-c6
+3. Ng1-f3 Ng8-f6
+4. g2-g3 d7-d5
+5. c4xd5 Nf6xd5
+6. Bf1-g2 Nd5-b6
+7. 0-0 Bf8-e7
+ENGLISH OPENING
+FLOHR-MIKENAS SYSTEM
+1. c2-c4 Ng8-f6
+2. Nb1-c3 e7-e6
+3. e2-e4 d7-d5
+4. e4-e5 d5-d4
+5. e5xf6 d4xc3
+6. b2xc3 Qd8xf6
+RETI OPENING
+Bg4 VARIATION
+1. Ng1-f3 d7-d5
+2. g2-g3 Ng8-f6
+3. Bf1-g2 c7-c6
+4. 0-0 Bc8-g4
+5. c2-c4 e7-e6
+6. b2-b3 Nb8-d7
+ENGLISH OPENING
+STAUNTON SYSTEM v e5
+1. c2-c4 e7-e5
+2. Nb1-c3 Nb8-c6
+3. g2-g3 g7-g6
+4. Bf1-g2 Bf8-g7
+5. e2-e3 d7-d6
+6. Ng1-e2 Ng8-e7
+ENGLISH OPENING
+NIMZO-ENGLISH
+1. c2-c4 Ng8-f6
+2. Nb1-c3 e7-e6
+3. Ng1-f3 Bf1-b4
+4. Qd1-c2 0-0
+5. a2-a3 Bb4xc3
+6. Qc2xc3 b7-b6
+KING'S INDIAN ATTACK
+1. Ng1-f3 d7-d5
+2. g2-g3 c7-c5
+3. Bf1-g2 Nb8-c6
+4. 0-0 e7-e6
+5. d2-d3 Ng8-f6
+6. Nb1-d2 Bf8-e7
+7. e2-e4 0-0
+ENGLISH OPENING
+e5+f5 SYSTEM
+1. c2-c4 e7-e5
+2. Nb1-c3 Nb8-c6
+3. g2-g3 f7-f5
+4. Bf1-g2 Ng8-f6
+5. d2-d3 g7-g6
+6. e2-e3 Bf8-g7
+ENGLISH OPENING
+1... Nf6 2... d5
+1. c2-c4 Ng8-f6
+2. Nb1-c3 d7-d5
+3. c4xd5 Nf6xd5
+4. g2-g3 g7-g6
+5. Bf1-g2 Nd5xc3
+6. b2xc3 Bf8-g7
+NIMZO-LARSEN ATTACK
+1. b2-b3 d7-d5
+2. Bc1-b2 c7-c5
+3. e2-e3 Ng8-f6
+4. Ng1-f3 e7-e6
+5. Bf1-b5+ Bc8-d7
+ENGLISH OPENING
+SYMMETRICAL: d4
+1. c2-c4 c7-c5
+2. Ng1-f3 Ng8-f6
+3. d2-d4 c5xd4
+4. Nf3xd4 e7-e6
+5. g2-g3 Qd8-c7
+ENGLISH OPENING
+1... Nf6 2... e6 3... d5
+1. c2-c4 Ng8-f6
+2. Ng1-f3 e7-e6
+3. g2-g3 d7-d5
+4. b2-b3 Bf8-e7
+5. Bf1-g2 0-0
+BIRD'S OPENING
+1. f2-f4 d7-d5
+2. Ng1-f3 Ng8-f6
+3. e2-e3 g7-g6
+4. Bf1-e2 Bf8-g7
+5. 0-0 0-0
+6. d2-d3 c7-c5
+ENGLISH OPENING
+a3+b4 v SYMMETRICAL
+1. c2-c4 c7-c5
+2. Nb1-c3 Nb8-c6
+3. g2-g3 g7-g6
+4. Bf1-g2 Bf8-g7
+5. a2-a3 a7-a6
+6. Ra1-b1 Ra8-b8
+RETI OPENING
+1. Ng1-f3 d7-d5
+2. c2-c4 d5xc4
+3. Nb1-a3 c7-c5
+4. Na3xc4 Nb8-c6
+5. b2-b3 f7-f6
+6. Bc1-b2 e7-e5
+FROM GAMBIT
+1. f2-f4 e7-e5
+2. f4xe5 d7-d6
+3. e5xd6 Bf8xd6
+4. Ng1-f3 Ng8-f6
+5. g2-g3 Nb8-c6
+6. Bf1-g2 Bc8-g4

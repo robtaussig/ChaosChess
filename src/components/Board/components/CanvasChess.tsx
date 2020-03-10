@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
-import Game from '../../../game';
+import Game from '../../../gfx';
 
 interface CanvasChessProps {
   onMove: (from: number, to: number) => void;
