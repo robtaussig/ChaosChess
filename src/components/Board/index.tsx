@@ -22,6 +22,12 @@ import { userSelector } from '../../redux/User';
 import {
   getChaoticBoard,
 } from './util';
+import { WorkerInterface } from '../../engine/types';
+import { wrap } from 'comlink';
+
+export const engineWorker = wrap<WorkerInterface>(
+  new Worker('../../engine/engine.worker.ts')
+);
 
 export const Board: FC = () => {
   const classes = useStyles({});
@@ -57,19 +63,23 @@ export const Board: FC = () => {
 
   useEffect(() => {
     const getBestMove = async () => {
-      const response: ChessResponse = await fetch(
-        `https://robtaussig.com/chess/${board}?withBestMove=true`
-      ).then(res => res.json());
+      const validMovesResponse = await engineWorker.getValidMoves(board);
+      const bestMoveResponse = await engineWorker.getBestMove(board);
 
-      dispatch(moveReceived(response))
+      dispatch(moveReceived({
+        isCheck: validMovesResponse.isCheck,
+        legalMoves: validMovesResponse.legalMoves,
+        bestMove: bestMoveResponse[1],
+      }))
     };
 
     const getAvailableMoves = async () => {
-      const response: ChessResponse = await fetch(
-        `https://robtaussig.com/chess/${board}`
-      ).then(res => res.json());
+      const validMovesResponse = await engineWorker.getValidMoves(board);
 
-      dispatch(legalMovesReceived(response));
+      dispatch(legalMovesReceived({
+        isCheck: validMovesResponse.isCheck,
+        legalMoves: validMovesResponse.legalMoves,
+      }));
     };
   
     if (stage === GameStages.InProgress) {

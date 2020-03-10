@@ -66,7 +66,7 @@ export const snapshotEvaluation = (board: Board) => {
 export const getBestMove = (
   board: Board,
   depth: number = 4,
-  isMaximizer: boolean = true,
+  isMaximizer: boolean = false,
   alpha = -Infinity,
   beta = Infinity,
   root = true,

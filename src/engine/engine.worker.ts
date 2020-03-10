@@ -2,6 +2,7 @@ import { expose } from 'comlink';
 import {
   Board,
   Move,
+  WorkerInterface,
 } from './types';
 import {
   DEFAULT_BOARD
@@ -28,4 +29,4 @@ const getBestMove = (board: Board, depth = 4): [number, Move] => {
 expose({
   getValidMoves,
   getBestMove,
-});
+} as WorkerInterface);

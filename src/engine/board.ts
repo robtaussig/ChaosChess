@@ -107,10 +107,17 @@ export const recordLastMove = (board: Board, from: Square, to: Square): Board =>
 };
 
 //Similar to makeMove, but without concern for specialBits
-export const testMove = (move: Move, board: Board, withLastMove = false): Board => {
+export const testMove = (
+  move: Move,
+  board: Board,
+  withLastMove = false,
+  withSwapColor = true,
+): Board => {
   const [from, to] = move.split('-').map(Number);
   board = updateBoard(board, to, board[from]);
-  board = swapColors(updateBoard(board, from, '-'));
+  board = updateBoard(board, from, '-');
+  if (withSwapColor) board = swapColors(board);
+
   if (withLastMove) {
     return recordLastMove(
       board,

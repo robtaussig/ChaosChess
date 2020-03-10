@@ -95,7 +95,7 @@ export const findLegalMoves = (board: Board): Move[] => {
     }
   }
 
-  return legalMoves.filter(el => !isCheck(testMove(el, board)));
+  return legalMoves.filter(el => !isCheck(testMove(el, board, false, false)));
 };
 
 export const isCheck = (board: Board) => {

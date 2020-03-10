@@ -45,3 +45,13 @@ export const CurrentColorBit = {
   White: '0',
   Black: '1',
 };
+
+export interface ValidMovesPayload {
+  legalMoves: Move[];
+  isCheck: boolean;
+}
+
+export interface WorkerInterface {
+  getValidMoves: (board: Board) => ValidMovesPayload;
+  getBestMove: (board: Board, depth?: number) => [number, Move];
+}
