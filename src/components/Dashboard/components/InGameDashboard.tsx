@@ -1,19 +1,21 @@
 import React, { FC } from 'react';
 import { useInGameDashboard } from './style';
 import { useSelector, useDispatch } from 'react-redux';
-import { chessSelector, CONSTANTS } from '../../../redux/Chess';
+import { chessSelector } from '../../../redux/Chess';
 import { userSelector } from '../../../redux/User';
 import { gameStarted } from '../../../redux/Game';
 import 'css.gg/icons/redo.css';
 import DashboardButton from './DashboardButton';
 import { opponentSelector } from '../../../redux/Opponent';
+import { getCurrentTurn } from '../../../engine/board';
+
 export const InGameDashboard: FC = () => {
   const classes = useInGameDashboard({});
   const dispatch = useDispatch();
   const { isCheck, legalMoves, board } = useSelector(chessSelector);
   const { type: opponentType } = useSelector(opponentSelector);
   const { color } = useSelector(userSelector);
-  const isAITurn = board[CONSTANTS.CURRENT_TURN_BLACK_BIT] !== color;
+  const isAITurn = getCurrentTurn(board) !== color;
   const isCheckMate = isCheck && legalMoves.length === 0;
   
   return (

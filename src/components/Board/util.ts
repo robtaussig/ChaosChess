@@ -3,6 +3,11 @@ import {
   WhitePieces,
   BlackPieces,
 } from '../../redux/Chess';
+import {
+  WHITE_KING_MOVED_BIT,
+  BLACK_KING_MOVED_BIT,
+  BIT_ON,
+} from '../../engine/constants';
 
 type Pieces = WhitePieces | BlackPieces;
 type Positions = { [pos: string]: Pieces };
@@ -103,6 +108,8 @@ export const getChaoticBoard = async (): Promise<string> => {
   
   return EMPTY_BOARD.split('').map((char, idx) => {
     if (currentPositions[idx]) return currentPositions[idx];
+    if (WHITE_KING_MOVED_BIT === idx) return BIT_ON;
+    if (BLACK_KING_MOVED_BIT === idx) return BIT_ON;
     return char;
   }).join('');
 };

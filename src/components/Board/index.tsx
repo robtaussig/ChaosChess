@@ -10,8 +10,6 @@ import {
 } from '../../redux/Game';
 import {
   DEFAULT_BOARD,
-  CONSTANTS,
-  ChessResponse,
   gameInitialized,
   chessSelector,
   moveAttempted,
@@ -23,6 +21,7 @@ import {
   getChaoticBoard,
 } from './util';
 import { WorkerInterface } from '../../engine/types';
+import { getCurrentTurn } from '../../engine/board';
 import { wrap } from 'comlink';
 
 export const engineWorker = wrap<WorkerInterface>(
@@ -83,7 +82,7 @@ export const Board: FC = () => {
     };
   
     if (stage === GameStages.InProgress) {
-      if (board[CONSTANTS.CURRENT_TURN_BLACK_BIT] !== userColor) {
+      if (getCurrentTurn(board) !== userColor) {
         getBestMove();
       } else {
         getAvailableMoves();

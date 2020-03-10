@@ -4,14 +4,13 @@ import {
   MoveAttemptedPayload,
   ChessResponse,
 } from './types';
-import { DEFAULT_BOARD, CONSTANTS } from './constants';
 import {
   positionString,
-  flipBit,
-  movePiece,
   getValidPiecesToMoveFromLegalMoveList,
   removeMoveThatCapturesKing,
 } from './util';
+import { makeMove } from '../../engine/board';
+import { DEFAULT_BOARD } from '../../engine/constants';
 
 const INITIAL_STATE: ChessState = {
   board: DEFAULT_BOARD,
@@ -44,13 +43,10 @@ export default createSlice({
       ))) {
         return {
           ...state,
-          board: flipBit(
-            movePiece(
-              state.board,
-              action.payload.from,
-              action.payload.to
-            ),
-            CONSTANTS.CURRENT_TURN_BLACK_BIT
+          board: makeMove(
+            state.board,
+            action.payload.from,
+            action.payload.to
           ),
           lastRejectedMove: null,
           legalMoves: [],
@@ -88,13 +84,10 @@ export default createSlice({
         isCheck,
         nodesExplored,
         lastRejectedMove: null,
-        board: flipBit(
-          movePiece(
-            state.board,
-            from,
-            to,
-          ),
-          CONSTANTS.CURRENT_TURN_BLACK_BIT
+        board: makeMove(
+          state.board,
+          from,
+          to
         ),
       };
     },

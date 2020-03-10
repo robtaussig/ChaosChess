@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Avatar, UserState, Color } from './types';
+import { Avatar, UserState } from './types';
+import { Color } from '../../engine/types';
 
 const INITIAL_STATE: UserState = {
   avatar: Avatar.Bot,

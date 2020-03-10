@@ -6,7 +6,6 @@ import {
   Board,
   Square,
   MoveIncrement,
-  SpecialMoves,
   CurrentColorBit,
 } from './types';
 import {
@@ -30,62 +29,48 @@ import {
   BLACK_KINGSIDE_ROOK_MOVED_BIT,
   WHITE_KING_MOVED_BIT,
   BLACK_KING_MOVED_BIT,
+  WHITE_KING_INITIAL_POSITION,
+  BLACK_KING_INITIAL_POSITION,
 } from './constants';
 
-/**
- * TODO
- * Special move handling
- */
-
- //TODO
-export const getSpecialMoves = (board: Board, color: Color): SpecialMoves => {
-  return {
-    queenSideCastle: true,
-    kingSideCastle: true
-  };
-};
-
-//TODO handle special moves
 export const makeMove = (
   board: Board,
   from: Square,
   to: Square,
 ): Board => {
-  // switch (this.board[from]) {
-  //   case 'K':
-  //     this.specialMoves.w.kingSideCastle = false;
-  //     this.specialMoves.w.queenSideCastle = false;
-  //     if (Math.abs(from - to) === 2) {
-  //       this.castle(from, to);
-  //     }
-  //     break;
-  //   case 'k':
-  //     this.specialMoves.b.kingSideCastle = false;
-  //     this.specialMoves.b.queenSideCastle = false;
-  //     if (Math.abs(from - to) === 2) {
-  //       this.castle(from, to);
-  //     }
-  //     break;
+  switch (board[from]) {
+    case 'K':
+      board = kingMoved(board, Color.White);
+      if (Math.abs(from - to) === 2) {
+        castle(board, from, to);
+      }
+      break;
+    case 'k':
+      board = kingMoved(board, Color.Black);
+      if (Math.abs(from - to) === 2) {
+        castle(board, from, to);
+      }
+      break;
 
-  //   case 'R':
-  //     if (from == 81) {
-  //       this.specialMoves.w.queenSideCastle = false;
-  //     } else if (from == 88){
-  //       this.specialMoves.w.kingSideCastle = false;
-  //     }
-  //     break;
+    case 'R':
+      if (from == 81) {
+        board = queenSideRookMoved(board, Color.White);
+      } else if (from == 88){
+        board = kingSideRookMoved(board, Color.White);
+      }
+      break;
 
-  //   case 'r':
-  //     if (from == 11) {
-  //       this.specialMoves.b.queenSideCastle = false;
-  //     } else if (from == 18){
-  //       this.specialMoves.b.kingSideCastle = false;
-  //     }
-  //     break;
+    case 'r':
+      if (from == 11) {
+        board = queenSideRookMoved(board, Color.Black);
+      } else if (from == 18){
+        board = kingSideRookMoved(board, Color.Black);
+      }
+      break;
   
-  //   default:
-  //     break;
-  //   }
+    default:
+      break;
+    }
 
   board = updateBoard(board, to, board[from]);
   board = updateBoard(board, from, '-');
@@ -94,6 +79,31 @@ export const makeMove = (
     recordLastMove(board, from, to)
   );
 };
+
+export const kingMoved = (board: Board, color: Color): Board =>
+  updateBoard(
+    board,
+    color === Color.White ? WHITE_KING_MOVED_BIT : BLACK_KING_MOVED_BIT,
+    BIT_ON
+  );
+
+export const queenSideRookMoved = (board: Board, color: Color): Board =>
+  updateBoard(
+    board,
+    color === Color.White ?
+      WHITE_QUEENSIDE_ROOK_MOVED_BIT :
+      BLACK_QUEENSIDE_ROOK_MOVED_BIT,
+    BIT_ON
+  );
+
+export const kingSideRookMoved = (board: Board, color: Color): Board =>
+  updateBoard(
+    board,
+    color === Color.White ?
+      WHITE_KINGSIDE_ROOK_MOVED_BIT :
+      BLACK_KINGSIDE_ROOK_MOVED_BIT,
+    BIT_ON
+  );
 
 export const recordLastMove = (board: Board, from: Square, to: Square): Board => {
   const fromTens = String(from)[0];
@@ -134,6 +144,12 @@ export const canCastleKingSide = (
   board: Board,
   color: Color,
 ) => {
+  const isInOriginalPosition = color === Color.White ?
+    position === WHITE_KING_INITIAL_POSITION :
+    position === BLACK_KING_INITIAL_POSITION;
+
+  if (!isInOriginalPosition) return false;
+
   const emptySpaceBetween = board[position + 1] === SpecialSquares.Empty &&
     board[position + 2] === SpecialSquares.Empty;
 
@@ -156,6 +172,12 @@ export const canCastleQueenSide = (
   board: Board,
   color: Color,
 ) => {
+  const isInOriginalPosition = color === Color.White ?
+    position === WHITE_KING_INITIAL_POSITION :
+    position === BLACK_KING_INITIAL_POSITION;
+
+  if (!isInOriginalPosition) return false;
+
   const emptySpaceBetween = board[position - 1] === SpecialSquares.Empty &&
     board[position - 2] === SpecialSquares.Empty &&
     board[position - 3] === SpecialSquares.Empty;
@@ -226,22 +248,12 @@ export const getKingMoves = (
   color: Color,
 ): Move[] => {
   const legalMoves: Move[] = [];
-  const specialMoves = getSpecialMoves(board, color);
 
-  if (
-    specialMoves.kingSideCastle &&
-    board[position + 1] === SpecialSquares.Empty &&
-    board[position + 2] === SpecialSquares.Empty
-  ) {
+  if (canCastleKingSide(position, board, color)) {
     legalMoves.push(`${position}-${position + 2}`);
   }
   
-  if (
-    specialMoves.queenSideCastle &&
-    board[position - 1] === SpecialSquares.Empty &&
-    board[position - 2] === SpecialSquares.Empty &&
-    board[position - 3] === SpecialSquares.Empty
-  ) {
+  if (canCastleQueenSide(position, board, color)) {
     legalMoves.push(`${position}-${position - 2}`);
   }
 

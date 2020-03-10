@@ -26,12 +26,6 @@ export enum SpecialSquares {
   Boundary = '0',
 }
 
-export interface SpecialMoves {
-  queenSideCastle: boolean;
-  kingSideCastle: boolean;
-}
-
-export type SpecialMovesByColor = Record<Color, SpecialMoves>;
 export const A8Square = 11;
 export const H1Square = 88;
 export type Piece = WhitePieces | BlackPieces | string;

@@ -1,3 +1,5 @@
+import { Color } from '../../engine/types';
+
 export enum Avatar {
   Boy = 'boy',
   Girl = 'girl',
@@ -8,9 +10,4 @@ export interface UserState {
   avatar: Avatar;
   name: string;
   color: Color;
-}
-
-export enum Color {
-  White = '0',
-  Black = '1',
 }
