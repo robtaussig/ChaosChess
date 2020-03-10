@@ -34,6 +34,7 @@ export default createSlice({
     gameInitialized: (state, action: PayloadAction<string>) => {
       return {
         ...state,
+        turnsElapsed: 0,
         board: action.payload,
       };
     },
