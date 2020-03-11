@@ -6,6 +6,7 @@ export interface ChessState {
   lastRejectedMove: string;
   nodesExplored: number;
   turnsElapsed: number;
+  lastCapturedPiece: [number, string];
 }
 
 export interface ChessResponse {

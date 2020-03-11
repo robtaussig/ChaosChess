@@ -3,6 +3,8 @@
 import Board from './board';
 
 export default class Game {
+  public board: Board;
+  
   constructor(element, onMove) {
     this.canvas = element;
     this.ctx = this.canvas.getContext('2d');

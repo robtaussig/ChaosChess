@@ -67,10 +67,10 @@ export const useInGameDashboard = makeStyles((theme: Theme) => ({
   root: {
     ...rootStyles(theme),
     display: 'grid',
-    gridTemplateAreas: `"text-left text-right"
-                        "start-over start-over"`,
-    gridTemplateRows: '1fr 1fr',
-    gridTemplateColumns: '1fr max-content',
+    gridTemplateAreas: `"captured text"
+                        "main-menu start-over"`,
+    gridTemplateRows: '100px 1fr',
+    gridTemplateColumns: '100px 1fr',
     gridGap: '20px',
     padding: 20,
     '& .start-over': {
@@ -80,12 +80,47 @@ export const useInGameDashboard = makeStyles((theme: Theme) => ({
   dashboardButton: {
     ...buttonStyles(theme),
   },
-  inGameDashboardText: {
+  lastCapturedPiece: {
+    gridArea: 'captured',
+    position: 'relative',
+    backgroundColor: '#ffffffb3',
+    borderRadius: '50%',
+    '& i': {
+      position: 'absolute',
+      height: 100,
+      width: 100,
+      border: '4px solid',
+      color: '#b70000a3',
+      '&:after': {
+        left: 45,
+        height: 92,
+        top: 0,
+        width: 4,
+        borderRadius: '0px',
+      },
+    },
+  },
+  inGameText: {
+    gridArea: 'text',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 30,
     fontFamily: "Oxanium",
+    '& span': {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    '& .top': {
+      flex: 1,
+      color: '000000ad',
+    },
+    '& .bottom': {
+      flex: 1,
+      color: '#000075',
+    },
   },
 }));
 

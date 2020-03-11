@@ -1,37 +1,22 @@
 import React, { FC } from 'react';
 import { useInGameDashboard } from './style';
 import { useSelector, useDispatch } from 'react-redux';
-import { chessSelector } from '../../../redux/Chess';
-import { userSelector } from '../../../redux/User';
 import { gameStarted } from '../../../redux/Game';
 import 'css.gg/icons/redo.css';
 import DashboardButton from './DashboardButton';
 import { opponentSelector } from '../../../redux/Opponent';
-import { getCurrentTurn } from '../../../engine/board';
+import LastCapturedPiece from './LastCapturedPiece';
+import InGameText from './InGameText';
 
 export const InGameDashboard: FC = () => {
   const classes = useInGameDashboard({});
   const dispatch = useDispatch();
-  const { isCheck, legalMoves, board } = useSelector(chessSelector);
-  const { type: opponentType } = useSelector(opponentSelector);
-  const { color } = useSelector(userSelector);
-  const isAITurn = getCurrentTurn(board) !== color;
-  const isCheckMate = isCheck && legalMoves.length === 0;
+  const { type: opponentType } = useSelector(opponentSelector);  
   
   return (
     <div className={classes.root}>
-      {isCheckMate && (
-        <span className={classes.inGameDashboardText}>Checkmate!</span>
-      )}
-      {(isCheck && !isCheckMate) && (
-        <span className={classes.inGameDashboardText}>Check</span>
-      )}
-      {(!isCheckMate && isAITurn) && (
-        <span className={classes.inGameDashboardText}>Thinking...</span>
-      )}
-      {!isCheckMate && !isAITurn && (
-        <span className={classes.inGameDashboardText}>Your turn</span>
-      )}
+      <LastCapturedPiece classes={classes}/>
+      <InGameText classes={classes}/>
       <DashboardButton
         classes={classes}
         className={'start-over'}

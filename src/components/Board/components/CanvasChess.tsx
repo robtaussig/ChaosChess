@@ -81,6 +81,7 @@ export const CanvasChess: FC<CanvasChessProps> = ({
   }, [board]);
 
   useEffect(() => {
+    gameRef.current.board.isDragging = null;
     gameRef.current.updateLegalMoves(legalMoves);
     gameRef.current.updateValidPieces(validPiecesToMove);
     gameRef.current.updateBoard(board);

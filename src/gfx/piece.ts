@@ -1,5 +1,18 @@
 export default class Piece {
-  constructor(piece, pos, ctx, onMove, height, xOffset, yOffset, squareOffset) {
+  public width: any;
+  public dragPos: { x: number, y: number };
+  public dragOffset: { x: number, y: number };
+
+  constructor(
+    public piece: any,
+    public pos: any,
+    public ctx: any,
+    public onMove: any,
+    public height: any,
+    public xOffset: any,
+    public yOffset: any,
+    public squareOffset: any,
+  ) {
     this.piece = piece;
     this.pos = pos;
     this.xOffset = xOffset;
@@ -140,7 +153,11 @@ export default class Piece {
     this.ctx.fill();
   }
 
-  draw(isDragging, dragPos, dragOffset) {
+  draw(
+    isDragging: boolean,
+    dragPos: { x: number, y: number },
+    dragOffset: { x: number, y: number },
+  ) {
     if (isDragging === this.pos) {
       this.dragPos = dragPos;
       this.dragOffset = dragOffset;

@@ -20,6 +20,7 @@ const INITIAL_STATE: ChessState = {
   lastRejectedMove: null,
   nodesExplored: null,
   turnsElapsed: 0,
+  lastCapturedPiece: [null, null],
 };
 
 //TODO check for check on moveAttempted
@@ -54,6 +55,7 @@ export default createSlice({
           validPiecesToMove: [],
           isCheck: false,
           turnsElapsed: state.turnsElapsed + 1,
+          lastCapturedPiece: [action.payload.to, state.board[action.payload.to]],
         };
       } else {
         return {
@@ -90,6 +92,7 @@ export default createSlice({
           from,
           to
         ),
+        lastCapturedPiece: [to, state.board[to]],
       };
     },
     specialBoardCreated: (state, action: PayloadAction<string>) => {
