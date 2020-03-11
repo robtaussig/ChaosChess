@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { chessSelector } from '../../../redux/Chess';
 import Piece from '../../../gfx/piece';
 import 'css.gg/icons/unavailable.css';
+import classNames from 'classnames';
 
 export interface LastCapturedPieceProps {
   classes: any;
@@ -12,11 +13,15 @@ export const LastCapturedPiece: FC<LastCapturedPieceProps> = ({ classes }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { lastCapturedPiece } = useSelector(chessSelector);
 
+  const capturedPiece =
+    lastCapturedPiece?.[1] && lastCapturedPiece[1] !== '-' ?
+    lastCapturedPiece[1] :
+    null;
   useEffect(() => {
-    if (lastCapturedPiece?.[1] && lastCapturedPiece?.[1] !== '-') {
+    if (capturedPiece) {
       const ctx = canvasRef.current.getContext('2d');
       const piece = new Piece(
-        lastCapturedPiece[1],
+        capturedPiece,
         0,
         ctx,
         null,
@@ -32,11 +37,15 @@ export const LastCapturedPiece: FC<LastCapturedPieceProps> = ({ classes }) => {
         ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       };
     }
-  }, [lastCapturedPiece?.[1] ?? null]);
+  }, [capturedPiece]);
 
   return (
-    <div className={classes.lastCapturedPiece}>
-      <i className={'gg-unavailable'}/>
+    <div className={classNames(classes.lastCapturedPiece, {
+      capturedPiece, 
+    })}>
+      {capturedPiece && (
+        <i className={'gg-unavailable'}/>
+      )}
       <canvas ref={canvasRef} height={'100px'} width={'100px'}/>
     </div>
   );

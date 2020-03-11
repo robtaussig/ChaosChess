@@ -90,8 +90,11 @@ export const useInGameDashboard = makeStyles((theme: Theme) => ({
   lastCapturedPiece: {
     gridArea: 'captured',
     position: 'relative',
-    backgroundColor: '#ffffffb3',
+    backgroundColor: 'transparent',
     borderRadius: '50%',
+    '&.capturedPiece': {
+      backgroundColor: '#ffffffb3',
+    },
     '& i': {
       position: 'absolute',
       height: 100,
