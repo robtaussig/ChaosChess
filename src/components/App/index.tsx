@@ -38,9 +38,11 @@ export const App: FC<AppProps> = () => {
   ] = useWebsocket('wss://robtaussig.com/ws/', STATIC_OPTIONS);
 
   useEffect(() => {
-    dispatch(
-      messageReceived(receiveMessage(lastMessage?.data, sendMessage))
-    );
+    if (lastMessage?.data) {
+      dispatch(
+        messageReceived(receiveMessage(lastMessage?.data, sendMessage))
+      );
+    }
   }, [lastMessage]);
 
   useEffect(() => {

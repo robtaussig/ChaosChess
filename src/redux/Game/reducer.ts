@@ -37,6 +37,9 @@ export default createSlice({
         state.subType = ChaosGameTypes.Normal;
       }
     },
+    subGameTypeSelected: (state, action: PayloadAction<ChaosGameTypes>) => {
+      state.subType = action.payload;
+    },
     difficultyChanged: (state, action: PayloadAction<number>) => {
       state.difficulty = action.payload;
     },

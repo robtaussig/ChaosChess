@@ -7,6 +7,7 @@ export const {
   setUpVsHuman,
   gameTypeSelected,
   difficultyChanged,
+  subGameTypeSelected,
 } = gameReducer.actions;
 
 export const reducer = gameReducer.reducer;

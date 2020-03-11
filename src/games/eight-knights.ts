@@ -4,10 +4,7 @@ import BaseGame from './base';
 
 export default class EightKnights extends BaseGame {
   public static gameName = 'Eight Knights';
-  public static description: `Both players begin the game with 8 knights and a
-                              king. After 20 turns, a random knight will
-                              transform in a queen for both sides. First to
-                              checkmate wins.`;
+  public static description = `Both players begin the game with 8 knights and a king. After 20 turns, a random knight will transform in a queen for both sides. First to checkmate wins.`;
   public static type = GameTypes.Chaos;
   public static subType = ChaosGameTypes.EightKnights;
   public static initialBoard = BoardTypes.Custom;

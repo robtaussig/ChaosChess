@@ -6,7 +6,7 @@ import { getChaoticBoard } from './lib/chaosUtils';
 
 export default class Regular extends BaseGame {
   public static gameName = 'Regular';
-  public static description: `The standard rules of chess. Boring!`;
+  public static description = `The standard rules of chess. Boring!`;
   public static type = GameTypes.Regular;
   public static initialBoard = BoardTypes.Normal;
   public static previewComponent: JSX.Element = null;
