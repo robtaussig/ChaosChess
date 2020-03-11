@@ -4,6 +4,7 @@ import {
   MessageTypes,
   JoinMessage,
   RenameMessage,
+  DisconnectedMessage,
 } from '../redux/Connection';
 import { Avatar } from '../redux/User';
 
@@ -47,6 +48,17 @@ const getNameMessageData = (message: string): RenameMessage['data'] => {
   };
 };
 
+const getNameMessageDataFromDisconnect =
+  (message: string): DisconnectedMessage['data'] => {
+    const [, uuidWithName] = message.split('||');
+    const [name,, ...uuid] = uuidWithName.split('-');
+
+    return {
+      name,
+      uuid: uuid.join('-'),
+    };
+  };
+
 const getUuidAndNameFromMessage =
   (message: string): { name: string, avatar: Avatar, uuid: string } => {
     const [nameWithAvatarAndUuid,] = message.split(':');
@@ -84,6 +96,11 @@ export const receiveMessage = (
     return {
       type: MessageTypes.InRoom,
       data: getUuidAndNameFromMessage(message),
+    };
+  } else if (isMessageType(message, MessageTypes.Disconnected)) {
+    return {
+      type: MessageTypes.Disconnected,
+      data: getNameMessageDataFromDisconnect(message),
     };
   }
 };

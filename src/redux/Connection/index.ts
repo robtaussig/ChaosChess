@@ -17,4 +17,5 @@ export {
   MessageTypes,
   JoinMessage,
   RenameMessage,
+  DisconnectedMessage,
 } from './types';

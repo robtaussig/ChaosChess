@@ -4,6 +4,7 @@ import { Avatar } from '../User';
 export enum MessageTypes {
   JoinedRoom = 'JoinedRoom',
   ChangedName = 'ChangedName',
+  Disconnected = 'Disconnected',
   InRoom = 'InRoom',
   None = 'None',
 }
@@ -41,15 +42,27 @@ export interface InRoomMessage extends BaseMessage {
   };
 }
 
+export interface DisconnectedMessage extends BaseMessage {
+  type: MessageTypes.Disconnected;
+  data: {
+    uuid: string;
+    name: string;
+  };
+}
+
 export type Message =
   JoinMessage |
   RenameMessage |
-  InRoomMessage;
+  InRoomMessage |
+  DisconnectedMessage;
 
 export interface ConnectionState {
   status: ReadyState;
   uuid: string;
-  messageHistory: Message[];
+  messageHistory: {
+    [uuid: string]: Message[];
+  };
+  notifications: string[];
   roomId: string;
 }
 
