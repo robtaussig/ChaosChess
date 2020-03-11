@@ -7,6 +7,8 @@ import {
   Square,
   MoveIncrement,
   CurrentColorBit,
+  WhitePieces,
+  BlackPieces,
 } from './types';
 import {
   BISHOP_MOVES,
@@ -39,20 +41,20 @@ export const makeMove = (
   to: Square,
 ): Board => {
   switch (board[from]) {
-    case 'K':
+    case WhitePieces.King:
       board = kingMoved(board, Color.White);
       if (Math.abs(from - to) === 2) {
-        castle(board, from, to);
+        board = castle(board, from, to);
       }
       break;
-    case 'k':
+    case BlackPieces.King:
       board = kingMoved(board, Color.Black);
       if (Math.abs(from - to) === 2) {
-        castle(board, from, to);
+        board = castle(board, from, to);
       }
       break;
 
-    case 'R':
+    case WhitePieces.Rook:
       if (from == 81) {
         board = queenSideRookMoved(board, Color.White);
       } else if (from == 88){
@@ -60,20 +62,32 @@ export const makeMove = (
       }
       break;
 
-    case 'r':
+    case BlackPieces.Rook:
       if (from == 11) {
         board = queenSideRookMoved(board, Color.Black);
       } else if (from == 18){
         board = kingSideRookMoved(board, Color.Black);
       }
       break;
-  
+
+    case WhitePieces.Pawn:
+      if (to < 19) {
+        board = updateBoard(board, from, WhitePieces.Queen);
+      }
+      break;
+
+    case BlackPieces.Pawn:
+      if (to > 80) {
+        board = updateBoard(board, from, BlackPieces.Queen);
+      }
+      break
+    
     default:
       break;
     }
 
   board = updateBoard(board, to, board[from]);
-  board = updateBoard(board, from, '-');
+  board = updateBoard(board, from, SpecialSquares.Empty);
  
   return swapColors(
     recordLastMove(board, from, to)
@@ -123,9 +137,15 @@ export const testMove = (
   withLastMove = false,
   withSwapColor = true,
 ): Board => {
-  const [from, to] = move.split('-').map(Number);
+  const [from, to] = move.split(SpecialSquares.Empty).map(Number);
+  if (to < 19 && board[from] === WhitePieces.Pawn) {
+    board = updateBoard(board, from, WhitePieces.Queen);
+  } else if (to > 80 && board[from] === BlackPieces.Pawn) {
+    board = updateBoard(board, from, BlackPieces.Queen);
+  }
+
   board = updateBoard(board, to, board[from]);
-  board = updateBoard(board, from, '-');
+  board = updateBoard(board, from, SpecialSquares.Empty);
   if (withSwapColor) board = swapColors(board);
 
   if (withLastMove) {
@@ -299,7 +319,7 @@ export const getPawnMoves = (
 ): Move[] => {
   if (color === Color.White && position > 70 && position < 79) {
     return getPawnMovements(position, board, color, WHITE_PAWN_INITIAL_MOVES);
-  } else if (color === Color.White && position > 20 && position < 29) {
+  } else if (color === Color.Black && position > 20 && position < 29) {
     return getPawnMovements(position, board, color, BLACK_PAWN_INITIAL_MOVES);
   } else if (color === Color.White){
     return getPawnMovements(position, board, color, WHITE_PAWN_MOVES);
@@ -380,7 +400,7 @@ export const attackers = (
 ): number[] => {
   const attackers: number[] = [];
   for (let i = 0; i < moves.length; i++) {
-    const to = Number(moves[i].split('-')[1]);
+    const to = Number(moves[i].split(SpecialSquares.Empty)[1]);
     if (
       board[to].toUpperCase() === type.toUpperCase() &&
       getColor(to, board) !== color
@@ -392,6 +412,7 @@ export const attackers = (
   return attackers;
 };
 
+//String pieces are not enums for WhitePieces, as attackers function compares capitalized value
 export const bishopAttackers = (
   position: Square,
   board: Board,
@@ -416,7 +437,7 @@ export const knightAttackers = (
   color: Color,
 ): number[] => attackers(
   getKnightMoves(position, board, color),
-  board, color, 'N'
+  board, color, 'N',
 );
 
 export const pawnAttackers = (
@@ -451,7 +472,6 @@ export const getCurrentTurn = (board: Board): Color => {
     Color.White :
     Color.Black;
 };
-
 
 const swapColors = (board: Board): Board => {
   const nextColor = board[CurrentColorBit.position] === CurrentColorBit.White ?

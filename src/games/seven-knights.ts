@@ -1,8 +1,14 @@
 import { ChaosGameTypes, BoardTypes, GameTypes } from '../redux/Game';
 import { Board, WhitePieces, BlackPieces } from '../engine/types';
+import {
+  BIT_ON,
+  WHITE_KING_MOVED_BIT,
+  BLACK_KING_MOVED_BIT,
+} from '../engine/constants';
 import BaseGame from './base';
 import { isCheck } from '../engine';
 import { transformRandomPiece } from './lib/chaosUtils';
+import { updateBoard } from '../engine/board';
 
 export default class SevenKnights extends BaseGame {
   public static gameName = 'Seven Knights and a Pawn';
@@ -52,6 +58,14 @@ export default class SevenKnights extends BaseGame {
   }
 
   public async generateInitialBoard() {
-    return '00000000000-----nnp00-----nnn00-----knn00--------00--------00NNK-----00NNN-----00PNN-----0000000000000000000000';
+    return updateBoard(
+      updateBoard(
+        '00000000000-----nnp00-----nnn00-----knn00--------00--------00NNK-----00NNN-----00PNN-----0000000000000000000000',
+        WHITE_KING_MOVED_BIT, //Prevent castling
+        BIT_ON,
+      ),
+      BLACK_KING_MOVED_BIT, //Prevent castling
+      BIT_ON,
+    );
   }
 }
