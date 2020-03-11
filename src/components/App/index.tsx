@@ -22,7 +22,7 @@ export const App: FC<AppProps> = () => {
   const classes = useStyles({});
   const dispatch = useDispatch();
   const { roomId, uuid } = useSelector(connectionSelector);
-  const { name } = useSelector(userSelector);
+  const { name, avatar } = useSelector(userSelector);
 
   const STATIC_OPTIONS = useMemo(() => ({
     retryOnError: true,
@@ -38,7 +38,9 @@ export const App: FC<AppProps> = () => {
   ] = useWebsocket('wss://robtaussig.com/ws/', STATIC_OPTIONS);
 
   useEffect(() => {
-    dispatch(messageReceived(receiveMessage(lastMessage?.data)));
+    dispatch(
+      messageReceived(receiveMessage(lastMessage?.data, sendMessage))
+    );
   }, [lastMessage]);
 
   useEffect(() => {
@@ -47,9 +49,9 @@ export const App: FC<AppProps> = () => {
 
   useEffect(() => {
     if (readyState === ReadyState.OPEN) {
-      setName(uuid, name, sendMessage);
+      setName(uuid, name, avatar, sendMessage);
     }
-  }, [readyState, sendMessage, name, uuid]);
+  }, [readyState, sendMessage, name, avatar, uuid]);
 
   useEffect(() => {
     if (readyState === ReadyState.OPEN) {

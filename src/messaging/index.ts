@@ -5,13 +5,16 @@ import {
   JoinMessage,
   RenameMessage,
 } from '../redux/Connection';
+import { Avatar } from '../redux/User';
 
 export const setName = (
   uuid: string,
   name: string,
+  avatar: Avatar,
   sendMessage: SendMessage,
 ): void => {
-  sendMessage(`/name ${name}-${uuid}`);
+  sendMessage(`/name ${name}-${avatar}-${uuid}`);
+  sendMessage(`${MessageTypes.ChangedName}||${uuid}||${name}||${avatar}`);
 };
 
 export const joinRoom = (
@@ -20,36 +23,67 @@ export const joinRoom = (
   sendMessage: SendMessage,
 ): void => {
   sendMessage(`/join ${roomId}`);
+  sendMessage(`${MessageTypes.JoinedRoom}||${uuid}||${roomId}`);
 };
 
-const getNameAndUuidFromBoth = (both: string): { name: string, uuid: string } => {
-  const [name, ...uuid] = both.split('-');
-
-  return {
-    name,
-    uuid: uuid.join('-'),
-  };
+export const inRoom = (
+  sendMessage: SendMessage,
+): void => {
+  sendMessage(`${MessageTypes.InRoom}||`);
 };
 
 const getJoinMessageData = (message: string): JoinMessage['data'] => {
-  const [user, room] = message.split(' joined ');
-  return { ...getNameAndUuidFromBoth(user), room };
+  const [,uuid, room] = message.split('||');
+  return { uuid, room };
 };
 
 const getNameMessageData = (message: string): RenameMessage['data'] => {
-  const [nameWithUUID, ..._rest] = message.split(' ').reverse();
+  const [, uuid, name, avatar] = message.split('||');
 
-  return getNameAndUuidFromBoth(nameWithUUID);
+  return {
+    uuid,
+    name,
+    avatar: avatar as Avatar,
+  };
 };
 
-export const receiveMessage = (message: string): Message => {
-  if (/^[^\s]* joined/.test(message)) return {
-    type: MessageTypes.JoinedRoom,
-    data: getJoinMessageData(message),
+const getUuidAndNameFromMessage =
+  (message: string): { name: string, avatar: Avatar, uuid: string } => {
+    const [nameWithAvatarAndUuid,] = message.split(':');
+    const [name, avatar, ...uuid] = nameWithAvatarAndUuid.split('-');
+
+    return {
+      name,
+      avatar: avatar as Avatar,
+      uuid: uuid.join('-'),
+    };
   };
 
-  if (/^name changed/.test(message)) return {
-    type: MessageTypes.ChangedName,
-    data: getNameMessageData(message),
-  };
+const isMessageType = (message: string, type: MessageTypes): boolean => {
+  if (!message) return;
+
+  return message.indexOf(`${type}||`) > -1;
+};
+
+export const receiveMessage = (
+  message: string,
+  respond: SendMessage,
+): Message => {
+  if (isMessageType(message, MessageTypes.JoinedRoom)) {
+    inRoom(respond);
+    return {
+      type: MessageTypes.JoinedRoom,
+      data: getJoinMessageData(message),
+    };
+  } else if (isMessageType(message, MessageTypes.ChangedName)) {
+    return {
+      type: MessageTypes.ChangedName,
+      data: getNameMessageData(message),
+    };
+  } else if (isMessageType(message, MessageTypes.InRoom)) {
+    return {
+      type: MessageTypes.InRoom,
+      data: getUuidAndNameFromMessage(message),
+    };
+  }
 };

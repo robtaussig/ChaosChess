@@ -1,8 +1,10 @@
 import { ReadyState } from 'react-use-websocket';
+import { Avatar } from '../User';
 
 export enum MessageTypes {
   JoinedRoom = 'JoinedRoom',
   ChangedName = 'ChangedName',
+  InRoom = 'InRoom',
   None = 'None',
 }
 
@@ -14,23 +16,35 @@ interface BaseMessage {
 }
 
 export interface JoinMessage extends BaseMessage {
-  type: MessageTypes.JoinedRoom,
+  type: MessageTypes.JoinedRoom;
   data: {
-    name: string,
-    uuid: string,
-    room: string,
-  },
-}
-
-export interface RenameMessage extends BaseMessage {
-  type: MessageTypes.ChangedName,
-  data: {
-    uuid: string,
-    name: string,
+    uuid: string;
+    room: string;
   };
 }
 
-export type Message = JoinMessage | RenameMessage;
+export interface RenameMessage extends BaseMessage {
+  type: MessageTypes.ChangedName;
+  data: {
+    uuid: string;
+    name: string;
+    avatar: Avatar;
+  };
+}
+
+export interface InRoomMessage extends BaseMessage {
+  type: MessageTypes.InRoom;
+  data: {
+    uuid: string;
+    name: string;
+    avatar: Avatar;
+  };
+}
+
+export type Message =
+  JoinMessage |
+  RenameMessage |
+  InRoomMessage;
 
 export interface ConnectionState {
   status: ReadyState;

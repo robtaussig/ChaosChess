@@ -12,11 +12,11 @@ export default createSlice({
   name: 'user',
   initialState: INITIAL_STATE,
   reducers: {
-    avatarPicked: (state, action: PayloadAction<Avatar>) => {
-      state.avatar = action.payload;
-    },
-    nameEntered: (state, action: PayloadAction<string>) => {
-      state.name = action.payload;
+    userUpdated: (state, action: PayloadAction<Partial<UserState>>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
     },
   },
   extraReducers: {
