@@ -4,7 +4,7 @@ import { Color } from '../../engine/types';
 
 const INITIAL_STATE: UserState = {
   avatar: Avatar.Bot,
-  name: '?',
+  name: '',
   color: Color.White,
 };
 

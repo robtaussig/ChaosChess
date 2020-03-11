@@ -31,7 +31,7 @@ export const Settings: FC = () => {
   }, [inputtedName, selectedAvatar]);
 
   return (
-    <div id={'settings'} className={classes.root}>
+      <>
       {type === SettingsType.User && (
         <UserSettings
           classes={classes}
@@ -39,6 +39,9 @@ export const Settings: FC = () => {
           setInputtedName={setInputtedName}
           selectedAvatar={selectedAvatar}
           setSelectedAvatar={setSelectedAvatar}
+          submitted={submitted}
+          avatar={avatar}
+          onSubmit={handleSubmit}
         />
       )}
       {type === SettingsType.Game && (
@@ -46,16 +49,7 @@ export const Settings: FC = () => {
           classes={classes}
         />
       )}
-      <button
-        className={classNames(classes.submit, {
-          submitted: submitted,
-        })}
-        disabled={inputtedName === name && selectedAvatar === avatar}
-        onClick={handleSubmit}
-      >
-        <i className={`gg-check`}/>
-      </button>
-    </div>
+    </>
   );
 };
 

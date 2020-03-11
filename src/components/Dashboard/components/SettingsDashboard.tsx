@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { useSettingsDashboard } from './style';
 import 'css.gg/icons/home.css';
 import 'css.gg/icons/bot.css';
+import 'css.gg/icons/file-document.css';
 import 'css.gg/icons/boy.css';
 import 'css.gg/icons/girl.css';
 import 'css.gg/icons/performance.css';
@@ -9,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DashboardButton from './DashboardButton';
 import { returnHome } from '../../../redux/App';
 import { userSelector } from '../../../redux/User';
+import { openHelp, HelpTypes, helpSelector } from '../../../redux/Help';
 import {
   settingsSelector,
   SettingsType,
@@ -20,6 +22,7 @@ export const SettingsDashboard: FC = () => {
   const classes = useSettingsDashboard({});
   const { avatar } = useSelector(userSelector);
   const { type } = useSelector(settingsSelector);
+  const { currentPage } = useSelector(helpSelector);
   const dispatch = useDispatch();
 
   return (
@@ -43,6 +46,20 @@ export const SettingsDashboard: FC = () => {
         disabled={type === SettingsType.Game}
         icon={'performance'}
         onClick={() => dispatch(typeSelected(SettingsType.Game))}
+      />
+      <DashboardButton
+        classes={classes}
+        className={'guide'}
+        label={'Guide'}
+        icon={'file-document'}
+        onClick={() => dispatch(openHelp(HelpTypes.General))}
+      />
+      <DashboardButton
+        classes={classes}
+        className={'guide'}
+        label={'Guide'}
+        icon={'file-document'}
+        onClick={() => dispatch(openHelp(HelpTypes.General))}
       />
       <DashboardButton
         classes={classes}

@@ -40,7 +40,7 @@ export const useMainScreenDashboardStyles = makeStyles((theme: Theme) => ({
     ...rootStyles(theme),
     display: 'grid',
     gridTemplateAreas: `"vs-ai vs-human"
-                        "settings settings"`,
+                        "settings close"`,
     gridTemplateRows: '1fr 1fr',
     gridTemplateColumns: '1fr 1fr',
     gridGap: '20px',
@@ -53,6 +53,9 @@ export const useMainScreenDashboardStyles = makeStyles((theme: Theme) => ({
     },
     '& .settings': {
       gridArea: 'settings',
+    },
+    '& .close': {
+      gridArea: 'close',
     },
   },
   dashboardButton: {
@@ -90,14 +93,23 @@ export const useSettingsDashboard = makeStyles((theme: Theme) => ({
   root: {
     ...rootStyles(theme),
     display: 'grid',
-    gridTemplateAreas: `". ."
-                        "home home"`,
+    gridTemplateAreas: `"user game"
+                        "guide home"`,
     gridTemplateRows: '1fr 1fr',
     gridTemplateColumns: '1fr 1fr',
     gridGap: '20px',
     padding: 20,
     '& .home': {
       gridArea: 'home',
+    },
+    '& .user': {
+      gridArea: 'user',
+    },
+    '& .game': {
+      gridArea: 'game',
+    },
+    '& .guide': {
+      gridArea: 'guide',
     },
   },
   dashboardButton: {

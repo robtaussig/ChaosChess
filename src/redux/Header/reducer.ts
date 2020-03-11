@@ -14,7 +14,7 @@ export default createSlice({
   },
   extraReducers: {
     [setUpVsAI.type]: (_state) => {
-      return 'Rules';
+      return 'Game Modes';
     },
     [setUpVsHuman.type]: (_state) => {
       return 'Find Opponent';

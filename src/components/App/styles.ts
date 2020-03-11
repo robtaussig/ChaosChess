@@ -17,7 +17,7 @@ export default makeStyles((theme: Theme) => ({
     '& #board': {
       gridArea: 'main',
     },
-    '& #rules': {
+    '& #game-modes': {
       gridArea: 'main',
     },
     '& #settings': {

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import 'css.gg/icons/laptop.css';
 import 'css.gg/icons/games.css';
 import 'css.gg/icons/ruler.css';
+import 'css.gg/icons/close.css';
 import DashboardButton from './DashboardButton';
 import { settingsOpened } from '../../../redux/Settings';
 import { setUpVsAI, setUpVsHuman } from '../../../redux/Game';
@@ -34,6 +35,13 @@ export const MainScreenDashboard: FC = () => {
         label={'Settings'}
         icon={'ruler'}
         onClick={() => dispatch(settingsOpened())}
+      />
+      <DashboardButton
+        classes={classes}
+        className={'close'}
+        label={'Close'}
+        icon={'close'}
+        onClick={() => history.back()}
       />
     </div>
   );

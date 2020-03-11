@@ -11,6 +11,7 @@ import { gameInitialized } from '../Chess';
 const INITIAL_STATE: GameState = {
   stage: GameStages.NotStarted,
   type: GameTypes.Chaos,
+  subType: null,
   difficulty: 5,
 };
 
@@ -29,6 +30,9 @@ export default createSlice({
     },
     gameTypeSelected: (state, action: PayloadAction<GameTypes>) => {
       state.type = action.payload;
+      if (action.payload === GameTypes.Regular) {
+        state.subType = null;
+      }
     },
     difficultyChanged: (state, action: PayloadAction<number>) => {
       state.difficulty = action.payload;

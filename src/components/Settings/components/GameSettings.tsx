@@ -9,8 +9,10 @@ export const GameSettings: FC<GameSettingsProps> = ({
 }) => {
 
   return (
-    <div className={classes.gameSettings}>
+    <div id={'settings'} className={classes.root}>
+      <section className={classes.gameSettings}>
 
+      </section>
     </div>
   );
 };

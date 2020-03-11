@@ -17,12 +17,10 @@ import {
   legalMovesReceived,
 } from '../../redux/Chess';
 import { userSelector } from '../../redux/User';
-import {
-  getChaoticBoard,
-} from './util';
 import { WorkerInterface } from '../../engine/types';
 import { getCurrentTurn } from '../../engine/board';
 import { wrap } from 'comlink';
+import { getGameGenerator, BaseGame } from '../../games';
 
 export const engineWorker = wrap<WorkerInterface>(
   new Worker('../../engine/engine.worker.ts')
@@ -39,18 +37,20 @@ export const Board: FC = () => {
     isCheck,
     lastRejectedMove,
   } = useSelector(chessSelector);
+  const game = useRef<BaseGame>(null);
   const { color: userColor } = useSelector(userSelector);
-  const { stage, type } = useSelector(gameSelector);
+  const { stage, type, subType } = useSelector(gameSelector);
 
   const handleMove = useCallback((from: number, to: number) => {
     dispatch(moveAttempted({ from, to }));
   }, [dispatch]);
 
   useEffect(() => {
+    if (!game.current) {
+      game.current = getGameGenerator(type, subType);
+    }
     const getBoardState = async () => {
-      const startingBoard = type === GameTypes.Regular ?
-        DEFAULT_BOARD :
-        await getChaoticBoard();
+      const startingBoard = await game.current.generateInitialBoard();
       
       dispatch(gameInitialized(startingBoard));
     };
@@ -58,7 +58,7 @@ export const Board: FC = () => {
     if (stage === GameStages.Started) {
       getBoardState();
     }
-  }, [stage, type, dispatch]);
+  }, [stage, type, subType, dispatch]);
 
   useEffect(() => {
     const getBestMove = async () => {

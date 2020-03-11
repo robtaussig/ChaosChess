@@ -18,4 +18,6 @@ export {
   GameState,
   GameStartedPayload,
   GameTypes,
+  ChaosGameTypes,
+  BoardTypes,
 } from './types';
