@@ -9,12 +9,12 @@ import {
   GameTypes,
 } from '../../redux/Game';
 import {
-  DEFAULT_BOARD,
   gameInitialized,
   chessSelector,
   moveAttempted,
   moveReceived,
   legalMovesReceived,
+  specialBoardCreated,
 } from '../../redux/Chess';
 import { userSelector } from '../../redux/User';
 import { WorkerInterface } from '../../engine/types';
@@ -63,7 +63,10 @@ export const Board: FC = () => {
   useEffect(() => {
     const getBestMove = async () => {
       const validMovesResponse = await engineWorker.getValidMoves(board);
-      const bestMoveResponse = await engineWorker.getBestMove(board);
+      const bestMoveResponse = await engineWorker.getBestMove(
+        board,
+        game.current.engineDifficulty,
+      );
 
       dispatch(moveReceived({
         isCheck: validMovesResponse.isCheck,
@@ -89,6 +92,15 @@ export const Board: FC = () => {
       }
     }
   }, [stage, board, userColor, dispatch]);
+
+  useEffect(() => {
+    if (game.current) {
+      const nextBoard = game.current.moveMade(board);
+      if (nextBoard !== board) {
+        dispatch(specialBoardCreated(nextBoard));
+      }
+    }
+  }, [board, dispatch]);
 
   return (
     <main ref={rootRef} id={'board'} className={classes.root}>

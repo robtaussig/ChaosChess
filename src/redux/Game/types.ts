@@ -22,7 +22,7 @@ export enum ChaosGameTypes {
   Normal = 'Normal',
   RankedChaos = 'RankedChaos',
   SemiChaos = 'SemiChaos',
-  EightKnights = 'EightKnights',
+  SevenKnights = 'SevenKnights',
   Draft = 'Draft',
   None = 'None',
 }

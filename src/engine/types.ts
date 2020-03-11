@@ -1,3 +1,7 @@
+export type WhitePieceMap<T> = Record<WhitePieces, T>;
+export type BlackPieceMap<T> = Record<BlackPieces, T>;
+export type PieceMap<T> = Record<Piece, T>;
+
 export enum Color {
   White = 'w',
   Black = 'b',

@@ -6,6 +6,7 @@ export const {
   moveAttempted,
   moveReceived,
   legalMovesReceived,
+  specialBoardCreated,
 } = chessReducer.actions;
 
 export const reducer = chessReducer.reducer;

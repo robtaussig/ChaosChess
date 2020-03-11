@@ -8,6 +8,8 @@ import {
   BLACK_KING_MOVED_BIT,
   BIT_ON,
 } from '../../engine/constants';
+import { Board } from '../../engine/types';
+import { updateBoard } from '../../engine/board';
 
 type Pieces = WhitePieces | BlackPieces;
 type Positions = { [pos: string]: Pieces };
@@ -34,7 +36,7 @@ const nullIfAdjacentTo = (
   return pos;
 }
 
-const getPiecePosition = (piece: Pieces, takenPositions: Positions): string => {
+const getPiecePosition = (piece: Pieces, takenPositions: Positions): Board => {
   let minCol = 1, maxCol = 8, minRow = 1, maxRow = 8, isKing = false;
   switch (piece) {
     case WhitePieces.Pawn:
@@ -113,3 +115,24 @@ export const getChaoticBoard = async (): Promise<string> => {
     return char;
   }).join('');
 };
+
+//Inclusive of min, exclusive of max
+const random = (min: number, max: number): number => {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+export const transformRandomPiece = (
+  board: Board,
+  pieceToReplace: any,
+  nextPiece: any,
+): Board => {
+  const positions = board.split('')
+    .map((piece, idx) => ({ piece, idx }))
+    .filter(({ piece }) => piece === pieceToReplace)
+    .map(({ idx }) => idx);
+  if (positions.length > 0) {
+    const positionToReplace = positions[random(0, positions.length)];
+    return updateBoard(board, positionToReplace, nextPiece);
+  }
+  return board;
+}

@@ -1,12 +1,8 @@
 import {
-  WhitePieces,
-  BlackPieces,
-  Piece,
+  WhitePieceMap,
+  BlackPieceMap,
+  PieceMap,
 } from './types';
-
-export type WhitePieceMap<T> = Record<WhitePieces, T>;
-export type BlackPieceMap<T> = Record<BlackPieces, T>;
-export type PieceMap<T> = Record<Piece, T>;
 
 export const WHITE_VALUE_MAP: PieceMap<number> = {
   'R': 500,

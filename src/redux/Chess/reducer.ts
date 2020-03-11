@@ -92,6 +92,9 @@ export default createSlice({
         ),
       };
     },
+    specialBoardCreated: (state, action: PayloadAction<string>) => {
+      state.board = action.payload;
+    },
     legalMovesReceived: (state, action: PayloadAction<ChessResponse>) => {
       if (state.turnsElapsed === 0) {
         const legalMovesWithoutKingCapture = removeMoveThatCapturesKing(

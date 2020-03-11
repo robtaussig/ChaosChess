@@ -3,7 +3,7 @@ import BaseGame from './base';
 import Regular from './regular';
 import NormalChaos from './normal-chaos';
 import DraftChaos from './draft';
-import EightKnights from './eight-knights';
+import SevenKnights from './seven-knights';
 import RankedChaos from './ranked-chaos';
 import SemiChaos from './semi-chaos';
 
@@ -28,8 +28,8 @@ export const getGameInformation = (gameType: GameTypes, subType?: ChaosGameTypes
         case ChaosGameTypes.Draft:
           return DraftChaos;  
 
-        case ChaosGameTypes.EightKnights:
-          return EightKnights;  
+        case ChaosGameTypes.SevenKnights:
+          return SevenKnights;  
 
         case ChaosGameTypes.RankedChaos:
           return RankedChaos;  
@@ -56,8 +56,8 @@ export const getGameGenerator = (gameType: GameTypes, subType?: ChaosGameTypes):
           return new NormalChaos();
         case ChaosGameTypes.Draft:
           return new DraftChaos();
-        case ChaosGameTypes.EightKnights:
-          return new EightKnights();
+        case ChaosGameTypes.SevenKnights:
+          return new SevenKnights();
         case ChaosGameTypes.RankedChaos:
           return new RankedChaos();
         case ChaosGameTypes.SemiChaos:
@@ -76,7 +76,7 @@ export { BaseGame };
 export const CHAOS_GAME_OPTIONS = [
   ChaosGameTypes.Normal,
   ChaosGameTypes.Draft,
-  ChaosGameTypes.EightKnights,
+  ChaosGameTypes.SevenKnights,
   ChaosGameTypes.RankedChaos,
   ChaosGameTypes.SemiChaos,
 ];

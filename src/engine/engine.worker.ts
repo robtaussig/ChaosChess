@@ -22,7 +22,10 @@ const getValidMoves = (board: Board = DEFAULT_BOARD) => {
   };
 };
 
-const getBestMove = (board: Board, depth = 4): [number, Move] => {
+const getBestMove = (
+  board: Board,
+  depth = 4,
+): [number, Move] => {
   return getBestMoveEval(board, depth);
 };
 

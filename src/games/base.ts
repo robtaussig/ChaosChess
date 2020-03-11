@@ -9,6 +9,8 @@ export default class BaseGame {
   public static subType: ChaosGameTypes;
   public static initialBoard: BoardTypes;
   public static previewComponent: JSX.Element;
+  
+  public engineDifficulty: number = 4;
 
   public moveMade = (board: Board): Board => board;
   public async generateInitialBoard() {
