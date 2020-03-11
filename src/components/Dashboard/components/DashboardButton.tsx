@@ -8,6 +8,7 @@ interface DashboardButtonProps {
   icon: string;
   onClick: (event: any) => void;
   disabled?: boolean;
+  hideLabel?: boolean;
 }
 
 export const DashboardButton: FC<DashboardButtonProps> = ({
@@ -17,6 +18,7 @@ export const DashboardButton: FC<DashboardButtonProps> = ({
   icon,
   onClick,
   disabled,
+  hideLabel,
 }) => {
 
   const handleClick = (e: any) => {
@@ -35,7 +37,9 @@ export const DashboardButton: FC<DashboardButtonProps> = ({
       disabled={Boolean(disabled)}
     >
       <i className={`gg-${icon}`}/>
-      <span className={classes.dashbordButtonLabel}>{label}</span>
+      {hideLabel !== true && (
+        <span className={classes.dashbordButtonLabel}>{label}</span>
+      )}
     </button>
   );
 };

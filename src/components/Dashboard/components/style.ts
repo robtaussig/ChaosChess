@@ -73,6 +73,13 @@ export const useInGameDashboard = makeStyles((theme: Theme) => ({
     gridTemplateColumns: '100px 1fr',
     gridGap: '20px',
     padding: 20,
+    '& .main-menu': {
+      gridArea: 'main-menu',
+      '& i': {
+        marginTop: 5,
+        marginRight: 0,
+      },
+    },
     '& .start-over': {
       gridArea: 'start-over',
     },
