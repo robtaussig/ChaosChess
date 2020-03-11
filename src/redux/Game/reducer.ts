@@ -4,6 +4,7 @@ import {
   GameState,
   GameTypes,
   GameStartedPayload,
+  ChaosGameTypes,
 } from './types';
 import { returnHome } from '../App';
 import { gameInitialized } from '../Chess';
@@ -11,7 +12,7 @@ import { gameInitialized } from '../Chess';
 const INITIAL_STATE: GameState = {
   stage: GameStages.NotStarted,
   type: GameTypes.Chaos,
-  subType: null,
+  subType: ChaosGameTypes.Normal,
   difficulty: 5,
 };
 
@@ -32,6 +33,8 @@ export default createSlice({
       state.type = action.payload;
       if (action.payload === GameTypes.Regular) {
         state.subType = null;
+      } else if (action.payload === GameTypes.Chaos) {
+        state.subType = ChaosGameTypes.Normal;
       }
     },
     difficultyChanged: (state, action: PayloadAction<number>) => {

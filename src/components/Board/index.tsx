@@ -46,9 +46,6 @@ export const Board: FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!game.current) {
-      game.current = getGameGenerator(type, subType);
-    }
     const getBoardState = async () => {
       const startingBoard = await game.current.generateInitialBoard();
       
@@ -56,6 +53,9 @@ export const Board: FC = () => {
     };
   
     if (stage === GameStages.Started) {
+      if (!game.current) {
+        game.current = getGameGenerator(type, subType);
+      }
       getBoardState();
     }
   }, [stage, type, subType, dispatch]);
