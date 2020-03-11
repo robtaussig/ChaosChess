@@ -10,4 +10,11 @@ export const reducer = connectionReducer.reducer;
 
 export const connectionSelector = (state: RootState) => state.connection;
 
-export { ConnectionState, ReadyState, Message } from './types';
+export {
+  ConnectionState,
+  ReadyState,
+  Message,
+  MessageTypes,
+  JoinMessage,
+  RenameMessage,
+} from './types';

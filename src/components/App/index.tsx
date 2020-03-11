@@ -1,12 +1,18 @@
 import React, { FC, useEffect, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
-import useWebsocket from 'react-use-websocket';
+import { useDispatch, useSelector } from 'react-redux';
+import useWebsocket, { ReadyState } from 'react-use-websocket';
 import useStyles from './styles';
 import Header from '../Header/';
 import Main from '../Main/';
 import Dashboard from '../Dashboard/';
-import { statusChanged, messageReceived } from '../../redux/Connection';
+import {
+  statusChanged,
+  messageReceived,
+  connectionSelector,
+} from '../../redux/Connection';
+import { userSelector } from '../../redux/User';
 import { SocketProvider } from '../../hooks/useSocket';
+import { setName, joinRoom, receiveMessage } from '../../messaging';
 
 interface AppProps {
   children?: any,
@@ -15,6 +21,8 @@ interface AppProps {
 export const App: FC<AppProps> = () => {
   const classes = useStyles({});
   const dispatch = useDispatch();
+  const { roomId, uuid } = useSelector(connectionSelector);
+  const { name } = useSelector(userSelector);
 
   const STATIC_OPTIONS = useMemo(() => ({
     retryOnError: true,
@@ -27,15 +35,27 @@ export const App: FC<AppProps> = () => {
     sendMessage,
     lastMessage,
     readyState,
-  ] = useWebsocket('ws://localhost:8080/ws/', STATIC_OPTIONS);
+  ] = useWebsocket('wss://robtaussig.com/ws/', STATIC_OPTIONS);
 
   useEffect(() => {
-    dispatch(messageReceived(lastMessage?.data));
+    dispatch(messageReceived(receiveMessage(lastMessage?.data)));
   }, [lastMessage]);
 
   useEffect(() => {
-    dispatch(statusChanged(readyState));
+    dispatch(statusChanged(readyState));    
   }, [readyState]);
+
+  useEffect(() => {
+    if (readyState === ReadyState.OPEN) {
+      setName(uuid, name, sendMessage);
+    }
+  }, [readyState, sendMessage, name, uuid]);
+
+  useEffect(() => {
+    if (readyState === ReadyState.OPEN) {
+      joinRoom(uuid, roomId, sendMessage);
+    }
+  }, [readyState, sendMessage, roomId, uuid]);
 
   return (
     <div id={'app'} className={classes.root}>

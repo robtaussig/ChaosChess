@@ -149,10 +149,10 @@ fn main() -> std::io::Result<()> {
         App::new()
             .service(web::resource("/ws/").to(chat_route))
     })
-    .bind("127.0.0.1:8080")
+    .bind("127.0.0.1:8010")
     .unwrap()
     .start();
 
-    info!("Started http server: 127.0.0.1:8080");
+    info!("Started http server: 127.0.0.1:8010");
     sys.run()
 }

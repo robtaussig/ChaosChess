@@ -1,7 +1,6 @@
 import React, { createContext, useContext } from 'react';
-import { Message } from '../redux/Connection';
 
-export type SendMessage = (message: Message) => void;
+export type SendMessage = (message: string) => void;
 
 const socketContext = createContext<SendMessage>(null);
 

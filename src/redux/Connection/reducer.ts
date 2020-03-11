@@ -17,7 +17,17 @@ export default createSlice({
       state.status = action.payload;
     },
     messageReceived: (state, action: PayloadAction<Message>) => {
-      state.messageHistory.push(action.payload);
+      if (
+        action.payload &&
+        action.payload.data.uuid &&
+        action.payload.data.uuid !== state.uuid
+      ) {
+        state.messageHistory = state.messageHistory
+          .filter(({ type }) => {
+            return type !== action.payload.type;
+          })
+          .concat(action.payload);
+      }
     },
   },
   extraReducers: {
