@@ -8,7 +8,7 @@ const rootStyles = (theme: Theme): any => ({
   borderRadius: 15,
 });
 
-const buttonStyles = (theme: Theme): any => ({
+export const buttonStyles = (theme: Theme): any => ({
   fontFamily: '"Oxanium"',
   display: 'flex',
   // flexDirection: 'column',
