@@ -26,11 +26,6 @@ export type InitializeGamePayload = {
   isCheck: boolean;
 }
 
-export type MoveAttemptedPayload = {
-  from: number;
-  to: number;
-}
-
 export enum WhitePieces {
   King = 'k',
   Queen = 'q',

@@ -11,8 +11,8 @@ import { transformRandomPiece } from './lib/chaosUtils';
 import { updateBoard } from '../engine/board';
 
 export default class SevenKnights extends BaseGame {
-  public static gameName = 'Seven Knights and a Pawn';
-  public static description = `Both players begin the game with 7 knights, a king, and a pawn. After 10 turns, each side's pawn will transform into a rook, and then into a queen after another 10 turns (if it still exists). First to checkmate wins.`;
+  public static gameName = 'Protect the Pawn';
+  public static description = `Both players begin the game with 5 knights, 2 bishops, a king, and a pawn. After each player's 10th turn, their pawn will transform into a rook, and then into a queen after another 10 turns. First to checkmate wins.`;
   public static type = GameTypes.Chaos;
   public static subType = ChaosGameTypes.SevenKnights;
   public static initialBoard = BoardTypes.Custom;
@@ -30,28 +30,23 @@ export default class SevenKnights extends BaseGame {
 
   private transformBoard = (board: Board): Board => {
     this.movesUntilTransform = 10;
-    let nextBoard;
-    //Turn into queen if there is a rook on board,
-    //else into a rook, in a safe position if possible
-    while (!nextBoard || isCheck(nextBoard)) {
-      nextBoard = transformRandomPiece(
-        transformRandomPiece(
-          board,
-          this.transformToQueen ?
-            BlackPieces.Rook :
-            BlackPieces.Pawn,
-            this.transformToQueen ?
-              BlackPieces.Queen :
-              BlackPieces.Rook,
-        ),
+    const nextBoard = transformRandomPiece(
+      transformRandomPiece(
+        board,
         this.transformToQueen ?
-            WhitePieces.Rook :
-            WhitePieces.Pawn,
-            this.transformToQueen ?
-              WhitePieces.Queen :
-              WhitePieces.Rook,
-      );
-    }
+          BlackPieces.Rook :
+          BlackPieces.Pawn,
+          this.transformToQueen ?
+            BlackPieces.Queen :
+            BlackPieces.Rook,
+      ),
+      this.transformToQueen ?
+          WhitePieces.Rook :
+          WhitePieces.Pawn,
+          this.transformToQueen ?
+            WhitePieces.Queen :
+            WhitePieces.Rook,
+    );
 
     this.transformToQueen = true;
     return nextBoard;

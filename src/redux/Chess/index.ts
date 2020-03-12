@@ -3,9 +3,7 @@ import chessReducer from './reducer';
 
 export const {
   gameInitialized,
-  moveAttempted,
-  moveReceived,
-  legalMovesReceived,
+  moveCompleted,
   specialBoardCreated,
 } = chessReducer.actions;
 

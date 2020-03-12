@@ -1,4 +1,4 @@
-import React, { FC, useRef, useCallback, useState, useEffect } from 'react';
+import React, { FC, useRef, useCallback, useEffect } from 'react';
 import useStyles from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import CanvasChess from './components/CanvasChess';
@@ -6,25 +6,12 @@ import { BOARD_MARGIN } from './constants';
 import {
   gameSelector,
   GameStages,
-  GameTypes,
 } from '../../redux/Game';
 import {
-  gameInitialized,
   chessSelector,
-  moveAttempted,
-  moveReceived,
-  legalMovesReceived,
-  specialBoardCreated,
 } from '../../redux/Chess';
-import { userSelector } from '../../redux/User';
-import { WorkerInterface } from '../../engine/types';
-import { getCurrentTurn } from '../../engine/board';
-import { wrap } from 'comlink';
 import { getGameGenerator, BaseGame } from '../../games';
-
-export const engineWorker = wrap<WorkerInterface>(
-  new Worker('../../engine/engine.worker.ts')
-);
+import { processMove, startGame } from '../../redux/Engine/actions';
 
 export const Board: FC = () => {
   const classes = useStyles({});
@@ -34,73 +21,20 @@ export const Board: FC = () => {
     board,
     legalMoves,
     validPiecesToMove,
-    isCheck,
-    lastRejectedMove,
   } = useSelector(chessSelector);
   const game = useRef<BaseGame>(null);
-  const { color: userColor } = useSelector(userSelector);
   const { stage, type, subType } = useSelector(gameSelector);
 
   const handleMove = useCallback((from: number, to: number) => {
-    dispatch(moveAttempted({ from, to }));
+    dispatch(processMove(from, to, game.current));
   }, [dispatch]);
 
   useEffect(() => {
-    const getBoardState = async () => {
-      const startingBoard = await game.current.generateInitialBoard();
-      
-      dispatch(gameInitialized(startingBoard));
-    };
-  
     if (stage === GameStages.Started) {
-      if (!game.current) {
-        game.current = getGameGenerator(type, subType);
-      }
-      getBoardState();
+      game.current = getGameGenerator(type, subType);
+      dispatch(startGame(game.current));
     }
   }, [stage, type, subType, dispatch]);
-
-  useEffect(() => {
-    const getBestMove = async () => {
-      const validMovesResponse = await engineWorker.getValidMoves(board);
-      const bestMoveResponse = await engineWorker.getBestMove(
-        board,
-        game.current.engineDifficulty,
-      );
-
-      dispatch(moveReceived({
-        isCheck: validMovesResponse.isCheck,
-        legalMoves: validMovesResponse.legalMoves,
-        bestMove: bestMoveResponse[1],
-      }))
-    };
-
-    const getAvailableMoves = async () => {
-      const validMovesResponse = await engineWorker.getValidMoves(board);
-
-      dispatch(legalMovesReceived({
-        isCheck: validMovesResponse.isCheck,
-        legalMoves: validMovesResponse.legalMoves,
-      }));
-    };
-  
-    if (stage === GameStages.InProgress) {
-      if (getCurrentTurn(board) !== userColor) {
-        getBestMove();
-      } else {
-        getAvailableMoves();
-      }
-    }
-  }, [stage, board, userColor, dispatch]);
-
-  useEffect(() => {
-    if (game.current) {
-      const nextBoard = game.current.moveMade(board);
-      if (nextBoard !== board) {
-        dispatch(specialBoardCreated(nextBoard));
-      }
-    }
-  }, [board, dispatch]);
 
   return (
     <main ref={rootRef} id={'board'} className={classes.root}>

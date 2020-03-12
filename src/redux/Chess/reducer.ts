@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   ChessState,
-  MoveAttemptedPayload,
   ChessResponse,
 } from './types';
 import {
@@ -23,7 +22,6 @@ const INITIAL_STATE: ChessState = {
   lastCapturedPiece: [null, null],
 };
 
-//TODO check for check on moveAttempted
 //TODO check for castle when king moves >1 space
 //TODO Update board meta information, such as king moving for first time
 //TODO handle pawn promotion, make sure AI considers pawn promotion
@@ -32,95 +30,39 @@ export default createSlice({
   name: 'chess',
   initialState: INITIAL_STATE,
   reducers: {
-    gameInitialized: (state, action: PayloadAction<string>) => {
+    gameInitialized: (state, action: PayloadAction<{
+      board: string,
+      legalMoves: string[],
+    }>) => {
       return {
         ...state,
         turnsElapsed: 0,
-        board: action.payload,
+        board: action.payload.board,
+        legalMoves: action.payload.legalMoves,
       };
     },
-    moveAttempted: (state, action: PayloadAction<MoveAttemptedPayload>) => {
-      if (state.legalMoves.includes(positionString(
-        action.payload.from, action.payload.to
-      ))) {
-        return {
-          ...state,
-          board: makeMove(
-            state.board,
-            action.payload.from,
-            action.payload.to
-          ),
-          lastRejectedMove: null,
-          legalMoves: [],
-          validPiecesToMove: [],
-          isCheck: false,
-          turnsElapsed: state.turnsElapsed + 1,
-          lastCapturedPiece: [action.payload.to, state.board[action.payload.to]],
-        };
-      } else {
-        return {
-          ...state,
-          lastRejectedMove: positionString(
-            action.payload.from,
-            action.payload.to,
-          )
-        };
-      }
-    },
-    moveReceived: (state, action: PayloadAction<ChessResponse>) => {
-      const { isCheck, bestMove, nodesExplored, legalMoves } = action.payload;
-
-      if (isCheck && legalMoves.length === 0) {
-        return {
-          ...state,
-          isCheck,
-          nodesExplored,
-          legalMoves,
-          lastRejectedMove: null,
-        };
-      }
-
-      const [from, to] = bestMove.split('-').map(Number);
-
+    moveCompleted: (state, action: PayloadAction<{
+      from: number,
+      to: number,
+      board: string,
+      isCheck: boolean,
+      legalMoves: string[],
+    }>) => {
       return {
         ...state,
-        isCheck,
-        nodesExplored,
+        board: action.payload.board,
+        isCheck: action.payload.isCheck,
         lastRejectedMove: null,
-        board: makeMove(
-          state.board,
-          from,
-          to
+        legalMoves: action.payload.legalMoves,
+        validPiecesToMove: getValidPiecesToMoveFromLegalMoveList(
+          action.payload.legalMoves
         ),
-        lastCapturedPiece: [to, state.board[to]],
+        turnsElapsed: state.turnsElapsed + 1,
+        lastCapturedPiece: [action.payload.to, state.board[action.payload.to]],
       };
     },
     specialBoardCreated: (state, action: PayloadAction<string>) => {
       state.board = action.payload;
-    },
-    legalMovesReceived: (state, action: PayloadAction<ChessResponse>) => {
-      if (state.turnsElapsed === 0) {
-        const legalMovesWithoutKingCapture = removeMoveThatCapturesKing(
-          action.payload.legalMoves,
-          state.board,
-        );
-        return {
-          ...state,
-          isCheck: action.payload.isCheck,
-          legalMoves: legalMovesWithoutKingCapture,
-          validPiecesToMove: getValidPiecesToMoveFromLegalMoveList(
-            legalMovesWithoutKingCapture,
-          ),
-        };
-      }
-      return {
-        ...state,
-        isCheck: action.payload.isCheck,
-        legalMoves: action.payload.legalMoves,
-        validPiecesToMove: getValidPiecesToMoveFromLegalMoveList(
-          action.payload.legalMoves,
-        ),
-      };
     },
   },
   extraReducers: {
