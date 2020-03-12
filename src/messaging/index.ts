@@ -41,6 +41,12 @@ export const hostTable = (
   sendMessage(`${MessageTypes.HostTable}||`);
 };
 
+export const dropTable = (
+  sendMessage: SendMessage,
+): void => {
+  sendMessage(`${MessageTypes.DropTable}||`);
+};
+
 export const getTables = (
   sendMessage: SendMessage,
 ): void => {
@@ -126,5 +132,10 @@ export const receiveMessage = (
     if (connection.hostedTable) {
       hostTable(respond);
     }
+  } else if (isMessageType(message, MessageTypes.DropTable)) {
+    dispatch(messageReceived({
+      type: MessageTypes.DropTable,
+      data: getUuidAndNameFromMessage(message),
+    }));
   }
 };

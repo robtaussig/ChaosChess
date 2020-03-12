@@ -184,9 +184,11 @@ export const useOpponentDashboardStyles = makeStyles((theme: Theme) => ({
     '& .ready': {
       gridArea: 'ready',
     },
+    '& .drop-table': {
+      gridArea: 'chaos',
+    },
     '& .create-table': {
-      gridRow: '1',
-      gridColumn: '1 / -1',
+      gridArea: 'regular',
     },
   },
   dashboardButton: {

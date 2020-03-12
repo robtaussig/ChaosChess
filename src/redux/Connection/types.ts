@@ -7,6 +7,7 @@ export enum MessageTypes {
   Disconnected = 'Disconnected',
   InRoom = 'InRoom',
   HostTable = 'HostTable',
+  DropTable = 'DropTable',
   GetTables = 'GetTables',
   HasTable = 'HasTable',
   None = 'None',
@@ -62,12 +63,22 @@ export interface HostTableMessage extends BaseMessage {
   };
 }
 
+export interface DropTableMessage extends BaseMessage {
+  type: MessageTypes.DropTable;
+  data: {
+    uuid: string;
+    name: string;
+    avatar: Avatar;
+  };
+}
+
 export type Message =
   JoinMessage |
   RenameMessage |
   InRoomMessage |
   DisconnectedMessage |
-  HostTableMessage;
+  HostTableMessage |
+  DropTableMessage;
 
 export interface ConnectionState {
   status: ReadyState;

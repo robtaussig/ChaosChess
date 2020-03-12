@@ -4,6 +4,7 @@ import 'css.gg/icons/home.css';
 import 'css.gg/icons/smile.css';
 import 'css.gg/icons/check.css';
 import 'css.gg/icons/add.css';
+import 'css.gg/icons/remove.css';
 import 'css.gg/icons/smile-neutral.css';
 import { useDispatch, useSelector } from 'react-redux';
 import DashboardButton from './DashboardButton';
@@ -14,7 +15,7 @@ import {
   gameStarted,
 } from '../../../redux/Game';
 import { returnHome } from '../../../redux/App';
-import { hostTable } from '../../../redux/Connection/actions';
+import { hostTable, dropTable } from '../../../redux/Connection/actions';
 import { connectionSelector } from '../../../redux/Connection';
 import { opponentSelector, OpponentType } from '../../../redux/Opponent';
 import { useSocket } from '../../../hooks/useSocket';
@@ -55,14 +56,24 @@ export const OpponentDashboard: FC = () => {
           />
         </>
       ) : (
-        <DashboardButton
-          classes={classes}
-          className={'create-table'}
-          label={'Create Table'}
-          disabled={Boolean(hostedTable)}
-          icon={'add'}
-          onClick={() => dispatch(hostTable(sendMessage))}
-        />
+        <>
+          <DashboardButton
+            classes={classes}
+            className={'drop-table'}
+            label={'Drop Table'}
+            disabled={!Boolean(hostedTable)}
+            icon={'remove'}
+            onClick={() => dispatch(dropTable(sendMessage))}
+          />
+          <DashboardButton
+            classes={classes}
+            className={'create-table'}
+            label={'Create Table'}
+            disabled={Boolean(hostedTable)}
+            icon={'add'}
+            onClick={() => dispatch(hostTable(sendMessage))}
+          />
+        </>
       )}
       <DashboardButton
         classes={classes}

@@ -4,6 +4,7 @@ import { SendMessage } from '../../hooks/useSocket';
 import {
   hostTable as hostTableMessage,
   getTables as getTablesMessage,
+  dropTable as dropTableMessage,
 } from '../../messaging';
 
 export const hostTable = (sendMessage: SendMessage): AppThunk<void> =>
@@ -13,6 +14,14 @@ export const hostTable = (sendMessage: SendMessage): AppThunk<void> =>
       sendMessage,
     );
     dispatch(tableHosted(connection.uuid));
+  };
+
+export const dropTable = (sendMessage: SendMessage): AppThunk<void> =>
+  async (dispatch, getState) => {
+    dropTableMessage(
+      sendMessage,
+    );
+    dispatch(tableHosted(null));
   };
 
 export const getTables = (sendMessage: SendMessage): AppThunk<void> =>

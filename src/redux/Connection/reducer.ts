@@ -27,6 +27,15 @@ export default createSlice({
         if (action.payload.type === MessageTypes.Disconnected) {
           state.notifications.push(`${action.payload.data.name} disconnected`);
           delete state.messageHistory[action.payload.data.uuid];
+        } else if (action.payload.type === MessageTypes.DropTable) {
+          state.messageHistory[action.payload.data.uuid] =
+            state.messageHistory[action.payload.data.uuid] || [];
+
+          state.messageHistory[action.payload.data.uuid] =
+            state.messageHistory[action.payload.data.uuid]
+              .filter(({ type }) => {
+                return type !== MessageTypes.HostTable;
+              });
         } else {
           state.messageHistory[action.payload.data.uuid] =
             state.messageHistory[action.payload.data.uuid] || [];
