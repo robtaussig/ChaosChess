@@ -8,6 +8,7 @@ const INITIAL_STATE: ConnectionState = {
   messageHistory: {},
   notifications: [],
   roomId: 'Main',
+  hostedTable: null,
 };
 
 export default createSlice({
@@ -38,6 +39,9 @@ export default createSlice({
               .concat(action.payload);
         }
       }
+    },
+    tableHosted: (state, action: PayloadAction<string>) => {
+      state.hostedTable = action.payload;
     },
   },
   extraReducers: {

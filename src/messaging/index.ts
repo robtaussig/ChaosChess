@@ -5,8 +5,10 @@ import {
   JoinMessage,
   RenameMessage,
   DisconnectedMessage,
+  messageReceived,
 } from '../redux/Connection';
 import { Avatar } from '../redux/User';
+import { AppThunk } from '../redux/types';
 
 export const setName = (
   uuid: string,
@@ -31,6 +33,18 @@ export const inRoom = (
   sendMessage: SendMessage,
 ): void => {
   sendMessage(`${MessageTypes.InRoom}||`);
+};
+
+export const hostTable = (
+  sendMessage: SendMessage,
+): void => {
+  sendMessage(`${MessageTypes.HostTable}||`);
+};
+
+export const getTables = (
+  sendMessage: SendMessage,
+): void => {
+  sendMessage(`${MessageTypes.GetTables}||`);
 };
 
 const getJoinMessageData = (message: string): JoinMessage['data'] => {
@@ -80,27 +94,37 @@ const isMessageType = (message: string, type: MessageTypes): boolean => {
 export const receiveMessage = (
   message: string,
   respond: SendMessage,
-): Message => {
+): AppThunk<void> => (dispatch, getState) => {
   if (isMessageType(message, MessageTypes.JoinedRoom)) {
     inRoom(respond);
-    return {
+    dispatch(messageReceived({
       type: MessageTypes.JoinedRoom,
       data: getJoinMessageData(message),
-    };
+    }));
   } else if (isMessageType(message, MessageTypes.ChangedName)) {
-    return {
+    dispatch(messageReceived({
       type: MessageTypes.ChangedName,
       data: getNameMessageData(message),
-    };
+    }));
   } else if (isMessageType(message, MessageTypes.InRoom)) {
-    return {
+    dispatch(messageReceived({
       type: MessageTypes.InRoom,
       data: getUuidAndNameFromMessage(message),
-    };
+    }));
   } else if (isMessageType(message, MessageTypes.Disconnected)) {
-    return {
+    dispatch(messageReceived({
       type: MessageTypes.Disconnected,
       data: getNameMessageDataFromDisconnect(message),
-    };
+    }));
+  } else if (isMessageType(message, MessageTypes.HostTable)) {
+    dispatch(messageReceived({
+      type: MessageTypes.HostTable,
+      data: getUuidAndNameFromMessage(message),
+    }));
+  } else if (isMessageType(message, MessageTypes.GetTables)) {
+    const { connection } = getState();
+    if (connection.hostedTable) {
+      hostTable(respond);
+    }
   }
 };

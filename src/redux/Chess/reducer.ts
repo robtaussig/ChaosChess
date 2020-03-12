@@ -33,10 +33,12 @@ export default createSlice({
     gameInitialized: (state, action: PayloadAction<{
       board: string,
       legalMoves: string[],
+      isCheck: boolean,
     }>) => {
       return {
         ...state,
         turnsElapsed: 0,
+        isCheck: action.payload.isCheck,
         board: action.payload.board,
         legalMoves: action.payload.legalMoves,
       };

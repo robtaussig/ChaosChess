@@ -19,6 +19,7 @@ export const startGame = (
     dispatch(gameInitialized({
       board: initialBoard,
       legalMoves: availableMoves.legalMoves,
+      isCheck: isCheck(initialBoard),
     }));
   };
 

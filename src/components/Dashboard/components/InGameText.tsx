@@ -13,7 +13,7 @@ export const InGameText: FC<InGameTextProps> = ({ classes }) => {
   const { color } = useSelector(userSelector);
   const isAITurn = getCurrentTurn(board) !== color;
   const isCheckMate = isCheck && legalMoves.length === 0;
-
+  
   const topText = isCheckMate ? (
     <span className={'top'}>Checkmate!</span>
   ) : isAITurn ? (
@@ -31,7 +31,7 @@ export const InGameText: FC<InGameTextProps> = ({ classes }) => {
   return (
     <div className={classes.inGameText}>
       {topText}
-      {bottomText}
+      {!isCheckMate && bottomText}
     </div>
   );
 };

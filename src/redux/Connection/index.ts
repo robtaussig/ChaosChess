@@ -4,6 +4,7 @@ import { RootState } from '../types';
 export const {
   statusChanged,
   messageReceived,
+  tableHosted,
 } = connectionReducer.actions;
 
 export const reducer = connectionReducer.reducer;

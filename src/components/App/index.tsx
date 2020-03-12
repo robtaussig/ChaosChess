@@ -40,7 +40,7 @@ export const App: FC<AppProps> = () => {
   useEffect(() => {
     if (lastMessage?.data) {
       dispatch(
-        messageReceived(receiveMessage(lastMessage?.data, sendMessage))
+        receiveMessage(lastMessage?.data, sendMessage)
       );
     }
   }, [lastMessage]);
