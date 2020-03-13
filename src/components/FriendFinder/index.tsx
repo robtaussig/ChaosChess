@@ -2,20 +2,32 @@ import React, { FC, useEffect, useMemo } from 'react';
 import useStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSocket } from '../../hooks/useSocket';
-import { getTables } from '../../redux/Connection/actions';
-import { connectionSelector, MessageTypes } from '../../redux/Connection';
+import { getTables, requestJoin } from '../../redux/Connection/actions';
+import {
+  connectionSelector,
+  MessageTypes,
+  JoinPhase,
+  HostPhase,
+} from '../../redux/Connection';
 import { Avatar, userSelector } from '../../redux/User';
 import HostedTable from './components/HostedTable';
+import PrivateRoom from './components/PrivateRoom';
 
 export const FriendFinder: FC = () => {
   const classes = useStyles({});
   const sendMessage = useSocket();
   const dispatch = useDispatch();
-  const { messageHistory, hostedTable, uuid } = useSelector(connectionSelector);
+  const {
+    messageHistory,
+    hostedTable,
+    uuid,
+    joinPhase,
+    hostPhase,
+  } = useSelector(connectionSelector);
   const { avatar, name } = useSelector(userSelector);
 
-  const handleJoinTable = (uuid: string) => {
-    console.log(uuid);
+  const handleJoinTable = (uuidToJoin: string) => {
+    dispatch(requestJoin(sendMessage, uuidToJoin));
   };
 
   useEffect(() => {
@@ -46,6 +58,16 @@ export const FriendFinder: FC = () => {
         return next;
       }, [] as { uuid: string, name: string, avatar: Avatar }[]);
   }, [messageHistory]);
+
+  if (joinPhase === JoinPhase.Joined) {
+    return (
+      <PrivateRoom isHost={false}/>
+    );
+  } else if (hostPhase === HostPhase.Joined) {
+    return (
+      <PrivateRoom isHost={true}/>
+    );
+  }
 
   return (
     <div id={'friend-finder'} className={classes.root}>

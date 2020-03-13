@@ -9,6 +9,13 @@ import {
 } from '../redux/Connection';
 import { Avatar } from '../redux/User';
 import { AppThunk } from '../redux/types';
+import {
+  expectResponse,
+  respondToMessage,
+  handleMessageResponse,
+  Response,
+} from './respond';
+import { isMessageType } from './util';
 
 export const setName = (
   uuid: string,
@@ -53,6 +60,17 @@ export const getTables = (
   sendMessage(`${MessageTypes.GetTables}||`);
 };
 
+export const requestJoin = async (
+  sendMessage: SendMessage,
+  uuidToJoin: string,
+): Promise<Response> => {
+  return expectResponse(
+    sendMessage,
+    `${MessageTypes.RequestJoin}||`,
+    uuidToJoin,
+  );
+};
+
 const getJoinMessageData = (message: string): JoinMessage['data'] => {
   const [,uuid, room] = message.split('||');
   return { uuid, room };
@@ -91,17 +109,16 @@ const getUuidAndNameFromMessage =
     };
   };
 
-const isMessageType = (message: string, type: MessageTypes): boolean => {
-  if (!message) return;
-
-  return message.indexOf(`${type}||`) > -1;
-};
-
 export const receiveMessage = (
   message: string,
   respond: SendMessage,
 ): AppThunk<void> => (dispatch, getState) => {
-  if (isMessageType(message, MessageTypes.JoinedRoom)) {
+  
+  if (isMessageType(message, MessageTypes.Response)) {
+    dispatch(handleMessageResponse(message));
+  } else if (isMessageType(message, MessageTypes.ResponseExpected)) {
+    dispatch(respondToMessage(message, respond));
+  } else if (isMessageType(message, MessageTypes.JoinedRoom)) {
     inRoom(respond);
     dispatch(messageReceived({
       type: MessageTypes.JoinedRoom,

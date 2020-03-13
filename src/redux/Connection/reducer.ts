@@ -1,5 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ReadyState, ConnectionState, Message, MessageTypes } from './types';
+import {
+  ReadyState,
+  ConnectionState,
+  Message,
+  MessageTypes,
+  JoinPhase,
+  HostPhase,
+  RoomCreatedPayload,
+} from './types';
 import { v4 as uuidv4 } from 'uuid';
 
 const INITIAL_STATE: ConnectionState = {
@@ -9,6 +17,9 @@ const INITIAL_STATE: ConnectionState = {
   notifications: [],
   roomId: 'Main',
   hostedTable: null,
+  hostPhase: HostPhase.None,
+  joinedTable: null,
+  joinPhase: JoinPhase.None,
 };
 
 export default createSlice({
@@ -51,6 +62,22 @@ export default createSlice({
     },
     tableHosted: (state, action: PayloadAction<string>) => {
       state.hostedTable = action.payload;
+      if (action.payload) {
+        state.hostPhase = HostPhase.Waiting;
+      } else {
+        state.hostPhase = HostPhase.None;
+      }
+    },
+    joinRequested: (state, action: PayloadAction<string>) => {
+      state.joinPhase = JoinPhase.Requested;
+      state.joinedTable = action.payload;
+    },
+    roomCreated: (state, action: PayloadAction<RoomCreatedPayload>) => {
+      state.roomId = action.payload.roomId;
+      state.hostPhase = HostPhase.Joined;
+    },
+    joinToRequestAccepted: (state, action: PayloadAction<string>) => {
+      state.joinPhase = JoinPhase.Joined;
     },
   },
   extraReducers: {

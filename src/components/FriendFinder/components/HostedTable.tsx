@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
 import { Avatar } from '../../../redux/User';
+import { useSelector } from 'react-redux';
 import classNames from 'classnames';
 import DashboardButton from '../../Dashboard/components/DashboardButton';
+import { connectionSelector, JoinPhase } from '../../../redux/Connection';
 import 'css.gg/icons/chevron-down-o.css';
 import 'css.gg/icons/spinner.css';
 
@@ -22,6 +24,9 @@ export const HostedTable: FC<HostedTableProps> = ({
   uuid,
   onJoin,
 }) => {
+  const { joinPhase, joinedTable} = useSelector(connectionSelector);
+  const isJoining = joinPhase === JoinPhase.Requested;
+  const isJoiningThisTable = isJoining && joinedTable === uuid;
 
   return (
     <div className={classNames(classes.hostedTable, {
@@ -31,7 +36,7 @@ export const HostedTable: FC<HostedTableProps> = ({
       <span className={classes.name}>{name}</span>
       {isUserTable ? (
         <DashboardButton
-          label={'Your table'}
+          label={'Host'}
           classes={classes}
           className={'join-button'}
           icon={'spinner'}
@@ -39,10 +44,11 @@ export const HostedTable: FC<HostedTableProps> = ({
         />
       ) : (
         <DashboardButton
-          label={'Join'}
+          label={isJoiningThisTable ? 'Joining...' : 'Join'}
           classes={classes}
           className={'join-button'}
           icon={'chevron-down-o'}
+          disabled={isJoining}
           onClick={() => onJoin(uuid)}
         />
       )}

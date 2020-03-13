@@ -5,6 +5,9 @@ export const {
   statusChanged,
   messageReceived,
   tableHosted,
+  joinRequested,
+  roomCreated,
+  joinToRequestAccepted,
 } = connectionReducer.actions;
 
 export const reducer = connectionReducer.reducer;
@@ -19,4 +22,7 @@ export {
   JoinMessage,
   RenameMessage,
   DisconnectedMessage,
+  JoinPhase,
+  HostPhase,
+  RoomCreatedPayload,
 } from './types';

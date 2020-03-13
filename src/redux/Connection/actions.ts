@@ -1,10 +1,15 @@
 import { AppThunk } from '../types';
-import { tableHosted } from './';
+import {
+  tableHosted,
+  joinRequested,
+  joinToRequestAccepted,
+  MessageTypes } from './';
 import { SendMessage } from '../../hooks/useSocket';
 import {
   hostTable as hostTableMessage,
   getTables as getTablesMessage,
   dropTable as dropTableMessage,
+  requestJoin as requestJoinMessage,
 } from '../../messaging';
 
 export const hostTable = (sendMessage: SendMessage): AppThunk<void> =>
@@ -27,4 +32,19 @@ export const dropTable = (sendMessage: SendMessage): AppThunk<void> =>
 export const getTables = (sendMessage: SendMessage): AppThunk<void> =>
   async (dispatch, getState) => {
     getTablesMessage(sendMessage);
+  };
+
+export const requestJoin = (
+  sendMessage: SendMessage,
+  uuidToJoin: string,
+): AppThunk<void> =>
+  async (dispatch, getState) => {
+    dispatch(joinRequested(uuidToJoin));
+    const response = await requestJoinMessage(sendMessage, uuidToJoin);
+    if (response.message === MessageTypes.RequestToJoinAccepted) {
+      //TODO: Actually join room
+      dispatch(joinToRequestAccepted(uuidToJoin));
+    } else {
+      //TODO: Handle fail to join
+    }
   };

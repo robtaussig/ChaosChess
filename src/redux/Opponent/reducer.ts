@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { OpponentState, OpponentType } from './types';
+import { roomCreated, joinToRequestAccepted, RoomCreatedPayload } from '../Connection';
 import {
   setUpVsAI,
   setUpVsHuman,
@@ -25,6 +26,12 @@ export default createSlice({
     [setUpVsHuman.type]: state => {
       state.type = OpponentType.Human;
       state.isReady = false;
+    },
+    [roomCreated.type]: (state, action: PayloadAction<RoomCreatedPayload>) => {
+      state.uuid = action.payload.opponent;
+    },
+    [joinToRequestAccepted.type]: (state, action: PayloadAction<string>) => {
+      state.uuid = action.payload;
     },
   },
 });

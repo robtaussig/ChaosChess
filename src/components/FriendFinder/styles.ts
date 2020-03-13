@@ -43,6 +43,12 @@ export default makeStyles((theme: any) => ({
       padding: '0 20px',
       backgroundColor: '#005439',
       color: 'white',
+      '& i': {
+        '--ggs': 1,
+      },
+      '& span': {
+        marginLeft: 20,
+      },
     },
   },
 }));

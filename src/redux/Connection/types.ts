@@ -10,6 +10,10 @@ export enum MessageTypes {
   DropTable = 'DropTable',
   GetTables = 'GetTables',
   HasTable = 'HasTable',
+  RequestJoin = 'RequestJoin',
+  RequestToJoinAccepted = 'RequestToJoinAccepted',
+  ResponseExpected = 'ResponseExpected',
+  Response = 'Response',
   None = 'None',
 }
 
@@ -80,6 +84,23 @@ export type Message =
   HostTableMessage |
   DropTableMessage;
 
+export enum JoinPhase {
+  None = 'None',
+  Requested = 'Requested',
+  Joined = 'Joined',
+}
+
+export enum HostPhase {
+  None = 'None',
+  Waiting = 'Waiting',
+  Joined = 'Joined',
+}
+
+export interface RoomCreatedPayload {
+  roomId: string;
+  opponent: string;
+}
+
 export interface ConnectionState {
   status: ReadyState;
   uuid: string;
@@ -89,6 +110,9 @@ export interface ConnectionState {
   notifications: string[];
   roomId: string;
   hostedTable: string;
+  joinedTable: string;
+  joinPhase: JoinPhase;
+  hostPhase: HostPhase;
 }
 
 export { ReadyState }
