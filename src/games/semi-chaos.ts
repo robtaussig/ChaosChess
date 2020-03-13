@@ -1,23 +1,8 @@
-import { ChaosGameTypes, BoardTypes, GameTypes } from '../redux/Game';
-import { Board } from '../engine/types';
-import BaseGame from './base';
-import { getChaoticBoard } from './lib/chaosUtils';
+import { ChaosGameTypes } from '../redux/Game';
+import ChaosBase from './chaos-base';
 
-export default class SemiChaos extends BaseGame {
+export default class SemiChaos extends ChaosBase {
   public static gameName = 'Semi-Chaos';
-  public static description = `Similar to standard Chaos, semi-chaos allows for the 'capture' of pieces during the initial random placement. This leads to more open initial baords and slightly longer games.`;
-  public static type = GameTypes.Chaos;
+  public static description = `Similar to standard Chaos, semi-chaos allows for the 'capture' of pieces during the initial random placement. This leads to more open initial boards and slightly longer games.`;
   public static subType = ChaosGameTypes.SemiChaos;
-  public static initialBoard = BoardTypes.Random;
-  public static previewComponent: JSX.Element = null;
-
-  //TODO
-  public moveMade = (board: Board): Board => {
-    return board;
-  }
-
-  //TODO
-  public generateInitialBoard() {
-    return getChaoticBoard();
-  }
 }

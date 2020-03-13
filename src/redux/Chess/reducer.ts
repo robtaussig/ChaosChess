@@ -4,9 +4,7 @@ import {
   ChessResponse,
 } from './types';
 import {
-  positionString,
   getValidPiecesToMoveFromLegalMoveList,
-  removeMoveThatCapturesKing,
 } from './util';
 import { makeMove } from '../../engine/board';
 import { DEFAULT_BOARD } from '../../engine/constants';

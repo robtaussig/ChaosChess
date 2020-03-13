@@ -18,7 +18,7 @@ export const startGame = (
 
     dispatch(gameInitialized({
       board: initialBoard,
-      legalMoves: availableMoves.legalMoves,
+      legalMoves: game.filterLegalMoves(availableMoves.legalMoves, initialBoard),
       isCheck: isCheck(initialBoard),
     }));
   };
@@ -40,7 +40,7 @@ export const processMove = (
       to,
       board: nextBoard,
       isCheck: isCheck(nextBoard),
-      legalMoves: [],
+      legalMoves: null,
     }));
 
     const [, move] = await engineWorker.getBestMove(

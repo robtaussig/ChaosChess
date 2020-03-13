@@ -9,7 +9,7 @@ import {
   BIT_ON,
 } from '../../engine/constants';
 import { Board } from '../../engine/types';
-import { updateBoard } from '../../engine/board';
+import { updateBoard, makeMove } from '../../engine/board';
 
 type Pieces = WhitePieces | BlackPieces;
 type Positions = { [pos: string]: Pieces };
@@ -136,3 +136,13 @@ export const transformRandomPiece = (
   }
   return board;
 }
+
+export const removeMoveThatCapturesKing =
+  (moves: string[], board: string): string[] => {
+    return moves.filter(move => {
+      const [from, to] = move.split('-').map(Number);
+      const nextBoard = makeMove(board, from, to);
+      return nextBoard.includes(WhitePieces.King) &&
+        nextBoard.includes(BlackPieces.King);
+    });
+  };

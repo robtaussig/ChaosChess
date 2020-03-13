@@ -13,6 +13,7 @@ export default class BaseGame {
   public engineDifficulty: number = 4;
 
   public moveMade = (board: Board): Board => board;
+  public filterLegalMoves = (moves: string[], board: Board): string[] => moves;
   public async generateInitialBoard() {
     return DEFAULT_BOARD;
   }
