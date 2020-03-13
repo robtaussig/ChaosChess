@@ -39,10 +39,10 @@ export default createSlice({
       state.type = DashboardTypes.SetUpOpponent;
     },
     [joinToRequestAccepted.type]: state => {
-      state.type = DashboardTypes.GuestDashboard;
+      state.type = DashboardTypes.MultiplayerDashboard;
     },
     [roomCreated.type]: state => {
-      state.type = DashboardTypes.HostDashboard;
+      state.type = DashboardTypes.MultiplayerDashboard;
     },
   },
 });
