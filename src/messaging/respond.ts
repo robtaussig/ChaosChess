@@ -74,11 +74,12 @@ export const respondToMessage = (
 ): AppThunk<void> => (dispatch, getState) => {
   const { connection } = getState();
   const [sender, messageData] = message.split(':');
+  const [,, ...senderUuid] = sender.split('-');
   const [,uuid, messageId,...originalMessage] = messageData.split('||');
   if (uuid === connection.uuid) {
     dispatch(sendResponse(
       respond,
-      sender,
+      senderUuid.join('-'),
       messageId,
       originalMessage.join('||')
     ));

@@ -8,8 +8,6 @@ interface HostDashboardProps {
   
 }
 
-//TODO: Join Main room when leaving for home
-//TODO: Communicate leaving room to guest
 export const HostDashboard: FC<HostDashboardProps> = () => {
   const classes = useStyles({});
   const dispatch = useDispatch();

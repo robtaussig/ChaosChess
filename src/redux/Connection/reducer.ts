@@ -83,7 +83,7 @@ export default createSlice({
       state.roomId = action.payload;
       state.joinPhase = JoinPhase.Joined;
     },
-    requestToJoinCancelled: (state, action: PayloadAction<string>) => {
+    requestToJoinCancelled: (state) => {
       state.joinPhase = JoinPhase.None;
       state.joinedTable = null;
     },

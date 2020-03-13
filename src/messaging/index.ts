@@ -1,6 +1,5 @@
 import { SendMessage } from '../hooks/useSocket';
 import {
-  Message,
   MessageTypes,
   JoinMessage,
   RenameMessage,
@@ -165,9 +164,12 @@ export const receiveMessage = (
     }));
   } else if (isMessageType(message, MessageTypes.JoiningRoom)) {
     const { uuid, roomId } = getUuidAndRoomId(message);
-    const { connection } = getState();
+    const { connection, opponent } = getState();
+
     if (connection.roomId === uuid && connection.roomId !== roomId) {
       //TODO: Display notification informing of reason
+      dispatch(returnHome());
+    } else if (uuid === opponent.uuid && roomId !== connection.roomId) {
       dispatch(returnHome());
     }
   }
