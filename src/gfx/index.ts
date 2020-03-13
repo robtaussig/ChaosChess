@@ -59,6 +59,10 @@ export default class Game {
     this.board.setValidPieces(pieces);
   }
 
+  updateSquaresToHighlight(pieces) {
+    this.board.setPiecesToHighlight(pieces);
+  }
+
   draw() {
     this.board.draw();
   }

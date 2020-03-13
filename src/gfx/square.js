@@ -8,7 +8,7 @@ export default class Square {
     this.width = sideLength;
   }
 
-  draw(isSelected, isLegalMove, movedFrom, movedTo) {
+  draw(isSelected, isLegalMove, movedFrom, movedTo, shouldHighlight) {
     const column = this.pos % 10;
     const row = Math.floor(this.pos / 10);
 
@@ -24,6 +24,10 @@ export default class Square {
       this.ctx.fillStyle = 'black';
     }
 
+    if (shouldHighlight) {
+      this.ctx.fillStyle = '#86002b';
+    }
+
     if (movedFrom) {
       this.ctx.fillStyle = '#dbad6a';
     } else if (movedTo) {
@@ -32,7 +36,8 @@ export default class Square {
 
     if (isLegalMove) {
       this.ctx.fillStyle = '#b470c3';
-    }
+    }    
+
     this.ctx.fillRect(this.xOffset, this.yOffset, this.width, this.height);    
   }
 }

@@ -6,6 +6,7 @@ interface CanvasChessProps {
   board: string;
   legalMoves: string[];
   validPiecesToMove: string[];
+  squaresToHighlight: number[];
   canvasWidth: string,
   canvasHeight: string,
 }
@@ -15,6 +16,7 @@ export const CanvasChess: FC<CanvasChessProps> = ({
   board,
   legalMoves,
   validPiecesToMove,
+  squaresToHighlight,
   canvasWidth,
   canvasHeight,
 }) => {
@@ -84,8 +86,9 @@ export const CanvasChess: FC<CanvasChessProps> = ({
     gameRef.current.board.isDragging = null;
     gameRef.current.updateLegalMoves(legalMoves);
     gameRef.current.updateValidPieces(validPiecesToMove);
+    gameRef.current.updateSquaresToHighlight(squaresToHighlight);
     gameRef.current.updateBoard(board);
-  }, [legalMoves, validPiecesToMove, board]);
+  }, [legalMoves, validPiecesToMove, board, squaresToHighlight]);
 
   return (
     <canvas

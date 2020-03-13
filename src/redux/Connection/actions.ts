@@ -54,6 +54,6 @@ export const requestJoin = (
     } catch (e) {
       //Handle timeout
       console.error(e);
-      dispatch(requestToJoinCancelled(uuidToJoin));
+      dispatch(requestToJoinCancelled());
     }
   };

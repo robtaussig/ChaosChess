@@ -1,4 +1,4 @@
-import React, { FC, useRef, useCallback, useEffect } from 'react';
+import React, { FC, useRef, useCallback, useEffect, useMemo } from 'react';
 import useStyles from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import CanvasChess from './components/CanvasChess';
@@ -12,6 +12,8 @@ import {
 } from '../../redux/Chess';
 import { getGameGenerator, BaseGame } from '../../games';
 import { processMove, startGame } from '../../redux/Engine/actions';
+import { getCurrentTurn } from '../../engine/board';
+import { Color, WhitePieces, BlackPieces } from '../../engine/types';
 
 export const Board: FC = () => {
   const classes = useStyles({});
@@ -21,6 +23,7 @@ export const Board: FC = () => {
     board,
     legalMoves,
     validPiecesToMove,
+    isCheck,
   } = useSelector(chessSelector);
   const game = useRef<BaseGame>(null);
   const { stage, type, subType } = useSelector(gameSelector);
@@ -36,12 +39,26 @@ export const Board: FC = () => {
     }
   }, [stage, type, subType, dispatch]);
 
+  const squaresToHighlight = useMemo(() => {
+    const piecesToHighlight: number[] = [];
+    if (isCheck) {
+      const currentTurn = getCurrentTurn(board);
+      if (currentTurn === Color.White) {
+        piecesToHighlight.push(board.indexOf(WhitePieces.King));
+      } else {
+        piecesToHighlight.push(board.indexOf(BlackPieces.King));
+      }
+    }
+    return piecesToHighlight;
+  }, [isCheck, board])
+
   return (
     <main ref={rootRef} id={'board'} className={classes.root}>
       <CanvasChess
         onMove={handleMove}
         board={board}
         legalMoves={legalMoves}
+        squaresToHighlight={squaresToHighlight}
         validPiecesToMove={validPiecesToMove}
         canvasWidth={`${window.innerWidth - (BOARD_MARGIN * 2)}px`}
         canvasHeight={`${window.innerWidth - (BOARD_MARGIN * 2)}px`}

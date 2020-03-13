@@ -11,6 +11,7 @@ export default class Board {
     this.height= sideLength;
     this.width = sideLength;
     this.validTargetSquares = new Set();
+    this.piecesToHighlight = new Set();
     this.initializeBoard();
   }
 
@@ -103,6 +104,10 @@ export default class Board {
     this.validPieces = pieces;
   }
 
+  setPiecesToHighlight(pieces) {
+    this.piecesToHighlight = new Set(pieces);
+  }
+
   clear() {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
@@ -121,6 +126,7 @@ export default class Board {
     this.squares.forEach(square => {
       const movingFrom = this.isDragging === square.pos;
       const isValidTarget = this.validTargetSquares.has(square.pos);
+      const shouldHighlight = this.piecesToHighlight.has(square.pos);
       const movedFrom = from && from === square.pos;
       const movedTo = to && to === square.pos;
       square.draw(
@@ -128,6 +134,7 @@ export default class Board {
         isValidTarget,
         movedFrom,
         movedTo,
+        shouldHighlight,
       );
     });
     this.pieces.forEach(piece => piece.draw(this.isDragging, this.draggedPos, this.dragOffset));
