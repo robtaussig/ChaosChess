@@ -4,6 +4,7 @@ import {
   joinRequested,
   joinToRequestAccepted,
   requestToJoinCancelled,
+  tablesCleared,
   MessageTypes } from './';
 import { SendMessage } from '../../hooks/useSocket';
 import {
@@ -32,6 +33,7 @@ export const dropTable = (sendMessage: SendMessage): AppThunk<void> =>
 
 export const getTables = (sendMessage: SendMessage): AppThunk<void> =>
   async (dispatch, getState) => {
+    dispatch(tablesCleared());
     getTablesMessage(sendMessage);
   };
 

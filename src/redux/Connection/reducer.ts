@@ -84,6 +84,14 @@ export default createSlice({
       state.joinPhase = JoinPhase.None;
       state.joinedTable = null;
     },
+    tablesCleared: (state) => {
+      Object.keys(state.messageHistory).forEach(uuid => {
+        state.messageHistory[uuid] = state.messageHistory[uuid]
+          .filter(({ type }) => {
+            return type !== MessageTypes.HostTable;
+          })
+      });
+    },
   },
   extraReducers: {
     [returnHome.type]: (state) => {

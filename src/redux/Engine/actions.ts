@@ -47,10 +47,11 @@ export const processMove = (
       nextBoard,
       game.engineDifficulty,
     );
-    const [fromResponse, fromTo] = move.split('-').map(Number);
-    const followupBoard = game.moveMade(
+    //move is undefined if no legal moves
+    const [fromResponse, fromTo] = move?.split('-').map(Number) ?? [];
+    const followupBoard = fromTo ? game.moveMade(
       makeMove(nextBoard, fromResponse, fromTo)
-    );
+    ) : nextBoard;
 
     const availableMoves = await engineWorker.getValidMoves(followupBoard);
 
