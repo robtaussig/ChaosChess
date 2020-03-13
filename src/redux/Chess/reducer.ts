@@ -8,6 +8,7 @@ import {
 } from './util';
 import { makeMove } from '../../engine/board';
 import { DEFAULT_BOARD } from '../../engine/constants';
+import { returnHome } from '../App';
 
 const INITIAL_STATE: ChessState = {
   board: DEFAULT_BOARD,
@@ -67,6 +68,8 @@ export default createSlice({
     },
   },
   extraReducers: {
-
+    [returnHome.type]: () => {
+      return INITIAL_STATE;
+    },
   },
 });

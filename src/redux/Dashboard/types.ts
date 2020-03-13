@@ -7,4 +7,6 @@ export enum DashboardTypes {
   SetUpOpponent = 'SetUpOpponent',
   InGame = 'InGame',
   Settings = 'Settings',
+  GuestDashboard = 'GuestDashboard',
+  HostDashboard = 'HostDashboard',
 }

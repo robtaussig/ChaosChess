@@ -8,6 +8,7 @@ import {
   HostPhase,
   RoomCreatedPayload,
 } from './types';
+import { returnHome } from '../App';
 import { v4 as uuidv4 } from 'uuid';
 
 const INITIAL_STATE: ConnectionState = {
@@ -79,8 +80,20 @@ export default createSlice({
     joinToRequestAccepted: (state, action: PayloadAction<string>) => {
       state.joinPhase = JoinPhase.Joined;
     },
+    requestToJoinCancelled: (state, action: PayloadAction<string>) => {
+      state.joinPhase = JoinPhase.None;
+      state.joinedTable = null;
+    },
   },
   extraReducers: {
-
+    [returnHome.type]: (state) => {
+      return {
+        ...state,
+        hostedTable: null,
+        hostPhase: HostPhase.None,
+        joinedTable: null,
+        joinPhase: JoinPhase.None,
+      };
+    },
   },
 });

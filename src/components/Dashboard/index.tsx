@@ -8,6 +8,8 @@ import InGameDashboard from './components/InGameDashboard';
 import MainScreenDashboard from './components/MainScreenDashboard';
 import SettingsDashboard from './components/SettingsDashboard';
 import OpponentDashboard from './components/OpponentDashboard';
+import GuestDashboard from './components/GuestDashboard';
+import HostDashboard from './components/HostDashboard';
 
 export const Dashboard: FC = () => {
   const { type } = useSelector(dashboardSelector);
@@ -21,6 +23,10 @@ export const Dashboard: FC = () => {
       return <SettingsDashboard/>;
     case DashboardTypes.SetUpOpponent:
       return <OpponentDashboard/>;
+    case DashboardTypes.GuestDashboard:
+      return <GuestDashboard/>
+    case DashboardTypes.HostDashboard:
+      return <HostDashboard/>
     default:
       return null;
   }

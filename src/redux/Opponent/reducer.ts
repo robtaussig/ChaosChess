@@ -5,6 +5,7 @@ import {
   setUpVsAI,
   setUpVsHuman,
 } from '../Game';
+import { returnHome } from '../App';
 
 const INITIAL_STATE: OpponentState = {
   type: OpponentType.AI,
@@ -32,6 +33,9 @@ export default createSlice({
     },
     [joinToRequestAccepted.type]: (state, action: PayloadAction<string>) => {
       state.uuid = action.payload;
+    },
+    [returnHome.type]: () => {
+      return INITIAL_STATE;
     },
   },
 });

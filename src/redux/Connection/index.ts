@@ -8,6 +8,7 @@ export const {
   joinRequested,
   roomCreated,
   joinToRequestAccepted,
+  requestToJoinCancelled,
 } = connectionReducer.actions;
 
 export const reducer = connectionReducer.reducer;

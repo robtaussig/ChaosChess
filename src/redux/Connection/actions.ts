@@ -3,6 +3,7 @@ import {
   tableHosted,
   joinRequested,
   joinToRequestAccepted,
+  requestToJoinCancelled,
   MessageTypes } from './';
 import { SendMessage } from '../../hooks/useSocket';
 import {
@@ -40,11 +41,17 @@ export const requestJoin = (
 ): AppThunk<void> =>
   async (dispatch, getState) => {
     dispatch(joinRequested(uuidToJoin));
-    const response = await requestJoinMessage(sendMessage, uuidToJoin);
-    if (response.message === MessageTypes.RequestToJoinAccepted) {
-      //TODO: Actually join room
-      dispatch(joinToRequestAccepted(uuidToJoin));
-    } else {
-      //TODO: Handle fail to join
+    try {
+      const response = await requestJoinMessage(sendMessage, uuidToJoin);
+      if (response.message === MessageTypes.RequestToJoinAccepted) {
+        //TODO: Actually join room
+        dispatch(joinToRequestAccepted(uuidToJoin));
+      } else {
+        //TODO: Handle refusal
+      }
+    } catch (e) {
+      //Handle timeout
+      console.error(e);
+      dispatch(requestToJoinCancelled(uuidToJoin));
     }
   };

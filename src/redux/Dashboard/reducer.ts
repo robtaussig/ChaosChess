@@ -6,6 +6,10 @@ import {
   setUpVsHuman,
 } from '../Game';
 import { settingsOpened } from '../Settings';
+import {
+  roomCreated,
+  joinToRequestAccepted,
+} from '../Connection';
 import { returnHome } from '../App';
 
 const INITIAL_STATE: DashboardState = {
@@ -33,6 +37,12 @@ export default createSlice({
     },
     [setUpVsHuman.type]: state => {
       state.type = DashboardTypes.SetUpOpponent;
+    },
+    [joinToRequestAccepted.type]: state => {
+      state.type = DashboardTypes.GuestDashboard;
+    },
+    [roomCreated.type]: state => {
+      state.type = DashboardTypes.HostDashboard;
     },
   },
 });
