@@ -8,6 +8,7 @@ import {
   messageReceived,
 } from '../redux/Connection';
 import { Avatar } from '../redux/User';
+import { returnHome } from '../redux/App';
 import { AppThunk } from '../redux/types';
 import {
   expectResponse,
@@ -32,6 +33,7 @@ export const joinRoom = (
   roomId: string,
   sendMessage: SendMessage,
 ): void => {
+  sendMessage(`${MessageTypes.JoiningRoom}||${uuid}||${roomId}`); //Inform others in case you are host of room
   sendMessage(`/join ${roomId}`);
   sendMessage(`${MessageTypes.JoinedRoom}||${uuid}||${roomId}`);
 };
@@ -109,6 +111,13 @@ const getUuidAndNameFromMessage =
     };
   };
 
+const getUuidAndRoomId =
+  (message: string): { uuid: string, roomId: string } => {
+    const [, messageData] = message.split(':');
+    const [,uuid,roomId] = messageData.split('||');
+    return { uuid, roomId };
+  };
+
 export const receiveMessage = (
   message: string,
   respond: SendMessage,
@@ -154,5 +163,12 @@ export const receiveMessage = (
       type: MessageTypes.DropTable,
       data: getUuidAndNameFromMessage(message),
     }));
+  } else if (isMessageType(message, MessageTypes.JoiningRoom)) {
+    const { uuid, roomId } = getUuidAndRoomId(message);
+    const { connection } = getState();
+    if (connection.roomId === uuid && connection.roomId !== roomId) {
+      //TODO: Display notification informing of reason
+      dispatch(returnHome());
+    }
   }
 };

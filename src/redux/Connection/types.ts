@@ -2,6 +2,7 @@ import { ReadyState } from 'react-use-websocket';
 import { Avatar } from '../User';
 
 export enum MessageTypes {
+  JoiningRoom = 'JoiningRoom',
   JoinedRoom = 'JoinedRoom',
   ChangedName = 'ChangedName',
   Disconnected = 'Disconnected',
