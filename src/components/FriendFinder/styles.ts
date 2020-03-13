@@ -25,7 +25,7 @@ export default makeStyles((theme: any) => ({
     gridTemplateColumns: '40px 1fr max-content',
     gridTemplateRows: '1fr',
     padding: 10,
-    height: 60,
+    minHeight: 60,
     backgroundColor: '#ffffffa6',
     borderRadius: '2px',
     boxShadow: '0px 0px 5px -2px black',

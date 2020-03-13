@@ -6,7 +6,7 @@ interface DashboardButtonProps {
   classes: any;
   className: string;
   icon: string;
-  onClick: (event: any) => void;
+  onClick?: (event: any) => void;
   disabled?: boolean;
   hideLabel?: boolean;
 }

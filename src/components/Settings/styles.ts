@@ -73,12 +73,13 @@ export default makeStyles((theme: any) => ({
     gridArea: 'submit',
     marginTop: 'auto',
     padding: '15px 50px',
+    borderRadius: '5px',
     '& i': {
       '--ggs': 2,
     },
     '&:not(:disabled)': {
       '&.submitted': {
-        backgroundColor: 'limegreen',
+        backgroundColor: '#005f00',
         color: 'white',
       },
     },

@@ -39,6 +39,7 @@ export default createSlice({
         isCheck: action.payload.isCheck,
         board: action.payload.board,
         legalMoves: action.payload.legalMoves,
+        lastCapturedPiece: [null, null],
       };
     },
     moveCompleted: (state, action: PayloadAction<{

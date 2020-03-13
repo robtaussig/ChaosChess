@@ -7,6 +7,8 @@ import {
 
 const INITIAL_STATE: OpponentState = {
   type: OpponentType.AI,
+  uuid: null,
+  isReady: false,
 };
 
 export default createSlice({
@@ -18,9 +20,11 @@ export default createSlice({
   extraReducers: {
     [setUpVsAI.type]: state => {
       state.type = OpponentType.AI;
+      state.isReady = true;
     },
     [setUpVsHuman.type]: state => {
       state.type = OpponentType.Human;
+      state.isReady = false;
     },
   },
 });

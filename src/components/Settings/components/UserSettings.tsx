@@ -25,6 +25,11 @@ export const UserSettings: FC<UserSettingsProps> = ({
   onSubmit,
 }) => {
 
+  const handleSelectAvatar = (choice: Avatar) => () => {
+    navigator.vibrate(50);
+    setSelectedAvatar(choice);
+  };
+
   return (
     <div id={'settings'} className={classes.root}>
       <section className={classes.userSettings}>
@@ -40,21 +45,21 @@ export const UserSettings: FC<UserSettingsProps> = ({
         <AvatarOption
           avatar={Avatar.Bot}
           selected={selectedAvatar === Avatar.Bot}
-          onSelect={() => setSelectedAvatar(Avatar.Bot)}
+          onSelect={handleSelectAvatar(Avatar.Bot)}
           classes={classes}
           rootClassName={classes.bot}
         />
         <AvatarOption
           avatar={Avatar.Boy}
           selected={selectedAvatar === Avatar.Boy}
-          onSelect={() => setSelectedAvatar(Avatar.Boy)}
+          onSelect={handleSelectAvatar(Avatar.Boy)}
           classes={classes}
           rootClassName={classes.boy}
         />
         <AvatarOption
           avatar={Avatar.Girl}
           selected={selectedAvatar === Avatar.Girl}
-          onSelect={() => setSelectedAvatar(Avatar.Girl)}
+          onSelect={handleSelectAvatar(Avatar.Girl)}
           classes={classes}
           rootClassName={classes.girl}
         />

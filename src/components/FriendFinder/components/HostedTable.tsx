@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { Avatar } from '../../../redux/User';
 import classNames from 'classnames';
 import DashboardButton from '../../Dashboard/components/DashboardButton';
+import 'css.gg/icons/chevron-down-o.css';
+import 'css.gg/icons/spinner.css';
 
 interface HostedTableProps {
   classes: any;
@@ -27,12 +29,20 @@ export const HostedTable: FC<HostedTableProps> = ({
     })}>
       <i className={`gg-${avatar}`}/>
       <span className={classes.name}>{name}</span>
-      {!isUserTable && (
+      {isUserTable ? (
+        <DashboardButton
+          label={'Your table'}
+          classes={classes}
+          className={'join-button'}
+          icon={'spinner'}
+          disabled
+        />
+      ) : (
         <DashboardButton
           label={'Join'}
           classes={classes}
           className={'join-button'}
-          icon={'check'}
+          icon={'chevron-down-o'}
           onClick={() => onJoin(uuid)}
         />
       )}

@@ -27,7 +27,7 @@ export const OpponentDashboard: FC = () => {
   const dispatch = useDispatch();
   const sendMessage = useSocket();
   const { type } = useSelector(gameSelector);
-  const { type: opponentType } = useSelector(opponentSelector);
+  const { type: opponentType, isReady } = useSelector(opponentSelector);
   const { hostedTable } = useSelector(connectionSelector);
 
   return (
@@ -87,6 +87,7 @@ export const OpponentDashboard: FC = () => {
         className={'ready'}
         label={'Ready'}
         icon={'check'}
+        disabled={!isReady}
         onClick={() => dispatch(gameStarted({ opponent: opponentType }))}
       />
     </div>
