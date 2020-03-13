@@ -11,12 +11,14 @@ import {
 import { returnHome } from '../App';
 import { v4 as uuidv4 } from 'uuid';
 
+const MAIN_ROOM = 'Main';
+
 const INITIAL_STATE: ConnectionState = {
   status: ReadyState.CLOSED,
   uuid: uuidv4(),
   messageHistory: {},
   notifications: [],
-  roomId: 'Main',
+  roomId: MAIN_ROOM,
   hostedTable: null,
   hostPhase: HostPhase.None,
   joinedTable: null,
@@ -78,6 +80,7 @@ export default createSlice({
       state.hostPhase = HostPhase.Joined;
     },
     joinToRequestAccepted: (state, action: PayloadAction<string>) => {
+      state.roomId = action.payload;
       state.joinPhase = JoinPhase.Joined;
     },
     requestToJoinCancelled: (state, action: PayloadAction<string>) => {
@@ -97,6 +100,7 @@ export default createSlice({
     [returnHome.type]: (state) => {
       return {
         ...state,
+        roomId: MAIN_ROOM,
         hostedTable: null,
         hostPhase: HostPhase.None,
         joinedTable: null,
