@@ -1,32 +1,34 @@
 import React, { FC } from 'react';
-import AvatarOption from './AvatarOption';
+import Option from './Option';
+import 'css.gg/icons/bot.css';
+import 'css.gg/icons/boy.css';
+import 'css.gg/icons/girl.css';
 import { Avatar } from '../../../redux/User';
+import { userSettingStyles } from '../styles';
 import classNames from 'classnames';
 
 interface UserSettingsProps {
-  classes: any;
   inputtedName: string;
   setInputtedName: (value: string) => void;
   selectedAvatar: Avatar;
   setSelectedAvatar: (selected: Avatar) => void;
   submitted: boolean;
-  avatar: Avatar;
+  isSubmitDisabled: boolean;
   onSubmit: () => void;
 }
 
 export const UserSettings: FC<UserSettingsProps> = ({
-  classes,
   inputtedName,
   setInputtedName,
   selectedAvatar,
   setSelectedAvatar,
   submitted,
-  avatar,
+  isSubmitDisabled,
   onSubmit,
 }) => {
-
+  const classes = userSettingStyles({});
   const handleSelectAvatar = (choice: Avatar) => () => {
-    navigator.vibrate(50);
+    navigator.vibrate(10);
     setSelectedAvatar(choice);
   };
 
@@ -41,23 +43,23 @@ export const UserSettings: FC<UserSettingsProps> = ({
           aria-label={'name'}
           onChange={e => setInputtedName(e.target.value)}
         />
-        <span className={classes.avatarOptions}>Select an Avatar</span>
-        <AvatarOption
-          avatar={Avatar.Bot}
+        <span className={classes.avatarOptions}>Select an avatar:</span>
+        <Option
+          icon={Avatar.Bot}
           selected={selectedAvatar === Avatar.Bot}
           onSelect={handleSelectAvatar(Avatar.Bot)}
           classes={classes}
           rootClassName={classes.bot}
         />
-        <AvatarOption
-          avatar={Avatar.Boy}
+        <Option
+          icon={Avatar.Boy}
           selected={selectedAvatar === Avatar.Boy}
           onSelect={handleSelectAvatar(Avatar.Boy)}
           classes={classes}
           rootClassName={classes.boy}
         />
-        <AvatarOption
-          avatar={Avatar.Girl}
+        <Option
+          icon={Avatar.Girl}
           selected={selectedAvatar === Avatar.Girl}
           onSelect={handleSelectAvatar(Avatar.Girl)}
           classes={classes}
@@ -68,7 +70,7 @@ export const UserSettings: FC<UserSettingsProps> = ({
         className={classNames(classes.submit, {
           submitted,
         })}
-        disabled={inputtedName === name && selectedAvatar === avatar}
+        disabled={isSubmitDisabled}
         onClick={onSubmit}
       >
         <i className={`gg-check`}/>
