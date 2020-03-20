@@ -1,22 +1,20 @@
 import React, { FC, useEffect, useRef } from 'react';
-import { ChaosGameTypes, GameTypes } from '../../../redux/Game';
+import { GameTypes } from '../../../redux/Game';
 import { getGameInformation } from '../../../games';
 import classNames from 'classnames';
 
-interface ChaosGameOptionProps {
+interface RegularGameOptionProps {
   classes: any;
-  option: ChaosGameTypes;
   selected: boolean;
   onSelect: () => void;
 }
 
-export const ChaosGameOption: FC<ChaosGameOptionProps> = ({
+export const RegularGameOption: FC<RegularGameOptionProps> = ({
   classes,
-  option,
   selected,
   onSelect,
 }) => {
-  const { gameName, description } = getGameInformation(GameTypes.Chaos, option);
+  const { gameName, description } = getGameInformation(GameTypes.Regular);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -40,4 +38,4 @@ export const ChaosGameOption: FC<ChaosGameOptionProps> = ({
   );
 };
 
-export default ChaosGameOption;
+export default RegularGameOption;

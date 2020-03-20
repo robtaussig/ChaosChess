@@ -1,12 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   ChessState,
-  ChessResponse,
 } from './types';
 import {
   getValidPiecesToMoveFromLegalMoveList,
 } from './util';
-import { makeMove } from '../../engine/board';
 import { DEFAULT_BOARD } from '../../engine/constants';
 import { returnHome } from '../App';
 

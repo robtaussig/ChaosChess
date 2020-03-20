@@ -88,7 +88,7 @@ export const OpponentDashboard: FC = () => {
         label={'Ready'}
         icon={'check'}
         disabled={!isReady}
-        onClick={() => dispatch(gameStarted({ opponent: opponentType }))}
+        onClick={() => dispatch(gameStarted({ opponent: opponentType, isWhite: true }))}
       />
     </div>
   );

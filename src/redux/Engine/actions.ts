@@ -11,9 +11,10 @@ export const engineWorker = wrap<WorkerInterface>(
 
 export const startGame = (
   game: BaseGame,
+  board?: string,
 ): AppThunk<void> =>
   async (dispatch, getState) => {
-    const initialBoard = await game.generateInitialBoard();
+    const initialBoard = board ?? await game.generateInitialBoard();
     const availableMoves = await engineWorker.getValidMoves(initialBoard);
 
     dispatch(gameInitialized({

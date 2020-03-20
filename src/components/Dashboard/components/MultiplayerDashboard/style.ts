@@ -46,5 +46,8 @@ export default makeStyles((theme: any) => ({
     '&.opponent': {
       gridArea: 'opponent',
     },
+    '&.isReady': {
+      backgroundColor: '#a3ffa3',
+    },
   },
 }));

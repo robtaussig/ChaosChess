@@ -6,6 +6,8 @@ import {
   DisconnectedMessage,
   messageReceived,
 } from '../redux/Connection';
+import { syncGameStateWithHost, GameState, gameStarted, GameStartedPayload } from '../redux/Game';
+import { syncOpponentStateWithGuest, OpponentState, OpponentType } from '../redux/Opponent';
 import { Avatar } from '../redux/User';
 import { returnHome } from '../redux/App';
 import { AppThunk } from '../redux/types';
@@ -72,6 +74,39 @@ export const requestJoin = async (
   );
 };
 
+export const getInitialBoardFromHost = async (
+  sendMessage: SendMessage,
+  uuid: string,
+): Promise<Response> => {
+  return expectResponse(
+    sendMessage,
+    `${MessageTypes.GetBoard}`,
+    uuid,
+  );
+};
+
+export const syncGameMode = (
+  sendMessage: SendMessage,
+  gameType: any,
+  subType: any,
+): void => {
+  sendMessage(`${MessageTypes.SelectGameType}||${gameType}||${subType}`);
+};
+
+export const syncHostWithReadyStatus = (
+  sendMessage: SendMessage,
+  isReady: boolean,
+): void => {
+  sendMessage(`${MessageTypes.SetReadyStatus}||${isReady}`);
+}
+
+export const syncGuestWithGameStarted = (
+  sendMessage: SendMessage,
+  isWhite: boolean,
+): void => {
+  sendMessage(`${MessageTypes.GameStarted}||${isWhite}`);
+};
+
 const getJoinMessageData = (message: string): JoinMessage['data'] => {
   const [,uuid, room] = message.split('||');
   return { uuid, room };
@@ -110,6 +145,32 @@ const getUuidAndNameFromMessage =
     };
   };
 
+const getGameStateFromSelectGameTypeMessage =
+  (message: string): Partial<GameState> => {
+    const [, type, subType] = message.split('||');
+    return {
+      type,
+      subType,
+    } as Partial<GameState>;
+  };
+
+const getOpponentStateFromReadyStatusMessage =
+  (message: string): Partial<OpponentState> => {
+    const [,isReady] = message.split('||');
+    return {
+      isReady: isReady === 'true' ? true : false,
+    };
+  };
+
+const getGameStartedDataFromMessage =
+  (message: string): GameStartedPayload => {
+    const [, isWhite] = message.split('||');
+    return {
+      opponent: OpponentType.Human,
+      isWhite: isWhite === 'true' ? true : false,
+    };
+  };
+
 const getUuidAndRoomId =
   (message: string): { uuid: string, roomId: string } => {
     const [, messageData] = message.split(':');
@@ -117,6 +178,7 @@ const getUuidAndRoomId =
     return { uuid, roomId };
   };
 
+//TODO: Make more performant by extracting messageType once and comparing by string
 export const receiveMessage = (
   message: string,
   respond: SendMessage,
@@ -172,5 +234,23 @@ export const receiveMessage = (
     } else if (uuid === opponent.uuid && roomId !== connection.roomId) {
       dispatch(returnHome());
     }
+  } else if (isMessageType(message, MessageTypes.SelectGameType)) {
+    dispatch(
+      syncGameStateWithHost(
+        getGameStateFromSelectGameTypeMessage(message)
+      )
+    );
+  } else if (isMessageType(message, MessageTypes.SetReadyStatus)) {
+    dispatch(
+      syncOpponentStateWithGuest(
+        getOpponentStateFromReadyStatusMessage(message)
+      )
+    );
+  } else if (isMessageType(message, MessageTypes.GameStarted)) {
+    dispatch(
+      gameStarted(
+        getGameStartedDataFromMessage(message),
+      )
+    )
   }
 };

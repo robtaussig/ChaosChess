@@ -57,6 +57,15 @@ const acceptRequestToJoin = (
   sendMessage(`${MessageTypes.Response}||${senderUuid}||${messageId}||${MessageTypes.RequestToJoinAccepted}`);
 }
 
+const sendBoardState = (
+  sendMessage: SendMessage,
+  senderUuid: string,
+  messageId: string,
+  board: string,
+): void => {
+  sendMessage(`${MessageTypes.Response}||${senderUuid}||${messageId}||${board}`);
+};
+
 const sendResponse = (
   respond: SendMessage,
   senderUuid: string,
@@ -65,6 +74,9 @@ const sendResponse = (
 ): AppThunk<void> => (dispatch, getState) => {
   if (isMessageType(originalMessage, MessageTypes.RequestJoin)) {
     dispatch(acceptRequestToJoin(respond, senderUuid, messageId));
+  } else if (originalMessage === MessageTypes.GetBoard) {
+    const { chess } = getState();
+    sendBoardState(respond, senderUuid, messageId, chess.board);
   }
 };
 

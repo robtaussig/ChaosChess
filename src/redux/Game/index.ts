@@ -8,6 +8,7 @@ export const {
   gameTypeSelected,
   difficultyChanged,
   subGameTypeSelected,
+  syncGameStateWithHost,
 } = gameReducer.actions;
 
 export const reducer = gameReducer.reducer;

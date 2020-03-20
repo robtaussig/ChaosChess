@@ -32,7 +32,7 @@ export const InGameDashboard: FC = () => {
         className={'start-over'}
         label={'Start over'}
         icon={'redo'}
-        onClick={() => dispatch(gameStarted({ opponent: opponentType }))}
+        onClick={() => dispatch(gameStarted({ opponent: opponentType, isWhite: true }))}
       />
     </div>
   );

@@ -17,7 +17,15 @@ export default createSlice({
   name: 'opponent',
   initialState: INITIAL_STATE,
   reducers: {
-
+    setIsReady: (state, action: PayloadAction<boolean>) => {
+      state.isReady = action.payload;
+    },
+    syncOpponentStateWithGuest: (state, action: PayloadAction<Partial<OpponentState>>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
   },
   extraReducers: {
     [setUpVsAI.type]: state => {

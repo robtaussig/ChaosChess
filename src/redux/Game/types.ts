@@ -35,4 +35,5 @@ export enum BoardTypes {
 
 export type GameStartedPayload = {
   opponent: string;
+  isWhite: boolean;
 }

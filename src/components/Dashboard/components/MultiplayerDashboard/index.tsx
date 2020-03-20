@@ -4,16 +4,20 @@ import { useSelector } from 'react-redux';
 import PlayerCard from './components/PlayerCard';
 import { Avatar } from '../../../../redux/User';
 import { connectionSelector } from '../../../../redux/Connection';
+import { opponentSelector } from '../../../../redux/Opponent';
 import GuestDashboard from './components/GuestDashboard';
 import HostDashboard from './components/HostDashboard';
+import classNames from 'classnames';
 
 interface MultiplayerDashboardProps {
   
 }
 
+//TODO hook up player information
 export const MultiplayerDashboard: FC<MultiplayerDashboardProps> = () => {
   const classes = useStyles({});
   const { hostedTable } = useSelector(connectionSelector);
+  const { isReady } = useSelector(opponentSelector);
 
   return (
     <div className={classes.root}>
@@ -30,7 +34,9 @@ export const MultiplayerDashboard: FC<MultiplayerDashboardProps> = () => {
         avatar={Avatar.Girl}
         name={'Guest'}
         uuid={'ewrewrew'}
-        rootClassName={'opponent'}
+        rootClassName={classNames('opponent', {
+          isReady
+        })}
       />
       {hostedTable ? (
         <HostDashboard classes={classes}/>

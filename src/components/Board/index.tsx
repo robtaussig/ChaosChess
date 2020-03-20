@@ -12,8 +12,12 @@ import {
 } from '../../redux/Chess';
 import { getGameGenerator, BaseGame } from '../../games';
 import { processMove, startGame } from '../../redux/Engine/actions';
+import { opponentSelector, OpponentType } from '../../redux/Opponent';
+import { useSocket } from '../../hooks/useSocket';
+import { connectionSelector, HostPhase } from '../../redux/Connection';
 import { getCurrentTurn } from '../../engine/board';
 import { Color, WhitePieces, BlackPieces } from '../../engine/types';
+import { getInitialBoardFromHost } from '../../messaging';
 
 export const Board: FC = () => {
   const classes = useStyles({});
@@ -26,7 +30,14 @@ export const Board: FC = () => {
     isCheck,
   } = useSelector(chessSelector);
   const game = useRef<BaseGame>(null);
-  const { stage, type, subType } = useSelector(gameSelector);
+  const sendMessage = useSocket();
+  const { stage, type: gameType, subType } = useSelector(gameSelector);
+  const { type: opponentType, uuid } = useSelector(opponentSelector);
+  const { hostPhase } = useSelector(connectionSelector);
+
+  const isHost =
+    opponentType === OpponentType.AI ||
+    hostPhase === HostPhase.Joined;
 
   const handleMove = useCallback((from: number, to: number) => {
     dispatch(processMove(from, to, game.current));
@@ -34,10 +45,19 @@ export const Board: FC = () => {
 
   useEffect(() => {
     if (stage === GameStages.Started) {
-      game.current = getGameGenerator(type, subType);
-      dispatch(startGame(game.current));
+      game.current = getGameGenerator(gameType, subType);
+      if (isHost) {
+        dispatch(startGame(game.current));
+      } else {
+        const startGameAsGuest = async () => {
+          const { message } = await getInitialBoardFromHost(sendMessage, uuid);
+          dispatch(startGame(game.current, message));
+        };
+
+        startGameAsGuest();
+      }
     }
-  }, [stage, type, subType, dispatch]);
+  }, [stage, gameType, subType, dispatch, isHost, uuid]);
 
   const squaresToHighlight = useMemo(() => {
     const piecesToHighlight: number[] = [];

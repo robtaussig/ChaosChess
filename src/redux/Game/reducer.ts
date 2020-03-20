@@ -32,7 +32,7 @@ export default createSlice({
     gameTypeSelected: (state, action: PayloadAction<GameTypes>) => {
       state.type = action.payload;
       if (action.payload === GameTypes.Regular) {
-        state.subType = null;
+        state.subType = ChaosGameTypes.None;
       } else if (action.payload === GameTypes.Chaos) {
         state.subType = ChaosGameTypes.Normal;
       }
@@ -42,6 +42,12 @@ export default createSlice({
     },
     difficultyChanged: (state, action: PayloadAction<number>) => {
       state.difficulty = action.payload;
+    },
+    syncGameStateWithHost: (state, action: PayloadAction<Partial<GameState>>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
     },
   },
   extraReducers: {
