@@ -4,7 +4,10 @@ import { AppThunk } from '../types';
 import { BaseGame } from '../../games';
 import { makeMove } from '../../engine/board';
 import { isCheck } from '../../engine/';
-import { gameInitialized, moveCompleted } from '../Chess';
+import { gameInitialized, moveCompleted, MakeMovePayload } from '../Chess';
+import { SendMessage } from '../../hooks/useSocket';
+import { MessageTypes } from '../../redux/Connection';
+
 export const engineWorker = wrap<WorkerInterface>(
   new Worker('../../engine/engine.worker.ts')
 );
@@ -63,4 +66,41 @@ export const processMove = (
       isCheck: isCheck(followupBoard),
       legalMoves: availableMoves.legalMoves,
     }));
+  };
+
+export const makeMoveAndUpdateOpponent = (
+  from: number,
+  to: number,
+  game: BaseGame,
+  sendMessage: SendMessage,
+): AppThunk<void> =>
+  async (dispatch, getState) => {
+    const { chess } = getState();
+    const { board } = chess;
+  
+    const nextBoard = game.moveMade(
+      makeMove(board, from, to)
+    );
+
+    const checked = isCheck(nextBoard);
+  
+    dispatch(moveCompleted({
+      from,
+      to,
+      board: nextBoard,
+      isCheck: checked,
+      legalMoves: null,
+    }));
+
+    const availableMoves = await engineWorker.getValidMoves(nextBoard);
+
+    const payload: MakeMovePayload = {
+      from,
+      to,
+      board: nextBoard,
+      isCheck: availableMoves.isCheck,
+      legalMoves: availableMoves.legalMoves,
+    };
+
+    sendMessage(`${MessageTypes.MakeMove}||${JSON.stringify(payload)}`);
   };

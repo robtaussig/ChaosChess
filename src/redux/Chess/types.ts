@@ -43,3 +43,11 @@ export enum BlackPieces {
   Knight = 'N',
   Pawn = 'P',
 }
+
+export type MakeMovePayload = {
+  from: number;
+  to: number;
+  board: string;
+  isCheck: boolean;
+  legalMoves: string[];
+};

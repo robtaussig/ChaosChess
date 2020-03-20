@@ -12,6 +12,7 @@ export enum MessageTypes {
   GetTables = 'GetTables',
   HasTable = 'HasTable',
   GetBoard = 'GetBoard',
+  MakeMove = 'MakeMove',
   RequestJoin = 'RequestJoin',
   SelectGameType = 'SelectGameType',
   SetReadyStatus = 'SetReadyStatus',

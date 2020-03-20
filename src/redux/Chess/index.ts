@@ -16,6 +16,7 @@ export {
   ChessResponse,
   WhitePieces,
   BlackPieces,
+  MakeMovePayload,
 } from './types';
 
 export { DEFAULT_BOARD, EMPTY_BOARD } from '../../engine/constants';

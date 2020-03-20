@@ -11,7 +11,7 @@ import {
   chessSelector,
 } from '../../redux/Chess';
 import { getGameGenerator, BaseGame } from '../../games';
-import { processMove, startGame } from '../../redux/Engine/actions';
+import { processMove, startGame, makeMoveAndUpdateOpponent } from '../../redux/Engine/actions';
 import { opponentSelector, OpponentType } from '../../redux/Opponent';
 import { useSocket } from '../../hooks/useSocket';
 import { connectionSelector, HostPhase } from '../../redux/Connection';
@@ -40,8 +40,12 @@ export const Board: FC = () => {
     hostPhase === HostPhase.Joined;
 
   const handleMove = useCallback((from: number, to: number) => {
-    dispatch(processMove(from, to, game.current));
-  }, [dispatch]);
+    if (opponentType === OpponentType.AI) {
+      dispatch(processMove(from, to, game.current));
+    } else {
+      dispatch(makeMoveAndUpdateOpponent(from, to, game.current, sendMessage));
+    }
+  }, [dispatch, sendMessage, opponentType]);
 
   useEffect(() => {
     if (stage === GameStages.Started) {

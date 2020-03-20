@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   ChessState,
+  MakeMovePayload,
 } from './types';
 import {
   getValidPiecesToMoveFromLegalMoveList,
@@ -41,13 +42,7 @@ export default createSlice({
         lastCapturedPiece: [null, null],
       };
     },
-    moveCompleted: (state, action: PayloadAction<{
-      from: number,
-      to: number,
-      board: string,
-      isCheck: boolean,
-      legalMoves: string[],
-    }>) => {
+    moveCompleted: (state, action: PayloadAction<MakeMovePayload>) => {
       return {
         ...state,
         board: action.payload.board,

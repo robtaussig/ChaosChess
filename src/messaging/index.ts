@@ -18,6 +18,7 @@ import {
   Response,
 } from './respond';
 import { isMessageType } from './util';
+import { moveCompleted, MakeMovePayload } from '../redux/Chess';
 
 export const setName = (
   uuid: string,
@@ -171,6 +172,13 @@ const getGameStartedDataFromMessage =
     };
   };
 
+const getMovePayloadFromMessage =
+  (message: string): MakeMovePayload => {
+    const [, stringifiedPayload] = message.split('||');
+
+    return JSON.parse(stringifiedPayload);
+  }
+
 const getUuidAndRoomId =
   (message: string): { uuid: string, roomId: string } => {
     const [, messageData] = message.split(':');
@@ -252,5 +260,9 @@ export const receiveMessage = (
         getGameStartedDataFromMessage(message),
       )
     )
+  } else if (isMessageType(message, MessageTypes.MakeMove)) {
+    dispatch(moveCompleted(
+      getMovePayloadFromMessage(message),
+    ));
   }
 };
