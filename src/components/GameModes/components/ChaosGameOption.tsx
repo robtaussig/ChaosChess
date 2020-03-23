@@ -8,6 +8,7 @@ interface ChaosGameOptionProps {
   option: ChaosGameTypes;
   selected: boolean;
   onSelect: () => void;
+  disabled: boolean;
 }
 
 export const ChaosGameOption: FC<ChaosGameOptionProps> = ({
@@ -15,6 +16,7 @@ export const ChaosGameOption: FC<ChaosGameOptionProps> = ({
   option,
   selected,
   onSelect,
+  disabled,
 }) => {
   const { gameName, description } = getGameInformation(GameTypes.Chaos, option);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -32,7 +34,7 @@ export const ChaosGameOption: FC<ChaosGameOptionProps> = ({
         selected,
       })}
       onClick={onSelect}
-      disabled={Boolean(selected)}
+      disabled={Boolean(selected || disabled)}
     >
       <span className={classes.gameOptionName}>{gameName}</span>
       <span className={classes.gameOptionDescription}>{description}</span>

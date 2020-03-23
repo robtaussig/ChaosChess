@@ -73,10 +73,10 @@ export const getGameGenerator = (gameType: GameTypes, subType?: ChaosGameTypes):
 
 export { BaseGame };
 
-export const CHAOS_GAME_OPTIONS = [
-  ChaosGameTypes.Normal,
-  ChaosGameTypes.Draft,
-  ChaosGameTypes.SevenKnights,
-  ChaosGameTypes.RankedChaos,
-  ChaosGameTypes.SemiChaos,
+export const CHAOS_GAME_OPTIONS: [ChaosGameTypes, boolean][] = [
+  [ChaosGameTypes.Normal, true],
+  [ChaosGameTypes.Draft, false],
+  [ChaosGameTypes.SevenKnights, true],
+  [ChaosGameTypes.RankedChaos, false],
+  [ChaosGameTypes.SemiChaos, true],
 ];

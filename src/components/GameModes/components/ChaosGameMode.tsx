@@ -21,13 +21,14 @@ export const ChaosGameMode: FC<ChaosGameModeProps> = ({
   
   return (
     <div id={'chaos-game-mode-types'} className={classes.root}>
-      {CHAOS_GAME_OPTIONS.map(option => {
+      {CHAOS_GAME_OPTIONS.map(([option, isEnabled]) => {
         return (
           <ChaosGameOption
             key={`${option}-game-option`}
             classes={classes}            
             option={option}
             selected={subType === option}
+            disabled={!isEnabled}
             onSelect={() => canSelect && dispatch(subGameTypeSelected(option))}
           />
         );
