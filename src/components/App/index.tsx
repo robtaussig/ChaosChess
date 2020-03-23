@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useWebsocket, { ReadyState } from 'react-use-websocket';
 import useStyles from './styles';
@@ -18,9 +18,14 @@ interface AppProps {
   children?: any,
 }
 
+const WS_ADDR = 'wss://robtaussig.com/ws/';
+
 export const App: FC<AppProps> = () => {
   const classes = useStyles({});
   const dispatch = useDispatch();
+  const connectionAttempt = useRef<number>(0);
+  const [wsAddress, setWsAddress] = useState<string>(`${WS_ADDR}?conn=${connectionAttempt.current}`);
+  const messageQueue = useRef<string[]>([]);
   const { roomId, uuid } = useSelector(connectionSelector);
   const { name, avatar } = useSelector(userSelector);
 
@@ -35,35 +40,56 @@ export const App: FC<AppProps> = () => {
     sendMessage,
     lastMessage,
     readyState,
-  ] = useWebsocket('wss://robtaussig.com/ws/', STATIC_OPTIONS);
+    getWebSocket,
+  ] = useWebsocket(wsAddress, STATIC_OPTIONS);
+
+  const sendMessageWithReconnect = useCallback((message: string) => {
+    const currentReadyState = getWebSocket().readyState;
+    if (currentReadyState === ReadyState.OPEN) {
+      sendMessage(message);
+    } else {
+      messageQueue.current.push(message);
+      
+      if (currentReadyState !== ReadyState.CONNECTING) {
+        setWsAddress(`${WS_ADDR}?conn=${++connectionAttempt.current}`);
+      }
+    }
+  }, [sendMessage]);
 
   useEffect(() => {
     if (lastMessage?.data) {
       dispatch(
-        receiveMessage(lastMessage?.data, sendMessage)
+        receiveMessage(lastMessage?.data, sendMessageWithReconnect)
       );
     }
   }, [lastMessage]);
 
   useEffect(() => {
-    dispatch(statusChanged(readyState));    
+    dispatch(statusChanged(readyState));
   }, [readyState]);
 
   useEffect(() => {
     if (readyState === ReadyState.OPEN) {
-      setName(uuid, name, avatar, sendMessage);
+      setName(uuid, name, avatar, sendMessageWithReconnect);
     }
-  }, [readyState, sendMessage, name, avatar, uuid]);
+  }, [readyState, sendMessageWithReconnect, name, avatar, uuid]);
 
   useEffect(() => {
     if (readyState === ReadyState.OPEN) {
-      joinRoom(uuid, roomId, sendMessage);
+      joinRoom(uuid, roomId, sendMessageWithReconnect);
+
+      //Give chance to join room before sending message
+      setTimeout(() => {
+        messageQueue.current.splice(0).forEach(message => {
+          sendMessageWithReconnect(message);
+        });
+      }, 2000);
     }
-  }, [readyState, sendMessage, roomId, uuid]);
+  }, [readyState, sendMessageWithReconnect, roomId, uuid]);
 
   return (
     <div id={'app'} className={classes.root}>
-      <SocketProvider value={sendMessage}>
+      <SocketProvider value={sendMessageWithReconnect}>
         <Header/>
         <Main/>
         <Dashboard/>
