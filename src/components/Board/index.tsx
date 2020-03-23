@@ -13,6 +13,7 @@ import {
 import { getGameGenerator, BaseGame } from '../../games';
 import { processMove, startGame, makeMoveAndUpdateOpponent } from '../../redux/Engine/actions';
 import { opponentSelector, OpponentType } from '../../redux/Opponent';
+import { userSelector } from '../../redux/User';
 import { useSocket } from '../../hooks/useSocket';
 import { connectionSelector, HostPhase } from '../../redux/Connection';
 import { getCurrentTurn } from '../../engine/board';
@@ -34,6 +35,7 @@ export const Board: FC = () => {
   const { stage, type: gameType, subType } = useSelector(gameSelector);
   const { type: opponentType, uuid } = useSelector(opponentSelector);
   const { hostPhase } = useSelector(connectionSelector);
+  const { color } = useSelector(userSelector);
 
   const isHost =
     opponentType === OpponentType.AI ||
@@ -49,7 +51,7 @@ export const Board: FC = () => {
 
   useEffect(() => {
     if (stage === GameStages.Started) {
-      game.current = getGameGenerator(gameType, subType);
+      game.current = getGameGenerator(gameType, subType, dispatch, sendMessage);
       if (isHost) {
         dispatch(startGame(game.current));
       } else {
@@ -87,6 +89,7 @@ export const Board: FC = () => {
         canvasWidth={`${window.innerWidth - (BOARD_MARGIN * 2)}px`}
         canvasHeight={`${window.innerWidth - (BOARD_MARGIN * 2)}px`}
       />
+      {game.current && game.current.render(board, color, isHost)}
     </main>
   );
 };

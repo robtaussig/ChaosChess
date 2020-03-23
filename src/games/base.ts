@@ -1,6 +1,8 @@
 import { ChaosGameTypes, BoardTypes, GameTypes } from '../redux/Game';
-import { Board } from '../engine/types';
+import { Board, Color } from '../engine/types';
 import { DEFAULT_BOARD } from '../engine/constants';
+import { Dispatch } from 'redux';
+import { SendMessage } from '../hooks/useSocket';
 
 export default class BaseGame {
   public static gameName: string;
@@ -12,9 +14,21 @@ export default class BaseGame {
   
   public engineDifficulty: number = 4;
 
+  constructor(
+    readonly dispatch?: Dispatch<any>,
+    readonly sendMessage?: SendMessage,
+  ) {
+    this.init();
+  }
+
+  protected init() {}
   public moveMade = (board: Board): Board => board;
   public filterLegalMoves = (moves: string[], board: Board): string[] => moves;
   public async generateInitialBoard() {
     return DEFAULT_BOARD;
+  }
+
+  public render(board: Board, color: Color, isHost: boolean): JSX.Element {
+    return null;
   }
 }

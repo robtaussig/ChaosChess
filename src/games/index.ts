@@ -6,6 +6,8 @@ import DraftChaos from './draft';
 import SevenKnights from './seven-knights';
 import RankedChaos from './ranked-chaos';
 import SemiChaos from './semi-chaos';
+import { Dispatch } from 'redux';
+import { SendMessage } from '../hooks/useSocket';
 
 interface GameInformation {
   gameName: string;
@@ -46,7 +48,12 @@ export const getGameInformation = (gameType: GameTypes, subType?: ChaosGameTypes
   }
 };
 
-export const getGameGenerator = (gameType: GameTypes, subType?: ChaosGameTypes): BaseGame => {
+export const getGameGenerator = (
+  gameType: GameTypes,
+  subType?: ChaosGameTypes,
+  dispatch?: Dispatch<any>,
+  sendMessage?: SendMessage,
+): BaseGame => {
   switch (gameType) {
     case GameTypes.Regular:
       return new Regular();
@@ -59,7 +66,7 @@ export const getGameGenerator = (gameType: GameTypes, subType?: ChaosGameTypes):
         case ChaosGameTypes.SevenKnights:
           return new SevenKnights();
         case ChaosGameTypes.RankedChaos:
-          return new RankedChaos();
+          return new RankedChaos(dispatch, sendMessage);
         case ChaosGameTypes.SemiChaos:
           return new SemiChaos();
         default:
@@ -77,6 +84,6 @@ export const CHAOS_GAME_OPTIONS: [ChaosGameTypes, boolean][] = [
   [ChaosGameTypes.Normal, true],
   [ChaosGameTypes.Draft, false],
   [ChaosGameTypes.SevenKnights, true],
-  [ChaosGameTypes.RankedChaos, false],
+  [ChaosGameTypes.RankedChaos, true],
   [ChaosGameTypes.SemiChaos, true],
 ];
