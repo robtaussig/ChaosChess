@@ -14,6 +14,41 @@ import { updateBoard, makeMove } from '../../engine/board';
 type Pieces = WhitePieces | BlackPieces;
 type Positions = { [pos: string]: Pieces };
 
+const CHAOTIIC_PIECES_QUEUE: Pieces[] = [    
+  WhitePieces.Queen,
+  BlackPieces.Queen,
+  WhitePieces.Rook,
+  WhitePieces.Rook,
+  BlackPieces.Rook,
+  BlackPieces.Rook,
+  WhitePieces.Bishop,
+  WhitePieces.Bishop,
+  BlackPieces.Bishop,
+  BlackPieces.Bishop,
+  WhitePieces.Knight,
+  WhitePieces.Knight,
+  BlackPieces.Knight,
+  BlackPieces.Knight,
+  WhitePieces.Pawn,
+  WhitePieces.Pawn,
+  WhitePieces.Pawn,
+  WhitePieces.Pawn,
+  WhitePieces.Pawn,
+  WhitePieces.Pawn,
+  WhitePieces.Pawn,
+  WhitePieces.Pawn,
+  BlackPieces.Pawn,
+  BlackPieces.Pawn,
+  BlackPieces.Pawn,
+  BlackPieces.Pawn,
+  BlackPieces.Pawn,
+  BlackPieces.Pawn,
+  BlackPieces.Pawn,
+  BlackPieces.Pawn,
+  WhitePieces.King,
+  BlackPieces.King,
+];
+
 const nullIfAdjacentTo = (
   pos: string,
   takenPositions: Positions,
@@ -66,40 +101,7 @@ const getPiecePosition = (piece: Pieces, takenPositions: Positions): Board => {
 };
 
 export const getChaoticBoard = async (): Promise<string> => {
-  const pieceQueue: Pieces[] = [    
-    WhitePieces.Queen,
-    BlackPieces.Queen,
-    WhitePieces.Rook,
-    WhitePieces.Rook,
-    BlackPieces.Rook,
-    BlackPieces.Rook,
-    WhitePieces.Bishop,
-    WhitePieces.Bishop,
-    BlackPieces.Bishop,
-    BlackPieces.Bishop,
-    WhitePieces.Knight,
-    WhitePieces.Knight,
-    BlackPieces.Knight,
-    BlackPieces.Knight,
-    WhitePieces.Pawn,
-    WhitePieces.Pawn,
-    WhitePieces.Pawn,
-    WhitePieces.Pawn,
-    WhitePieces.Pawn,
-    WhitePieces.Pawn,
-    WhitePieces.Pawn,
-    WhitePieces.Pawn,
-    BlackPieces.Pawn,
-    BlackPieces.Pawn,
-    BlackPieces.Pawn,
-    BlackPieces.Pawn,
-    BlackPieces.Pawn,
-    BlackPieces.Pawn,
-    BlackPieces.Pawn,
-    BlackPieces.Pawn,
-    WhitePieces.King,
-    BlackPieces.King,
-  ];
+  const pieceQueue = [...CHAOTIIC_PIECES_QUEUE];
   const currentPositions: Positions = {};
 
   while (pieceQueue.length > 0) {
@@ -146,3 +148,28 @@ export const removeMoveThatCapturesKing =
         nextBoard.includes(BlackPieces.King);
     });
   };
+
+  export const getSemiChaoticBoard = async (): Promise<string> => {
+    const pieceQueue = [...CHAOTIIC_PIECES_QUEUE];
+    const kingPositions: Positions = {};
+    const currentPositions: Positions = {};
+
+    while (pieceQueue.length > 0) {
+      const piece = pieceQueue.shift();
+      const position = await getPiecePosition(piece, kingPositions);
+      currentPositions[position] = piece;
+      // This only reserves square for white king, meaning black king will not be
+      // placed over it
+      if (piece === WhitePieces.King) {
+        kingPositions[position] = piece;
+      }
+    }
+    
+    return EMPTY_BOARD.split('').map((char, idx) => {
+      if (currentPositions[idx]) return currentPositions[idx];
+      if (WHITE_KING_MOVED_BIT === idx) return BIT_ON;
+      if (BLACK_KING_MOVED_BIT === idx) return BIT_ON;
+      return char;
+    }).join('');
+  }
+  
