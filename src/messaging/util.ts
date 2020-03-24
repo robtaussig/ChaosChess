@@ -1,8 +1,4 @@
-import {
-  MessageTypes,
-} from '../redux/Connection';
-
-export const isMessageType = (message: string, type: MessageTypes): boolean => {
+export const isMessageType = <t>(message: string, type: t): boolean => {
   if (!message) return;
 
   return message.indexOf(`${type}||`) > -1;

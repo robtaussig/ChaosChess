@@ -11,17 +11,17 @@ export default class BaseGame {
   public static subType: ChaosGameTypes;
   public static initialBoard: BoardTypes;
   public static previewComponent: JSX.Element;
+  protected board: Board = null;
   
   public engineDifficulty: number = 4;
 
   constructor(
     readonly dispatch?: Dispatch<any>,
     readonly sendMessage?: SendMessage,
-  ) {
-    this.init();
-  }
+  ) {}
 
-  protected init() {}
+  public init() {}
+  public deinit() {}
   public moveMade = (board: Board): Board => board;
   public filterLegalMoves = (moves: string[], board: Board): string[] => moves;
   public async generateInitialBoard() {

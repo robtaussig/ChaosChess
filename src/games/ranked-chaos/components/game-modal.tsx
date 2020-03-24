@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef, useEffect } from 'react';
 import { useStyles } from './style';
 import { Board, Color } from '../../../engine/types';
 import { GamePhase } from '../types';
@@ -20,21 +20,20 @@ export const GameModal: FC<GameModalProps> = ({
   onBet,
 }) => {
   const classes = useStyles({});
+  const betReceived = useRef<boolean>(false);
   const [bet, setBet] = useState<string>('');
-  const [isWaiting, setIsWaiting] = useState<boolean>(false);
 
   const handleClickBet = () => {
     onBet(Number(bet));
-    setIsWaiting(true);
+    betReceived.current = true;
+    setBet('');
   };
 
-  if (phase !== GamePhase.Playing && isWaiting) {
-    return (
-      <div className={classes.loading}>
-        <i className={'gg-spinner'}/>
-      </div>
-    )
-  } else if (phase === GamePhase.Betting) {
+  useEffect(() => {
+    betReceived.current = false;
+  }, [phase]);
+
+  if (phase === GamePhase.Betting) {
     return (
       <div className={classes.bettingModal}>
         <label htmlFor={'bet'} className={classes.label}>
@@ -54,7 +53,7 @@ export const GameModal: FC<GameModalProps> = ({
           disabled={bet === ''}
           onClick={handleClickBet}
         >
-          Bet
+          {betReceived.current ? 'Bet received' : 'Bet'}
         </button>
       </div>
     );

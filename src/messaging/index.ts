@@ -19,6 +19,7 @@ import {
 } from './respond';
 import { isMessageType } from './util';
 import { moveCompleted, MakeMovePayload } from '../redux/Chess';
+import messager from './dispatcher';
 
 export const setName = (
   uuid: string,
@@ -192,47 +193,47 @@ export const receiveMessage = (
   respond: SendMessage,
 ): AppThunk<void> => (dispatch, getState) => {
   
-  if (isMessageType(message, MessageTypes.Response)) {
+  if (isMessageType<MessageTypes>(message, MessageTypes.Response)) {
     dispatch(handleMessageResponse(message));
-  } else if (isMessageType(message, MessageTypes.ResponseExpected)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.ResponseExpected)) {
     dispatch(respondToMessage(message, respond));
-  } else if (isMessageType(message, MessageTypes.JoinedRoom)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.JoinedRoom)) {
     inRoom(respond);
     dispatch(messageReceived({
       type: MessageTypes.JoinedRoom,
       data: getJoinMessageData(message),
     }));
-  } else if (isMessageType(message, MessageTypes.ChangedName)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.ChangedName)) {
     dispatch(messageReceived({
       type: MessageTypes.ChangedName,
       data: getNameMessageData(message),
     }));
-  } else if (isMessageType(message, MessageTypes.InRoom)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.InRoom)) {
     dispatch(messageReceived({
       type: MessageTypes.InRoom,
       data: getUuidAndNameFromMessage(message),
     }));
-  } else if (isMessageType(message, MessageTypes.Disconnected)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.Disconnected)) {
     dispatch(messageReceived({
       type: MessageTypes.Disconnected,
       data: getNameMessageDataFromDisconnect(message),
     }));
-  } else if (isMessageType(message, MessageTypes.HostTable)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.HostTable)) {
     dispatch(messageReceived({
       type: MessageTypes.HostTable,
       data: getUuidAndNameFromMessage(message),
     }));
-  } else if (isMessageType(message, MessageTypes.GetTables)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.GetTables)) {
     const { connection } = getState();
     if (connection.hostedTable) {
       hostTable(respond);
     }
-  } else if (isMessageType(message, MessageTypes.DropTable)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.DropTable)) {
     dispatch(messageReceived({
       type: MessageTypes.DropTable,
       data: getUuidAndNameFromMessage(message),
     }));
-  } else if (isMessageType(message, MessageTypes.JoiningRoom)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.JoiningRoom)) {
     const { uuid, roomId } = getUuidAndRoomId(message);
     const { connection, opponent } = getState();
 
@@ -242,27 +243,29 @@ export const receiveMessage = (
     } else if (uuid === opponent.uuid && roomId !== connection.roomId) {
       dispatch(returnHome());
     }
-  } else if (isMessageType(message, MessageTypes.SelectGameType)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.SelectGameType)) {
     dispatch(
       syncGameStateWithHost(
         getGameStateFromSelectGameTypeMessage(message)
       )
     );
-  } else if (isMessageType(message, MessageTypes.SetReadyStatus)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.SetReadyStatus)) {
     dispatch(
       syncOpponentStateWithGuest(
         getOpponentStateFromReadyStatusMessage(message)
       )
     );
-  } else if (isMessageType(message, MessageTypes.GameStarted)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.GameStarted)) {
     dispatch(
       gameStarted(
         getGameStartedDataFromMessage(message),
       )
     )
-  } else if (isMessageType(message, MessageTypes.MakeMove)) {
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.MakeMove)) {
     dispatch(moveCompleted(
       getMovePayloadFromMessage(message),
     ));
+  } else {
+    messager.dispatch(message);
   }
 };

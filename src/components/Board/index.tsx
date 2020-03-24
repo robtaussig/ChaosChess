@@ -51,7 +51,9 @@ export const Board: FC = () => {
 
   useEffect(() => {
     if (stage === GameStages.Started) {
+      if (game.current) game.current.deinit();
       game.current = getGameGenerator(gameType, subType, dispatch, sendMessage);
+      game.current.init();
       if (isHost) {
         dispatch(startGame(game.current));
       } else {
@@ -77,6 +79,11 @@ export const Board: FC = () => {
     }
     return piecesToHighlight;
   }, [isCheck, board])
+
+  useEffect(() => {
+
+    return () => game.current && game.current.deinit();
+  }, []);
 
   return (
     <main ref={rootRef} id={'board'} className={classes.root}>
