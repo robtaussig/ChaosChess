@@ -8,6 +8,7 @@ interface GameModalProps {
   board: Board;
   isHost: boolean;
   color: Color;
+  budget: number;
   phase: GamePhase;
   onBet: (amount: number) => void;
 }
@@ -18,6 +19,7 @@ export const GameModal: FC<GameModalProps> = ({
   color,
   phase,
   onBet,
+  budget,
 }) => {
   const classes = useStyles({});
   const betReceived = useRef<boolean>(false);
@@ -36,8 +38,9 @@ export const GameModal: FC<GameModalProps> = ({
   if (phase === GamePhase.Betting) {
     return (
       <div className={classes.bettingModal}>
+        <h2 className={classes.budget}>Total: ${budget}</h2>
         <label htmlFor={'bet'} className={classes.label}>
-          Set your bid on playing White (lowest bid plays white)          
+          Set your bid on White (highest bid plays white)
         </label>
         <input
           className={classes.input}

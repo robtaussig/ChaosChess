@@ -3,7 +3,7 @@ import { ChaosGameTypes, gameStarted } from '../../redux/Game';
 import { userUpdated } from '../../redux/User';
 import { OpponentType } from '../../redux/Opponent';
 import { moveCompleted } from '../../redux/Chess'
-import { MakeMovePayload } from '../../redux/Chess/types';
+import { setHeader } from '../../redux/Header';
 import { Board, Color } from '../../engine/types';
 import { findLegalMoves, isCheck } from '../../engine';
 import ChaosBase from '../chaos-base';
@@ -73,11 +73,11 @@ export default class RankedChaos extends ChaosBase {
   private handleBets () {
     const totalBet = this.hostBet + this.guestBet;
     if (this.hostBet > this.guestBet) {
-      this.startPlaying(Color.Black, totalBet, this.hostBet);
-      this.sendMessage(`${MessageTypes.Start}||${Color.White}||${totalBet}||${this.guestBet}`);
-    } else if (this.guestBet > this.hostBet) {
       this.startPlaying(Color.White, totalBet, this.hostBet);
       this.sendMessage(`${MessageTypes.Start}||${Color.Black}||${totalBet}||${this.guestBet}`);
+    } else if (this.guestBet > this.hostBet) {
+      this.startPlaying(Color.Black, totalBet, this.hostBet);
+      this.sendMessage(`${MessageTypes.Start}||${Color.White}||${totalBet}||${this.guestBet}`);
     } else {
       this.startOver();
     }
@@ -111,6 +111,8 @@ export default class RankedChaos extends ChaosBase {
     this.phase = GamePhase.Playing;
     this.movesMade++;
 
+    this.dispatch(setHeader(`$${ourBet} in to win $${totalBet}`));
+
     this.dispatch(moveCompleted({
       from: null,
       to: null,
@@ -132,6 +134,7 @@ export default class RankedChaos extends ChaosBase {
         board={board}
         color={color}
         isHost={isHost}
+        budget={this.budget}
         phase={this.phase}
         onBet={this.handleBet(isHost)}
       />

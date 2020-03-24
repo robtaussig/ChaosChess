@@ -21,12 +21,16 @@ export const useStyles = makeStyles((theme: any) => ({
   bettingModal: {
     ...containerStyles(theme),
     display: 'grid',
-    gridTemplateAreas: `"label"
+    gridTemplateAreas: `"budget"
+                        "label"
                         "input"
                         "button"`,
-    gridTemplateRows: 'max-content 1fr max-content',
+    gridTemplateRows: 'max-content max-content 1fr max-content',
     gridTemplateColumns: '1fr',
     gridGap: '20px',
+  },
+  budget: {
+    gridArea: 'budget',
   },
   label: {
     gridArea: 'label',

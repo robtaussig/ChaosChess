@@ -10,7 +10,9 @@ export default createSlice({
   name: 'header',
   initialState: INITIAL_STATE,
   reducers: {
-
+    setHeader: (state, action: PayloadAction<string>) => {
+      return action.payload;
+    },
   },
   extraReducers: {
     [setUpVsAI.type]: (_state) => {
