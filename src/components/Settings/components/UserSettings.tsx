@@ -28,7 +28,7 @@ export const UserSettings: FC<UserSettingsProps> = ({
 }) => {
   const classes = userSettingStyles({});
   const handleSelectAvatar = (choice: Avatar) => () => {
-    navigator.vibrate(10);
+    navigator.vibrate?.(10);
     setSelectedAvatar(choice);
   };
 

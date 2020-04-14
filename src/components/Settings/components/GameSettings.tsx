@@ -35,7 +35,7 @@ export const GameSettings: FC<GameSettingsProps> = ({
   const classes = useGameSettingsStyles({});
 
   const handleSelectDifficulty = (choice: DifficultyType) => () => {
-    navigator.vibrate(10);
+    navigator.vibrate?.(10);
     setDifficulty(choice);
   };
   
