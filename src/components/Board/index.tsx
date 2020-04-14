@@ -95,6 +95,7 @@ export const Board: FC = () => {
         validPiecesToMove={validPiecesToMove}
         canvasWidth={`${window.innerWidth - (BOARD_MARGIN * 2)}px`}
         canvasHeight={`${window.innerWidth - (BOARD_MARGIN * 2)}px`}
+        flipped={color === Color.Black}
       />
       {game.current && game.current.render(board, color, isHost)}
     </main>

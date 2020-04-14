@@ -1,9 +1,17 @@
 import React, { FC, useEffect, useRef } from 'react';
 import Game from '../../../gfx';
+import {
+  flippedBoard,
+  flippedMoves,
+  flippedPieces,
+  flippedSquares,
+  flipPos,
+} from '../util';
 
 interface CanvasChessProps {
   onMove: (from: number, to: number) => void;
   board: string;
+  flipped: boolean;
   legalMoves: string[];
   validPiecesToMove: string[];
   squaresToHighlight: number[];
@@ -19,6 +27,7 @@ export const CanvasChess: FC<CanvasChessProps> = ({
   squaresToHighlight,
   canvasWidth,
   canvasHeight,
+  flipped,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameRef = useRef<Game>(null);
@@ -75,20 +84,26 @@ export const CanvasChess: FC<CanvasChessProps> = ({
 
   useEffect(() => {
     canvasRef.current.onselectstart = function () { return false; };
-    gameRef.current = new Game(canvasRef.current, onMove);
-  }, []);
+    gameRef.current = new Game(canvasRef.current, (from: number, to: number) => {
+      if (flipped) {
+        return onMove(flipPos(from), flipPos(to));
+      }
+
+      return onMove(from, to);
+    });
+  }, [onMove, flipped]);
 
   useEffect(() => {
-    gameRef.current.updateBoard(board);
-  }, [board]);
+    gameRef.current.updateBoard(flippedBoard(board, flipped));
+  }, [board, flipped]);
 
   useEffect(() => {
     gameRef.current.board.isDragging = null;
-    gameRef.current.updateLegalMoves(legalMoves);
-    gameRef.current.updateValidPieces(validPiecesToMove);
-    gameRef.current.updateSquaresToHighlight(squaresToHighlight);
-    gameRef.current.updateBoard(board);
-  }, [legalMoves, validPiecesToMove, board, squaresToHighlight]);
+    gameRef.current.updateLegalMoves(flippedMoves(legalMoves, flipped));
+    gameRef.current.updateValidPieces(flippedPieces(validPiecesToMove, flipped));
+    gameRef.current.updateSquaresToHighlight(flippedSquares(squaresToHighlight, flipped));
+    gameRef.current.updateBoard(flippedBoard(board, flipped));
+  }, [legalMoves, validPiecesToMove, board, squaresToHighlight, flipped]);
 
   return (
     <canvas
