@@ -98,11 +98,13 @@ export const CanvasChess: FC<CanvasChessProps> = ({
   }, [board, flipped]);
 
   useEffect(() => {
-    gameRef.current.board.isDragging = null;
-    gameRef.current.updateLegalMoves(flippedMoves(legalMoves, flipped));
-    gameRef.current.updateValidPieces(flippedPieces(validPiecesToMove, flipped));
-    gameRef.current.updateSquaresToHighlight(flippedSquares(squaresToHighlight, flipped));
-    gameRef.current.updateBoard(flippedBoard(board, flipped));
+    if (gameRef.current) {
+      if (gameRef.current.board) gameRef.current.board.isDragging = null;
+      gameRef.current.updateLegalMoves(flippedMoves(legalMoves, flipped));
+      gameRef.current.updateValidPieces(flippedPieces(validPiecesToMove, flipped));
+      gameRef.current.updateSquaresToHighlight(flippedSquares(squaresToHighlight, flipped));
+      gameRef.current.updateBoard(flippedBoard(board, flipped));
+    }
   }, [legalMoves, validPiecesToMove, board, squaresToHighlight, flipped]);
 
   return (

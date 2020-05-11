@@ -9,17 +9,18 @@ export default class Game {
     this.canvas = element;
     this.ctx = this.canvas.getContext('2d');
     this.onMove = onMove;
+
+    const boardSide = Math.min(this.canvas.clientHeight, this.canvas.clientWidth);
+    const horizontalOffset = this.canvas.clientHeight < this.canvas.clientWidth ? Math.floor((this.canvas.clientWidth - this.canvas.clientHeight) / 2) : 0;
+    const verticalOffset = this.canvas.clientHeight > this.canvas.clientWidth ? Math.floor((this.canvas.clientHeight - this.canvas.clientWidth) / 2) : 0;
+    this.board = new Board(board, this.ctx, this.onMove, boardSide, horizontalOffset, verticalOffset);
   }
 
   updateBoard(board) {
     if (this.board) {
       this.board.update(board);
-    } else {
-      const boardSide = Math.min(this.canvas.clientHeight, this.canvas.clientWidth);
-      const horizontalOffset = this.canvas.clientHeight < this.canvas.clientWidth ? Math.floor((this.canvas.clientWidth - this.canvas.clientHeight) / 2) : 0;
-      const verticalOffset = this.canvas.clientHeight > this.canvas.clientWidth ? Math.floor((this.canvas.clientHeight - this.canvas.clientWidth) / 2) : 0;
-      this.board = new Board(board, this.ctx, this.onMove, boardSide, horizontalOffset, verticalOffset);
     }
+
     this.draw();
   }
 
@@ -52,6 +53,7 @@ export default class Game {
   }
 
   updateLegalMoves(moves) {
+    console.log(this, this.board)
     this.board.setLegalMoves(moves);
   }
 

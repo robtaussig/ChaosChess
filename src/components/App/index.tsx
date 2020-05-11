@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useMemo, useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useWebsocket, { ReadyState } from 'react-use-websocket';
+import { useRouteMatch } from "react-router-dom";
 import useStyles from './styles';
 import Header from '../Header/';
 import Main from '../Main/';
@@ -18,16 +19,17 @@ interface AppProps {
   children?: any,
 }
 
+//TODO: Use match.params.roomId to start game immediately
+
 const WS_ADDR = 'wss://robtaussig.com/ws/';
 
 export const App: FC<AppProps> = () => {
   const classes = useStyles({});
   const dispatch = useDispatch();
-  const connectionAttempt = useRef<number>(0);
-  const [wsAddress, setWsAddress] = useState<string>(`${WS_ADDR}?conn=${connectionAttempt.current}`);
-  const messageQueue = useRef<string[]>([]);
-  const { roomId, uuid } = useSelector(connectionSelector);
+  const connection = useSelector(connectionSelector);
   const { name, avatar } = useSelector(userSelector);
+  const match: { params: { roomId: string } } = useRouteMatch('/:roomId');
+  const roomId = match?.params?.roomId ?? connection.roomId;
 
   const STATIC_OPTIONS = useMemo(() => ({
     retryOnError: true,
@@ -36,30 +38,16 @@ export const App: FC<AppProps> = () => {
     reconnectInterval: 5000,
   }),[]);
 
-  const [
+  const {
     sendMessage,
     lastMessage,
     readyState,
-    getWebSocket,
-  ] = useWebsocket(wsAddress, STATIC_OPTIONS);
-
-  const sendMessageWithReconnect = useCallback((message: string) => {
-    const currentReadyState = getWebSocket().readyState;
-    if (currentReadyState === ReadyState.OPEN) {
-      sendMessage(message);
-    } else {
-      messageQueue.current.push(message);
-      
-      if (currentReadyState !== ReadyState.CONNECTING) {
-        setWsAddress(`${WS_ADDR}?conn=${++connectionAttempt.current}`);
-      }
-    }
-  }, [sendMessage]);
+  } = useWebsocket(WS_ADDR, STATIC_OPTIONS);
 
   useEffect(() => {
     if (lastMessage?.data) {
       dispatch(
-        receiveMessage(lastMessage?.data, sendMessageWithReconnect)
+        receiveMessage(lastMessage?.data, sendMessage)
       );
     }
   }, [lastMessage]);
@@ -70,26 +58,19 @@ export const App: FC<AppProps> = () => {
 
   useEffect(() => {
     if (readyState === ReadyState.OPEN) {
-      setName(uuid, name, avatar, sendMessageWithReconnect);
+      setName(connection.uuid, name, avatar, sendMessage);
     }
-  }, [readyState, sendMessageWithReconnect, name, avatar, uuid]);
+  }, [readyState, sendMessage, name, avatar, connection.uuid]);
 
   useEffect(() => {
     if (readyState === ReadyState.OPEN) {
-      joinRoom(uuid, roomId, sendMessageWithReconnect);
-
-      //Give chance to join room before sending message
-      setTimeout(() => {
-        messageQueue.current.splice(0).forEach(message => {
-          sendMessageWithReconnect(message);
-        });
-      }, 2000);
+      joinRoom(connection.uuid, roomId, sendMessage);
     }
-  }, [readyState, sendMessageWithReconnect, roomId, uuid]);
+  }, [readyState, sendMessage, roomId, connection.uuid]);
 
   return (
     <div id={'app'} className={classes.root}>
-      <SocketProvider value={sendMessageWithReconnect}>
+      <SocketProvider value={sendMessage}>
         <Header/>
         <Main/>
         <Dashboard/>

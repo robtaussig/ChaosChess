@@ -27,13 +27,15 @@
   "dependencies": {
     "@material-ui/styles": "^4.9.0",
     "@reduxjs/toolkit": "^1.2.5",
+    "@types/react-router-dom": "^5.1.5",
     "classnames": "^2.2.6",
     "comlink": "^4.2.0",
     "css.gg": "^1.0.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.2.0",
-    "react-use-websocket": "1.6.1",
+    "react-router-dom": "^5.2.0",
+    "react-use-websocket": "2.0.1",
     "redux-logger": "^3.0.6",
     "uuid": "^7.0.2"
   },
