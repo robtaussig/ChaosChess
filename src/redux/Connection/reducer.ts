@@ -95,6 +95,9 @@ export default createSlice({
           })
       });
     },
+    privateRoomJoined: (state, action: PayloadAction<string>) => {
+      state.uuid = action.payload;
+    },
   },
   extraReducers: {
     [returnHome.type]: (state) => {

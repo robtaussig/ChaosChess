@@ -3,6 +3,7 @@ import { RootState } from '../types';
 
 export const {
   statusChanged,
+  privateRoomJoined,
   messageReceived,
   tableHosted,
   joinRequested,

@@ -8,12 +8,16 @@ import Main from '../Main/';
 import Dashboard from '../Dashboard/';
 import {
   statusChanged,
-  messageReceived,
   connectionSelector,
+  privateRoomJoined,
 } from '../../redux/Connection';
+import {
+  hostTable,
+} from '../../redux/Connection/actions';
 import { userSelector } from '../../redux/User';
 import { SocketProvider } from '../../hooks/useSocket';
 import { setName, joinRoom, receiveMessage } from '../../messaging';
+import { getTables, requestJoin } from '../../redux/Connection/actions';
 
 interface AppProps {
   children?: any,
@@ -29,20 +33,18 @@ export const App: FC<AppProps> = () => {
   const connection = useSelector(connectionSelector);
   const { name, avatar } = useSelector(userSelector);
   const match: { params: { roomId: string } } = useRouteMatch('/:roomId');
-  const roomId = match?.params?.roomId ?? connection.roomId;
-
-  const STATIC_OPTIONS = useMemo(() => ({
-    retryOnError: true,
-    shouldReconnect: () => true,
-    reconnectAttempts: 100,
-    reconnectInterval: 5000,
-  }),[]);
+  const roomIdFromParams = match?.params?.roomId;
 
   const {
     sendMessage,
     lastMessage,
     readyState,
-  } = useWebsocket(WS_ADDR, STATIC_OPTIONS);
+  } = useWebsocket(WS_ADDR, {
+    retryOnError: true,
+    shouldReconnect: () => true,
+    reconnectAttempts: 100,
+    reconnectInterval: 5000,
+  });
 
   useEffect(() => {
     if (lastMessage?.data) {
@@ -64,10 +66,22 @@ export const App: FC<AppProps> = () => {
 
   useEffect(() => {
     if (readyState === ReadyState.OPEN) {
-      joinRoom(connection.uuid, roomId, sendMessage);
+      joinRoom(connection.uuid, connection.roomId, sendMessage);
     }
-  }, [readyState, sendMessage, roomId, connection.uuid]);
+  }, [readyState, sendMessage, connection.roomId, connection.uuid]);
 
+  useEffect(() => {
+    if (roomIdFromParams) {
+      dispatch(privateRoomJoined(roomIdFromParams));
+      if (readyState === ReadyState.OPEN) {
+        try {
+          dispatch(requestJoin(sendMessage, roomIdFromParams, 1000));
+        } catch(e) {
+          dispatch(hostTable(sendMessage));
+        }
+      }
+    }
+  }, [readyState, roomIdFromParams]);
   return (
     <div id={'app'} className={classes.root}>
       <SocketProvider value={sendMessage}>

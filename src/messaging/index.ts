@@ -68,11 +68,13 @@ export const getTables = (
 export const requestJoin = async (
   sendMessage: SendMessage,
   uuidToJoin: string,
+  timeoutMs?: number,
 ): Promise<Response> => {
   return expectResponse(
     sendMessage,
     `${MessageTypes.RequestJoin}||`,
     uuidToJoin,
+    timeoutMs,
   );
 };
 

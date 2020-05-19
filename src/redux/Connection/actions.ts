@@ -40,20 +40,19 @@ export const getTables = (sendMessage: SendMessage): AppThunk<void> =>
 export const requestJoin = (
   sendMessage: SendMessage,
   uuidToJoin: string,
+  timeoutMs?: number,
 ): AppThunk<void> =>
   async (dispatch, getState) => {
     dispatch(joinRequested(uuidToJoin));
     try {
-      const response = await requestJoinMessage(sendMessage, uuidToJoin);
+      const response = await requestJoinMessage(sendMessage, uuidToJoin, timeoutMs);
       if (response.message === MessageTypes.RequestToJoinAccepted) {
-        //TODO: Actually join room
         dispatch(joinToRequestAccepted(uuidToJoin));
-      } else {
-        //TODO: Handle refusal
       }
     } catch (e) {
       //Handle timeout
       console.error(e);
       dispatch(requestToJoinCancelled());
+      throw e;
     }
   };

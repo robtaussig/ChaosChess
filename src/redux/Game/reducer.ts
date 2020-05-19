@@ -8,6 +8,7 @@ import {
 } from './types';
 import { returnHome } from '../App';
 import { gameInitialized } from '../Chess';
+import { privateRoomJoined } from '../Connection';
 
 const INITIAL_STATE: GameState = {
   stage: GameStages.NotStarted,
@@ -56,6 +57,9 @@ export default createSlice({
     },
     [gameInitialized.type]: state => {
       state.stage = GameStages.InProgress;
+    },
+    [privateRoomJoined.type]: state => {
+      state.stage = GameStages.SettingUpHuman;
     },
   },
 });

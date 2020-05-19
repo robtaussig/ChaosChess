@@ -53,7 +53,6 @@ export default class Game {
   }
 
   updateLegalMoves(moves) {
-    console.log(this, this.board)
     this.board.setLegalMoves(moves);
   }
 
