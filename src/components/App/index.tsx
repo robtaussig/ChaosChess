@@ -72,13 +72,11 @@ export const App: FC<AppProps> = () => {
 
   useEffect(() => {
     if (roomIdFromParams) {
-      dispatch(privateRoomJoined(roomIdFromParams));
       if (readyState === ReadyState.OPEN) {
-        try {
-          dispatch(requestJoin(sendMessage, roomIdFromParams, 1000));
-        } catch(e) {
+        dispatch(requestJoin(sendMessage, roomIdFromParams, 1000, () => {
+          dispatch(privateRoomJoined(roomIdFromParams));
           dispatch(hostTable(sendMessage));
-        }
+        }));
       }
     }
   }, [readyState, roomIdFromParams]);

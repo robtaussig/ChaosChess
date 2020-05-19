@@ -41,6 +41,7 @@ export const requestJoin = (
   sendMessage: SendMessage,
   uuidToJoin: string,
   timeoutMs?: number,
+  onError?: (e: Error) => void,
 ): AppThunk<void> =>
   async (dispatch, getState) => {
     dispatch(joinRequested(uuidToJoin));
@@ -53,6 +54,6 @@ export const requestJoin = (
       //Handle timeout
       console.error(e);
       dispatch(requestToJoinCancelled());
-      throw e;
+      if (onError) onError(e);
     }
   };
