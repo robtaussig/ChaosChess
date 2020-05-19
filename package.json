@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "cross-env node_modules/.bin/jest",
-    "build": "cross-env node_modules/.bin/parcel build ./src/index.html --no-source-maps",
+    "build": "cross-env node_modules/.bin/parcel build ./src/index.html --no-source-maps && cp ./src/public/_redirects ./dist",
     "start": "concurrently \"cross-env node_modules/.bin/tsc --noEmit --watch\" \"cross-env node_modules/.bin/parcel ./src/index.html\""
   },
   "author": "",
