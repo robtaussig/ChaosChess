@@ -37,6 +37,8 @@ export const Board: FC = () => {
   const { hostPhase } = useSelector(connectionSelector);
   const { color } = useSelector(userSelector);
 
+  const APP_HEADER_HEIGHT = 80;
+
   const isHost =
     opponentType === OpponentType.AI ||
     hostPhase === HostPhase.Joined;
@@ -85,6 +87,9 @@ export const Board: FC = () => {
     return () => game.current && game.current.deinit();
   }, []);
 
+  //80 is height of header;
+  const sideLength = window.innerHeight > window.innerWidth ? window.innerWidth : window.innerHeight - APP_HEADER_HEIGHT;
+
   return (
     <main ref={rootRef} id={'board'} className={classes.root}>
       <CanvasChess
@@ -93,8 +98,8 @@ export const Board: FC = () => {
         legalMoves={legalMoves}
         squaresToHighlight={squaresToHighlight}
         validPiecesToMove={validPiecesToMove}
-        canvasWidth={`${window.innerWidth - (BOARD_MARGIN * 2)}px`}
-        canvasHeight={`${window.innerWidth - (BOARD_MARGIN * 2)}px`}
+        canvasWidth={`${sideLength - (BOARD_MARGIN * 2)}px`}
+        canvasHeight={`${sideLength - (BOARD_MARGIN * 2)}px`}
         flipped={color === Color.Black}
       />
       {game.current && game.current.render(board, color, isHost)}

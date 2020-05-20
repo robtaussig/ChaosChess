@@ -1,0 +1,8 @@
+@media only screen  and (min-width : 1224px) {
+    #app {
+        grid-template-areas: "header header"
+                             "main dashboard";
+        grid-template-rows: 80px 1fr;
+        grid-template-columns: calc(100vh - 80px) 1fr;
+    }
+}
