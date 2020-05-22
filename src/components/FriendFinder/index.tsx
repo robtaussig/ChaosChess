@@ -12,11 +12,13 @@ import {
 import { Avatar, userSelector } from '../../redux/User';
 import HostedTable from './components/HostedTable';
 import PrivateRoom from './components/PrivateRoom';
+import { useHistory } from 'react-router-dom';
 
 export const FriendFinder: FC = () => {
   const classes = useStyles({});
   const sendMessage = useSocket();
   const dispatch = useDispatch();
+  const history = useHistory();
   const {
     messageHistory,
     hostedTable,
@@ -28,6 +30,7 @@ export const FriendFinder: FC = () => {
 
   const handleJoinTable = (uuidToJoin: string) => {
     dispatch(requestJoin(sendMessage, uuidToJoin));
+    history.push(`/room/${uuidToJoin}`);
   };
 
   useEffect(() => {

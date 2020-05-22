@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HelpState, HelpTypes } from './types';
-import { returnHome } from '../App';
 
 const INITIAL_STATE: HelpState = {
   currentPage: null,
@@ -15,8 +14,6 @@ export default createSlice({
     },
   },
   extraReducers: {
-    [returnHome.type]: (state) => {
-      state.currentPage = null;
-    },
+
   },
 });

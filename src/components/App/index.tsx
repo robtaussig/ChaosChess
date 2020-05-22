@@ -11,6 +11,7 @@ import {
   statusChanged,
   connectionSelector,
   privateRoomJoined,
+  JoinPhase,
 } from '../../redux/Connection';
 import {
   hostTable,
@@ -31,11 +32,12 @@ const WS_ADDR = 'wss://robtaussig.com/ws/';
 export const App: FC<AppProps> = () => {
   const classes = useStyles({});
   const dispatch = useDispatch();
+  const joinPhase = useRef<JoinPhase>(null);
   const connection = useSelector(connectionSelector);
   const { name, avatar } = useSelector(userSelector);
-  const match: { params: { roomId: string } } = useRouteMatch('/:roomId');
+  const match: { params: { roomId: string } } = useRouteMatch('/room/:roomId');
   const roomIdFromParams = match?.params?.roomId;
-
+  joinPhase.current = connection.joinPhase;
   const {
     sendMessage,
     lastMessage,
@@ -72,7 +74,7 @@ export const App: FC<AppProps> = () => {
   }, [readyState, sendMessage, connection.roomId, connection.uuid]);
 
   useEffect(() => {
-    if (roomIdFromParams) {
+    if (roomIdFromParams && joinPhase.current !== JoinPhase.Requested) {
       if (readyState === ReadyState.OPEN) {
         dispatch(requestJoin(sendMessage, roomIdFromParams, 1000, () => {
           dispatch(privateRoomJoined(roomIdFromParams));
@@ -81,6 +83,7 @@ export const App: FC<AppProps> = () => {
       }
     }
   }, [readyState, roomIdFromParams]);
+
   return (
     <div id={'app'} className={classes.root}>
       <SocketProvider value={sendMessage}>

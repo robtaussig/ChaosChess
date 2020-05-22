@@ -2,7 +2,6 @@ import settingsReducer from './reducer';
 import { RootState } from '../types';
 
 export const {
-  settingsOpened,
   typeSelected,
   settingsUpdated,
 } = settingsReducer.actions;

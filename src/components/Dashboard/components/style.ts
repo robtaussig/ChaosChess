@@ -40,7 +40,7 @@ export const useMainScreenDashboardStyles = makeStyles((theme: Theme) => ({
     ...rootStyles(theme),
     display: 'grid',
     gridTemplateAreas: `"vs-ai vs-human"
-                        "settings close"`,
+                        "settings enter"`,
     gridTemplateRows: '1fr 1fr',
     gridTemplateColumns: '1fr 1fr',
     gridGap: '20px',
@@ -54,9 +54,21 @@ export const useMainScreenDashboardStyles = makeStyles((theme: Theme) => ({
     '& .settings': {
       gridArea: 'settings',
     },
-    '& .close': {
-      gridArea: 'close',
+    '& .enter': {
+      gridArea: 'enter',
     },
+    '& .cancel-room': {
+      gridArea: 'settings',
+    },
+    '& .enter-room': {
+      gridArea: 'enter',
+    },
+  },
+  roomInput: {
+    gridRow: '1 / span 1',
+    gridColumn: '1 / -1',
+    fontSize: 20,
+    textAlign: 'center',
   },
   dashboardButton: {
     ...buttonStyles(theme),

@@ -7,7 +7,6 @@ import {
   getValidPiecesToMoveFromLegalMoveList,
 } from './util';
 import { DEFAULT_BOARD } from '../../engine/constants';
-import { returnHome } from '../App';
 
 const INITIAL_STATE: ChessState = {
   board: DEFAULT_BOARD,
@@ -61,8 +60,6 @@ export default createSlice({
     },
   },
   extraReducers: {
-    [returnHome.type]: () => {
-      return INITIAL_STATE;
-    },
+
   },
 });

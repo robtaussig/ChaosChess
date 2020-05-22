@@ -4,9 +4,11 @@ import { returnHome } from '../../../../../redux/App';
 import { useSocket } from '../../../../../hooks/useSocket';
 import { opponentSelector, OpponentType } from '../../../../../redux/Opponent';
 import { gameStarted } from '../../../../../redux/Game';
+import { connectionSelector } from '../../../../../redux/Connection';
 import DashboardButton from '../../DashboardButton';
 import { syncGuestWithGameStarted } from '../../../../../messaging';
 import classNames from 'classnames';
+import { useHistory } from 'react-router-dom';
 
 interface HostDashboardProps {
   classes: any;
@@ -16,13 +18,16 @@ export const HostDashboard: FC<HostDashboardProps> = ({
   classes,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sendMessage = useSocket();
   const { isReady } = useSelector(opponentSelector);
+  const { roomId } = useSelector(connectionSelector);
 
   const handleStartGame = () => {
     const isWhite = true;
     dispatch(gameStarted({ opponent: OpponentType.Human, isWhite }));
     syncGuestWithGameStarted(sendMessage, !isWhite);
+    history.push(`/game/${roomId}`);
   };
 
   return (

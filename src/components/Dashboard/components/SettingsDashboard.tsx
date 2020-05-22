@@ -6,6 +6,7 @@ import 'css.gg/icons/file-document.css';
 import 'css.gg/icons/boy.css';
 import 'css.gg/icons/girl.css';
 import 'css.gg/icons/performance.css';
+import 'css.gg/icons/arrow-left-o.css';
 import { useDispatch, useSelector } from 'react-redux';
 import DashboardButton from './DashboardButton';
 import { returnHome } from '../../../redux/App';
@@ -17,12 +18,13 @@ import {
   typeSelected,
 } from '../../../redux/Settings';
 import classNames from 'classnames';
+import { useHistory } from 'react-router-dom';
 
 export const SettingsDashboard: FC = () => {
   const classes = useSettingsDashboard({});
   const { avatar } = useSelector(userSelector);
   const { type } = useSelector(settingsSelector);
-  const { currentPage } = useSelector(helpSelector);
+  const history = useHistory();
   const dispatch = useDispatch();
 
   return (
@@ -63,10 +65,10 @@ export const SettingsDashboard: FC = () => {
       />
       <DashboardButton
         classes={classes}
-        className={'home'}
-        label={'Home'}
-        icon={'home'}
-        onClick={() => dispatch(returnHome())}
+        className={'back'}
+        label={'Back'}
+        icon={'arrow-left-o'}
+        onClick={() => history.goBack()}
       />
     </div>
   );

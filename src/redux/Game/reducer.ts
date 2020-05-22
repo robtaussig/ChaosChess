@@ -6,7 +6,6 @@ import {
   GameStartedPayload,
   ChaosGameTypes,
 } from './types';
-import { returnHome } from '../App';
 import { gameInitialized } from '../Chess';
 import { joinRequested } from '../Connection';
 
@@ -52,9 +51,6 @@ export default createSlice({
     },
   },
   extraReducers: {
-    [returnHome.type]: state => {
-      state.stage = GameStages.NotStarted;
-    },
     [gameInitialized.type]: state => {
       state.stage = GameStages.InProgress;
     },

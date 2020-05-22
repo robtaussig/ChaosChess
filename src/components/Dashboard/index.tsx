@@ -1,31 +1,35 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
-import {
-  dashboardSelector,
-  DashboardTypes,
-} from '../../redux/Dashboard';
+import SettingsDashboard from './components/SettingsDashboard';
+import AIDashboard from './components/AIDashboard';
+import FriendFinderDashboard from './components/FriendFinderDashboard';
+import MultiplayerDashboard from './components/MultiplayerDashboard';
 import InGameDashboard from './components/InGameDashboard';
 import MainScreenDashboard from './components/MainScreenDashboard';
-import SettingsDashboard from './components/SettingsDashboard';
-import OpponentDashboard from './components/OpponentDashboard';
-import MultiplayerDashboard from './components/MultiplayerDashboard';
+import { Switch, Route } from 'react-router-dom';
 
 export const Dashboard: FC = () => {
-  const { type } = useSelector(dashboardSelector);
-
-  switch (type) {
-    case DashboardTypes.MainScreen:
-      return <MainScreenDashboard/>;
-    case DashboardTypes.InGame:
-      return <InGameDashboard/>;
-    case DashboardTypes.Settings:
-      return <SettingsDashboard/>;
-    case DashboardTypes.SetUpOpponent:
-      return <OpponentDashboard/>;
-    case DashboardTypes.MultiplayerDashboard:
-      return <MultiplayerDashboard/>
-      return null;
-  }
+  return (
+    <Switch>
+      <Route path={'/settings'}>
+        <SettingsDashboard/>
+      </Route>
+      <Route path={'/vs-ai'}>
+        <AIDashboard/>
+      </Route>
+      <Route path={'/vs-human'}>
+        <FriendFinderDashboard/>
+      </Route>
+      <Route path={'/room/:roomId'}>
+        <MultiplayerDashboard/>
+      </Route>
+      <Route path={'/game/:roomId'}>
+        <InGameDashboard/>
+      </Route>
+      <Route path={'/'}>
+        <MainScreenDashboard/>
+      </Route>
+    </Switch>
+  );
 };
 
 export default Dashboard;

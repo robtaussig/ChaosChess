@@ -1,5 +1,4 @@
 export interface SettingsState {
-  isOpen: boolean;
   type: SettingsType;
   difficulty: DifficultyType;
   useMoveHistory: boolean;

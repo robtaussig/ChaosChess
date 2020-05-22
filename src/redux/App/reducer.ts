@@ -9,6 +9,9 @@ export default createSlice({
   name: 'app',
   initialState: INITIAL_STATE,
   reducers: {
-    returnHome: () => null,
+    returnHome: () => {
+      location.href = '/';
+      return null;
+    },
   },
 });

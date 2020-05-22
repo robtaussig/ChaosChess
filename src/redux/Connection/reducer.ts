@@ -8,7 +8,6 @@ import {
   HostPhase,
   RoomCreatedPayload,
 } from './types';
-import { returnHome } from '../App';
 import { v4 as uuidv4 } from 'uuid';
 
 const MAIN_ROOM = 'Main';
@@ -100,15 +99,6 @@ export default createSlice({
     },
   },
   extraReducers: {
-    [returnHome.type]: (state) => {
-      return {
-        ...state,
-        roomId: MAIN_ROOM,
-        hostedTable: null,
-        hostPhase: HostPhase.None,
-        joinedTable: null,
-        joinPhase: JoinPhase.None,
-      };
-    },
+
   },
 });

@@ -2,7 +2,8 @@ export const flipPos = (pos: number): number => {
   const column = pos % 10;
   const row = Math.floor(pos / 10);
   const nextRow = 9 - row;
-  const flippedPos = (nextRow * 10) + column;
+  const nextCol = 9 - column;
+  const flippedPos = (nextRow * 10) + nextCol;
   return flippedPos;
 };
 
@@ -14,6 +15,10 @@ const pieceFlipper = (board: string) =>
         return board[flipPos(pos)];
       }
     } else if (pos === 107 || pos === 109) { //Row
+      if (board[pos] !== '0') {
+        return `${9 - Number(board[pos])}`;
+      }
+    } else if (pos === 108 || pos === 110) { //Column
       if (board[pos] !== '0') {
         return `${9 - Number(board[pos])}`;
       }
