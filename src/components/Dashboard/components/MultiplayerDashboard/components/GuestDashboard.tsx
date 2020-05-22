@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { returnHome } from '../../../../../redux/App';
 import { useSocket } from '../../../../../hooks/useSocket';
 import { setIsReady, opponentSelector } from '../../../../../redux/Opponent';
+import { gameSelector, GameStages } from '../../../../../redux/Game';
 import DashboardButton from '../../DashboardButton';
 import { syncHostWithReadyStatus } from '../../../../../messaging';
+import { useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 
 interface GuestDashboardProps {
@@ -15,12 +17,20 @@ export const GuestDashboard: FC<GuestDashboardProps> = ({
   classes,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sendMessage = useSocket();
-  const { isReady } = useSelector(opponentSelector);
+  const { isReady, uuid } = useSelector(opponentSelector);
+  const { stage } = useSelector(gameSelector);
 
   useEffect(() => {
     syncHostWithReadyStatus(sendMessage, isReady);
   }, [sendMessage, isReady]);
+
+  useEffect(() => {
+    if (stage === GameStages.Started) {
+      history.push(`/game/${uuid}`);
+    }
+  }, [stage, history, uuid]);
 
   return (
     <div className={classNames(classes.userDashboard, 'guest')}>
