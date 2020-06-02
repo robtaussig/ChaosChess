@@ -5,7 +5,10 @@ import {
   joinToRequestAccepted,
   requestToJoinCancelled,
   tablesCleared,
-  MessageTypes } from './';
+  joinWaiting,
+  MessageTypes,
+  InRoomMessage,
+} from './';
 import { SendMessage } from '../../hooks/useSocket';
 import {
   hostTable as hostTableMessage,
@@ -13,6 +16,7 @@ import {
   dropTable as dropTableMessage,
   requestJoin as requestJoinMessage,
 } from '../../messaging';
+import { gameStarted } from '../Game';
 
 export const hostTable = (sendMessage: SendMessage): AppThunk<void> =>
   async (dispatch, getState) => {
@@ -48,7 +52,7 @@ export const requestJoin = (
     try {
       const response = await requestJoinMessage(sendMessage, uuidToJoin, timeoutMs);
       if (response.message === MessageTypes.RequestToJoinAccepted) {
-        dispatch(joinToRequestAccepted(uuidToJoin));
+        return dispatch(joinToRequestAccepted(uuidToJoin));
       }
     } catch (e) {
       //Handle timeout
@@ -56,4 +60,19 @@ export const requestJoin = (
       dispatch(requestToJoinCancelled());
       if (onError) onError(e);
     }
+  };
+
+export const waitingRoomJoined = (gameId: string): AppThunk<void> =>
+  (dispatch, getState) => {
+    dispatch(joinWaiting(gameId));
+  };
+
+export const startGameFromJoin = (gameId: string): AppThunk<void> =>
+  (dispatch, getState) => {
+    const { connection } = getState();
+    const joinRoomMessage = connection.messageHistory[gameId].find(({ type }) => type === MessageTypes.InRoom) as InRoomMessage;
+    dispatch(gameStarted({
+      opponent: joinRoomMessage.data.name,
+      isWhite: false,
+    }))
   };

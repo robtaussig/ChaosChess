@@ -11,6 +11,7 @@ export const {
   joinToRequestAccepted,
   requestToJoinCancelled,
   tablesCleared,
+  joinWaiting,
 } = connectionReducer.actions;
 
 export const reducer = connectionReducer.reducer;
@@ -28,4 +29,5 @@ export {
   JoinPhase,
   HostPhase,
   RoomCreatedPayload,
+  InRoomMessage,
 } from './types';

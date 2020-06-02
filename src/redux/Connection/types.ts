@@ -94,6 +94,7 @@ export enum JoinPhase {
   None = 'None',
   Requested = 'Requested',
   Joined = 'Joined',
+  Waiting = 'Waiting',
 }
 
 export enum HostPhase {

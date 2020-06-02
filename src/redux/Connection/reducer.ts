@@ -97,6 +97,10 @@ export default createSlice({
     privateRoomJoined: (state, action: PayloadAction<string>) => {
       state.uuid = action.payload;
     },
+    joinWaiting: (state, action: PayloadAction<string>) => {
+      state.joinPhase = JoinPhase.Waiting;
+      state.roomId = action.payload;
+    },
   },
   extraReducers: {
 

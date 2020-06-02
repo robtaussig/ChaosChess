@@ -19,7 +19,8 @@ import {
 import { userSelector } from '../../redux/User';
 import { SocketProvider } from '../../hooks/useSocket';
 import { setName, joinRoom, receiveMessage } from '../../messaging';
-import { getTables, requestJoin } from '../../redux/Connection/actions';
+import { waitingRoomJoined, requestJoin, startGameFromJoin } from '../../redux/Connection/actions';
+import { gameStarted } from '~redux/Game';
 
 interface AppProps {
   children?: any,
@@ -27,7 +28,7 @@ interface AppProps {
 
 //TODO: Use match.params.roomId to start game immediately
 
-const WS_ADDR = 'wss://robtaussig.com/ws/';
+const WS_ADDR = 'ws://localhost:8010/ws/';
 
 export const App: FC<AppProps> = () => {
   const classes = useStyles({});
@@ -35,8 +36,11 @@ export const App: FC<AppProps> = () => {
   const joinPhase = useRef<JoinPhase>(null);
   const connection = useSelector(connectionSelector);
   const { name, avatar } = useSelector(userSelector);
-  const match: { params: { roomId: string } } = useRouteMatch('/room/:roomId');
-  const roomIdFromParams = match?.params?.roomId;
+  const roomMatch: { params: { roomId: string } } = useRouteMatch('/room/:roomId');
+  const roomIdFromParams = roomMatch?.params?.roomId;
+  const gameMatch: { params: { gameId: string } } = useRouteMatch('/game/:gameId');
+  const gameIdFromParams = gameMatch?.params?.gameId;
+
   joinPhase.current = connection.joinPhase;
   const {
     sendMessage,
@@ -68,21 +72,50 @@ export const App: FC<AppProps> = () => {
   }, [readyState, sendMessage, name, avatar, connection.uuid]);
 
   useEffect(() => {
-    if (readyState === ReadyState.OPEN) {
+    if (readyState === ReadyState.OPEN && !gameIdFromParams) {
       joinRoom(connection.uuid, connection.roomId, sendMessage);
     }
-  }, [readyState, sendMessage, connection.roomId, connection.uuid]);
+  }, [readyState, sendMessage, connection.roomId, connection.uuid, gameIdFromParams]);
 
   useEffect(() => {
     if (roomIdFromParams && joinPhase.current !== JoinPhase.Requested) {
       if (readyState === ReadyState.OPEN) {
-        dispatch(requestJoin(sendMessage, roomIdFromParams, 1000, () => {
+        dispatch(requestJoin(sendMessage, roomIdFromParams, 2000, () => {
           dispatch(privateRoomJoined(roomIdFromParams));
           dispatch(hostTable(sendMessage));
         }));
       }
     }
-  }, [readyState, roomIdFromParams]);
+  }, [sendMessage, readyState, roomIdFromParams]);
+
+  useEffect(() => {
+    if (gameIdFromParams && gameIdFromParams !== connection.roomId) {
+      if (readyState === ReadyState.OPEN) {
+        dispatch(waitingRoomJoined(gameIdFromParams));
+        joinRoom(gameIdFromParams, gameIdFromParams, sendMessage);
+      }
+    }
+  }, [sendMessage, readyState, gameIdFromParams, connection.roomId]);
+
+  useEffect(() => {
+    if (connection.joinPhase === JoinPhase.Waiting && lastMessage?.data === 'joined') {
+      const join = async () => {
+        const joined = await dispatch(requestJoin(sendMessage, connection.roomId, 2000, () => {
+          dispatch(privateRoomJoined(connection.roomId));
+          dispatch(hostTable(sendMessage));
+          dispatch(gameStarted({
+            opponent: '',
+            isWhite: true,
+          }));
+        }));
+        if (joined) {
+          dispatch(startGameFromJoin(connection.roomId));
+        }
+      };
+
+      join();
+    }
+  }, [lastMessage, connection.joinPhase, connection.roomId]);
 
   return (
     <div id={'app'} className={classes.root}>
