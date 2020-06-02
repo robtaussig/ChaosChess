@@ -58,6 +58,9 @@ export default createSlice({
     specialBoardCreated: (state, action: PayloadAction<string>) => {
       state.board = action.payload;
     },
+    gameSynced: (state, action: PayloadAction<ChessState>) => {
+      return action.payload;
+    },
   },
   extraReducers: {
 

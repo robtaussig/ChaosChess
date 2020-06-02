@@ -4,7 +4,7 @@ import { AppThunk } from '../types';
 import { BaseGame } from '../../games';
 import { makeMove } from '../../engine/board';
 import { isCheck } from '../../engine/';
-import { gameInitialized, moveCompleted, MakeMovePayload } from '../Chess';
+import { gameInitialized, moveCompleted, MakeMovePayload, ChessState, gameSynced } from '../Chess';
 import { SendMessage } from '../../hooks/useSocket';
 import { MessageTypes } from '../../redux/Connection';
 
@@ -103,4 +103,14 @@ export const makeMoveAndUpdateOpponent = (
     };
 
     sendMessage(`${MessageTypes.MakeMove}||${JSON.stringify(payload)}`);
+  };
+
+export const syncronizeBoard = (chessState: ChessState): AppThunk<void> =>
+  async (dispatch, getState) => {
+    const availableMoves = await engineWorker.getValidMoves(chessState.board);
+    dispatch(gameSynced({
+      ...chessState,
+      isCheck: availableMoves.isCheck,
+      legalMoves: availableMoves.legalMoves,
+    }))
   };

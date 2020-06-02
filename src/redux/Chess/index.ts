@@ -5,6 +5,7 @@ export const {
   gameInitialized,
   moveCompleted,
   specialBoardCreated,
+  gameSynced,
 } = chessReducer.actions;
 
 export const reducer = chessReducer.reducer;

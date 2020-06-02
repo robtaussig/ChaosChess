@@ -18,7 +18,8 @@ import {
   Response,
 } from './respond';
 import { isMessageType } from './util';
-import { moveCompleted, MakeMovePayload } from '../redux/Chess';
+import { moveCompleted, MakeMovePayload, ChessState } from '../redux/Chess';
+import { syncronizeBoard } from '../redux/Engine/actions';
 import messager from './dispatcher';
 
 export const setName = (
@@ -43,8 +44,9 @@ export const joinRoom = (
 
 export const inRoom = (
   sendMessage: SendMessage,
+  chessState: ChessState,
 ): void => {
-  sendMessage(`${MessageTypes.InRoom}||`);
+  sendMessage(`${MessageTypes.InRoom}||${JSON.stringify(chessState)}`);
 };
 
 export const hostTable = (
@@ -189,6 +191,19 @@ const getUuidAndRoomId =
     return { uuid, roomId };
   };
 
+const syncGame = (respond: SendMessage, message: string): AppThunk<void> =>
+  (dispatch, getState) => {
+    const [,chessStateString] = message.split('||');
+    const chessState: ChessState = JSON.parse(chessStateString);
+    const { chess } = getState();
+
+    if (chessState.turnsElapsed > chess.turnsElapsed) {
+      dispatch(syncronizeBoard(chessState));
+    } else if (chess.turnsElapsed > chessState.turnsElapsed) {
+      inRoom(respond, chess);
+    }
+  };
+
 //TODO: Make more performant by extracting messageType once and comparing by string
 export const receiveMessage = (
   message: string,
@@ -200,7 +215,7 @@ export const receiveMessage = (
   } else if (isMessageType<MessageTypes>(message, MessageTypes.ResponseExpected)) {
     dispatch(respondToMessage(message, respond));
   } else if (isMessageType<MessageTypes>(message, MessageTypes.JoinedRoom)) {
-    inRoom(respond);
+    inRoom(respond, getState().chess);
     dispatch(messageReceived({
       type: MessageTypes.JoinedRoom,
       data: getJoinMessageData(message),
@@ -211,6 +226,7 @@ export const receiveMessage = (
       data: getNameMessageData(message),
     }));
   } else if (isMessageType<MessageTypes>(message, MessageTypes.InRoom)) {
+    dispatch(syncGame(respond, message));
     dispatch(messageReceived({
       type: MessageTypes.InRoom,
       data: getUuidAndNameFromMessage(message),
