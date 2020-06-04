@@ -28,7 +28,7 @@ interface AppProps {
 
 //TODO: Use match.params.roomId to start game immediately
 
-const WS_ADDR = 'ws://localhost:8010/ws/';
+const WS_ADDR = 'wss://robtaussig.com/ws/';
 
 export const App: FC<AppProps> = () => {
   const classes = useStyles({});
