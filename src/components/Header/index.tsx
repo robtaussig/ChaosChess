@@ -20,6 +20,9 @@ export const Header: FC = () => {
         <Route path={'/vs-human'}>
           Find Opponent
         </Route>
+        <Route path={'/go'}>
+          Go
+        </Route>
         <Route path={'*'}>
           {headerText}
         </Route>

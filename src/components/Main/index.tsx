@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import Board from '../Board';
 import Settings from '../Settings';
+import Go from '../Go';
 import GameModes from '../GameModes';
 import FriendFinder from '../FriendFinder';
 import { Switch, Route } from 'react-router-dom';
@@ -22,6 +23,9 @@ export const Main: FC = () => {
       </Route>
       <Route path={'/game/:roomId'}>
         <Board/>
+      </Route>
+      <Route path={'/go'}>
+        <Go/>
       </Route>
       <Route path={'*'}>
         <Board/>

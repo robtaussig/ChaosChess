@@ -9,6 +9,7 @@ import { reducer as opponent } from './Opponent';
 import { reducer as chess } from './Chess';
 import { reducer as connection } from './Connection';
 import { reducer as help } from './Help';
+import { reducer as go } from './Go';
 
 const rootReducer = combineReducers({
   app,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   chess,
   connection,
   help,
+  go,
 });
 
 export default rootReducer;

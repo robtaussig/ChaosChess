@@ -5,6 +5,7 @@ import FriendFinderDashboard from './components/FriendFinderDashboard';
 import MultiplayerDashboard from './components/MultiplayerDashboard';
 import InGameDashboard from './components/InGameDashboard';
 import MainScreenDashboard from './components/MainScreenDashboard';
+import GoDashboard from './components/GoDashboard';
 import { Switch, Route } from 'react-router-dom';
 
 export const Dashboard: FC = () => {
@@ -18,6 +19,9 @@ export const Dashboard: FC = () => {
       </Route>
       <Route path={'/vs-human'}>
         <FriendFinderDashboard/>
+      </Route>
+      <Route path={'/go'}>
+        <GoDashboard/>
       </Route>
       <Route path={'/room/:roomId'}>
         <MultiplayerDashboard/>

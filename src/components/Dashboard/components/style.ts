@@ -146,6 +146,49 @@ export const useInGameDashboard = makeStyles((theme: Theme) => ({
   },
 }));
 
+export const useGoStyles = makeStyles((theme: Theme) => ({
+  root: {
+    ...rootStyles(theme),
+    fontFamily: 'Oxanium',
+    display: 'grid',
+    gridTemplateAreas: `"white-capture black-capture"
+                        "home start-over"`,
+    gridTemplateRows: '1fr 1fr',
+    gridTemplateColumns: '1fr 1fr',
+    gridGap: '20px',
+    padding: 20,
+    '& .main-menu': {
+      gridArea: 'home',
+    },
+    '& .start-over': {
+      gridArea: 'start-over',
+    },
+  },
+  capturedPieces: {
+    display: 'flex',
+    flexDirection: 'column',
+    '&.black': {
+      gridArea: 'black-capture',
+    },
+    '&.white': {
+      gridArea: 'white-capture',
+    },
+  },
+  capturedHeader: {
+
+  },
+  capturedValue: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 48,
+  },
+  dashboardButton: {
+    ...buttonStyles(theme),
+  },
+}));
+
 export const useSettingsDashboard = makeStyles((theme: Theme) => ({
   root: {
     ...rootStyles(theme),
