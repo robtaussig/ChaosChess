@@ -90,7 +90,7 @@ export const App: FC<AppProps> = () => {
 
   useEffect(() => {
     if (gameIdFromParams && gameIdFromParams !== connection.roomId) {
-      if (readyState === ReadyState.OPEN) {
+      if (readyState === ReadyState.OPEN && gameIdFromParams !== 'vs-ai') {
         dispatch(waitingRoomJoined(gameIdFromParams));
         joinRoom(gameIdFromParams, gameIdFromParams, sendMessage);
       }
