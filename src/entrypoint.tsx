@@ -36,6 +36,37 @@ if ("serviceWorker" in navigator) {
   }
 }
 
+if ('wakeLock' in navigator) {
+  // The wake lock sentinel.
+  let wakeLock: any = null;
+
+  // Function that attempts to request a screen wake lock.
+  const requestWakeLock = async () => {
+    try {
+      wakeLock = await (navigator as any).wakeLock.request('screen');
+      wakeLock.addEventListener('release', () => {
+        console.log('Screen Wake Lock was released');
+      });
+      console.log('Screen Wake Lock is active');
+    } catch (err) {
+      console.error(`${err.name}, ${err.message}`);
+    }
+  };
+
+  requestWakeLock();
+
+  const handleVisibilityChange = () => {
+    if (wakeLock !== null && document.visibilityState === 'visible') {
+      requestWakeLock();
+    }
+  };
+  
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  document.addEventListener('fullscreenchange', handleVisibilityChange);
+} else {
+  console.log('wakeLock not supported');
+}
+
 if ((module as any).hot) {
   (module as any).hot.accept()
 }
