@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import useStyles from './styles';
 import { useSelector } from 'react-redux';
 import { headerSelector } from '../../redux/Header';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 
 export const Header: FC = () => {
   const classes = useStyles({});
@@ -20,11 +20,9 @@ export const Header: FC = () => {
         <Route path={'/vs-human'}>
           Find Opponent
         </Route>
-        <Route path={'/go'}>
-          Go
-        </Route>
+        <Route path={'/go'}/>
         <Route path={'*'}>
-          {headerText}
+          <Link to={'/go'}>{headerText}</Link>
         </Route>
       </Switch>
     </h1>
