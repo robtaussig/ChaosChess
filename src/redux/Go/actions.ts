@@ -69,3 +69,13 @@ export const resignGame = (): AppThunk<void> =>
     //   legalMoves,
     // }));
   };
+
+export const undo = (): AppThunk<void> =>
+  async (dispatch, getState) => {
+    // const legalMoves = await engineWorker.getValidMoves(board);
+
+    // dispatch(gameInitialized({
+    //   board,
+    //   legalMoves,
+    // }));
+  };

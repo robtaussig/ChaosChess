@@ -151,9 +151,9 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     ...rootStyles(theme),
     fontFamily: 'Oxanium',
     display: 'grid',
-    gridTemplateAreas: `"current-turn pass-turn"
-                        "white-capture resign"
-                        "black-capture home"`,
+    gridTemplateAreas: `"black pass-turn"
+                        "white resign"
+                        "undo home"`,
     gridTemplateRows: '1fr 1fr 1fr',
     gridTemplateColumns: '1fr 1fr',
     gridGap: '20px',
@@ -167,43 +167,37 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     '& .resign': {
       gridArea: 'resign',
     },
-    '& .current-turn': {
-      gridArea: 'current-turn',
-      fontFamily: 'Oxanium',
-      fontSize: 20,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
+    '& .undo': {
+      gridArea: 'undo',
     },
   },
-  capturedPieces: {
-    display: 'flex',
-    flexDirection: 'column',
-    '&.black': {
-      gridArea: 'black-capture',
-    },
-    '&.white': {
-      gridArea: 'white-capture',
-    },
-  },
-  results: {
-    gridArea: 'current-turn',
+  colorSpace: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
     fontSize: 30,
-    flexDirection: 'column',
-    textAlign: 'center',
+    fontWeight: 600,
+    borderBottom: '4px solid transparent',
+    borderTop: '4px solid transparent',
+    '&.white': {
+      gridArea: 'white',
+    },
+    '&.black': {
+      gridArea: 'black',
+    },
+    '&.currentTurn': {
+      borderBottom: '4px solid #000094',
+    },
+    '&.winner': {
+      backgroundColor: '#000094',
+      color: 'white',
+    },
   },
-  capturedHeader: {
-
+  colorHeader: {
+    
   },
-  capturedValue: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 24,
+  colorValue: {
+    marginLeft: 'auto',
+    
   },
   dashboardButton: {
     ...buttonStyles(theme),

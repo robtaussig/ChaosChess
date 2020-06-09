@@ -7,7 +7,7 @@ import 'css.gg/icons/chevron-right.css';
 import DashboardButton from '../DashboardButton';
 import { returnHome } from '../../../../redux/App';
 import { goSelector } from '../../../../redux/Go';
-import { startGame, passTurn, resignGame } from '../../../../redux/Go/actions';
+import { startGame, passTurn, resignGame, undo } from '../../../../redux/Go/actions';
 import { Color, Piece } from '../../../../goEngine/types';
 import { SpecialValues } from '../../../../goEngine/constants';
 import { getRemovedPiecesCount, getNumSquares } from '../../../../goEngine/board';
@@ -24,39 +24,36 @@ export const GoDashboard: FC = () => {
 
     return (
         <div className={classes.root}>
-            {winner ? (
-                <div className={classes.results}>
-                    {winner === Color.White ?
-                        'White wins' :
-                        winner === Color.Black ?
-                            'Black wins' :
-                            'Tie'
-                    }
-                </div>
-            ) : (
-                <span className={'current-turn'}>
-                    {lastMoved === Color.White ?
-                        'Black\'s turn' :
-                        'White\'s turn'
-                    }
+            <div className={classNames(classes.colorSpace, 'black', {
+                currentTurn: !winner && lastMoved === Color.White,
+                winner: winner === Color.Black,
+            })}>
+                <span className={classes.colorHeader}>
+                    Black:
                 </span>
-            )}
-            <div className={classNames(classes.capturedPieces, 'black')}>
-                <span className={classes.capturedHeader}>
-                    {winner ? 'Black points:' : 'Black captured:'}
-                </span>
-                <span className={classes.capturedValue}>
-                    {winner ? points.black : blackCapturedPieces}
+                <span className={classes.colorValue}>
+                    {winner ? points.black : whiteCapturedPieces}
                 </span>
             </div>
-            <div className={classNames(classes.capturedPieces, 'white')}>
-                <span className={classes.capturedHeader}>
-                    {winner ? 'White points:' : 'White captured:'}
+            <div className={classNames(classes.colorSpace, 'white', {
+                currentTurn: !winner && lastMoved === Color.Black,
+                winner: winner === Color.White,
+            })}>
+                <span className={classes.colorHeader}>
+                    White:
                 </span>
-                <span className={classes.capturedValue}>
-                    {winner ? points.white : whiteCapturedPieces}
+                <span className={classes.colorValue}>
+                    {winner ? points.white : blackCapturedPieces}
                 </span>
             </div>
+            <DashboardButton
+                classes={classes}
+                className={'undo'}
+                label={'Undo'}
+                icon={'redo'}
+                disabled={Boolean(turnsElapsed === 0 || winner)}
+                onClick={() => dispatch(undo())}
+            />
             <DashboardButton
                 classes={classes}
                 className={'pass-turn'}
