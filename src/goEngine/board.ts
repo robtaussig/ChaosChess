@@ -156,6 +156,7 @@ const hasAtLeastOneLiberty = (
             if (condition(pos)) {
                 const nextNode = pos + dir;
                 if (!visited[nextNode]) {
+                    visited[nextNode] = true;
                     if (board[nextNode] === Piece.Empty) {
                         return true;
                     } else if (board[nextNode] === sharedLiberties) {
