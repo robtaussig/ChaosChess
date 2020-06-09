@@ -3,6 +3,8 @@ import goReducer from './reducer';
 
 export const {
     gameInitialized,
+    moveCompleted,
+    gameOver,
 } = goReducer.actions;
 
 export const reducer = goReducer.reducer;

@@ -6,4 +6,4 @@ export enum SpecialValues {
     WhiteCapturedPiecesOnes = 85,
 }
 
-export const INITIAL_BOARD = 'w---b-----------------w-b--------------------------------------------------------10000';
+export const INITIAL_BOARD = '---------------------------------------------------------------------------------00000';

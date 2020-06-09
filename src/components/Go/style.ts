@@ -65,7 +65,7 @@ export const useSquareStyles = makeStyles((theme: any) => ({
             },
         },
         '&.col-2.row-2, &.col-6.row-6, &.col-2.row-6, &.col-6.row-2, &.col-4.row-4': {
-            '&:not(.blackPiece):not(.whitePiece)': {
+            '&:not(.blackPiece):not(.whitePiece):not(.whiteZone):not(.blackZone)': {
                 '&:after': {  
                     content: '""',
                     position: 'absolute',
@@ -94,6 +94,36 @@ export const useSquareStyles = makeStyles((theme: any) => ({
             '&.whitePiece': {
                 '&:after': {
                     backgroundColor: 'white',
+                    border: '2px solid black',
+                },
+            },
+            '&.wasLastMove': {
+                '&:after': {
+                    border: '3px solid #00a074!important',
+                },
+            },
+        },
+        '&.whiteZone, &.blackZone': {
+            '&:after': {
+                content: '"1"',
+                position: 'absolute',
+                backgroundColor: 'black',
+                border: '2px solid white',
+                color: 'white',
+                height: '70%',
+                width: '70%',
+                left: '50%',
+                top: '50%',
+                transform: 'translate(calc(-50% + 1px), calc(-50% + 1px))',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontFamily: 'Oxanium',
+            },
+            '&.whiteZone': {
+                '&:after': {
+                    backgroundColor: 'white',
+                    color: 'black',
                     border: '2px solid black',
                 },
             },

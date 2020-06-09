@@ -151,9 +151,10 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     ...rootStyles(theme),
     fontFamily: 'Oxanium',
     display: 'grid',
-    gridTemplateAreas: `"white-capture black-capture"
+    gridTemplateAreas: `"white-capture pass-turn"
+                        "black-capture resign"
                         "home start-over"`,
-    gridTemplateRows: '1fr 1fr',
+    gridTemplateRows: '1fr 1fr 2fr',
     gridTemplateColumns: '1fr 1fr',
     gridGap: '20px',
     padding: 20,
@@ -162,6 +163,12 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     },
     '& .start-over': {
       gridArea: 'start-over',
+    },
+    '& .pass-turn': {
+      gridArea: 'pass-turn',
+    },
+    '& .resign': {
+      gridArea: 'resign',
     },
   },
   capturedPieces: {
@@ -174,6 +181,16 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
       gridArea: 'white-capture',
     },
   },
+  results: {
+    gridRow: '1 / span 2',
+    gridColumn: '2',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 30,
+    flexDirection: 'column',
+    textAlign: 'center',
+  },
   capturedHeader: {
 
   },
@@ -182,7 +199,7 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 48,
+    fontSize: 24,
   },
   dashboardButton: {
     ...buttonStyles(theme),

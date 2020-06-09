@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useStyles } from './style';
 import { goSelector } from '../../redux/Go';
+import { handlePlayerMove, startGame } from '../../redux/Go/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import Square from './components/Square';
 
@@ -11,11 +12,15 @@ export interface GoProps {
 export const Go: FC<GoProps> = () => {
     const classes = useStyles({});
     const dispatch = useDispatch();
-    const { board, legalMoves } = useSelector(goSelector);
+    const { board, legalMoves, lastMove, zones } = useSelector(goSelector);
 
     const handleClickSquare = (pos: number) => {
-        console.log(pos);
+        dispatch(handlePlayerMove(pos));
     };
+
+    useEffect(() => {
+        dispatch(startGame());
+    }, []);
 
     return (
         <div className={classes.root}>
@@ -27,8 +32,9 @@ export const Go: FC<GoProps> = () => {
                             square={square}
                             pos={idx}
                             onClick={handleClickSquare}
-                            disabled={false}
-                            canMoveTo={legalMoves.includes(idx)}
+                            disabled={!legalMoves.includes(idx)}
+                            wasLastMove={lastMove === idx}
+                            zone={zones[idx]}
                         />
                     );
                 })

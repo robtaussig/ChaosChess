@@ -1,14 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
     GoState,
+    MakeMovePayload,
+    GameOverPayload,
 } from './types';
-import { INITIAL_BOARD } from '../../goEngine/constants';
+import { INITIAL_BOARD, SpecialValues } from '../../goEngine/constants';
 
 const INITIAL_STATE: GoState = {
   board: INITIAL_BOARD,
   legalMoves: [],
   lastRejectedMove: null,
   turnsElapsed: 0,
+  lastMove: null,
+  history: [],
+  zones: {},
+  winner: null,
+  points: null,
 };
 
 export default createSlice({
@@ -21,7 +28,33 @@ export default createSlice({
             ...action.payload,
             turnsElapsed: 0,
             lastRejectedMove: null,
+            winner: null,
+            points: null,
+            zones: {},
+            history: [],
+            lastMove: null,
         };
+    },
+    moveCompleted: (state, action: PayloadAction<MakeMovePayload>) => {
+      return {
+        ...state,
+        board: action.payload.board,
+        legalMoves: action.payload.legalMoves,
+        lastRejectedMove: null,
+        turnsElapsed: state.turnsElapsed + 1,
+        lastMove: action.payload.move,
+        history: state.history.concat(action.payload.board.slice(0, SpecialValues.BlackTurn)),
+      };
+    },
+    gameOver: (state, action: PayloadAction<GameOverPayload>) => {
+      return {
+        ...state,
+        legalMoves: [],
+        lastRejectedMove: null,
+        winner: action.payload.winner,
+        zones: action.payload.zones,
+        points: action.payload.points,
+      };
     },
   },
   extraReducers: {

@@ -7,13 +7,13 @@ import {
 } from './constants';
 import {
   findLegalMoves,
-} from './';
+} from './board';
 import {
   getBestMove as getBestMoveEval,
 } from './eval';
 
-const getValidMoves = (board = INITIAL_BOARD) => {
-  return findLegalMoves(board);
+const getValidMoves = (board = INITIAL_BOARD, history: string[] = []) => {
+  return findLegalMoves(board, history);
 };
 
 const getBestMove = (

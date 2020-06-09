@@ -7,7 +7,8 @@ export interface SquareProps {
     pos: number;
     onClick: (pos: number) => void;
     disabled: boolean;
-    canMoveTo: boolean;
+    wasLastMove: boolean;
+    zone: string;
 }
 
 export const Square: FC<SquareProps> = ({
@@ -15,20 +16,23 @@ export const Square: FC<SquareProps> = ({
     pos,
     onClick,
     disabled,
-    canMoveTo,
+    wasLastMove,
+    zone,
 }) => {
     const classes = useSquareStyles({});
     
     return (
         <button
             className={classNames(classes.root, {
-                canMoveTo,
                 whitePiece: square === 'w',
                 blackPiece: square === 'b',
                 left: pos % 9 === 0,
                 top: pos < 9,
                 bottom: pos > 71,
                 right: (pos + 1) % 9 === 0,
+                wasLastMove,
+                whiteZone: zone === 'w',
+                blackZone: zone === 'b',
             }, `col-${pos % 9}`, `row-${Math.floor(pos / 9)}`)}
             onClick={() => onClick(pos)}
             disabled={disabled || square !== '-'}

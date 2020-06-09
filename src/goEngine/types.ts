@@ -1,5 +1,5 @@
 export interface WorkerInterface {
-    getValidMoves: (board: string) => number[];
+    getValidMoves: (board: string, history?: string[]) => number[];
     getBestMove: (board: string, depth?: number) => [number, number];
 }
 
