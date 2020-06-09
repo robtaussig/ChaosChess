@@ -62,13 +62,13 @@ export const GoDashboard: FC = () => {
                 className={'pass-turn'}
                 label={turnsElapsed > 0 && lastMove === null ? 'Call game' : 'Pass'}
                 icon={'chevron-right'}
-                disabled={turnsElapsed === 0}
+                disabled={Boolean(turnsElapsed === 0 || winner)}
                 onClick={() => dispatch(passTurn())}
             />
             <DashboardButton
                 classes={classes}
                 className={'resign'}
-                label={'Resign'}
+                label={winner ? 'Start over' : 'Resign'}
                 icon={'chevron-right'}
                 onClick={() => dispatch(startGame())}
             />

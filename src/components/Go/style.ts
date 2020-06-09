@@ -48,16 +48,6 @@ export const useSquareStyles = makeStyles<any, {
         '&.top': {
 
         },
-        '&.bottom': {
-            '&:before': {
-                content: 'unset',
-            },
-        },
-        '&.right': {
-            '&:before': {
-                content: 'unset',
-            },
-        },
         [`&.col-${numSquaresPerSide - 2}`]: {
             '&:before': {
                 borderRight: '3px solid black',
@@ -97,8 +87,13 @@ export const useSquareStyles = makeStyles<any, {
             },
             '&.whitePiece': {
                 '&:after': {
-                    backgroundColor: 'white',
-                    border: '2px solid black',
+                    background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(207,207,207,1) 0%, rgba(255,255,255,1) 100%)',
+                    boxShadow: '0 0 3px 0px black',
+                },
+            },
+            '&.blackPiece': {
+                '&:after': {
+                    background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(87,87,87,1) 0%, rgba(0,0,0,1) 55%)',
                 },
             },
             '&.wasLastMove': {
@@ -112,35 +107,41 @@ export const useSquareStyles = makeStyles<any, {
                 content: '""',
                 position: 'absolute',
                 backgroundColor: 'black',
-                border: '2px solid white',
+                background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(87,87,87,1) 0%, rgba(0,0,0,1) 55%)',
                 color: 'white',
-                height: '70%',
-                width: '70%',
+                height: '50%',
+                width: '50%',
                 left: '50%',
                 top: '50%',
-                transform: 'translate(calc(-50% + 1px), calc(-50% + 1px))',
+                transform: 'translate(calc(-50% + 1px), calc(-50% + 1px)) rotate(45deg)',
             },
             '&.whiteZone': {
                 '&:after': {
-                    backgroundColor: 'white',
-                    border: '2px solid black',
+                    background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(207,207,207,1) 0%, rgba(255,255,255,1) 100%)',
+                    boxShadow: '0 0 3px 0px black',
                 },
             },
         },
-        '&.blackPiece': {
-
+        '&.bottom': {
+            '&:before': {
+                content: 'unset',
+            },
+            '&:after': {  
+                transform: 'translate(calc(-50% + 1px), calc(-50% - 2px)) rotate(45deg)',
+            },
         },
-        '&.top.left': {
-
-        },
-        '&.bottom.left': {
-
-        },
-        '&.top.right': {
-
+        '&.right': {
+            '&:before': {
+                content: 'unset',
+            },
+            '&:after': {  
+                transform: 'translate(calc(-50% - 1px), calc(-50% + 1px)) rotate(45deg)',
+            },
         },
         '&.bottom.right': {
-
+            '&:after': {  
+                transform: 'translate(calc(-50% - 1px), calc(-50% - 2px)) rotate(45deg)',
+            },
         },
     }),
 }));
