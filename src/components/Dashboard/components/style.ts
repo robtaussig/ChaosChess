@@ -151,9 +151,9 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     ...rootStyles(theme),
     fontFamily: 'Oxanium',
     display: 'grid',
-    gridTemplateAreas: `"white-capture pass-turn"
-                        "black-capture resign"
-                        "home start-over"`,
+    gridTemplateAreas: `"current-turn pass-turn"
+                        "white-capture resign"
+                        "black-capture home"`,
     gridTemplateRows: '1fr 1fr 1fr',
     gridTemplateColumns: '1fr 1fr',
     gridGap: '20px',
@@ -161,14 +161,19 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     '& .main-menu': {
       gridArea: 'home',
     },
-    '& .start-over': {
-      gridArea: 'start-over',
-    },
     '& .pass-turn': {
       gridArea: 'pass-turn',
     },
     '& .resign': {
       gridArea: 'resign',
+    },
+    '& .current-turn': {
+      gridArea: 'current-turn',
+      fontFamily: 'Oxanium',
+      fontSize: 20,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   },
   capturedPieces: {

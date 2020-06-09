@@ -9,7 +9,8 @@ import { returnHome } from '../../../../redux/App';
 import { goSelector } from '../../../../redux/Go';
 import { startGame, passTurn, resignGame } from '../../../../redux/Go/actions';
 import { Color, Piece } from '../../../../goEngine/types';
-import { getRemovedPiecesCount } from '../../../../goEngine/board';
+import { SpecialValues } from '../../../../goEngine/constants';
+import { getRemovedPiecesCount, getNumSquares } from '../../../../goEngine/board';
 import classNames from 'classnames';
 
 export const GoDashboard: FC = () => {
@@ -19,9 +20,16 @@ export const GoDashboard: FC = () => {
 
     const blackCapturedPieces = getRemovedPiecesCount(board, Piece.Black);
     const whiteCapturedPieces = getRemovedPiecesCount(board, Piece.White);
+    const lastMoved = board[getNumSquares(board) + SpecialValues.CurrentTurn];
 
     return (
         <div className={classes.root}>
+            <span className={'current-turn'}>
+                {lastMoved === Color.White ?
+                    'Black\'s turn' :
+                    'White\'s turn'
+                }
+            </span>
             <div className={classNames(classes.capturedPieces, 'black')}>
                 <span className={classes.capturedHeader}>
                     {winner ? 'Black points:' : 'Black captured:'}
@@ -70,16 +78,8 @@ export const GoDashboard: FC = () => {
                 classes={classes}
                 className={'main-menu'}
                 label={'Home'}
-                hideLabel={true}
                 icon={'home'}
                 onClick={() => dispatch(returnHome())}
-            />
-            <DashboardButton
-                classes={classes}
-                className={'start-over'}
-                label={'Start over'}
-                icon={'redo'}
-                onClick={() => dispatch(startGame())}
             />
         </div>
     );
