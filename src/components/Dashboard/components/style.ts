@@ -187,8 +187,7 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     },
   },
   results: {
-    gridRow: '1 / span 2',
-    gridColumn: '2',
+    gridArea: 'current-turn',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

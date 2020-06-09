@@ -109,7 +109,7 @@ export const useSquareStyles = makeStyles<any, {
         },
         '&.whiteZone, &.blackZone': {
             '&:after': {
-                content: '"1"',
+                content: '""',
                 position: 'absolute',
                 backgroundColor: 'black',
                 border: '2px solid white',
@@ -119,15 +119,10 @@ export const useSquareStyles = makeStyles<any, {
                 left: '50%',
                 top: '50%',
                 transform: 'translate(calc(-50% + 1px), calc(-50% + 1px))',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: 'Oxanium',
             },
             '&.whiteZone': {
                 '&:after': {
                     backgroundColor: 'white',
-                    color: 'black',
                     border: '2px solid black',
                 },
             },

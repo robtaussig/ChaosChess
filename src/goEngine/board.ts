@@ -200,6 +200,7 @@ const getChainIfNoContestingStones = (
     let foundOpposingColor = false;
     const opposingColor = color === Piece.White ? Piece.Black : Piece.White;
     let queue: number[] = [pos];
+    visited[pos] = true;
     const piece = board[pos];
     const chain: number[] = [];
     const adjacentSquares = getAdjacentSquares(board);
@@ -207,13 +208,13 @@ const getChainIfNoContestingStones = (
     while (queue.length > 0) {
         const currentNode = queue.shift();
         chain.push(currentNode);
-        visited[currentNode] = true;
         const toVisit = 
             adjacentSquares.reduce((next, { dir, condition }) => {
                 if (condition(currentNode)) {
                     const nextNode = currentNode + dir;
                     if (!visited[nextNode]) {
                         if (board[nextNode] === piece) {
+                            visited[nextNode] = true;
                             next.push(nextNode);
                         } else if (board[nextNode] === opposingColor) {
                             foundOpposingColor = true;

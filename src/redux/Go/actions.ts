@@ -12,11 +12,9 @@ export const engineWorker = wrap<WorkerInterface>(
   new Worker('../../goEngine/engine.worker.ts')
 );
 
-export const startGame = (
-  board?: string,
-): AppThunk<void> =>
+export const startGame = (): AppThunk<void> =>
   async (dispatch, getState) => {
-    board = board ?? getState().go.board;
+    const board = getState().go.initialBoard;
     const legalMoves = await engineWorker.getValidMoves(board);
 
     dispatch(gameInitialized({

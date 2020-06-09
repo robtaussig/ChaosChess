@@ -1,5 +1,6 @@
 export interface GoState {
     board: string;
+    initialBoard: string;
     legalMoves: number[];
     lastRejectedMove: number;
     turnsElapsed: number;

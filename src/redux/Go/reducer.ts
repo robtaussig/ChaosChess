@@ -9,6 +9,7 @@ import { getNumSquares } from '../../goEngine/board';
 
 const INITIAL_STATE: GoState = {
   board: INITIAL_BOARD_LARGE,
+  initialBoard: INITIAL_BOARD_LARGE,
   legalMoves: [],
   lastRejectedMove: null,
   turnsElapsed: 0,

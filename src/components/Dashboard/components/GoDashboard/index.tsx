@@ -24,12 +24,23 @@ export const GoDashboard: FC = () => {
 
     return (
         <div className={classes.root}>
-            <span className={'current-turn'}>
-                {lastMoved === Color.White ?
-                    'Black\'s turn' :
-                    'White\'s turn'
-                }
-            </span>
+            {winner ? (
+                <div className={classes.results}>
+                    {winner === Color.White ?
+                        'White wins' :
+                        winner === Color.Black ?
+                            'Black wins' :
+                            'Tie'
+                    }
+                </div>
+            ) : (
+                <span className={'current-turn'}>
+                    {lastMoved === Color.White ?
+                        'Black\'s turn' :
+                        'White\'s turn'
+                    }
+                </span>
+            )}
             <div className={classNames(classes.capturedPieces, 'black')}>
                 <span className={classes.capturedHeader}>
                     {winner ? 'Black points:' : 'Black captured:'}
@@ -46,34 +57,21 @@ export const GoDashboard: FC = () => {
                     {winner ? points.white : whiteCapturedPieces}
                 </span>
             </div>
-            {winner ? (
-                <div className={classes.results}>
-                    {winner === Color.White ?
-                        'White wins' :
-                        winner === Color.Black ?
-                            'Black wins' :
-                            'Tie'
-                    }
-                </div>
-            ) : (
-                <>
-                    <DashboardButton
-                        classes={classes}
-                        className={'pass-turn'}
-                        label={turnsElapsed > 0 && lastMove === null ? 'Call game' : 'Pass'}
-                        icon={'chevron-right'}
-                        disabled={turnsElapsed === 0}
-                        onClick={() => dispatch(passTurn())}
-                    />
-                    <DashboardButton
-                        classes={classes}
-                        className={'resign'}
-                        label={'Resign'}
-                        icon={'chevron-right'}
-                        onClick={() => dispatch(startGame())}
-                    />
-                </>
-            )}
+            <DashboardButton
+                classes={classes}
+                className={'pass-turn'}
+                label={turnsElapsed > 0 && lastMove === null ? 'Call game' : 'Pass'}
+                icon={'chevron-right'}
+                disabled={turnsElapsed === 0}
+                onClick={() => dispatch(passTurn())}
+            />
+            <DashboardButton
+                classes={classes}
+                className={'resign'}
+                label={'Resign'}
+                icon={'chevron-right'}
+                onClick={() => dispatch(startGame())}
+            />
             <DashboardButton
                 classes={classes}
                 className={'main-menu'}
