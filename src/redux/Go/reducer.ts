@@ -5,7 +5,6 @@ import {
     GameOverPayload,
 } from './types';
 import { INITIAL_BOARD_SMALL, INITIAL_BOARD_LARGE, INITIAL_BOARD_MEDIUM } from '../../goEngine/constants';
-import { getNumSquares } from '../../goEngine/board';
 
 const INITIAL_STATE: GoState = {
   board: INITIAL_BOARD_MEDIUM,
@@ -14,7 +13,7 @@ const INITIAL_STATE: GoState = {
   lastRejectedMove: null,
   turnsElapsed: 0,
   lastMove: null,
-  history: [],
+  history: [INITIAL_BOARD_MEDIUM],
   zones: {},
   winner: null,
   points: null,
@@ -33,7 +32,7 @@ export default createSlice({
             winner: null,
             points: null,
             zones: {},
-            history: [],
+            history: [action.payload.board],
             lastMove: null,
         };
     },
@@ -45,7 +44,7 @@ export default createSlice({
         lastRejectedMove: null,
         turnsElapsed: state.turnsElapsed + 1,
         lastMove: action.payload.move,
-        history: state.history.concat(action.payload.board.slice(0, getNumSquares(action.payload.board))),
+        history: state.history.concat(action.payload.board),
       };
     },
     gameOver: (state, action: PayloadAction<GameOverPayload>) => {
@@ -56,6 +55,17 @@ export default createSlice({
         winner: action.payload.winner,
         zones: action.payload.zones,
         points: action.payload.points,
+      };
+    },
+    moveUndone: (state, action: PayloadAction<MakeMovePayload>) => {
+      return {
+        ...state,
+        board: action.payload.board,
+        legalMoves: action.payload.legalMoves,
+        lastRejectedMove: null,
+        turnsElapsed: state.turnsElapsed - 1,
+        lastMove: action.payload.move,
+        history: state.history.slice(0, state.history.length - 1),
       };
     },
   },

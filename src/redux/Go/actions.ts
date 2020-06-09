@@ -1,8 +1,8 @@
 import { WorkerInterface, Piece, Color } from '../../goEngine/types';
 import { wrap } from 'comlink';
 import { AppThunk } from '../types';
-import { makeMove, getWinner } from '../../goEngine/board';
-import { gameInitialized, gameOver } from './';
+import { makeMove, getWinner, toggleTurn, getNumSquares } from '../../goEngine/board';
+import { gameInitialized, gameOver, moveUndone } from './';
 import { SendMessage } from '../../hooks/useSocket';
 import { MessageTypes } from '../../redux/Connection';
 import { moveCompleted } from './';
@@ -60,22 +60,25 @@ export const passTurn = (): AppThunk<void> =>
     }
   };
 
-export const resignGame = (): AppThunk<void> =>
-  async (dispatch, getState) => {
-    // const legalMoves = await engineWorker.getValidMoves(board);
-
-    // dispatch(gameInitialized({
-    //   board,
-    //   legalMoves,
-    // }));
-  };
-
 export const undo = (): AppThunk<void> =>
   async (dispatch, getState) => {
-    // const legalMoves = await engineWorker.getValidMoves(board);
+    const { go } = getState();
+    const { history } = go;
+    const lastBoard = history[history.length - 2];
+    const legalMoves = await engineWorker.getValidMoves(lastBoard);
+    const lastLastBoard = history[history.length - 3];
+    let lastMove: number = null;
+    if (lastLastBoard) {
+      lastBoard.split('').forEach((square, idx) => {
+        if (lastLastBoard[idx] === Piece.Empty && square !== Piece.Empty) {
+          lastMove = idx;
+        }
+      });
+    }
 
-    // dispatch(gameInitialized({
-    //   board,
-    //   legalMoves,
-    // }));
+    dispatch(moveUndone({
+      board: lastBoard,
+      legalMoves,
+      move: lastMove,
+    }));
   };

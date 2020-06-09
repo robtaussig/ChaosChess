@@ -5,6 +5,7 @@ export const {
     gameInitialized,
     moveCompleted,
     gameOver,
+    moveUndone,
 } = goReducer.actions;
 
 export const reducer = goReducer.reducer;

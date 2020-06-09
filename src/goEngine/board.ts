@@ -134,12 +134,20 @@ const updateBoard = (board: string, pos: number, value: string): string => {
         + board.substr(pos + 1);
 };
 
+export const toggleTurn = (board: string): string => {
+    const currentTurnBit = getCurrentTurnBit(board);
+    const currentColor = board[currentTurnBit] === Color.Black ?
+        Color.White :
+        Color.Black;
+    return updateBoard(board, currentTurnBit, currentColor);
+};
+
 export const makeMove = (board: string, pos?: number): string => {
     const currentTurnBit = getCurrentTurnBit(board);
     const currentPieceType = board[currentTurnBit] === Color.Black ? Piece.White : Piece.Black;
 
     const afterMove = pos ? updateBoard(board, pos, currentPieceType) : board;
-    const afterToggleTurn = updateBoard(afterMove, currentTurnBit, currentPieceType === Piece.White ? Color.White : Color.Black);
+    const afterToggleTurn = toggleTurn(afterMove);
     const afterCaptures = handleCaptures(afterToggleTurn, currentPieceType);
 
     return afterCaptures;

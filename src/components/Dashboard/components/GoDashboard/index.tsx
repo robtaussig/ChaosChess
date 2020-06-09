@@ -7,7 +7,7 @@ import 'css.gg/icons/chevron-right.css';
 import DashboardButton from '../DashboardButton';
 import { returnHome } from '../../../../redux/App';
 import { goSelector } from '../../../../redux/Go';
-import { startGame, passTurn, resignGame, undo } from '../../../../redux/Go/actions';
+import { startGame, passTurn, undo } from '../../../../redux/Go/actions';
 import { Color, Piece } from '../../../../goEngine/types';
 import { SpecialValues } from '../../../../goEngine/constants';
 import { getRemovedPiecesCount, getNumSquares } from '../../../../goEngine/board';
