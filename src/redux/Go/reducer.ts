@@ -4,12 +4,12 @@ import {
     MakeMovePayload,
     GameOverPayload,
 } from './types';
-import { INITIAL_BOARD_MEDIUM, INITIAL_BOARD_LARGE } from '../../goEngine/constants';
+import { INITIAL_BOARD_SMALL, INITIAL_BOARD_LARGE, INITIAL_BOARD_MEDIUM } from '../../goEngine/constants';
 import { getNumSquares } from '../../goEngine/board';
 
 const INITIAL_STATE: GoState = {
-  board: INITIAL_BOARD_LARGE,
-  initialBoard: INITIAL_BOARD_LARGE,
+  board: INITIAL_BOARD_MEDIUM,
+  initialBoard: INITIAL_BOARD_MEDIUM,
   legalMoves: [],
   lastRejectedMove: null,
   turnsElapsed: 0,

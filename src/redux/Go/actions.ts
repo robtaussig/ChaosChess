@@ -6,7 +6,6 @@ import { gameInitialized, gameOver } from './';
 import { SendMessage } from '../../hooks/useSocket';
 import { MessageTypes } from '../../redux/Connection';
 import { moveCompleted } from './';
-import { INITIAL_BOARD_MEDIUM } from '../../goEngine/constants';
 
 export const engineWorker = wrap<WorkerInterface>(
   new Worker('../../goEngine/engine.worker.ts')
