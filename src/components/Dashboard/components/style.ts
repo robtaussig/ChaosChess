@@ -154,7 +154,7 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     gridTemplateAreas: `"white-capture pass-turn"
                         "black-capture resign"
                         "home start-over"`,
-    gridTemplateRows: '1fr 1fr 2fr',
+    gridTemplateRows: '1fr 1fr 1fr',
     gridTemplateColumns: '1fr 1fr',
     gridGap: '20px',
     padding: 20,
