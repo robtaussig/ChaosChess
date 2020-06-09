@@ -3,7 +3,7 @@ import {
   WorkerInterface,
 } from './types';
 import {
-  INITIAL_BOARD
+  INITIAL_BOARD_MEDIUM
 } from './constants';
 import {
   findLegalMoves,
@@ -12,7 +12,7 @@ import {
   getBestMove as getBestMoveEval,
 } from './eval';
 
-const getValidMoves = (board = INITIAL_BOARD, history: string[] = []) => {
+const getValidMoves = (board = INITIAL_BOARD_MEDIUM, history: string[] = []) => {
   return findLegalMoves(board, history);
 };
 

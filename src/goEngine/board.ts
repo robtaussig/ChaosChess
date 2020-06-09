@@ -1,47 +1,54 @@
 import { SpecialValues } from './constants';
 import { CapturedZones } from '../redux/Go/types';
+import { Piece, Color } from './types';
 
 interface Visited {
     [pos: number]: boolean;
 };
 
-const ADJACENT_SQUARES = [
-    {
-        dir: 1,
-        condition: (pos: number) => (pos + 1) % 9 !== 0,
-    },
-    {
-        dir: -1,
-        condition: (pos: number) => pos % 9 !== 0,
-    },
-    {
-        dir: -9,
-        condition: (pos: number) => pos > 8,
-    },
-    {
-        dir: 9,
-        condition: (pos: number) => pos < 73,
-    },
-];
+const getAdjacentSquares = (board: string) => {
+    const numSquares = getNumSquares(board);
+    const numSquaresPerSide = Math.sqrt(numSquares);
+
+    return [
+        {
+            dir: 1,
+            condition: (pos: number) => (pos + 1) % numSquaresPerSide !== 0,
+        },
+        {
+            dir: -1,
+            condition: (pos: number) => pos % numSquaresPerSide !== 0,
+        },
+        {
+            dir: numSquaresPerSide * -1,
+            condition: (pos: number) => pos >= numSquaresPerSide,
+        },
+        {
+            dir: numSquaresPerSide,
+            condition: (pos: number) => pos <= numSquares - numSquaresPerSide,
+        },
+    ];
+};
 
 const getChainIfNoLiberties = (board: string, pos: number, visited: Visited = {}) => {
     let hasLiberty = false;
     let queue: number[] = [pos];
     const piece = board[pos];
     const chain: number[] = [];
+    const adjacentSquares = getAdjacentSquares(board);
 
     while (queue.length > 0) {
         const currentNode = queue.shift();
         chain.push(currentNode);
         visited[currentNode] = true;
-        const toVisit = ADJACENT_SQUARES
+        const toVisit = adjacentSquares
             .reduce((next, { dir, condition }) => {
                 if (condition(currentNode)) {
                     const nextNode = currentNode + dir;
                     if (!visited[nextNode]) {
                         if (board[nextNode] === piece) {
                             next.push(nextNode);
-                        } else if (board[nextNode] === '-') {
+                        } else if (board[nextNode] === Piece.Empty) {
                             hasLiberty = true;
                         }
                     }
@@ -54,22 +61,29 @@ const getChainIfNoLiberties = (board: string, pos: number, visited: Visited = {}
     if (!hasLiberty) return chain;
 };
 
-const getRemovedPiecesCount = (board: string, color: string): number => {
-    if (color === 'w') {
-        return Number(`${board[SpecialValues.WhiteCapturedPiecesTens]}${board[SpecialValues.WhiteCapturedPiecesOnes]}`);
-    } else {
-        return Number(`${board[SpecialValues.BlackCapturedPiecesTens]}${board[SpecialValues.BlackCapturedPiecesOnes]}`);
-    }
+export const getRemovedPiecesCount = (board: string, piece: string): number => {
+    const numSquares = getNumSquares(board);
+
+    const tensPos = piece === Piece.White ?
+        numSquares + SpecialValues.WhiteCapturedPiecesTens :
+        numSquares + SpecialValues.BlackCapturedPiecesTens;
+    const onesPos = piece === Piece.White ?
+        numSquares + SpecialValues.WhiteCapturedPiecesOnes :
+        numSquares + SpecialValues.BlackCapturedPiecesOnes;
+
+    return Number(`${board[tensPos]}${board[onesPos]}`);
 };
 
-const updateCaptureCount = (board: string, color: string, count: number): string => {
+const updateCaptureCount = (board: string, piece: string, count: number): string => {
     const stringified = String(count);
-    const tensPos = color === 'w' ?
-        SpecialValues.WhiteCapturedPiecesTens :
-        SpecialValues.BlackCapturedPiecesTens;
-    const onesPos = color === 'w' ?
-        SpecialValues.WhiteCapturedPiecesOnes :
-        SpecialValues.BlackCapturedPiecesOnes;
+    const numSquares = getNumSquares(board);
+
+    const tensPos = piece === Piece.White ?
+        numSquares + SpecialValues.WhiteCapturedPiecesTens :
+        numSquares + SpecialValues.BlackCapturedPiecesTens;
+    const onesPos = piece === Piece.White ?
+        numSquares + SpecialValues.WhiteCapturedPiecesOnes :
+        numSquares + SpecialValues.BlackCapturedPiecesOnes;
 
     if (count > 9) {
         board = updateBoard(board, tensPos, stringified[0]);
@@ -78,6 +92,7 @@ const updateCaptureCount = (board: string, color: string, count: number): string
         board = updateBoard(board, tensPos, '0');
         board = updateBoard(board, onesPos, stringified);
     }
+
     return board;
 };
 
@@ -85,9 +100,10 @@ const getCaptures = (board: string, colorToExclude: string): number[] => {
     let visited: Visited = {};
     let toRemove: number[] = [];
     let pointer: number = 0;
+    const numSquares = getNumSquares(board);
 
-    while (pointer < SpecialValues.BlackTurn) {
-        if (!visited[pointer] && board[pointer] !== '-' && colorToExclude !== board[pointer]) {
+    while (pointer < numSquares) {
+        if (!visited[pointer] && board[pointer] !== Piece.Empty && colorToExclude !== board[pointer]) {
             const currentChain = getChainIfNoLiberties(board, pointer, visited);
             if (currentChain) {
                 toRemove = toRemove.concat(currentChain);
@@ -104,7 +120,7 @@ const handleCaptures = (board: string, colorToExclude: string = null): string =>
 
     toRemove.forEach(pos => {
         const pieceToRemove = board[pos];
-        board = updateBoard(board, pos, '-');
+        board = updateBoard(board, pos, Piece.Empty);
         const currentRemoveCount = getRemovedPiecesCount(board, pieceToRemove);
         board = updateCaptureCount(board, pieceToRemove, currentRemoveCount + 1);
     });
@@ -119,20 +135,21 @@ const updateBoard = (board: string, pos: number, value: string): string => {
 };
 
 export const makeMove = (board: string, pos?: number): string => {
-    const currentPiece = board[SpecialValues.BlackTurn] === '1' ? 'w' : 'b';
+    const currentTurnBit = getCurrentTurnBit(board);
+    const currentPieceType = board[currentTurnBit] === Color.Black ? Piece.White : Piece.Black;
 
-    const afterMove = pos ? updateBoard(board, pos, currentPiece) : board;
-    const afterToggleTurn = updateBoard(afterMove, SpecialValues.BlackTurn, currentPiece === 'w' ? '0' : '1');
-    const afterCaptures = handleCaptures(afterToggleTurn, currentPiece);
+    const afterMove = pos ? updateBoard(board, pos, currentPieceType) : board;
+    const afterToggleTurn = updateBoard(afterMove, currentTurnBit, currentPieceType === Piece.White ? Color.White : Color.Black);
+    const afterCaptures = handleCaptures(afterToggleTurn, currentPieceType);
 
     return afterCaptures;
 };
 
 const hasAtLeastOneLiberty = (board: string, pos: number) => {
-    return ADJACENT_SQUARES.some(({ dir, condition }) => {
+    return getAdjacentSquares(board).some(({ dir, condition }) => {
         if (condition(pos)) {
             const nextNode = pos + dir;
-            if (board[nextNode] === '-') {
+            if (board[nextNode] === Piece.Empty) {
                 return true;
             }
         }
@@ -140,17 +157,23 @@ const hasAtLeastOneLiberty = (board: string, pos: number) => {
     });
 }
 
+export const getCurrentTurnBit = (board: string): number => {
+    const numSquares = getNumSquares(board);
+    return numSquares + SpecialValues.CurrentTurn;
+};
+
 export const findLegalMoves = (board: string, history: string[]): number[] => {
     let pointer: number = 0;
     const legalMoves: number[] = [];
-    const currentTurn = board[SpecialValues.BlackTurn] === '1' ? 'w' : 'b';
+    const currentTurnBit = getCurrentTurnBit(board);
+    const currentPieceType = board[currentTurnBit] === Color.Black ? Piece.White : Piece.Black;
 
-    while (pointer < SpecialValues.BlackTurn) {
-        if (board[pointer] === '-') {
+    while (pointer < currentTurnBit) {
+        if (board[pointer] === Piece.Empty) {
             let hasLiberty = hasAtLeastOneLiberty(board, pointer);
             if (!hasLiberty) {
-                const afterMove = updateBoard(board, pointer, currentTurn);
-                const afterCaptures = handleCaptures(afterMove, currentTurn);
+                const afterMove = updateBoard(board, pointer, currentPieceType);
+                const afterCaptures = handleCaptures(afterMove, currentPieceType);
                 hasLiberty = hasAtLeastOneLiberty(afterCaptures, pointer);
             }
 
@@ -164,7 +187,7 @@ export const findLegalMoves = (board: string, history: string[]): number[] => {
     return legalMoves
         .filter(move => {
             const afterMove = makeMove(board, move);
-            return !history.includes(afterMove.slice(0, SpecialValues.BlackTurn));
+            return !history.includes(afterMove.slice(0, currentTurnBit));
         });
 };
 
@@ -175,17 +198,18 @@ const getChainIfNoContestingStones = (
     visited: Visited = {},
 ) => {
     let foundOpposingColor = false;
-    const opposingColor = color === 'w' ? 'b' : 'w';
+    const opposingColor = color === Piece.White ? Piece.Black : Piece.White;
     let queue: number[] = [pos];
     const piece = board[pos];
     const chain: number[] = [];
+    const adjacentSquares = getAdjacentSquares(board);
 
     while (queue.length > 0) {
         const currentNode = queue.shift();
         chain.push(currentNode);
         visited[currentNode] = true;
-        const toVisit = ADJACENT_SQUARES
-            .reduce((next, { dir, condition }) => {
+        const toVisit = 
+            adjacentSquares.reduce((next, { dir, condition }) => {
                 if (condition(currentNode)) {
                     const nextNode = currentNode + dir;
                     if (!visited[nextNode]) {
@@ -204,13 +228,18 @@ const getChainIfNoContestingStones = (
     if (!foundOpposingColor) return chain;
 };
 
+export const getNumSquares = (board: string): number => {
+    return board.search(/[WB]/);
+}
+
 const getZones = (board: string, color: string): number[] => {
     let visited: Visited = {};
     let zones: number[] = [];
     let pointer: number = 0;
+    const numSquares = getNumSquares(board);
 
-    while (pointer < SpecialValues.BlackTurn) {
-        if (!visited[pointer] && board[pointer] === '-') {
+    while (pointer < numSquares) {
+        if (!visited[pointer] && board[pointer] === Piece.Empty) {
             const currentChain = getChainIfNoContestingStones(board, pointer, color, visited);
             if (currentChain) {
                 zones = zones.concat(currentChain);
@@ -223,19 +252,19 @@ const getZones = (board: string, color: string): number[] => {
 }
 
 export const getWinner = (board: string): { whitePoints: number, blackPoints: number, zones: CapturedZones } => {
-    const whiteZones = getZones(board, 'w');
-    const blackZones = getZones(board, 'b');
-    const whiteStones = board.split('').filter(piece => piece === 'w').length;
-    const blackStones = board.split('').filter(piece => piece === 'b').length;
+    const whiteZones = getZones(board, Piece.White);
+    const blackZones = getZones(board, Piece.Black);
+    const whiteStones = board.split('').filter(piece => piece === Piece.White).length;
+    const blackStones = board.split('').filter(piece => piece === Piece.Black).length;
     const whitePoints = whiteZones.length + whiteStones;
     const blackPoints = blackZones.length + blackStones;
 
     const zones: CapturedZones = {};
     whiteZones.forEach(zone => {
-        zones[zone] = 'w';
+        zones[zone] = Piece.White;
     });
     blackZones.forEach(zone => {
-        zones[zone] = 'b';
+        zones[zone] = Piece.Black;
     });
     
     return {

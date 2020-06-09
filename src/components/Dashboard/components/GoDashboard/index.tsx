@@ -8,8 +8,8 @@ import DashboardButton from '../DashboardButton';
 import { returnHome } from '../../../../redux/App';
 import { goSelector } from '../../../../redux/Go';
 import { startGame, passTurn, resignGame } from '../../../../redux/Go/actions';
-import { Color } from '../../../../goEngine/types';
-import { SpecialValues } from '../../../../goEngine/constants';
+import { Color, Piece } from '../../../../goEngine/types';
+import { getRemovedPiecesCount } from '../../../../goEngine/board';
 import classNames from 'classnames';
 
 export const GoDashboard: FC = () => {
@@ -17,8 +17,8 @@ export const GoDashboard: FC = () => {
     const dispatch = useDispatch();
     const { board, turnsElapsed, winner, lastMove, points } = useSelector(goSelector);
 
-    const blackCapturedPieces = Number(`${board[SpecialValues.BlackCapturedPiecesTens]}${board[SpecialValues.BlackCapturedPiecesOnes]}`);
-    const whiteCapturedPieces = Number(`${board[SpecialValues.WhiteCapturedPiecesTens]}${board[SpecialValues.WhiteCapturedPiecesOnes]}`);
+    const blackCapturedPieces = getRemovedPiecesCount(board, Piece.Black);
+    const whiteCapturedPieces = getRemovedPiecesCount(board, Piece.White);
 
     return (
         <div className={classes.root}>
@@ -40,7 +40,12 @@ export const GoDashboard: FC = () => {
             </div>
             {winner ? (
                 <div className={classes.results}>
-                    {winner === 'w' ? 'White wins' : 'Black wins'}
+                    {winner === Color.White ?
+                        'White wins' :
+                        winner === Color.Black ?
+                            'Black wins' :
+                            'Tie'
+                    }
                 </div>
             ) : (
                 <>

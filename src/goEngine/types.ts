@@ -3,7 +3,14 @@ export interface WorkerInterface {
     getBestMove: (board: string, depth?: number) => [number, number];
 }
 
-export enum Color {
+export enum Piece {
     White = 'w',
     Black = 'b',
+    Empty = '-',
+}
+
+export enum Color {
+    White = 'W',
+    Black = 'B',
+    None = '.',
 }

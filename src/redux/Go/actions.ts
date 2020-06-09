@@ -1,4 +1,4 @@
-import { WorkerInterface } from '../../goEngine/types';
+import { WorkerInterface, Piece, Color } from '../../goEngine/types';
 import { wrap } from 'comlink';
 import { AppThunk } from '../types';
 import { makeMove, getWinner } from '../../goEngine/board';
@@ -6,23 +6,24 @@ import { gameInitialized, gameOver } from './';
 import { SendMessage } from '../../hooks/useSocket';
 import { MessageTypes } from '../../redux/Connection';
 import { moveCompleted } from './';
-import { INITIAL_BOARD } from '../../goEngine/constants';
+import { INITIAL_BOARD_MEDIUM } from '../../goEngine/constants';
 
 export const engineWorker = wrap<WorkerInterface>(
   new Worker('../../goEngine/engine.worker.ts')
 );
 
 export const startGame = (
-    board: string = INITIAL_BOARD,
-  ): AppThunk<void> =>
-    async (dispatch, getState) => {
-      const legalMoves = await engineWorker.getValidMoves(board);
-  
-      dispatch(gameInitialized({
-        board,
-        legalMoves,
-      }));
-    };
+  board?: string,
+): AppThunk<void> =>
+  async (dispatch, getState) => {
+    board = board ?? getState().go.board;
+    const legalMoves = await engineWorker.getValidMoves(board);
+
+    dispatch(gameInitialized({
+      board,
+      legalMoves,
+    }));
+  };
 
 export const handlePlayerMove = (
   pos: number,
@@ -46,7 +47,7 @@ export const passTurn = (): AppThunk<void> =>
       const { whitePoints, blackPoints, zones } = getWinner(go.board);
 
       dispatch(gameOver({
-        winner: whitePoints > blackPoints ? 'w' : blackPoints > whitePoints ? 'b' : null,
+        winner: whitePoints > blackPoints ? Color.White : blackPoints > whitePoints ? Color.Black : Color.None,
         points: { white: whitePoints, black: blackPoints },
         zones,
       }));

@@ -1,16 +1,20 @@
 import { makeStyles } from '@material-ui/styles'
 
-export const useStyles = makeStyles((theme: any) => ({
-    root: {
+export const useStyles = makeStyles<any, {
+    numSquaresPerSide: number,
+}>(theme => ({
+    root: ({ numSquaresPerSide }) => ({
         display: 'grid',
-        gridTemplateRows: 'repeat(9, 1fr)',
-        gridTemplateColumns: 'repeat(9, 1fr)',
+        gridTemplateRows: `repeat(${numSquaresPerSide}, 1fr)`,
+        gridTemplateColumns: `repeat(${numSquaresPerSide}, 1fr)`,
         backgroundColor: '#ffe99ae8',
-    },
+    }),
 }));
 
-export const useSquareStyles = makeStyles((theme: any) => ({
-    root: {
+export const useSquareStyles = makeStyles<any, {
+    numSquaresPerSide: number,
+}>(theme => ({
+    root: ({ numSquaresPerSide }) => ({
         position: 'relative',
         backgroundColor: 'transparent',
         outline: 'none',
@@ -54,17 +58,17 @@ export const useSquareStyles = makeStyles((theme: any) => ({
                 content: 'unset',
             },
         },
-        '&.col-7': {
+        [`&.col-${numSquaresPerSide - 2}`]: {
             '&:before': {
                 borderRight: '3px solid black',
             },
         },
-        '&.row-7': {
+       [`&.row-${numSquaresPerSide - 2}`]: {
             '&:before': {
                 borderBottom: '3px solid black',
             },
         },
-        '&.col-2.row-2, &.col-6.row-6, &.col-2.row-6, &.col-6.row-2, &.col-4.row-4': {
+        '&.anchorPoint': {
             '&:not(.blackPiece):not(.whitePiece):not(.whiteZone):not(.blackZone)': {
                 '&:after': {  
                     content: '""',
@@ -143,5 +147,5 @@ export const useSquareStyles = makeStyles((theme: any) => ({
         '&.bottom.right': {
 
         },
-    },
+    }),
 }));
