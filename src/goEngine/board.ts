@@ -145,16 +145,26 @@ export const makeMove = (board: string, pos?: number): string => {
     return afterCaptures;
 };
 
-const hasAtLeastOneLiberty = (board: string, pos: number) => {
-    return getAdjacentSquares(board).some(({ dir, condition }) => {
-        if (condition(pos)) {
-            const nextNode = pos + dir;
-            if (board[nextNode] === Piece.Empty) {
-                return true;
+const hasAtLeastOneLiberty = (
+    board: string,
+    pos: number,
+    sharedLiberties: Piece = Piece.Empty,
+    visited: { [pos: number]: boolean } = { [pos]: true },
+): boolean => {
+    return getAdjacentSquares(board)
+        .some(({ dir, condition }) => {
+            if (condition(pos)) {
+                const nextNode = pos + dir;
+                if (!visited[nextNode]) {
+                    if (board[nextNode] === Piece.Empty) {
+                        return true;
+                    } else if (board[nextNode] === sharedLiberties) {
+                        return hasAtLeastOneLiberty(board, nextNode, sharedLiberties, visited);
+                    }
+                }
             }
-        }
-        return false;
-    });
+            return false;
+        });
 }
 
 export const getCurrentTurnBit = (board: string): number => {
@@ -170,7 +180,7 @@ export const findLegalMoves = (board: string, history: string[]): number[] => {
 
     while (pointer < currentTurnBit) {
         if (board[pointer] === Piece.Empty) {
-            let hasLiberty = hasAtLeastOneLiberty(board, pointer);
+            let hasLiberty = hasAtLeastOneLiberty(board, pointer, currentPieceType);
             if (!hasLiberty) {
                 const afterMove = updateBoard(board, pointer, currentPieceType);
                 const afterCaptures = handleCaptures(afterMove, currentPieceType);
