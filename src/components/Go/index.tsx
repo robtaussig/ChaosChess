@@ -5,6 +5,7 @@ import { handlePlayerMove, startGame } from '../../redux/Go/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import Square from './components/Square';
 import { getNumSquares } from '../../goEngine/board';
+import { useSocket } from '../../hooks/useSocket';
 
 export interface GoProps {
     
@@ -12,14 +13,15 @@ export interface GoProps {
 
 export const Go: FC<GoProps> = () => {
     const dispatch = useDispatch();
+    const broadcast = useSocket();
     const { board, legalMoves, lastMove, zones } = useSelector(goSelector);
 
     const handleClickSquare = useCallback((pos: number) => {
-        dispatch(handlePlayerMove(pos));
+        dispatch(handlePlayerMove(broadcast, pos));
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(startGame());
+        dispatch(startGame(broadcast));
     }, []);
 
     const numSquares = getNumSquares(board);
@@ -32,7 +34,7 @@ export const Go: FC<GoProps> = () => {
                 .map((square, idx) => {
                     return (
                         <Square
-                            key={`${idx}-square`}
+                            key={`${idx}-${numSquaresPerSide}-square`}
                             square={square}
                             pos={idx}
                             onClick={handleClickSquare}

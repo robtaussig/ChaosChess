@@ -9,12 +9,15 @@ export interface GoState {
     zones: CapturedZones;
     winner: string;
     points: { white: number, black: number };
+    goRoom: string;
+    goId: string;
 }
 
 export type MakeMovePayload = {
     board: string;
     legalMoves: number[];
     move: number;
+    broadcast?: (action: string) => void;
 }
 
 export interface CapturedZones {
@@ -25,4 +28,16 @@ export type GameOverPayload = {
     winner: string;
     zones: CapturedZones;
     points: { white: number, black: number };
+    broadcast?: (action: string) => void;
+};
+
+export type GameInitializedPayload = {
+    board: string;
+    legalMoves: number[];
+    broadcast?: (action: string) => void;
+};
+
+export type JoinRoomPayload = {
+    room: string;
+    uuid: string;
 };

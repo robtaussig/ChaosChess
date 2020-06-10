@@ -1,17 +1,19 @@
 import { WorkerInterface, Piece, Color } from '../../goEngine/types';
 import { wrap } from 'comlink';
 import { AppThunk } from '../types';
-import { makeMove, getWinner, toggleTurn, getNumSquares } from '../../goEngine/board';
-import { gameInitialized, gameOver, moveUndone } from './';
+import { makeMove, getWinner } from '../../goEngine/board';
+import { INITIAL_BOARD_SMALL, INITIAL_BOARD_MEDIUM, INITIAL_BOARD_LARGE } from '../../goEngine/constants';
+import { gameInitialized, gameOver, moveUndone, roomJoined } from './';
 import { SendMessage } from '../../hooks/useSocket';
-import { MessageTypes } from '../../redux/Connection';
 import { moveCompleted } from './';
+import { joinRoom } from '../../messaging';
+import { v4 as uuidv4 } from 'uuid';
 
 export const engineWorker = wrap<WorkerInterface>(
   new Worker('../../goEngine/engine.worker.ts')
 );
 
-export const startGame = (): AppThunk<void> =>
+export const startGame = (broadcast: SendMessage): AppThunk<void> =>
   async (dispatch, getState) => {
     const board = getState().go.initialBoard;
     const legalMoves = await engineWorker.getValidMoves(board);
@@ -19,10 +21,12 @@ export const startGame = (): AppThunk<void> =>
     dispatch(gameInitialized({
       board,
       legalMoves,
+      broadcast,
     }));
   };
 
 export const handlePlayerMove = (
+  broadcast: SendMessage,
   pos: number,
 ): AppThunk<void> =>
   async (dispatch, getState) => {
@@ -34,10 +38,11 @@ export const handlePlayerMove = (
       board: nextBoard,
       move: pos,
       legalMoves,
+      broadcast,
     }));
   };
 
-export const passTurn = (): AppThunk<void> =>
+export const passTurn = (broadcast: SendMessage): AppThunk<void> =>
   async (dispatch, getState) => {
     const { go } = getState();
     if (go.lastMove === null) {
@@ -47,6 +52,7 @@ export const passTurn = (): AppThunk<void> =>
         winner: whitePoints > blackPoints ? Color.White : blackPoints > whitePoints ? Color.Black : Color.None,
         points: { white: whitePoints, black: blackPoints },
         zones,
+        broadcast,
       }));
     } else {
       const nextBoard = makeMove(go.board, null);
@@ -56,11 +62,12 @@ export const passTurn = (): AppThunk<void> =>
         board: nextBoard,
         move: null,
         legalMoves,
+        broadcast,
       }));
     }
   };
 
-export const undo = (): AppThunk<void> =>
+export const undo = (broadcast: SendMessage): AppThunk<void> =>
   async (dispatch, getState) => {
     const { go } = getState();
     const { history } = go;
@@ -80,5 +87,31 @@ export const undo = (): AppThunk<void> =>
       board: lastBoard,
       legalMoves,
       move: lastMove,
+      broadcast,
+    }));
+  };
+
+export const boardSizeChanged = (broadcast: SendMessage, size: '9x9' | '13x13' | '19x19'): AppThunk<void> =>
+  async (dispatch, getState) => {
+    const board = size === '9x9' ?
+      INITIAL_BOARD_SMALL :
+      size === '13x13' ?
+      INITIAL_BOARD_MEDIUM :
+        INITIAL_BOARD_LARGE;
+    const legalMoves = await engineWorker.getValidMoves(board);
+
+    dispatch(gameInitialized({
+      board,
+      legalMoves,
+      broadcast,
+    }));
+  };
+
+export const joinGoRoom = (broadcast: SendMessage, room: string): AppThunk<void> =>
+  async (dispatch, getState) => {
+    const uuid = uuidv4();
+    joinRoom(uuid, room, broadcast);
+    dispatch(roomJoined({
+      room, uuid,
     }));
   };

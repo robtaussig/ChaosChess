@@ -204,6 +204,12 @@ const syncGame = (respond: SendMessage, message: string): AppThunk<void> =>
     }
   };
 
+const extractActionFromGoMessage = (message: string): AppThunk<void> =>
+  (dispatch, getState) => {
+    const [,action] = message.split('||');
+    dispatch(JSON.parse(action));
+  };
+
 //TODO: Make more performant by extracting messageType once and comparing by string
 export const receiveMessage = (
   message: string,
@@ -283,6 +289,10 @@ export const receiveMessage = (
     dispatch(moveCompleted(
       getMovePayloadFromMessage(message),
     ));
+  } else if (isMessageType<MessageTypes>(message, MessageTypes.GoMessage)) {
+    dispatch(
+      extractActionFromGoMessage(message)
+    );
   } else {
     messager.dispatch(message);
   }

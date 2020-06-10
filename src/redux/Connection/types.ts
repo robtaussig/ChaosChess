@@ -9,6 +9,7 @@ export enum MessageTypes {
   InRoom = 'InRoom',
   HostTable = 'HostTable',
   DropTable = 'DropTable',
+  GoMessage = 'GoMessage',
   GetTables = 'GetTables',
   HasTable = 'HasTable',
   GetBoard = 'GetBoard',

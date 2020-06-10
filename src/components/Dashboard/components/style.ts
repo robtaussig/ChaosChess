@@ -220,9 +220,39 @@ export const useGoSettingsStyle = makeStyles((theme: any) => ({
     ...rootStyles(theme),
     display: 'grid',
     gridArea: 'dashboard',
+    fontFamily: 'Oxanium',
+    gridTemplateAreas: `"header header"
+                        "room-input board-size"
+                        "join back"`,
+    gridTemplateRows: '1fr 1fr 1fr',
+    gridTemplateColumns: '1fr 1fr',
+    gridGap: '20px',
+    padding: 20,
+    '& .back': {
+      gridArea: 'back',
+    },
+    '& .join': {
+      gridArea: 'join',
+    },
   },
   dashboardButton: {
     ...buttonStyles(theme),
+  },
+  boardSize: {
+    gridArea: 'board-size',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  roomInput: {
+    gridArea: 'room-input',
+  },
+  joinButton: {
+
+  },
+  header: {
+    gridArea: 'header',
+    fontSize: 30,
+    fontWeight: 600,
   },
 }));
 

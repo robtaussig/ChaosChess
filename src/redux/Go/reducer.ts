@@ -3,6 +3,8 @@ import {
     GoState,
     MakeMovePayload,
     GameOverPayload,
+    GameInitializedPayload,
+    JoinRoomPayload,
 } from './types';
 import { INITIAL_BOARD_SMALL, INITIAL_BOARD_LARGE, INITIAL_BOARD_MEDIUM } from '../../goEngine/constants';
 
@@ -17,13 +19,15 @@ const INITIAL_STATE: GoState = {
   zones: {},
   winner: null,
   points: null,
+  goRoom: null,
+  goId: null,
 };
 
 export default createSlice({
   name: 'go',
   initialState: INITIAL_STATE,
   reducers: {
-    gameInitialized: (state, action: PayloadAction<{ board: string, legalMoves: number[]}>) => {
+    gameInitialized: (state, action: PayloadAction<GameInitializedPayload>) => {
         return {
             ...state,
             ...action.payload,
@@ -67,6 +71,10 @@ export default createSlice({
         lastMove: action.payload.move,
         history: state.history.slice(0, state.history.length - 1),
       };
+    },
+    roomJoined: (state, action: PayloadAction<JoinRoomPayload>) => {
+      state.goRoom = action.payload.room;
+      state.goId = action.payload.uuid;
     },
   },
   extraReducers: {

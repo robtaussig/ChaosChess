@@ -6,6 +6,7 @@ export const {
     moveCompleted,
     gameOver,
     moveUndone,
+    roomJoined,
 } = goReducer.actions;
 
 export const reducer = goReducer.reducer;

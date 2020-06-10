@@ -14,13 +14,14 @@ import { Color, Piece } from '../../../../goEngine/types';
 import { SpecialValues } from '../../../../goEngine/constants';
 import { getRemovedPiecesCount, getNumSquares } from '../../../../goEngine/board';
 import classNames from 'classnames';
+import { useSocket } from '../../../../hooks/useSocket';
 
 export const GoDashboard: FC = () => {
     const classes = useGoStyles({});
     const dispatch = useDispatch();
     const { board, turnsElapsed, winner, lastMove, points } = useSelector(goSelector);
     const [settingsOpen, setSettingsOpen] = useState(false);
-
+    const broadcast = useSocket();
     const blackCapturedPieces = getRemovedPiecesCount(board, Piece.Black);
     const whiteCapturedPieces = getRemovedPiecesCount(board, Piece.White);
     const lastMoved = board[getNumSquares(board) + SpecialValues.CurrentTurn];
@@ -38,7 +39,7 @@ export const GoDashboard: FC = () => {
             })}>
                 <div className={classNames(classes.colorSpace, 'black', {
                     currentTurn: !winner && lastMoved === Color.White,
-                    winner: winner === Color.Black,
+                    winner: winner === Color.Black || winner === Color.None,
                 })}>
                     <span className={classes.colorHeader}>
                         Black:
@@ -49,7 +50,7 @@ export const GoDashboard: FC = () => {
                 </div>
                 <div className={classNames(classes.colorSpace, 'white', {
                     currentTurn: !winner && lastMoved === Color.Black,
-                    winner: winner === Color.White,
+                    winner: winner === Color.White || winner === Color.None,
                 })}>
                     <span className={classes.colorHeader}>
                         White:
@@ -64,7 +65,7 @@ export const GoDashboard: FC = () => {
                     label={'Undo'}
                     icon={'redo'}
                     disabled={Boolean(turnsElapsed === 0 || winner)}
-                    onClick={() => dispatch(undo())}
+                    onClick={() => dispatch(undo(broadcast))}
                 />
                 <DashboardButton
                     classes={classes}
@@ -72,7 +73,7 @@ export const GoDashboard: FC = () => {
                     label={turnsElapsed > 0 && lastMove === null ? 'Call game' : 'Pass'}
                     icon={'chevron-right'}
                     disabled={Boolean(turnsElapsed === 0 || winner)}
-                    onClick={() => dispatch(passTurn())}
+                    onClick={() => dispatch(passTurn(broadcast))}
                 />
                 <DashboardButton
                     classes={classes}
@@ -95,7 +96,7 @@ export const GoDashboard: FC = () => {
                         className={'resign'}
                         label={'Resign'}
                         icon={'chevron-right'}
-                        onClick={() => dispatch(startGame())}
+                        onClick={() => dispatch(startGame(broadcast))}
                     />
                 )}
             </div>
