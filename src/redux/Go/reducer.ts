@@ -32,6 +32,7 @@ export default createSlice({
         return {
             ...state,
             ...action.payload,
+            initialBoard: action.payload.board,
             turnsElapsed: 0,
             lastRejectedMove: null,
             winner: null,
