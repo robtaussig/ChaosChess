@@ -183,7 +183,7 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
   hidden: {
     transform: 'rotate(180deg)',
     opacity: 0,
-    height: 0,
+    // height: 0,
     visibility: 'hidden',
   },
   colorSpace: {
