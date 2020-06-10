@@ -179,12 +179,11 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
   rotatable: {
     transition: 'all 0.5s linear',
     transformOrigin: '50% calc(100% + 20px)',
-  },
-  hidden: {
-    transform: 'rotate(180deg)',
-    opacity: 0,
-    // height: 0,
-    visibility: 'hidden',
+    '&.hidden': {
+      transform: 'rotate(180deg)',
+      opacity: 0,
+      visibility: 'hidden',
+    },
   },
   colorSpace: {
     display: 'flex',
@@ -232,6 +231,9 @@ export const useGoSettingsStyle = makeStyles((theme: any) => ({
     gridTemplateColumns: '1fr 1fr',
     gridGap: '20px',
     padding: 20,
+    '&.hidden': {
+      transform: 'rotate(-180deg)',
+    },
     '& .back': {
       gridArea: 'back',
     },

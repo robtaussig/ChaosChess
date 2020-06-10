@@ -30,12 +30,12 @@ export const GoDashboard: FC = () => {
         <>
             <GoSettings
                 className={classNames(classes.rotatable, {
-                    [classes.hidden]: !settingsOpen,
+                    hidden: !settingsOpen,
                 })}
                 onClose={() => setSettingsOpen(false)}
             />
             <div className={classNames(classes.root, classes.rotatable, {
-                [classes.hidden]: settingsOpen,
+                hidden: settingsOpen,
             })}>
                 <div className={classNames(classes.colorSpace, 'black', {
                     currentTurn: !winner && lastMoved === Color.White,
