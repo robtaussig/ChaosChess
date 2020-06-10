@@ -5,11 +5,14 @@ import Board from './board';
 export default class Game {
   public board: Board;
   
-  constructor(element, onMove) {
+  constructor(element, board, onMove) {
     this.canvas = element;
     this.ctx = this.canvas.getContext('2d');
     this.onMove = onMove;
+    this.init(board);
+  }
 
+  init(board) {
     const boardSide = Math.min(this.canvas.clientHeight, this.canvas.clientWidth);
     const horizontalOffset = this.canvas.clientHeight < this.canvas.clientWidth ? Math.floor((this.canvas.clientWidth - this.canvas.clientHeight) / 2) : 0;
     const verticalOffset = this.canvas.clientHeight > this.canvas.clientWidth ? Math.floor((this.canvas.clientHeight - this.canvas.clientWidth) / 2) : 0;

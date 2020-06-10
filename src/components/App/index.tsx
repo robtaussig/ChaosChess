@@ -24,6 +24,7 @@ import { waitingRoomJoined, requestJoin, startGameFromJoin } from '../../redux/C
 import { gameStarted } from '~redux/Game';
 import classNames from 'classnames';
 import { getRootPath } from './util';
+import Div100vh from 'react-div-100vh';
 
 interface AppProps {
   children?: any,
@@ -123,13 +124,13 @@ export const App: FC<AppProps> = () => {
   }, [lastMessage, connection.joinPhase, connection.roomId]);
 
   return (
-    <div id={'app'} className={classNames(classes.root, getRootPath(history))}>
+    <Div100vh id={'app'} className={classNames(classes.root, getRootPath(history))}>
       <SocketProvider value={sendMessage}>
         <Header/>
         <Main/>
         <Dashboard/>
       </SocketProvider>
-    </div>
+    </Div100vh>
   );
 };
 

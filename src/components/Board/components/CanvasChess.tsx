@@ -83,19 +83,19 @@ export const CanvasChess: FC<CanvasChessProps> = ({
   };
 
   useEffect(() => {
-    canvasRef.current.onselectstart = function () { return false; };
-    gameRef.current = new Game(canvasRef.current, (from: number, to: number) => {
-      if (flipped) {
-        return onMove(flipPos(from), flipPos(to));
-      }
+    if (gameRef.current === null) {
+      canvasRef.current.onselectstart = function () { return false; };
+      gameRef.current = new Game(canvasRef.current, board, (from: number, to: number) => {
+        if (flipped) {
+          return onMove(flipPos(from), flipPos(to));
+        }
+  
+        return onMove(from, to);
+      });
+    }
 
-      return onMove(from, to);
-    });
-  }, [onMove, flipped]);
-
-  useEffect(() => {
     gameRef.current.updateBoard(flippedBoard(board, flipped));
-  }, [board, flipped]);
+  }, [onMove, board, flipped]);
 
   useEffect(() => {
     if (gameRef.current) {
@@ -106,6 +106,13 @@ export const CanvasChess: FC<CanvasChessProps> = ({
       gameRef.current.updateBoard(flippedBoard(board, flipped));
     }
   }, [legalMoves, validPiecesToMove, board, squaresToHighlight, flipped]);
+
+  useEffect(() => {
+    if (gameRef.current && gameRef.current.board) {
+      gameRef.current.init(gameRef.current.board.board);
+      gameRef.current.draw();
+    }
+  }, [canvasHeight, canvasWidth]);
 
   return (
     <canvas

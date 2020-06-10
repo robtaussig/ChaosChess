@@ -1,4 +1,4 @@
-import React, { FC, useRef, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useRef, useCallback, useEffect, useMemo, useState } from 'react';
 import useStyles from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import CanvasChess from './components/CanvasChess';
@@ -19,6 +19,7 @@ import { connectionSelector, HostPhase } from '../../redux/Connection';
 import { getCurrentTurn } from '../../engine/board';
 import { Color, WhitePieces, BlackPieces } from '../../engine/types';
 import { getInitialBoardFromHost } from '../../messaging';
+const APP_HEADER_HEIGHT = 80;
 
 export const Board: FC = () => {
   const classes = useStyles({});
@@ -36,8 +37,11 @@ export const Board: FC = () => {
   const { type: opponentType, uuid } = useSelector(opponentSelector);
   const { hostPhase } = useSelector(connectionSelector);
   const { color } = useSelector(userSelector);
-
-  const APP_HEADER_HEIGHT = 80;
+  const [sideLength, setSideLength] = useState(
+    window.innerHeight > window.innerWidth ?
+      window.innerWidth :
+      window.innerHeight - APP_HEADER_HEIGHT,
+  );
 
   const isHost =
     opponentType === OpponentType.AI ||
@@ -87,8 +91,19 @@ export const Board: FC = () => {
     return () => game.current && game.current.deinit();
   }, []);
 
-  //80 is height of header;
-  const sideLength = window.innerHeight > window.innerWidth ? window.innerWidth : window.innerHeight - APP_HEADER_HEIGHT;
+  useEffect(() => {
+    const handleWindowResize = (e: WindowEventMap['resize']) => {
+      setSideLength(
+        window.innerHeight > window.innerWidth ?
+          window.innerWidth :
+          window.innerHeight - APP_HEADER_HEIGHT
+      );
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, [setSideLength]);
 
   return (
     <main ref={rootRef} id={'board'} className={classes.root}>
