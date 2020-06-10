@@ -41,3 +41,7 @@ export type JoinRoomPayload = {
     room: string;
     uuid: string;
 };
+
+export type LeaveRoomPayload = {
+    broadcast?: (action: string) => void;
+};

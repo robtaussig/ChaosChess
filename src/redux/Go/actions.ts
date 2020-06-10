@@ -3,9 +3,8 @@ import { wrap } from 'comlink';
 import { AppThunk } from '../types';
 import { makeMove, getWinner } from '../../goEngine/board';
 import { INITIAL_BOARD_SMALL, INITIAL_BOARD_MEDIUM, INITIAL_BOARD_LARGE } from '../../goEngine/constants';
-import { gameInitialized, gameOver, moveUndone, roomJoined } from './';
+import { moveCompleted, gameInitialized, gameOver, moveUndone, roomJoined, roomLeft } from './';
 import { SendMessage } from '../../hooks/useSocket';
-import { moveCompleted } from './';
 import { joinRoom } from '../../messaging';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -114,4 +113,19 @@ export const joinGoRoom = (broadcast: SendMessage, room: string): AppThunk<void>
     dispatch(roomJoined({
       room, uuid,
     }));
+  };
+
+export const leaveGoRoom = (broadcast: SendMessage): AppThunk<void> =>
+  async (dispatch, getState) => {
+    const { go } = getState();
+    const legalMoves = await engineWorker.getValidMoves(go.initialBoard);
+    dispatch(gameInitialized({
+      board: go.initialBoard,
+      legalMoves,
+      broadcast,
+    }));
+    dispatch(roomLeft({
+      broadcast,
+    }));
+    joinRoom(go.goId, 'Main', broadcast);
   };

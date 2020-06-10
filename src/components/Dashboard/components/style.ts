@@ -222,7 +222,7 @@ export const useGoSettingsStyle = makeStyles((theme: any) => ({
     gridArea: 'dashboard',
     fontFamily: 'Oxanium',
     gridTemplateAreas: `"header header"
-                        "room-input board-size"
+                        "room board-size"
                         "join back"`,
     gridTemplateRows: '1fr 1fr 1fr',
     gridTemplateColumns: '1fr 1fr',
@@ -244,7 +244,10 @@ export const useGoSettingsStyle = makeStyles((theme: any) => ({
     flexDirection: 'column',
   },
   roomInput: {
-    gridArea: 'room-input',
+    gridArea: 'room',
+  },
+  joinedRoom: {
+    gridArea: 'room',
   },
   joinButton: {
 

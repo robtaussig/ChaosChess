@@ -5,6 +5,7 @@ import {
     GameOverPayload,
     GameInitializedPayload,
     JoinRoomPayload,
+    LeaveRoomPayload,
 } from './types';
 import { INITIAL_BOARD_SMALL, INITIAL_BOARD_LARGE, INITIAL_BOARD_MEDIUM } from '../../goEngine/constants';
 
@@ -75,6 +76,9 @@ export default createSlice({
     roomJoined: (state, action: PayloadAction<JoinRoomPayload>) => {
       state.goRoom = action.payload.room;
       state.goId = action.payload.uuid;
+    },
+    roomLeft: (state, action: PayloadAction<LeaveRoomPayload>) => {
+      state.goRoom = null;
     },
   },
   extraReducers: {

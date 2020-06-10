@@ -17,11 +17,13 @@ import {
   hostTable,
 } from '../../redux/Connection/actions';
 import { userSelector } from '../../redux/User';
+import { goSelector } from '../../redux/Go';
 import { SocketProvider } from '../../hooks/useSocket';
 import { setName, joinRoom, receiveMessage } from '../../messaging';
 import { waitingRoomJoined, requestJoin, startGameFromJoin } from '../../redux/Connection/actions';
 import { gameStarted } from '~redux/Game';
 import classNames from 'classnames';
+import { getRootPath } from './util';
 
 interface AppProps {
   children?: any,
@@ -36,6 +38,7 @@ export const App: FC<AppProps> = () => {
   const dispatch = useDispatch();
   const joinPhase = useRef<JoinPhase>(null);
   const connection = useSelector(connectionSelector);
+  const { goRoom } = useSelector(goSelector);
   const { name, avatar } = useSelector(userSelector);
   const roomMatch: { params: { roomId: string } } = useRouteMatch('/room/:roomId');
   const history = useHistory();
@@ -74,10 +77,10 @@ export const App: FC<AppProps> = () => {
   }, [readyState, sendMessage, name, avatar, connection.uuid]);
 
   useEffect(() => {
-    if (readyState === ReadyState.OPEN && !gameIdFromParams) {
+    if (readyState === ReadyState.OPEN && !gameIdFromParams && !goRoom) {
       joinRoom(connection.uuid, connection.roomId, sendMessage);
     }
-  }, [readyState, sendMessage, connection.roomId, connection.uuid, gameIdFromParams]);
+  }, [readyState, goRoom, sendMessage, connection.roomId, connection.uuid, gameIdFromParams]);
 
   useEffect(() => {
     if (roomIdFromParams && joinPhase.current !== JoinPhase.Requested) {
@@ -120,7 +123,7 @@ export const App: FC<AppProps> = () => {
   }, [lastMessage, connection.joinPhase, connection.roomId]);
 
   return (
-    <div id={'app'} className={classNames(classes.root, history.location.pathname.substr(1))}>
+    <div id={'app'} className={classNames(classes.root, getRootPath(history))}>
       <SocketProvider value={sendMessage}>
         <Header/>
         <Main/>

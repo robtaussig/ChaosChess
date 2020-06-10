@@ -1,14 +1,16 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import 'css.gg/icons/chevron-left.css';
 import 'css.gg/icons/enter.css';
+import 'css.gg/icons/arrow-left-r.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useGoSettingsStyle } from '../../style';
 import DashboardButton from '../../DashboardButton';
 import classNames from 'classnames';
 import { goSelector } from '../../../../../redux/Go';
-import { boardSizeChanged, joinGoRoom } from '../../../../../redux/Go/actions';
+import { boardSizeChanged, joinGoRoom, leaveGoRoom } from '../../../../../redux/Go/actions';
 import { getNumSquares } from '../../../../../goEngine/board';
 import { useSocket } from '../../../../../hooks/useSocket';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 export interface GoSettingsProps {
     className: string;
@@ -21,36 +23,60 @@ export const GoSettings: FC<GoSettingsProps> = ({
 }) => {
     const classes = useGoSettingsStyle({});
     const dispatch = useDispatch();
+    const history = useHistory();
+    const roomMatch: { params: { roomId: string } } = useRouteMatch('/go/:roomId');
     const broadcast = useSocket();
     const [inputtedRoomId, setInputtedRoomId] = useState('');
-    const { board, initialBoard } = useSelector(goSelector);
+    const { board, initialBoard, goRoom } = useSelector(goSelector);
     const numSquares = getNumSquares(board ?? initialBoard);
     const squaresPerSize = Math.sqrt(numSquares);
 
     const handleClickJoin = () => {
-        dispatch(joinGoRoom(broadcast, inputtedRoomId));
+        history.push(`/go/${inputtedRoomId}`);
         setInputtedRoomId('');
     };
+
+    useEffect(() => {
+        if (roomMatch?.params?.roomId) {
+            dispatch(joinGoRoom(broadcast, roomMatch?.params?.roomId));
+        }
+    }, [dispatch, broadcast, roomMatch?.params?.roomId]);
     
     return (
         <div className={classNames(classes.root, className)}>
             <h2 className={classes.header}>Go Settings</h2>
-            <label className={classes.roomInput}>
-                Multiplayer room
-                <input
-                    type={'text'}
-                    value={inputtedRoomId}
-                    onChange={e => setInputtedRoomId(e.target.value)}
+            {goRoom ? (
+                <span className={classes.joinedRoom}>
+                    Joined {goRoom}
+                </span>
+            ) : (
+                <label className={classes.roomInput}>
+                    Multiplayer room
+                    <input
+                        type={'text'}
+                        value={inputtedRoomId}
+                        onChange={e => setInputtedRoomId(e.target.value)}
+                    />
+                </label>
+            )}
+            {goRoom ? (
+                <DashboardButton
+                    classes={classes}
+                    className={'join'}
+                    label={'Leave Room'}
+                    icon={'arrow-left-r'}
+                    onClick={() => dispatch(leaveGoRoom(broadcast))}
                 />
-            </label>
-            <DashboardButton
-                classes={classes}
-                className={'join'}
-                label={'Join'}
-                icon={'enter'}
-                disabled={inputtedRoomId === ''}
-                onClick={handleClickJoin}
-            />
+            ) : (
+                <DashboardButton
+                    classes={classes}
+                    className={'join'}
+                    label={'Join'}
+                    icon={'enter'}
+                    disabled={inputtedRoomId === ''}
+                    onClick={handleClickJoin}
+                />
+            )}
             <label className={classNames(classes.boardSize)}>
                 Board size
                 <select
