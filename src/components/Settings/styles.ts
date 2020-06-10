@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/styles';
 
 export const userSettingStyles = makeStyles((theme: any) => ({
   root: {
-    backgroundColor: '#rgba(255, 255, 255, 0.35)',
+    backgroundColor: 'rgba(255, 255, 255, 0.35)',
     padding: 20,
     borderRadius: 20,
     margin: 15,
@@ -78,7 +78,7 @@ export const userSettingStyles = makeStyles((theme: any) => ({
 
 export const useGameSettingsStyles = makeStyles((theme: any) => ({
   root: {
-    backgroundColor: '#rgba(255, 255, 255, 0.35)',
+    backgroundColor: 'rgba(255, 255, 255, 0.35)',
     padding: 20,
     borderRadius: 20,
     margin: 15,

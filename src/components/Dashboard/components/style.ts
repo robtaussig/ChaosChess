@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Theme } from '../../../theme';
 
 const rootStyles = (theme: Theme): any => ({
-  backgroundColor: '#rgba(255, 255, 255, 0.35)',
+  backgroundColor: 'rgba(255, 255, 255, 0.35)',
   margin: 15,
   marginTop: 10,
   borderRadius: 15,

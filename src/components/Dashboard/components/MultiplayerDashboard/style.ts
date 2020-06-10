@@ -10,7 +10,7 @@ export default makeStyles((theme: any) => ({
     gridColumnGap: '5px',
     marginTop: 10,
     borderRadius: '15px',
-    backgroundColor: '#rgba(255, 255, 255, 0.35)',
+    backgroundColor: 'rgba(255, 255, 255, 0.35)',
     gridTemplateAreas: `"player vs opponent"
                         "dashboard dashboard dashboard"`,
     gridTemplateRows: '1fr 1fr',
