@@ -50,7 +50,7 @@ export const handlePlayerMove = (
     }));
   };
 
-export const passTurn = (broadcast: SendMessage): AppThunk<void> =>
+export const passTurn = (broadcast?: SendMessage): AppThunk<void> =>
   async (dispatch, getState) => {
     const { go } = getState();
     if (go.lastMove === null) {
@@ -159,12 +159,16 @@ export const makeAIMove = (): AppThunk<void> =>
   async (dispatch, getState) => {
     const { go } = getState();
     const aiMove = await engineWorker.getBestMove(go.board, go.lastMove, go.history);
-    const nextBoard = makeMove(go.board, aiMove[1]);
-    const legalMoves = await engineWorker.getValidMoves(nextBoard, go.history);
-
-    dispatch(moveCompleted({
-      board: nextBoard,
-      move: aiMove[1],
-      legalMoves,
-    }));
+    if (aiMove[1] === null) {
+      dispatch(passTurn());
+    } else {
+      const nextBoard = makeMove(go.board, aiMove[1]);
+      const legalMoves = await engineWorker.getValidMoves(nextBoard, go.history);
+  
+      dispatch(moveCompleted({
+        board: nextBoard,
+        move: aiMove[1],
+        legalMoves,
+      }));
+    }
   };
