@@ -9,6 +9,7 @@ export const useStyles = makeStyles<any, {
     root: ({ numSquaresPerSide, expandedBoard }) => ({
         display: 'grid',
         gridArea: 'main',
+        maxHeight: 'calc(100vw - 30px)',
         margin: BOARD_SIDE_MARGIN,
         marginBottom: 0,
         ...(expandedBoard ? {

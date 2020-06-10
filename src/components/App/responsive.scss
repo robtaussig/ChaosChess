@@ -1,8 +1,7 @@
 #app.go {
     grid-template-areas: "main"
-                         "main"
                          "dashboard";
-    grid-template-rows: minmax(100px, 1fr) calc(100vh - 100vw + 30px);
+    grid-template-rows: minmax(100px, 1fr) minmax(100px,calc(100vh - 100vw + 20px));
     #header {
         display: none;
     }
@@ -11,9 +10,8 @@
 @media only screen and (max-height : 600px) {
     #app {
         grid-template-areas: "main"
-                             "main"
-                             "dashboard";
-        grid-template-rows: 100vw 1fr;
+                         "dashboard";
+        grid-template-rows: minmax(100px, 1fr) minmax(100px,calc(100vh - 100vw + 20px));
         #header {
             display: none!important;
         }

@@ -18,6 +18,8 @@ export default makeStyles((theme: Theme) => ({
     '& #board': {
       gridArea: 'main',
       display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'start',
     },
     '& #game-modes': {
       gridArea: 'main',
