@@ -3,9 +3,10 @@ import { Theme } from '../../theme';
 
 export default makeStyles((theme: Theme) => ({
   root: {
-    height: '100%',
-    width: '100%',
+    height: '100vh',
+    width: '100vw',
     display: 'grid',
+    overflow: 'hidden',
     gridTemplateAreas: `"header"
                         "main"
                         "dashboard"`,
