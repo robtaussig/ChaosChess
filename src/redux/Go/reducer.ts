@@ -22,6 +22,7 @@ const INITIAL_STATE: GoState = {
   points: null,
   goRoom: null,
   goId: null,
+  expandedBoard: false,
 };
 
 export default createSlice({
@@ -80,6 +81,9 @@ export default createSlice({
     },
     roomLeft: (state, action: PayloadAction<LeaveRoomPayload>) => {
       state.goRoom = null;
+    },
+    boardExpanded: (state) => {
+      state.expandedBoard = !state.expandedBoard;
     },
   },
   extraReducers: {

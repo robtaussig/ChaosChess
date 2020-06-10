@@ -1,15 +1,23 @@
 import { makeStyles } from '@material-ui/styles'
 
+const BOARD_SIDE_MARGIN = 15;
+
 export const useStyles = makeStyles<any, {
     numSquaresPerSide: number,
+    expandedBoard: boolean,
 }>(theme => ({
-    root: ({ numSquaresPerSide }) => ({
+    root: ({ numSquaresPerSide, expandedBoard }) => ({
         display: 'grid',
         gridArea: 'main',
-        margin: 15,
+        margin: BOARD_SIDE_MARGIN,
         marginBottom: 0,
+        ...(expandedBoard ? {
+            gridRow: '1 / -1',
+            marginBottom: 10,
+        } : {}),
         marginTop: 10,
-        gridTemplateRows: `repeat(${numSquaresPerSide}, 1fr)`,
+        overflow: 'auto',
+        gridTemplateRows: `repeat(${numSquaresPerSide}, minmax(calc((100vw - ${BOARD_SIDE_MARGIN * 2}px) / ${numSquaresPerSide}), 1fr))`,
         gridTemplateColumns: `repeat(${numSquaresPerSide}, 1fr)`,
         backgroundColor: 'rgba(255, 233, 154, 0.91)',
     }),

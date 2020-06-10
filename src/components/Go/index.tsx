@@ -14,7 +14,7 @@ export interface GoProps {
 export const Go: FC<GoProps> = () => {
     const dispatch = useDispatch();
     const broadcast = useSocket();
-    const { board, legalMoves, lastMove, zones } = useSelector(goSelector);
+    const { board, legalMoves, lastMove, zones, expandedBoard } = useSelector(goSelector);
 
     const handleClickSquare = useCallback((pos: number) => {
         dispatch(handlePlayerMove(broadcast, pos));
@@ -26,7 +26,7 @@ export const Go: FC<GoProps> = () => {
 
     const numSquares = getNumSquares(board);
     const numSquaresPerSide = Math.sqrt(numSquares);
-    const classes = useStyles({ numSquaresPerSide });
+    const classes = useStyles({ numSquaresPerSide, expandedBoard });
 
     return (
         <div className={classes.root}>

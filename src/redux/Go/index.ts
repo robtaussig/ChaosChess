@@ -8,6 +8,7 @@ export const {
     moveUndone,
     roomJoined,
     roomLeft,
+    boardExpanded,
 } = goReducer.actions;
 
 export const reducer = goReducer.reducer;

@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import 'css.gg/icons/redo.css';
 import 'css.gg/icons/ruler.css';
 import 'css.gg/icons/home.css';
+import 'css.gg/icons/eye.css';
 import 'css.gg/icons/chevron-right.css';
 import DashboardButton from '../DashboardButton';
 import GoSettings from './components/GoSettings';
 import { returnHome } from '../../../../redux/App';
-import { goSelector } from '../../../../redux/Go';
+import { goSelector, boardExpanded } from '../../../../redux/Go';
 import { startGame, passTurn, undo } from '../../../../redux/Go/actions';
 import { Color, Piece } from '../../../../goEngine/types';
 import { SpecialValues } from '../../../../goEngine/constants';
@@ -19,7 +20,7 @@ import { useSocket } from '../../../../hooks/useSocket';
 export const GoDashboard: FC = () => {
     const classes = useGoStyles({});
     const dispatch = useDispatch();
-    const { board, turnsElapsed, winner, lastMove, points } = useSelector(goSelector);
+    const { board, turnsElapsed, winner, lastMove, points, expandedBoard } = useSelector(goSelector);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const broadcast = useSocket();
     const blackCapturedPieces = getRemovedPiecesCount(board, Piece.Black);
@@ -36,7 +37,16 @@ export const GoDashboard: FC = () => {
             />
             <div className={classNames(classes.root, classes.rotatable, {
                 hidden: settingsOpen,
+                moved: expandedBoard,
             })}>
+                <button
+                    className={classNames(classes.visibilityToggle, {
+                        isOn: expandedBoard,
+                    })}
+                    onClick={() => dispatch(boardExpanded())}
+                >
+                    <i className={`gg-eye`}/>
+                </button>
                 <div className={classNames(classes.colorSpace, 'black', {
                     currentTurn: !winner && lastMoved === Color.White,
                     winner: winner === Color.Black || winner === Color.None,

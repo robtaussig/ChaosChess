@@ -2,7 +2,7 @@
     grid-template-areas: "main"
                          "main"
                          "dashboard";
-    grid-template-rows: max-content calc(100vw - 30px) calc(100vh - 100vw + 30px);
+    grid-template-rows: minmax(100px, 1fr) calc(100vh - 100vw + 30px);
     #header {
         display: none;
     }

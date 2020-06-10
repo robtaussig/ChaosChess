@@ -11,6 +11,7 @@ export interface GoState {
     points: { white: number, black: number };
     goRoom: string;
     goId: string;
+    expandedBoard: boolean;
 }
 
 export type MakeMovePayload = {

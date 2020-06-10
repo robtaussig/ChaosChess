@@ -153,6 +153,7 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     fontFamily: 'Oxanium',
     gridArea: 'dashboard',
     display: 'grid',
+    position: 'relative',
     gridTemplateAreas: `"black pass-turn"
                         "white settings"
                         "undo home"`,
@@ -184,6 +185,11 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
       opacity: 0,
       visibility: 'hidden',
     },
+    '&.moved': {
+      position: 'absolute',
+      top: 'calc(100% - 40px)',
+      left: 'calc(100% - 50px)',
+    },
   },
   colorSpace: {
     display: 'flex',
@@ -204,6 +210,15 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     '&.winner': {
       backgroundColor: '#000094',
       color: 'white',
+    },
+  },
+  visibilityToggle: {
+    position: 'absolute',
+    top: 5,
+    left: 5,
+    background: 'transparent',
+    '&.isOn': {
+
     },
   },
   colorHeader: {
