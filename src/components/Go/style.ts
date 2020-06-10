@@ -6,6 +6,9 @@ export const useStyles = makeStyles<any, {
     root: ({ numSquaresPerSide }) => ({
         display: 'grid',
         gridArea: 'main',
+        margin: 15,
+        marginBottom: 0,
+        marginTop: 10,
         gridTemplateRows: `repeat(${numSquaresPerSide}, 1fr)`,
         gridTemplateColumns: `repeat(${numSquaresPerSide}, 1fr)`,
         backgroundColor: 'rgba(255, 233, 154, 0.91)',

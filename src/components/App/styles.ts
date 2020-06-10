@@ -10,7 +10,7 @@ export default makeStyles((theme: Theme) => ({
     gridTemplateAreas: `"header"
                         "main"
                         "dashboard"`,
-    gridTemplateRows: 'max-content 100vw 1fr',
+    gridTemplateRows: 'max-content calc(100vw - 30px) calc(100vh - 100vw + 30px)',
     gridTemplateColumns: '1fr',
     '& #header': {
       gridArea: 'header',

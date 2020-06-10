@@ -6,6 +6,7 @@ const rootStyles = (theme: Theme): any => ({
   margin: 15,
   marginTop: 10,
   borderRadius: 15,
+  overflow: 'auto',
 });
 
 export const buttonStyles = (theme: Theme): any => ({

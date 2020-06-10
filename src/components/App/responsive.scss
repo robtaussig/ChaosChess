@@ -1,4 +1,7 @@
 #app.go {
+    grid-template-areas: "main"
+                         "main"
+                         "dashboard";
     #header {
         display: none;
     }
