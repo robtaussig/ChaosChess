@@ -176,11 +176,12 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     },
   },
   rotatable: {
-    transition: 'transform 0.5s linear',
+    transition: 'all 0.5s linear',
     transformOrigin: '50% calc(100% + 20px)',
   },
   hidden: {
     transform: 'rotate(180deg)',
+    opacity: 0,
   },
   colorSpace: {
     display: 'flex',

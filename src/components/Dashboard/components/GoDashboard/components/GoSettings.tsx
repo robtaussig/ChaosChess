@@ -56,6 +56,7 @@ export const GoSettings: FC<GoSettingsProps> = ({
                         type={'text'}
                         value={inputtedRoomId}
                         onChange={e => setInputtedRoomId(e.target.value)}
+                        onBlur={e => document.body.scrollTop = 0}
                     />
                 </label>
             )}
