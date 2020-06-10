@@ -153,7 +153,7 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     gridArea: 'dashboard',
     display: 'grid',
     gridTemplateAreas: `"black pass-turn"
-                        "white resign"
+                        "white settings"
                         "undo home"`,
     gridTemplateRows: '1fr 1fr 1fr',
     gridTemplateColumns: '1fr 1fr',
@@ -166,11 +166,21 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
       gridArea: 'pass-turn',
     },
     '& .resign': {
-      gridArea: 'resign',
+      gridArea: 'home',
     },
     '& .undo': {
       gridArea: 'undo',
     },
+    '& .settings': {
+      gridArea: 'settings',
+    },
+  },
+  rotatable: {
+    transition: 'transform 0.5s linear',
+    transformOrigin: '50% calc(100% + 20px)',
+  },
+  hidden: {
+    transform: 'rotate(180deg)',
   },
   colorSpace: {
     display: 'flex',
@@ -199,6 +209,17 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
   colorValue: {
     marginLeft: 'auto',
     
+  },
+  dashboardButton: {
+    ...buttonStyles(theme),
+  },
+}));
+
+export const useGoSettingsStyle = makeStyles((theme: any) => ({
+  root: {
+    ...rootStyles(theme),
+    display: 'grid',
+    gridArea: 'dashboard',
   },
   dashboardButton: {
     ...buttonStyles(theme),
