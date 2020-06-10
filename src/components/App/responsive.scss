@@ -2,10 +2,24 @@
     grid-template-areas: "main"
                          "main"
                          "dashboard";
+    grid-template-rows: max-content calc(100vw - 30px) calc(100vh - 100vw + 30px);
     #header {
         display: none;
     }
 }
+
+@media only screen and (max-height : 600px) {
+    #app {
+        grid-template-areas: "main"
+                             "main"
+                             "dashboard";
+        grid-template-rows: 100vw 1fr;
+        #header {
+            display: none!important;
+        }
+    }
+}
+
 
 @media only screen and (min-width : 700px) {
     #app {

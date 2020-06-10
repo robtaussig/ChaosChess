@@ -10,13 +10,14 @@ export default makeStyles((theme: Theme) => ({
     gridTemplateAreas: `"header"
                         "main"
                         "dashboard"`,
-    gridTemplateRows: 'max-content calc(100vw - 30px) calc(100vh - 100vw + 30px)',
+    gridTemplateRows: 'max-content 100vw 1fr',
     gridTemplateColumns: '1fr',
     '& #header': {
       gridArea: 'header',
     },
     '& #board': {
       gridArea: 'main',
+      display: 'flex',
     },
     '& #game-modes': {
       gridArea: 'main',
