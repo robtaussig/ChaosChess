@@ -8,7 +8,7 @@ export const useStyles = makeStyles<any, {
         gridArea: 'main',
         gridTemplateRows: `repeat(${numSquaresPerSide}, 1fr)`,
         gridTemplateColumns: `repeat(${numSquaresPerSide}, 1fr)`,
-        backgroundColor: '#ffe99ae8',
+        backgroundColor: 'rgba(255, 233, 154, 0.91)',
     }),
 }));
 
@@ -20,7 +20,7 @@ export const useSquareStyles = makeStyles<any, {
         backgroundColor: 'transparent',
         outline: 'none',
         '&:active': {
-            backgroundColor: '#000863a6',
+            backgroundColor: 'rgba(0, 8, 99, 0.65)',
         },
         '&:before': {
             content: '""',

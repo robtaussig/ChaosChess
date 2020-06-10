@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Theme } from '../../../theme';
 
 const rootStyles = (theme: Theme): any => ({
-  backgroundColor: '#ffffff59',
+  backgroundColor: '#rgba(255, 255, 255, 0.35)',
   margin: 15,
   marginTop: 10,
   borderRadius: 15,
@@ -16,7 +16,7 @@ export const buttonStyles = (theme: Theme): any => ({
   alignItems: 'center',
   padding: '20px 0',
   borderRadius: '5px',
-  backgroundColor: '#ffffffb3',
+  backgroundColor: 'rgba(255, 255, 255, 0.70)',
   '&:not(:disabled)': {
     cursor: 'pointer',
     boxShadow: '0px 0px 10px -5px black',
@@ -105,14 +105,14 @@ export const useInGameDashboard = makeStyles((theme: Theme) => ({
     backgroundColor: 'transparent',
     borderRadius: '50%',
     '&.capturedPiece': {
-      backgroundColor: '#ffffffb3',
+      backgroundColor: 'rgba(255, 255, 255, 0.70)',
     },
     '& i': {
       position: 'absolute',
       height: 100,
       width: 100,
       border: '4px solid',
-      color: '#b70000a3',
+      color: 'rgba(183, 0, 0, 0.64)',
       '&:after': {
         left: 45,
         height: 92,

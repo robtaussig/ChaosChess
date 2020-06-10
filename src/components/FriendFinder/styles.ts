@@ -3,7 +3,7 @@ import { buttonStyles } from '../Dashboard/components/style';
 
 export default makeStyles((theme: any) => ({
   root: {
-    backgroundColor: '#ffffff59',
+    backgroundColor: '#rgba(255, 255, 255, 0.35)',
     margin: 15,
     display: 'flex',
     flexDirection: 'column',
@@ -26,7 +26,7 @@ export default makeStyles((theme: any) => ({
     gridTemplateRows: '1fr',
     padding: 10,
     minHeight: 60,
-    backgroundColor: '#ffffffa6',
+    backgroundColor: 'rgba(255, 255, 255, 0.65)',
     borderRadius: '2px',
     boxShadow: '0px 0px 5px -2px black',
     '&:not(:last-child)': {
