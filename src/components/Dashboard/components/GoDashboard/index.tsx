@@ -94,7 +94,7 @@ export const GoDashboard: FC = () => {
                     <DashboardButton
                         classes={classes}
                         className={'resign'}
-                        label={'Resign'}
+                        label={winner ? 'New game': 'Resign'}
                         icon={'chevron-right'}
                         onClick={() => dispatch(startGame(broadcast))}
                     />
