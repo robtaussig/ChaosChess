@@ -2,7 +2,7 @@ import './responsive.scss';
 import React, { FC, useEffect, useMemo, useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useWebsocket, { ReadyState } from 'react-use-websocket';
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import useStyles from './styles';
 import Header from '../Header/';
 import Main from '../Main/';
@@ -21,6 +21,7 @@ import { SocketProvider } from '../../hooks/useSocket';
 import { setName, joinRoom, receiveMessage } from '../../messaging';
 import { waitingRoomJoined, requestJoin, startGameFromJoin } from '../../redux/Connection/actions';
 import { gameStarted } from '~redux/Game';
+import classNames from 'classnames';
 
 interface AppProps {
   children?: any,
@@ -37,6 +38,7 @@ export const App: FC<AppProps> = () => {
   const connection = useSelector(connectionSelector);
   const { name, avatar } = useSelector(userSelector);
   const roomMatch: { params: { roomId: string } } = useRouteMatch('/room/:roomId');
+  const history = useHistory();
   const roomIdFromParams = roomMatch?.params?.roomId;
   const gameMatch: { params: { gameId: string } } = useRouteMatch('/game/:gameId');
   const gameIdFromParams = gameMatch?.params?.gameId;
@@ -118,7 +120,7 @@ export const App: FC<AppProps> = () => {
   }, [lastMessage, connection.joinPhase, connection.roomId]);
 
   return (
-    <div id={'app'} className={classes.root}>
+    <div id={'app'} className={classNames(classes.root, history.location.pathname.substr(1))}>
       <SocketProvider value={sendMessage}>
         <Header/>
         <Main/>

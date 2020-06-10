@@ -5,6 +5,7 @@ export const useStyles = makeStyles<any, {
 }>(theme => ({
     root: ({ numSquaresPerSide }) => ({
         display: 'grid',
+        gridArea: 'main',
         gridTemplateRows: `repeat(${numSquaresPerSide}, 1fr)`,
         gridTemplateColumns: `repeat(${numSquaresPerSide}, 1fr)`,
         backgroundColor: '#ffe99ae8',

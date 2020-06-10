@@ -1,8 +1,23 @@
-@media only screen  and (min-width : 1224px) {
+#app.go {
+    #header {
+        display: none;
+    }
+}
+
+@media only screen and (min-width : 700px) {
     #app {
         grid-template-areas: "header header"
                              "main dashboard";
         grid-template-rows: 80px 1fr;
         grid-template-columns: calc(100vh - 80px) 1fr;
+        &.go {
+            grid-template-areas: "main header"
+                                 "main dashboard";
+            grid-template-rows: 80px 1fr;
+            grid-template-columns: calc(100vh - 80px) 1fr;
+        }
+        #header {
+            display: flex!important;
+        }
     }
 }

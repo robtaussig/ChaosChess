@@ -146,7 +146,7 @@ export const makeMove = (board: string, pos?: number): string => {
     const currentTurnBit = getCurrentTurnBit(board);
     const currentPieceType = board[currentTurnBit] === Color.Black ? Piece.White : Piece.Black;
 
-    const afterMove = pos ? updateBoard(board, pos, currentPieceType) : board;
+    const afterMove = pos !== null ? updateBoard(board, pos, currentPieceType) : board;
     const afterToggleTurn = toggleTurn(afterMove);
     const afterCaptures = handleCaptures(afterToggleTurn, currentPieceType);
 

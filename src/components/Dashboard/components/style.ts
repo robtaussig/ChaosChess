@@ -150,6 +150,7 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
   root: {
     ...rootStyles(theme),
     fontFamily: 'Oxanium',
+    gridArea: 'dashboard',
     display: 'grid',
     gridTemplateAreas: `"black pass-turn"
                         "white resign"
