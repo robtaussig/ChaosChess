@@ -1,10 +1,12 @@
 import React, { FC, useEffect, useCallback } from 'react';
 import { useStyles } from './style';
 import { goSelector } from '../../redux/Go';
-import { handlePlayerMove, startGame } from '../../redux/Go/actions';
+import { handlePlayerMove, startGame, makeAIMove } from '../../redux/Go/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import Square from './components/Square';
 import { getNumSquares } from '../../goEngine/board';
+import { Color } from '../../goEngine/types';
+import { SpecialValues } from '../../goEngine/constants';
 import { useSocket } from '../../hooks/useSocket';
 
 export interface GoProps {
@@ -14,7 +16,13 @@ export interface GoProps {
 export const Go: FC<GoProps> = () => {
     const dispatch = useDispatch();
     const broadcast = useSocket();
-    const { board, legalMoves, lastMove, zones, expandedBoard } = useSelector(goSelector);
+    const { board, legalMoves, lastMove, zones, expandedBoard, userColor, goRoom } = useSelector(goSelector);
+
+    const numSquares = getNumSquares(board);
+    const numSquaresPerSide = Math.sqrt(numSquares);
+    const classes = useStyles({ numSquaresPerSide, expandedBoard });
+    const lastMoved = board[getNumSquares(board) + SpecialValues.CurrentTurn];
+    const canMove = userColor === Color.None || userColor !== lastMoved;
 
     const handleClickSquare = useCallback((pos: number) => {
         dispatch(handlePlayerMove(broadcast, pos));
@@ -24,9 +32,11 @@ export const Go: FC<GoProps> = () => {
         dispatch(startGame(broadcast));
     }, []);
 
-    const numSquares = getNumSquares(board);
-    const numSquaresPerSide = Math.sqrt(numSquares);
-    const classes = useStyles({ numSquaresPerSide, expandedBoard });
+    useEffect(() => {
+        if (!goRoom && !canMove) {
+            dispatch(makeAIMove());
+        }
+    }, [dispatch, canMove, goRoom]);
 
     return (
         <div className={classes.root}>
@@ -38,7 +48,7 @@ export const Go: FC<GoProps> = () => {
                             square={square}
                             pos={idx}
                             onClick={handleClickSquare}
-                            disabled={!legalMoves.includes(idx)}
+                            disabled={!canMove || !legalMoves.includes(idx)}
                             wasLastMove={lastMove === idx}
                             zone={zones[idx]}
                             numSquaresPerSide={numSquaresPerSide}

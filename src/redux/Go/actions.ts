@@ -3,7 +3,16 @@ import { wrap } from 'comlink';
 import { AppThunk } from '../types';
 import { makeMove, getWinner } from '../../goEngine/board';
 import { INITIAL_BOARD_SMALL, INITIAL_BOARD_MEDIUM, INITIAL_BOARD_LARGE } from '../../goEngine/constants';
-import { moveCompleted, gameInitialized, gameOver, moveUndone, roomJoined, roomLeft } from './';
+import {
+  moveCompleted,
+  gameInitialized,
+  gameOver,
+  moveUndone,
+  roomJoined,
+  roomLeft,
+  colorClaimed,
+} from './';
+import { dispatchBroadcast } from './middleware';
 import { SendMessage } from '../../hooks/useSocket';
 import { joinRoom } from '../../messaging';
 import { v4 as uuidv4 } from 'uuid';
@@ -128,4 +137,34 @@ export const leaveGoRoom = (broadcast: SendMessage): AppThunk<void> =>
       broadcast,
     }));
     joinRoom(go.goId, 'Main', broadcast);
+  };
+
+export const claimColor = (broadcast: SendMessage, color: Color): AppThunk<void> =>
+  async (dispatch, getState) => {
+    const { go } = getState();
+    const { goRoom } = go;
+    if (goRoom) {
+      dispatchBroadcast(broadcast, colorClaimed(
+        color === Color.Black ?
+          Color.White :
+          color === Color.White ?
+            Color.Black :
+            Color.None
+      ));
+    }
+    dispatch(colorClaimed(color));
+  };
+
+export const makeAIMove = (): AppThunk<void> =>
+  async (dispatch, getState) => {
+    const { go } = getState();
+    const aiMove = await engineWorker.getBestMove(go.board, go.lastMove, go.history);
+    const nextBoard = makeMove(go.board, aiMove[1]);
+    const legalMoves = await engineWorker.getValidMoves(nextBoard, go.history);
+
+    dispatch(moveCompleted({
+      board: nextBoard,
+      move: aiMove[1],
+      legalMoves,
+    }));
   };

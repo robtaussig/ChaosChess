@@ -1,3 +1,5 @@
+import { Color } from '../../goEngine/types';
+
 export interface GoState {
     board: string;
     initialBoard: string;
@@ -12,6 +14,7 @@ export interface GoState {
     goRoom: string;
     goId: string;
     expandedBoard: boolean;
+    userColor: Color;
 }
 
 export type MakeMovePayload = {

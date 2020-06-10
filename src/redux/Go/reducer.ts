@@ -8,6 +8,7 @@ import {
     LeaveRoomPayload,
 } from './types';
 import { INITIAL_BOARD_SMALL, INITIAL_BOARD_LARGE, INITIAL_BOARD_MEDIUM } from '../../goEngine/constants';
+import { Color } from '../../goEngine/types';
 
 const INITIAL_STATE: GoState = {
   board: INITIAL_BOARD_MEDIUM,
@@ -23,6 +24,7 @@ const INITIAL_STATE: GoState = {
   goRoom: null,
   goId: null,
   expandedBoard: false,
+  userColor: Color.None,
 };
 
 export default createSlice({
@@ -82,8 +84,11 @@ export default createSlice({
     roomLeft: (state, action: PayloadAction<LeaveRoomPayload>) => {
       state.goRoom = null;
     },
-    boardExpanded: (state) => {
+    boardExpanded: state => {
       state.expandedBoard = !state.expandedBoard;
+    },
+    colorClaimed: (state, action: PayloadAction<Color>) => {
+      state.userColor = action.payload;
     },
   },
   extraReducers: {

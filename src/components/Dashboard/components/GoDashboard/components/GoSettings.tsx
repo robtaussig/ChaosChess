@@ -7,8 +7,9 @@ import { useGoSettingsStyle } from '../../style';
 import DashboardButton from '../../DashboardButton';
 import classNames from 'classnames';
 import { goSelector } from '../../../../../redux/Go';
-import { boardSizeChanged, joinGoRoom, leaveGoRoom } from '../../../../../redux/Go/actions';
+import { boardSizeChanged, joinGoRoom, leaveGoRoom, claimColor } from '../../../../../redux/Go/actions';
 import { getNumSquares } from '../../../../../goEngine/board';
+import { Color } from '../../../../../goEngine/types';
 import { useSocket } from '../../../../../hooks/useSocket';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 
@@ -27,7 +28,7 @@ export const GoSettings: FC<GoSettingsProps> = ({
     const roomMatch: { params: { roomId: string } } = useRouteMatch('/go/:roomId');
     const broadcast = useSocket();
     const [inputtedRoomId, setInputtedRoomId] = useState('');
-    const { board, initialBoard, goRoom } = useSelector(goSelector);
+    const { board, initialBoard, goRoom, userColor } = useSelector(goSelector);
     const numSquares = getNumSquares(board ?? initialBoard);
     const squaresPerSize = Math.sqrt(numSquares);
 
@@ -35,6 +36,22 @@ export const GoSettings: FC<GoSettingsProps> = ({
         history.push(`/go/${inputtedRoomId}`);
         setInputtedRoomId('');
     };
+
+    const handleClaimColor = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        switch (e.target.value) {
+            case 'Black':
+                dispatch(claimColor(broadcast, Color.Black));
+                break;
+            case 'White':
+                dispatch(claimColor(broadcast, Color.White));
+                break;
+            case 'Both':
+                dispatch(claimColor(broadcast, Color.None));
+                break;
+            default:
+                throw new Error('Unknowwn selection');
+        }
+    }
 
     useEffect(() => {
         if (roomMatch?.params?.roomId) {
@@ -78,6 +95,23 @@ export const GoSettings: FC<GoSettingsProps> = ({
                     onClick={handleClickJoin}
                 />
             )}
+            <label className={classNames(classes.userColor)}>
+                Claim color
+                <select
+                    value={
+                        userColor === Color.None ?
+                            'Both' :
+                            userColor === Color.White ?
+                                'White' :
+                                'Black'
+                }
+                    onChange={handleClaimColor}
+                >
+                    <option>Black</option>
+                    <option>White</option>
+                    <option>Both</option>
+                </select>
+            </label>
             <label className={classNames(classes.boardSize)}>
                 Board size
                 <select

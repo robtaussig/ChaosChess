@@ -9,6 +9,7 @@ export const {
     roomJoined,
     roomLeft,
     boardExpanded,
+    colorClaimed,
 } = goReducer.actions;
 
 export const reducer = goReducer.reducer;

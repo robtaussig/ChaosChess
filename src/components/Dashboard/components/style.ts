@@ -239,7 +239,7 @@ export const useGoSettingsStyle = makeStyles((theme: any) => ({
     display: 'grid',
     gridArea: 'dashboard',
     fontFamily: 'Oxanium',
-    gridTemplateAreas: `"header header"
+    gridTemplateAreas: `"header color"
                         "room board-size"
                         "join back"`,
     gridTemplateRows: '1fr 1fr 1fr',
@@ -261,6 +261,11 @@ export const useGoSettingsStyle = makeStyles((theme: any) => ({
   },
   boardSize: {
     gridArea: 'board-size',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  userColor: {
+    gridArea: 'color',
     display: 'flex',
     flexDirection: 'column',
   },

@@ -20,12 +20,13 @@ import { useSocket } from '../../../../hooks/useSocket';
 export const GoDashboard: FC = () => {
     const classes = useGoStyles({});
     const dispatch = useDispatch();
-    const { board, turnsElapsed, winner, lastMove, points, expandedBoard } = useSelector(goSelector);
+    const { board, turnsElapsed, winner, lastMove, points, expandedBoard, userColor } = useSelector(goSelector);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const broadcast = useSocket();
     const blackCapturedPieces = getRemovedPiecesCount(board, Piece.Black);
     const whiteCapturedPieces = getRemovedPiecesCount(board, Piece.White);
     const lastMoved = board[getNumSquares(board) + SpecialValues.CurrentTurn];
+    const canMove = userColor === Color.None || userColor !== lastMoved;
 
     return (
         <>
@@ -82,7 +83,7 @@ export const GoDashboard: FC = () => {
                     className={'pass-turn'}
                     label={turnsElapsed > 0 && lastMove === null ? 'Call game' : 'Pass'}
                     icon={'chevron-right'}
-                    disabled={Boolean(turnsElapsed === 0 || winner)}
+                    disabled={Boolean(!canMove || turnsElapsed === 0 || winner)}
                     onClick={() => dispatch(passTurn(broadcast))}
                 />
                 <DashboardButton
