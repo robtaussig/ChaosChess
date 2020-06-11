@@ -178,7 +178,7 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     },
   },
   rotatable: {
-    transition: 'all 0.5s linear',
+    transition: 'all 0.3s ease-in-out',
     transformOrigin: '50% calc(100% + 20px)',
     '&.hidden': {
       transform: 'rotate(180deg)',

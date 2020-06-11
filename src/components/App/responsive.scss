@@ -1,25 +1,13 @@
 #app.go {
     grid-template-areas: "main"
                          "dashboard";
-    grid-template-rows: minmax(100px, 1fr) minmax(100px,calc(100vh - 100vw + 20px));
+    grid-template-rows: minmax(100px, 1fr) minmax(100px, calc(max(100vh, 100vw) - min(100vh, 100vw)));
     #header {
         display: none;
     }
 }
 
-@media only screen and (max-height : 600px) {
-    #app {
-        grid-template-areas: "main"
-                         "dashboard";
-        grid-template-rows: minmax(100px, 1fr) minmax(100px,calc(100vh - 100vw + 20px));
-        #header {
-            display: none!important;
-        }
-    }
-}
-
-
-@media only screen and (min-width : 700px) {
+@media only screen and (min-width : 1200px) {
     #app {
         grid-template-areas: "header header"
                              "main dashboard";
@@ -29,7 +17,7 @@
             grid-template-areas: "main header"
                                  "main dashboard";
             grid-template-rows: 80px 1fr;
-            grid-template-columns: calc(100vh - 80px) 1fr;
+            grid-template-columns: min(100vw, 100vh) 1fr;
         }
         #header {
             display: flex!important;

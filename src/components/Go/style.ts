@@ -9,17 +9,9 @@ export const useStyles = makeStyles<any, {
     root: ({ numSquaresPerSide, expandedBoard }) => ({
         display: 'grid',
         gridArea: 'main',
-        maxHeight: 'calc(100vw - 30px)',
-        margin: BOARD_SIDE_MARGIN,
-        marginBottom: 0,
-        ...(expandedBoard ? {
-            gridRow: '1 / -1',
-            marginBottom: 10,
-        } : {}),
-        marginTop: 10,
         overflow: 'auto',
-        gridTemplateRows: `repeat(${numSquaresPerSide}, minmax(calc((100vw - ${BOARD_SIDE_MARGIN * 2}px) / ${numSquaresPerSide}), 1fr))`,
-        gridTemplateColumns: `repeat(${numSquaresPerSide}, 1fr)`,
+        gridTemplateRows: `repeat(${numSquaresPerSide}, min(calc(100vh / ${numSquaresPerSide}), calc(100vw / ${numSquaresPerSide})))`,
+        gridTemplateColumns: `repeat(${numSquaresPerSide}, min(calc(100vh / ${numSquaresPerSide}), calc(100vw / ${numSquaresPerSide})))`,
         backgroundColor: 'rgba(255, 233, 154, 0.91)',
     }),
 }));
