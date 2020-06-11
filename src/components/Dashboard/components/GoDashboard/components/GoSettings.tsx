@@ -33,7 +33,7 @@ export const GoSettings: FC<GoSettingsProps> = ({
     const squaresPerSize = Math.sqrt(numSquares);
 
     const handleClickJoin = () => {
-        history.push(`/go/${inputtedRoomId}`);
+        history.push(`/go/${inputtedRoomId.toLowerCase()}`);
         setInputtedRoomId('');
     };
 

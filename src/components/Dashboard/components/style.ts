@@ -155,8 +155,8 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     display: 'grid',
     position: 'relative',
     gridTemplateAreas: `"black pass-turn"
-                        "white settings"
-                        "undo home"`,
+                        "white home"
+                        "undo settings"`,
     gridTemplateRows: '1fr 1fr 1fr',
     gridTemplateColumns: '1fr 1fr',
     gridGap: '20px',
