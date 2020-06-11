@@ -16,11 +16,11 @@ export interface GoProps {
 export const Go: FC<GoProps> = () => {
     const dispatch = useDispatch();
     const broadcast = useSocket();
-    const { board, legalMoves, lastMove, zones, expandedBoard, userColor, goRoom } = useSelector(goSelector);
+    const { board, legalMoves, lastMove, zones, userColor, goRoom } = useSelector(goSelector);
 
     const numSquares = getNumSquares(board);
     const numSquaresPerSide = Math.sqrt(numSquares);
-    const classes = useStyles({ numSquaresPerSide, expandedBoard });
+    const classes = useStyles({ numSquaresPerSide });
     const lastMoved = board[getNumSquares(board) + SpecialValues.CurrentTurn];
     const canMove = userColor === Color.None || userColor !== lastMoved;
 

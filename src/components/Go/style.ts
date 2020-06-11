@@ -4,9 +4,8 @@ const BOARD_SIDE_MARGIN = 15;
 
 export const useStyles = makeStyles<any, {
     numSquaresPerSide: number,
-    expandedBoard: boolean,
 }>(theme => ({
-    root: ({ numSquaresPerSide, expandedBoard }) => ({
+    root: ({ numSquaresPerSide }) => ({
         display: 'grid',
         gridArea: 'main',
         overflow: 'auto',
@@ -149,4 +148,19 @@ export const useSquareStyles = makeStyles<any, {
             },
         },
     }),
+}));
+
+export const useHeaderStyles = makeStyles((theme: any) => ({
+    root: {
+
+    },
+    connected: {
+        color: 'green',
+    },
+    connecting: {
+        color: 'orange',
+    },
+    closed: {
+        color: 'red',
+    },
 }));

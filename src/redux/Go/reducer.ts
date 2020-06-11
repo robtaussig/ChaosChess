@@ -23,7 +23,6 @@ const INITIAL_STATE: GoState = {
   points: null,
   goRoom: null,
   goId: null,
-  expandedBoard: false,
   userColor: Color.None,
 };
 
@@ -83,9 +82,6 @@ export default createSlice({
     },
     roomLeft: (state, action: PayloadAction<LeaveRoomPayload>) => {
       state.goRoom = null;
-    },
-    boardExpanded: state => {
-      state.expandedBoard = !state.expandedBoard;
     },
     colorClaimed: (state, action: PayloadAction<Color>) => {
       state.userColor = action.payload;
