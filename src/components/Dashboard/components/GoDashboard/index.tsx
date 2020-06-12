@@ -22,7 +22,7 @@ import 'css.gg/icons/shape-circle.css';
 export const GoDashboard: FC = () => {
     const classes = useGoStyles({});
     const dispatch = useDispatch();
-    const { board, turnsElapsed, winner, lastMove, points, userColor } = useSelector(goSelector);
+    const { board, turnsElapsed, winner, lastMove, points, userColor, goId, opponent } = useSelector(goSelector);
     const { status } = useSelector(connectionSelector);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const broadcast = useSocket();
@@ -51,6 +51,13 @@ export const GoDashboard: FC = () => {
                     currentTurn: !winner && lastMoved === Color.White,
                     winner: winner === Color.Black || winner === Color.None,
                 })}>
+                    <span className={classNames(classes.playerName, {
+                        isPlayer: userColor === Color.Black,
+                        isOpponent: userColor === Color.White && opponent,
+                        hasPlayer: userColor !== Color.None,
+                    })}>
+                        {userColor === Color.Black ? goId : opponent}
+                    </span>
                     <span className={classes.colorHeader}>
                         Black:
                     </span>
@@ -62,6 +69,13 @@ export const GoDashboard: FC = () => {
                     currentTurn: !winner && lastMoved === Color.Black,
                     winner: winner === Color.White || winner === Color.None,
                 })}>
+                    <span className={classNames(classes.playerName, {
+                        isPlayer: userColor === Color.White,
+                        isOpponent: userColor === Color.Black && opponent,
+                        hasPlayer: userColor !== Color.None,
+                    })}>
+                        {userColor === Color.White ? goId : opponent}
+                    </span>
                     <span className={classes.colorHeader}>
                         White:
                     </span>

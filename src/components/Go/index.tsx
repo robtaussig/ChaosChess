@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useCallback } from 'react';
 import { useStyles } from './style';
 import { goSelector } from '../../redux/Go';
-import { handlePlayerMove, startGame, makeAIMove } from '../../redux/Go/actions';
+import { handlePlayerMove, startGame, makeAIMove, submitGoId, claimColorIfOwned } from '../../redux/Go/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import Square from './components/Square';
 import { getNumSquares } from '../../goEngine/board';
@@ -16,7 +16,7 @@ export interface GoProps {
 export const Go: FC<GoProps> = () => {
     const dispatch = useDispatch();
     const broadcast = useSocket();
-    const { board, legalMoves, lastMove, zones, userColor, goRoom } = useSelector(goSelector);
+    const { board, legalMoves, lastMove, zones, userColor, goRoom, goId, opponent } = useSelector(goSelector);
 
     const numSquares = getNumSquares(board);
     const numSquaresPerSide = Math.sqrt(numSquares);
@@ -37,6 +37,13 @@ export const Go: FC<GoProps> = () => {
             dispatch(makeAIMove());
         }
     }, [dispatch, canMove, goRoom]);
+
+    useEffect(() => {
+        if (opponent && goId) {
+            dispatch(submitGoId(broadcast,goId));
+            dispatch(claimColorIfOwned(broadcast));
+        }
+    }, [broadcast, dispatch, opponent, goId]);
 
     return (
         <div className={classes.root}>

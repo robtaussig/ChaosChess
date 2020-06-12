@@ -11,17 +11,16 @@ export const goMiddleware: Middleware = (store: Store<RootState>) =>
     (next: (action: PayloadAction<any>) => void) =>
         (action: PayloadAction<any>) => {
             if (action?.payload?.broadcast) {
-                const { goRoom, goId } = store.getState().go;
+                const { goRoom } = store.getState().go;
+                const { broadcast, ...payload } = action.payload;
+
                 if (goRoom) {
-                    dispatchBroadcast(action.payload.broadcast, {
+                    dispatchBroadcast(broadcast, {
                         ...action,
-                        payload: {
-                            ...action.payload,
-                            goOpponent: goId,
-                        }
+                        payload,
                     });
                 }
-                const { broadcast, ...payload } = action.payload;
+                
                 return next({
                     ...action,
                     payload,

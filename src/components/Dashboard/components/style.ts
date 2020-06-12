@@ -205,8 +205,16 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
       color: 'red',
     },
   },
+  opponentName: {
+    marginLeft: 10,
+    color: 'rgba(85, 255, 247, 0.81)',
+  },
   colorSpace: {
-    display: 'flex',
+    display: 'grid',
+    gridTemplateAreas: `"player player"
+                        "color score"`,
+    gridTemplateRows: 'max-content 1fr',
+    gridTemplateColumn: '1fr max-content',
     alignItems: 'center',
     fontSize: 30,
     fontWeight: 600,
@@ -226,6 +234,20 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
       color: 'white',
     },
   },
+  playerName: {
+    gridArea: 'player',
+    display: 'none',
+    fontSize: 14,
+    '&.isPlayer': {
+      color: 'rgba(255, 255, 255, 0.86)',
+    },
+    '&.isOpponent': {
+      color: 'rgba(210, 0, 0, 0.77)',
+    },
+    '&.hasPlayer': {
+      display: 'flex',
+    },
+  },
   visibilityToggle: {
     position: 'absolute',
     top: 5,
@@ -236,9 +258,10 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
     },
   },
   colorHeader: {
-    
+    gridArea: 'color',
   },
   colorValue: {
+    gridArea: 'score',
     marginLeft: 'auto',
     
   },
@@ -269,6 +292,9 @@ export const useGoSettingsStyle = makeStyles((theme: any) => ({
     '& .join': {
       gridArea: 'join',
     },
+  },
+  joinedText: {
+
   },
   dashboardButton: {
     ...buttonStyles(theme),

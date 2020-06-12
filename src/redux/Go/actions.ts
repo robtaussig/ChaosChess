@@ -11,6 +11,8 @@ import {
   roomJoined,
   roomLeft,
   colorClaimed,
+  opponentNamed,
+  goIdClaimed,
 } from './';
 import { dispatchBroadcast } from './middleware';
 import { SendMessage } from '../../hooks/useSocket';
@@ -155,6 +157,16 @@ export const claimColor = (broadcast: SendMessage, color: Color): AppThunk<void>
     dispatch(colorClaimed(color));
   };
 
+export const submitGoId = (broadcast: SendMessage, goId: string): AppThunk<void> =>
+  async (dispatch, getState) => {
+    const { go } = getState();
+    const { goRoom } = go;
+    if (goRoom) {
+      dispatchBroadcast(broadcast, opponentNamed(goId));
+    }
+    dispatch(goIdClaimed(goId));
+  };
+
 export const makeAIMove = (): AppThunk<void> =>
   async (dispatch, getState) => {
     const { go } = getState();
@@ -170,5 +182,14 @@ export const makeAIMove = (): AppThunk<void> =>
         move: aiMove[1],
         legalMoves,
       }));
+    }
+  };
+
+export const claimColorIfOwned = (broadcast: SendMessage): AppThunk<void> =>
+  async (dispatch, getState) => {
+    const { go } = getState();
+    const { userColor } = go;
+    if (userColor !== Color.None) {
+      dispatch(claimColor(broadcast, userColor));
     }
   };

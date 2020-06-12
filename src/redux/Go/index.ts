@@ -9,6 +9,8 @@ export const {
     roomJoined,
     roomLeft,
     colorClaimed,
+    opponentNamed,
+    goIdClaimed,
 } = goReducer.actions;
 
 export const reducer = goReducer.reducer;

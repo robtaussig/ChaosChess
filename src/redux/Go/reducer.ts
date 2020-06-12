@@ -43,7 +43,6 @@ export default createSlice({
             zones: {},
             history: [action.payload.board],
             lastMove: null,
-            opponent: action.payload.goOpponent || state.opponent,
         };
     },
     moveCompleted: (state, action: PayloadAction<MakeMovePayload>) => {
@@ -55,7 +54,6 @@ export default createSlice({
         turnsElapsed: state.turnsElapsed + 1,
         lastMove: action.payload.move,
         history: state.history.concat(action.payload.board),
-        opponent: action.payload.goOpponent || state.opponent,
       };
     },
     gameOver: (state, action: PayloadAction<GameOverPayload>) => {
@@ -81,13 +79,18 @@ export default createSlice({
     },
     roomJoined: (state, action: PayloadAction<JoinRoomPayload>) => {
       state.goRoom = action.payload.room;
-      state.goId = action.payload.uuid;
     },
     roomLeft: (state, action: PayloadAction<LeaveRoomPayload>) => {
       state.goRoom = null;
     },
     colorClaimed: (state, action: PayloadAction<Color>) => {
       state.userColor = action.payload;
+    },
+    opponentNamed: (state, action: PayloadAction<string>) => {
+      state.opponent = action.payload;
+    },
+    goIdClaimed: (state, action: PayloadAction<string>) => {
+      state.goId = action.payload;
     },
   },
   extraReducers: {
