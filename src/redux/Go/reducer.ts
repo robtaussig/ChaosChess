@@ -24,6 +24,7 @@ const INITIAL_STATE: GoState = {
   goRoom: null,
   goId: null,
   userColor: Color.None,
+  opponent: null,
 };
 
 export default createSlice({
@@ -42,6 +43,7 @@ export default createSlice({
             zones: {},
             history: [action.payload.board],
             lastMove: null,
+            opponent: action.payload.goOpponent || state.opponent,
         };
     },
     moveCompleted: (state, action: PayloadAction<MakeMovePayload>) => {
@@ -53,6 +55,7 @@ export default createSlice({
         turnsElapsed: state.turnsElapsed + 1,
         lastMove: action.payload.move,
         history: state.history.concat(action.payload.board),
+        opponent: action.payload.goOpponent || state.opponent,
       };
     },
     gameOver: (state, action: PayloadAction<GameOverPayload>) => {

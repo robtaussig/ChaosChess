@@ -191,6 +191,20 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
       left: 'calc(100% - 50px)',
     },
   },
+  connectedIcon: {
+    position: 'absolute',
+    top: 6,
+    left: 6,
+    '&.connected': {
+      color: 'limegreen',
+    },
+    '&.connecting': {
+      color: 'gold',
+    },
+    '&.closed': {
+      color: 'red',
+    },
+  },
   colorSpace: {
     display: 'flex',
     alignItems: 'center',

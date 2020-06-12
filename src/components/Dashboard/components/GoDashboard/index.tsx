@@ -16,6 +16,7 @@ import { SpecialValues } from '../../../../goEngine/constants';
 import { getRemovedPiecesCount, getNumSquares } from '../../../../goEngine/board';
 import classNames from 'classnames';
 import { useSocket } from '../../../../hooks/useSocket';
+import 'css.gg/icons/shape-circle.css';
 
 export const GoDashboard: FC = () => {
     const classes = useGoStyles({});
@@ -39,6 +40,11 @@ export const GoDashboard: FC = () => {
             <div className={classNames(classes.root, classes.rotatable, {
                 hidden: settingsOpen,
             })}>
+                <i className={classNames('gg-shape-circle', classes.connectedIcon, {
+                    connected: true,
+                    connecting: false,
+                    closed: false,
+                })}/>
                 <div className={classNames(classes.colorSpace, 'black', {
                     currentTurn: !winner && lastMoved === Color.White,
                     winner: winner === Color.Black || winner === Color.None,

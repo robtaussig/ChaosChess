@@ -14,6 +14,7 @@ export interface GoState {
     goRoom: string;
     goId: string;
     userColor: Color;
+    opponent: string;
 }
 
 export type MakeMovePayload = {
@@ -21,6 +22,7 @@ export type MakeMovePayload = {
     legalMoves: number[];
     move: number;
     broadcast?: (action: string) => void;
+    goOpponent?: string;
 }
 
 export interface CapturedZones {
@@ -38,6 +40,7 @@ export type GameInitializedPayload = {
     board: string;
     legalMoves: number[];
     broadcast?: (action: string) => void;
+    goOpponent?: string;
 };
 
 export type JoinRoomPayload = {

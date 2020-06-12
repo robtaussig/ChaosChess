@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import useStyles from './styles';
 import { useSelector } from 'react-redux';
 import { headerSelector } from '../../redux/Header';
-import GoHeader from '../Go/components/GoHeader';
 import { Switch, Route, Link } from 'react-router-dom';
 
 export const Header: FC = () => {
@@ -22,7 +21,7 @@ export const Header: FC = () => {
           Find Opponent
         </Route>
         <Route path={'/go'}>
-          <GoHeader/>
+          Go
         </Route>
         <Route path={'*'}>
           <Link to={'/go'}>{headerText}</Link>

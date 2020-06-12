@@ -149,18 +149,3 @@ export const useSquareStyles = makeStyles<any, {
         },
     }),
 }));
-
-export const useHeaderStyles = makeStyles((theme: any) => ({
-    root: {
-
-    },
-    connected: {
-        color: 'green',
-    },
-    connecting: {
-        color: 'orange',
-    },
-    closed: {
-        color: 'red',
-    },
-}));
