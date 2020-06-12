@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { useGoStyles } from '../style';
 import { useSelector, useDispatch } from 'react-redux';
 import 'css.gg/icons/redo.css';
@@ -11,7 +11,7 @@ import GoSettings from './components/GoSettings';
 import { returnHome } from '../../../../redux/App';
 import { goSelector } from '../../../../redux/Go';
 import { connectionSelector, ReadyState } from '../../../../redux/Connection';
-import { startGame, passTurn, undo } from '../../../../redux/Go/actions';
+import { startGame, passTurn, undo, claimColor } from '../../../../redux/Go/actions';
 import { Color, Piece } from '../../../../goEngine/types';
 import { SpecialValues } from '../../../../goEngine/constants';
 import { getRemovedPiecesCount, getNumSquares } from '../../../../goEngine/board';
@@ -22,7 +22,7 @@ import 'css.gg/icons/shape-circle.css';
 export const GoDashboard: FC = () => {
     const classes = useGoStyles({});
     const dispatch = useDispatch();
-    const { board, turnsElapsed, winner, lastMove, points, userColor, goId, opponent } = useSelector(goSelector);
+    const { board, turnsElapsed, winner, lastMove, points, userColor, goId, goRoom, opponent } = useSelector(goSelector);
     const { status } = useSelector(connectionSelector);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const broadcast = useSocket();
@@ -30,6 +30,14 @@ export const GoDashboard: FC = () => {
     const whiteCapturedPieces = getRemovedPiecesCount(board, Piece.White);
     const lastMoved = board[getNumSquares(board) + SpecialValues.CurrentTurn];
     const canMove = userColor === Color.None || userColor !== lastMoved;
+
+    useEffect(() => {
+        if (goRoom) {
+            return () => {
+                dispatch(claimColor(broadcast, Color.None));
+            };
+        }
+    }, [broadcast, dispatch, goRoom]);
 
     return (
         <>

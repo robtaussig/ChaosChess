@@ -133,6 +133,7 @@ export const GoSettings: FC<GoSettingsProps> = ({
                                 'Black'
                 }
                     onChange={handleClaimColor}
+                    disabled={Boolean(userColor !== Color.None && goRoom)}
                 >
                     <option>Black</option>
                     <option>White</option>

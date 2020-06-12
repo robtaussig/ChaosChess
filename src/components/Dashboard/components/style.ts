@@ -242,7 +242,7 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
       color: 'rgba(255, 255, 255, 0.86)',
     },
     '&.isOpponent': {
-      color: 'rgba(210, 0, 0, 0.77)',
+      color: 'rgba(255, 137, 137, 0.84)',
     },
     '&.hasPlayer': {
       display: 'flex',
