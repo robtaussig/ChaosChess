@@ -10,6 +10,7 @@ import DashboardButton from '../DashboardButton';
 import GoSettings from './components/GoSettings';
 import { returnHome } from '../../../../redux/App';
 import { goSelector } from '../../../../redux/Go';
+import { connectionSelector, ReadyState } from '../../../../redux/Connection';
 import { startGame, passTurn, undo } from '../../../../redux/Go/actions';
 import { Color, Piece } from '../../../../goEngine/types';
 import { SpecialValues } from '../../../../goEngine/constants';
@@ -22,6 +23,7 @@ export const GoDashboard: FC = () => {
     const classes = useGoStyles({});
     const dispatch = useDispatch();
     const { board, turnsElapsed, winner, lastMove, points, userColor } = useSelector(goSelector);
+    const { status } = useSelector(connectionSelector);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const broadcast = useSocket();
     const blackCapturedPieces = getRemovedPiecesCount(board, Piece.Black);
@@ -41,9 +43,9 @@ export const GoDashboard: FC = () => {
                 hidden: settingsOpen,
             })}>
                 <i className={classNames('gg-shape-circle', classes.connectedIcon, {
-                    connected: true,
-                    connecting: false,
-                    closed: false,
+                    connected: status === ReadyState.OPEN,
+                    connecting: status === ReadyState.CONNECTING,
+                    closed: status === ReadyState.CLOSED,
                 })}/>
                 <div className={classNames(classes.colorSpace, 'black', {
                     currentTurn: !winner && lastMoved === Color.White,
