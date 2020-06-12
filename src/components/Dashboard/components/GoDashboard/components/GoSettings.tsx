@@ -77,22 +77,36 @@ export const GoSettings: FC<GoSettingsProps> = ({
                 ) : (
                 <label className={classes.roomInput}>
                     Enter name
-                    <input
-                        type={'text'}
-                        value={inputtedGoId}
-                        onChange={e => setInputtedGoId(e.target.value)}
-                        onBlur={e => document.body.scrollTop = 0}
-                    />
+                    <form
+                        onSubmit={e => {
+                            e.preventDefault();
+                            handleSubmitGoId();
+                        }}
+                    >
+                        <input
+                            type={'text'}
+                            value={inputtedGoId}
+                            onChange={e => setInputtedGoId(e.target.value)}
+                            onBlur={e => document.body.scrollTop = 0}
+                        />
+                    </form>
                 </label>
             ) : (
                 <label className={classes.roomInput}>
                     Multiplayer room
-                    <input
-                        type={'text'}
-                        value={inputtedRoomId}
-                        onChange={e => setInputtedRoomId(e.target.value)}
-                        onBlur={e => document.body.scrollTop = 0}
-                    />
+                    <form
+                        onSubmit={e => {
+                            e.preventDefault();
+                            handleClickJoin();
+                        }}
+                    >
+                        <input
+                            type={'text'}
+                            value={inputtedRoomId}
+                            onChange={e => setInputtedRoomId(e.target.value)}
+                            onBlur={e => document.body.scrollTop = 0}
+                        />
+                    </form>
                 </label>
             )}
             {goRoom ?
