@@ -3,6 +3,7 @@ import { RootState } from '../types';
 
 export const {
   returnHome,
+  setBoardFocus,
 } = appReducer.actions;
 
 export const reducer = appReducer.reducer;

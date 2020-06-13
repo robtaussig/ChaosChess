@@ -18,6 +18,7 @@ import {
 } from '../../redux/Connection/actions';
 import { userSelector } from '../../redux/User';
 import { goSelector } from '../../redux/Go';
+import { appSelector } from '../../redux/App';
 import { SocketProvider } from '../../hooks/useSocket';
 import { setName, joinRoom, receiveMessage } from '../../messaging';
 import { waitingRoomJoined, requestJoin, startGameFromJoin } from '../../redux/Connection/actions';
@@ -36,6 +37,7 @@ const WS_ADDR = 'wss://robtaussig.com/ws/';
 
 export const App: FC<AppProps> = () => {
   const classes = useStyles({});
+  const { focusBoard } = useSelector(appSelector);
   const dispatch = useDispatch();
   const joinPhase = useRef<JoinPhase>(null);
   const connection = useSelector(connectionSelector);
@@ -124,7 +126,9 @@ export const App: FC<AppProps> = () => {
   }, [lastMessage, connection.joinPhase, connection.roomId]);
 
   return (
-    <Div100vh id={'app'} className={classNames(classes.root, getRootPath(history))}>
+    <Div100vh id={'app'} className={classNames(classes.root, getRootPath(history), {
+      focusBoard,
+    })}>
       <SocketProvider value={sendMessage}>
         <Header/>
         <Main/>

@@ -177,6 +177,12 @@ export const useGoStyles = makeStyles((theme: Theme) => ({
       gridArea: 'settings',
     },
   },
+  focusBoardButton: {
+    position: 'absolute',
+    top: 4,
+    left: 30,
+    backgroundColor: 'transparent',
+  },
   rotatable: {
     transition: 'all 0.3s ease-in-out',
     transformOrigin: '50% calc(100% + 20px)',

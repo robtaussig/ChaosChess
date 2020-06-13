@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import 'css.gg/icons/redo.css';
 import 'css.gg/icons/ruler.css';
 import 'css.gg/icons/home.css';
-import 'css.gg/icons/eye.css';
+import 'css.gg/icons/chevron-down.css';
+import 'css.gg/icons/chevron-up.css';
+import 'css.gg/icons/zoom-out.css';
 import 'css.gg/icons/chevron-right.css';
 import DashboardButton from '../DashboardButton';
 import GoSettings from './components/GoSettings';
-import { returnHome } from '../../../../redux/App';
+import { returnHome, appSelector, setBoardFocus } from '../../../../redux/App';
 import { goSelector } from '../../../../redux/Go';
 import { connectionSelector, ReadyState } from '../../../../redux/Connection';
 import { startGame, passTurn, undo, claimColor } from '../../../../redux/Go/actions';
@@ -24,6 +26,7 @@ export const GoDashboard: FC = () => {
     const dispatch = useDispatch();
     const { board, turnsElapsed, winner, lastMove, points, userColor, goId, goRoom, opponent } = useSelector(goSelector);
     const { status } = useSelector(connectionSelector);
+    const { focusBoard } = useSelector(appSelector);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const broadcast = useSocket();
     const blackCapturedPieces = getRemovedPiecesCount(board, Piece.Black);
@@ -55,6 +58,17 @@ export const GoDashboard: FC = () => {
                     connecting: status === ReadyState.CONNECTING,
                     closed: status === ReadyState.CLOSED,
                 })}/>
+                <button
+                    className={classNames(classes.focusBoardButton, 'show-board-button', {
+                        focused: focusBoard,
+                    })}
+                    onClick={() => dispatch(setBoardFocus(!focusBoard))}
+                >
+                    <i className={classNames({
+                        'gg-chevron-up': focusBoard,
+                        'gg-chevron-down': !focusBoard,
+                    })}/>
+                </button>
                 <div className={classNames(classes.colorSpace, 'black', {
                     currentTurn: !winner && lastMoved === Color.White,
                     winner: winner === Color.Black || winner === Color.None,
