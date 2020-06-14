@@ -171,8 +171,9 @@ export const submitGoId = (broadcast: SendMessage, goId: string): AppThunk<void>
 export const makeAIMove = (): AppThunk<void> =>
   async (dispatch, getState) => {
     const { go } = getState();
-    const aiMove = await engineWorker.getBestMove(go.board, go.lastMove, go.history, go.difficulty);
-    if (aiMove[1] === null) {
+    const aiMove = await engineWorker.getBestMove(go.board, go.history, go.difficulty);
+
+    if ( go.lastMove === null && aiMove[0] < 0) {
       dispatch(passTurn());
     } else {
       const nextBoard = makeMove(go.board, aiMove[1]);

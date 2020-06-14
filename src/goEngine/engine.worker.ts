@@ -18,7 +18,6 @@ const getValidMoves = (board = INITIAL_BOARD_MEDIUM, history: string[] = []) => 
 
 const getBestMove = (
   board: string,
-  lastMove: number,
   history: string[],
   difficulty = 0,
 ): [number, number] => {
