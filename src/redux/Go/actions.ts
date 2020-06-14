@@ -171,7 +171,7 @@ export const submitGoId = (broadcast: SendMessage, goId: string): AppThunk<void>
 export const makeAIMove = (): AppThunk<void> =>
   async (dispatch, getState) => {
     const { go } = getState();
-    const aiMove = await engineWorker.getBestMove(go.board, go.lastMove, go.history);
+    const aiMove = await engineWorker.getBestMove(go.board, go.lastMove, go.history, go.difficulty);
     if (aiMove[1] === null) {
       dispatch(passTurn());
     } else {
@@ -206,5 +206,8 @@ export const shuffleBoard = (broadcast: SendMessage): AppThunk<void> =>
       board = makeMove(board, moves[Math.floor(Math.random() * moves.length)]);
     }
     const newBoard = board.slice(0, numSquares) + boardSuffix;
-    dispatch(setBoard(newBoard));
+    dispatch(setBoard({
+      board: newBoard,
+      broadcast,
+    }));
   };

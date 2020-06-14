@@ -6,6 +6,7 @@ import {
     GameInitializedPayload,
     JoinRoomPayload,
     LeaveRoomPayload,
+    ShuffleBoardPayload,
 } from './types';
 import { INITIAL_BOARD_SMALL, INITIAL_BOARD_LARGE, INITIAL_BOARD_MEDIUM } from '../../goEngine/constants';
 import { Color } from '../../goEngine/types';
@@ -25,6 +26,7 @@ const INITIAL_STATE: GoState = {
   goId: null,
   userColor: Color.None,
   opponent: null,
+  difficulty: 0,
 };
 
 export default createSlice({
@@ -92,8 +94,11 @@ export default createSlice({
     goIdClaimed: (state, action: PayloadAction<string>) => {
       state.goId = action.payload;
     },
-    setBoard: (state, action: PayloadAction<string>) => {
-      state.board = action.payload;
+    setBoard: (state, action: PayloadAction<ShuffleBoardPayload>) => {
+      state.board = action.payload.board;
+    },
+    difficultyChanged: (state, action: PayloadAction<number>) => {
+      state.difficulty = action.payload;
     },
   },
   extraReducers: {

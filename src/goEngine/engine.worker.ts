@@ -20,9 +20,9 @@ const getBestMove = (
   board: string,
   lastMove: number,
   history: string[],
-  depth = 4,
+  difficulty = 0,
 ): [number, number] => {
-  return getBestMoveEval(board, lastMove, history, depth);
+  return getBestMoveEval(board, 3 + difficulty);
 };
 
 expose({

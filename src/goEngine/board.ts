@@ -181,7 +181,7 @@ export const getCurrentTurnBit = (board: string): number => {
     return numSquares + SpecialValues.CurrentTurn;
 };
 
-export const findLegalMoves = (board: string, history: string[]): number[] => {
+export const findLegalMoves = (board: string, history: string[] = []): number[] => {
     let pointer: number = 0;
     const legalMoves: number[] = [];
     const currentTurnBit = getCurrentTurnBit(board);

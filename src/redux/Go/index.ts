@@ -12,6 +12,7 @@ export const {
     opponentNamed,
     goIdClaimed,
     setBoard,
+    difficultyChanged,
 } = goReducer.actions;
 
 export const reducer = goReducer.reducer;

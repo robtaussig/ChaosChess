@@ -283,9 +283,10 @@ export const useGoSettingsStyle = makeStyles((theme: any) => ({
     gridArea: 'dashboard',
     fontFamily: 'Oxanium',
     gridTemplateAreas: `"header color"
+                        "difficulty difficulty"
                         "room board-size"
                         "join back"`,
-    gridTemplateRows: '1fr 1fr 1fr',
+    gridTemplateRows: '1fr 1fr 1fr 1fr',
     gridTemplateColumns: '1fr 1fr',
     gridGap: '20px',
     padding: 20,
@@ -298,6 +299,18 @@ export const useGoSettingsStyle = makeStyles((theme: any) => ({
     '& .join': {
       gridArea: 'join',
     },
+  },
+  difficultyOptions: {
+    gridArea: 'difficulty',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  difficultyHeader: {
+    fontWeight: 600,
+  },
+  difficultyOption: {
+    display: 'flex',
   },
   joinedText: {
 

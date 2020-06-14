@@ -15,6 +15,7 @@ export interface GoState {
     goId: string;
     userColor: Color;
     opponent: string;
+    difficulty: number;
 }
 
 export type MakeMovePayload = {
@@ -50,4 +51,9 @@ export type JoinRoomPayload = {
 
 export type LeaveRoomPayload = {
     broadcast?: (action: string) => void;
+};
+
+export type ShuffleBoardPayload = {
+    broadcast?: (action: string) => void;
+    board: string;
 };

@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useGoSettingsStyle } from '../../style';
 import DashboardButton from '../../DashboardButton';
 import classNames from 'classnames';
-import { goSelector } from '../../../../../redux/Go';
+import { goSelector, difficultyChanged } from '../../../../../redux/Go';
 import { boardSizeChanged, joinGoRoom, leaveGoRoom, submitGoId, claimColor } from '../../../../../redux/Go/actions';
 import { getNumSquares } from '../../../../../goEngine/board';
 import { Color } from '../../../../../goEngine/types';
@@ -30,7 +30,7 @@ export const GoSettings: FC<GoSettingsProps> = ({
     const broadcast = useSocket();
     const [inputtedRoomId, setInputtedRoomId] = useState('');
     const [inputtedGoId, setInputtedGoId] = useState('');
-    const { board, initialBoard, goRoom, goId, userColor } = useSelector(goSelector);
+    const { board, initialBoard, goRoom, goId, userColor, difficulty } = useSelector(goSelector);
     const numSquares = getNumSquares(board ?? initialBoard);
     const squaresPerSize = Math.sqrt(numSquares);
 
@@ -154,6 +154,24 @@ export const GoSettings: FC<GoSettingsProps> = ({
                     <option>Both</option>
                 </select>
             </label>
+            <form
+                className={classes.difficultyOptions}
+                onChange={(e: any) => dispatch(difficultyChanged(Number(e.target.value)))}
+            >
+                <span className={classes.difficultyHeader}>Difficulty:</span>
+                <label className={classes.difficultyOption}>
+                    Easy
+                    <input type={'radio'} name={'difficulty'} value={0} checked={difficulty === 0}/>
+                </label>    
+                <label className={classes.difficultyOption}>
+                    Normal
+                    <input type={'radio'} name={'difficulty'} value={1} checked={difficulty === 1}/>
+                </label>
+                <label className={classes.difficultyOption}>
+                    Hard
+                    <input type={'radio'} name={'difficulty'} value={2} checked={difficulty === 2}/>
+                </label>
+            </form>
             <label className={classNames(classes.boardSize)}>
                 Board size
                 <select
