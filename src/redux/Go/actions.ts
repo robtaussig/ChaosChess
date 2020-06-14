@@ -171,19 +171,22 @@ export const submitGoId = (broadcast: SendMessage, goId: string): AppThunk<void>
 export const makeAIMove = (): AppThunk<void> =>
   async (dispatch, getState) => {
     const { go } = getState();
+    const prevLastMove = go.lastMove;
     const aiMove = await engineWorker.getBestMove(go.board, go.history, go.difficulty);
-
-    if ( go.lastMove === null && aiMove[0] < 0) {
-      dispatch(passTurn());
-    } else {
-      const nextBoard = makeMove(go.board, aiMove[1]);
-      const legalMoves = await engineWorker.getValidMoves(nextBoard, go.history);
-  
-      dispatch(moveCompleted({
-        board: nextBoard,
-        move: aiMove[1],
-        legalMoves,
-      }));
+    const newLastMove = getState().go.lastMove;
+    if (newLastMove === prevLastMove) {
+      if (newLastMove === null && aiMove[0] < 0) {
+        dispatch(passTurn());
+      } else {
+        const nextBoard = makeMove(go.board, aiMove[1]);
+        const legalMoves = await engineWorker.getValidMoves(nextBoard, go.history);
+    
+        dispatch(moveCompleted({
+          board: nextBoard,
+          move: aiMove[1],
+          legalMoves,
+        }));
+      }
     }
   };
 
