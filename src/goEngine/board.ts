@@ -203,10 +203,11 @@ export const findLegalMoves = (board: string, history: string[] = []): number[] 
         pointer++;
     }
 
+    const boardOnlyHistory = history.map(boardPos => boardPos.slice(0, currentTurnBit));
     return legalMoves
         .filter(move => {
             const afterMove = makeMove(board, move);
-            return !history.includes(afterMove.slice(0, currentTurnBit));
+            return !boardOnlyHistory.includes(afterMove.slice(0, currentTurnBit));
         });
 };
 

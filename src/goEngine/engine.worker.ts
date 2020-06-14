@@ -22,7 +22,7 @@ const getBestMove = (
   history: string[],
   difficulty = 0,
 ): [number, number] => {
-  return getBestMoveEval(board, 3 + difficulty);
+  return getBestMoveEval(board, history, 3 + difficulty);
 };
 
 expose({

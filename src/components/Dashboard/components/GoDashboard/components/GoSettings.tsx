@@ -156,20 +156,37 @@ export const GoSettings: FC<GoSettingsProps> = ({
             </label>
             <form
                 className={classes.difficultyOptions}
-                onChange={(e: any) => dispatch(difficultyChanged(Number(e.target.value)))}
             >
                 <span className={classes.difficultyHeader}>Difficulty:</span>
                 <label className={classes.difficultyOption}>
                     Easy
-                    <input type={'radio'} name={'difficulty'} value={0} checked={difficulty === 0}/>
+                    <input
+                        type={'radio'}
+                        name={'difficulty'}
+                        value={0}
+                        checked={difficulty === 0}
+                        onChange={e => dispatch(difficultyChanged(Number(e.target.value)))}
+                    />
                 </label>    
                 <label className={classes.difficultyOption}>
                     Normal
-                    <input type={'radio'} name={'difficulty'} value={1} checked={difficulty === 1}/>
+                    <input
+                        type={'radio'}
+                        name={'difficulty'}
+                        value={1}
+                        checked={difficulty === 1}
+                        onChange={e => dispatch(difficultyChanged(Number(e.target.value)))}
+                    />
                 </label>
                 <label className={classes.difficultyOption}>
                     Hard
-                    <input type={'radio'} name={'difficulty'} value={2} checked={difficulty === 2}/>
+                    <input
+                        type={'radio'}
+                        name={'difficulty'}
+                        value={2}
+                        checked={difficulty === 2}
+                        onChange={e => dispatch(difficultyChanged(Number(e.target.value)))}
+                    />
                 </label>
             </form>
             <label className={classNames(classes.boardSize)}>

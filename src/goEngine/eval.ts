@@ -19,6 +19,7 @@ const snapshotEvaluation = (board: string): number => {
 
 export const getBestMove = (
   board: string,
+  history: string[] = [],
   depth: number = 4,
   isMaximizer: boolean = false,
   alpha = -Infinity,
@@ -42,7 +43,7 @@ export const getBestMove = (
     Sorts moves at first level by a single-level-deep evaluation. Searching through the best branches early on
     increases likelihood of pruning future branches
   */
-  const legalMoves = findLegalMoves(board);
+  const legalMoves = findLegalMoves(board, history);
   const moves = root ? legalMoves.sort((a, b) => {
     const posA = snapshotEvaluation(makeMove(board, a));
     const posB = snapshotEvaluation(makeMove(board, b));
@@ -52,7 +53,7 @@ export const getBestMove = (
   for (let i = 0; i < moves.length; i++) {
     const moveToTest = moves[i];
     const nextBoardRep = makeMove(board, moveToTest);
-    value = getBestMove(nextBoardRep, depth - 1, !isMaximizer, alpha, beta, false, countNode)[0];
+    value = getBestMove(nextBoardRep, [], depth - 1, !isMaximizer, alpha, beta, false, countNode)[0];
     if (countNode) countNode(); // Caller passes a callback that increments a counter. Can also be invoked in tests to evaluate efficiency.
 
     //Mini-max
