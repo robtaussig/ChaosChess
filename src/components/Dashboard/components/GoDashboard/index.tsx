@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import 'css.gg/icons/redo.css';
 import 'css.gg/icons/ruler.css';
 import 'css.gg/icons/home.css';
+import 'css.gg/icons/hashtag.css';
 import 'css.gg/icons/chevron-down.css';
 import 'css.gg/icons/chevron-up.css';
 import 'css.gg/icons/zoom-out.css';
@@ -13,7 +14,7 @@ import GoSettings from './components/GoSettings';
 import { returnHome, appSelector, setBoardFocus } from '../../../../redux/App';
 import { goSelector } from '../../../../redux/Go';
 import { connectionSelector, ReadyState } from '../../../../redux/Connection';
-import { startGame, passTurn, undo, claimColor } from '../../../../redux/Go/actions';
+import { startGame, passTurn, undo, claimColor, shuffleBoard } from '../../../../redux/Go/actions';
 import { Color, Piece } from '../../../../goEngine/types';
 import { SpecialValues } from '../../../../goEngine/constants';
 import { getRemovedPiecesCount, getNumSquares } from '../../../../goEngine/board';
@@ -105,14 +106,23 @@ export const GoDashboard: FC = () => {
                         {winner ? points.white : blackCapturedPieces}
                     </span>
                 </div>
-                <DashboardButton
-                    classes={classes}
-                    className={'undo'}
-                    label={'Undo'}
-                    icon={'redo'}
-                    disabled={Boolean(turnsElapsed === 0 || winner)}
-                    onClick={() => dispatch(undo(broadcast))}
-                />
+                {turnsElapsed > 0 ? (
+                    <DashboardButton
+                        classes={classes}
+                        className={'undo'}
+                        label={'Undo'}
+                        icon={'redo'}
+                        onClick={() => dispatch(undo(broadcast))}
+                    />
+                ) : (
+                    <DashboardButton
+                        classes={classes}
+                        className={'shuffle'}
+                        label={'Shuffle'}
+                        icon={'hashtag'}
+                        onClick={() => dispatch(shuffleBoard(broadcast))}
+                    />
+                )}
                 <DashboardButton
                     classes={classes}
                     className={'pass-turn'}

@@ -92,6 +92,9 @@ export default createSlice({
     goIdClaimed: (state, action: PayloadAction<string>) => {
       state.goId = action.payload;
     },
+    setBoard: (state, action: PayloadAction<string>) => {
+      state.board = action.payload;
+    },
   },
   extraReducers: {
 

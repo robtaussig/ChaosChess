@@ -1,7 +1,7 @@
 import { WorkerInterface, Piece, Color } from '../../goEngine/types';
 import { wrap } from 'comlink';
 import { AppThunk } from '../types';
-import { makeMove, getWinner } from '../../goEngine/board';
+import { makeMove, getWinner, getNumSquares } from '../../goEngine/board';
 import { INITIAL_BOARD_SMALL, INITIAL_BOARD_MEDIUM, INITIAL_BOARD_LARGE } from '../../goEngine/constants';
 import {
   moveCompleted,
@@ -13,6 +13,7 @@ import {
   colorClaimed,
   opponentNamed,
   goIdClaimed,
+  setBoard,
 } from './';
 import { dispatchBroadcast } from './middleware';
 import { SendMessage } from '../../hooks/useSocket';
@@ -192,4 +193,18 @@ export const claimColorIfOwned = (broadcast: SendMessage): AppThunk<void> =>
     if (userColor !== Color.None) {
       dispatch(claimColor(broadcast, userColor));
     }
+  };
+
+export const shuffleBoard = (broadcast: SendMessage): AppThunk<void> =>
+  async (dispatch, getState) => {
+    let board = getState().go.initialBoard;
+    const numSquares = getNumSquares(board);
+    let boardSuffix = board.slice(numSquares);
+    const numTurns = Math.floor(numSquares * 0.7);
+    for (let i = 0; i < numTurns; i++) {
+      const moves = await engineWorker.getValidMoves(board);
+      board = makeMove(board, moves[Math.floor(Math.random() * moves.length)]);
+    }
+    const newBoard = board.slice(0, numSquares) + boardSuffix;
+    dispatch(setBoard(newBoard));
   };

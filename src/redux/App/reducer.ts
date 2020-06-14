@@ -11,7 +11,7 @@ export default createSlice({
   reducers: {
     returnHome: () => {
       location.href = '/';
-      return null;
+      return INITIAL_STATE;
     },
     setBoardFocus: (state, action: PayloadAction<boolean>) => {
       state.focusBoard = action.payload;
