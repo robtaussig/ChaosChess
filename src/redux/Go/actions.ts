@@ -1,7 +1,7 @@
 import { WorkerInterface, Piece, Color } from '../../goEngine/types';
 import { wrap } from 'comlink';
 import { AppThunk } from '../types';
-import { makeMove, getWinner, getNumSquares } from '../../goEngine/board';
+import { makeMove, getWinner, getNumSquares, findLegalMoves } from '../../goEngine/board';
 import { INITIAL_BOARD_SMALL, INITIAL_BOARD_MEDIUM, INITIAL_BOARD_LARGE } from '../../goEngine/constants';
 import {
   moveCompleted,
@@ -83,7 +83,7 @@ export const undo = (broadcast: SendMessage): AppThunk<void> =>
     const { go } = getState();
     const { history } = go;
     const lastBoard = history[history.length - 2];
-    const legalMoves = await engineWorker.getValidMoves(lastBoard);
+    const legalMoves = findLegalMoves(lastBoard);
     const lastLastBoard = history[history.length - 3];
     let lastMove: number = null;
     if (lastLastBoard) {
