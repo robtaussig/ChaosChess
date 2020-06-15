@@ -3,6 +3,7 @@ import {
   makeMove,
   getWinner,
   getCurrentTurnBit,
+  filterIrrelevantSquaresAtRoot,
 } from './board';
 import { Color } from './types';
 
@@ -39,11 +40,17 @@ export const getBestMove = (
   let bestMove = null;
   let bestMoveValue = isMaximizer ? -Infinity : Infinity;
   let value;
+
+  /*
+    Perhaps an anti-strategy, but only consider moves within a certain range of another stone, the theory
+    being that all other squares are equally viable
+  */
+  const legalMoves = filterIrrelevantSquaresAtRoot(board, findLegalMoves(board, history));
+  
   /*
     Sorts moves at first level by a single-level-deep evaluation. Searching through the best branches early on
     increases likelihood of pruning future branches
   */
-  const legalMoves = findLegalMoves(board, history);
   const moves = root ? legalMoves.sort((a, b) => {
     const posA = snapshotEvaluation(makeMove(board, a));
     const posB = snapshotEvaluation(makeMove(board, b));

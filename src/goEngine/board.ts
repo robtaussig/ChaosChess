@@ -294,3 +294,56 @@ export const getWinner = (board: string): { whitePoints: number, blackPoints: nu
         zones,
     };
 };
+
+const boardLengthToZoneLength = {
+    [9*9]: 2,
+    [13*13]: 3,
+    [19*19]: 3,
+};
+
+const travel = (
+    pos: number,
+    adjacentSquares: { dir: number, condition: (pos: number) => boolean }[],
+    depth: number,
+    find: (pos: number) => void,
+    visited: { [pos: number]: boolean } = {},
+) => {
+    visited[pos] = true;
+
+    if (depth > 0) {
+        adjacentSquares
+            .forEach(({ dir, condition }) => {
+                const nextPos = pos + dir;
+                if (!visited[nextPos] && condition(pos)) {
+                    travel(nextPos  , adjacentSquares, depth - 1, find, visited);
+                    find(nextPos);
+                }
+            });
+    }
+};
+
+export const filterIrrelevantSquaresAtRoot = (board: string, moves: number[]): number[] => {
+    const numSquares = getNumSquares(board);
+    const adjacentSquares = getAdjacentSquares(board);
+    const zoneLength = boardLengthToZoneLength[numSquares];
+    const found: { [pos: number]: boolean } = {};
+
+    for (let i = 0; i < numSquares; i++) {
+        if (board[i] !== Piece.Empty) {
+            travel(i, adjacentSquares, zoneLength, (pos: number) => {
+                found[pos] = true;
+            });
+        }
+    }
+
+    let usingOneIrrelevant = false;
+
+    return moves.filter(pos => {
+        if (found[pos]) return true;
+        if (!usingOneIrrelevant) {
+            usingOneIrrelevant = true;
+            return true;
+        }
+        return false;
+    });
+};
