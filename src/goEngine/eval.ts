@@ -20,6 +20,7 @@ const snapshotEvaluation = (board: string): number => {
 
 export const getBestMove = (
   board: string,
+  lastMove: number,
   history: string[] = [],
   depth: number = 4,
   isMaximizer: boolean = false,
@@ -28,12 +29,16 @@ export const getBestMove = (
   root = true,
   countNode?: () => void,
 ): [number, number] => {
-  if (depth === 0) {
+  if (root || depth === 0) {
     const value = snapshotEvaluation(board);
-    if (isMaximizer) {
-      return [value, null];
+    if (root) {
+      if (lastMove === null && value > 0) return [value, null];
     } else {
-      return [-value, null];
+      if (isMaximizer) {
+        return [value, null];
+      } else {
+        return [-value, null];
+      }
     }
   }
 
@@ -60,7 +65,7 @@ export const getBestMove = (
   for (let i = 0; i < moves.length; i++) {
     const moveToTest = moves[i];
     const nextBoardRep = makeMove(board, moveToTest);
-    value = getBestMove(nextBoardRep, [], depth - 1, !isMaximizer, alpha, beta, false, countNode)[0];
+    value = getBestMove(nextBoardRep, moveToTest, [], depth - 1, !isMaximizer, alpha, beta, false, countNode)[0];
     if (countNode) countNode(); // Caller passes a callback that increments a counter. Can also be invoked in tests to evaluate efficiency.
 
     //Mini-max

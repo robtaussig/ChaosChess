@@ -11,7 +11,7 @@ export const {
     colorClaimed,
     opponentNamed,
     goIdClaimed,
-    setBoard,
+    boardShuffled,
     difficultyChanged,
 } = goReducer.actions;
 

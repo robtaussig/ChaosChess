@@ -45,6 +45,7 @@ export default createSlice({
             zones: {},
             history: [action.payload.board],
             lastMove: null,
+            userColor: Color.None,
         };
     },
     moveCompleted: (state, action: PayloadAction<MakeMovePayload>) => {
@@ -94,8 +95,10 @@ export default createSlice({
     goIdClaimed: (state, action: PayloadAction<string>) => {
       state.goId = action.payload;
     },
-    setBoard: (state, action: PayloadAction<ShuffleBoardPayload>) => {
+    boardShuffled: (state, action: PayloadAction<ShuffleBoardPayload>) => {
       state.board = action.payload.board;
+      state.history = [action.payload.board];
+      state.lastMove = action.payload.lastMove;
     },
     difficultyChanged: (state, action: PayloadAction<number>) => {
       state.difficulty = action.payload;

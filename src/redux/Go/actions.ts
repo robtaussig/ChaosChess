@@ -13,7 +13,7 @@ import {
   colorClaimed,
   opponentNamed,
   goIdClaimed,
-  setBoard,
+  boardShuffled,
 } from './';
 import { dispatchBroadcast } from './middleware';
 import { SendMessage } from '../../hooks/useSocket';
@@ -172,10 +172,12 @@ export const makeAIMove = (): AppThunk<void> =>
   async (dispatch, getState) => {
     const { go } = getState();
     const prevLastMove = go.lastMove;
-    const aiMove = await engineWorker.getBestMove(go.board, go.history, go.difficulty);
+
+    const aiMove = await engineWorker.getBestMove(go.board, prevLastMove, go.history, go.difficulty);
     const newLastMove = getState().go.lastMove;
+
     if (newLastMove === prevLastMove) {
-      if (newLastMove === null && aiMove[0] < 0) {
+      if (aiMove[1] === null) {
         dispatch(passTurn());
       } else {
         const nextBoard = makeMove(go.board, aiMove[1]);
@@ -205,13 +207,16 @@ export const shuffleBoard = (broadcast: SendMessage): AppThunk<void> =>
     const numSquares = getNumSquares(board);
     let boardSuffix = board.slice(numSquares);
     const numTurns = Math.floor(numSquares * 0.7);
+    let lastMove;
     for (let i = 0; i < numTurns; i++) {
       const moves = await engineWorker.getValidMoves(board);
-      board = makeMove(board, moves[Math.floor(Math.random() * moves.length)]);
+      lastMove = moves[Math.floor(Math.random() * moves.length)];
+      board = makeMove(board, lastMove);
     }
     const newBoard = board.slice(0, numSquares) + boardSuffix;
-    dispatch(setBoard({
+    dispatch(boardShuffled({
       board: newBoard,
       broadcast,
+      lastMove,
     }));
   };

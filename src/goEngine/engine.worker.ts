@@ -18,10 +18,11 @@ const getValidMoves = (board = INITIAL_BOARD_MEDIUM, history: string[] = []) => 
 
 const getBestMove = (
   board: string,
+  lastMove: number,
   history: string[],
   difficulty = 0,
 ): [number, number] => {
-  return getBestMoveEval(board, history, 3 + difficulty);
+  return getBestMoveEval(board, lastMove, history, 3 + difficulty);
 };
 
 expose({

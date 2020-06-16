@@ -327,6 +327,11 @@ export const filterIrrelevantSquaresAtRoot = (board: string, moves: number[]): n
     const adjacentSquares = getAdjacentSquares(board);
     const zoneLength = boardLengthToZoneLength[numSquares];
     const found: { [pos: number]: boolean } = {};
+    const numStones = board.match(/[wb]/g)?.length ?? 0;
+
+    if (numStones * 4 > numSquares) {
+        return moves;
+    }
 
     for (let i = 0; i < numSquares; i++) {
         if (board[i] !== Piece.Empty) {
