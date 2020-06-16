@@ -99,6 +99,7 @@ export default createSlice({
       state.board = action.payload.board;
       state.history = [action.payload.board];
       state.lastMove = action.payload.lastMove;
+      state.legalMoves = action.payload.legalMoves;
     },
     difficultyChanged: (state, action: PayloadAction<number>) => {
       state.difficulty = action.payload;

@@ -7,7 +7,7 @@ import {
 } from './board';
 import { Color } from './types';
 
-const snapshotEvaluation = (board: string): number => {
+export const snapshotEvaluation = (board: string): number => {
   const { whitePoints, blackPoints } = getWinner(board);
   const currentTurnBit = getCurrentTurnBit(board);
   const currentColor = board[currentTurnBit] === Color.Black ?
@@ -23,16 +23,18 @@ export const getBestMove = (
   lastMove: number,
   history: string[] = [],
   depth: number = 4,
+  countNode?: () => void,
   isMaximizer: boolean = false,
   alpha = -Infinity,
   beta = Infinity,
   root = true,
-  countNode?: () => void,
 ): [number, number] => {
   if (root || depth === 0) {
     const value = snapshotEvaluation(board);
     if (root) {
-      if (lastMove === null && value > 0) return [value, null];
+      if (lastMove === null && value > 0) {
+        return [value, null];
+      }
     } else {
       if (isMaximizer) {
         return [value, null];
@@ -43,11 +45,9 @@ export const getBestMove = (
   }
 
   let bestMove = null;
-  let bestMoveValue = root ?
-    snapshotEvaluation(board) :
-    isMaximizer ?
-      -Infinity :
-      Infinity;
+  let bestMoveValue = isMaximizer ?
+    -Infinity:
+    Infinity;
   let value;
 
   /*
@@ -69,7 +69,7 @@ export const getBestMove = (
   for (let i = 0; i < moves.length; i++) {
     const moveToTest = moves[i];
     const nextBoardRep = makeMove(board, moveToTest);
-    value = getBestMove(nextBoardRep, moveToTest, [], depth - 1, !isMaximizer, alpha, beta, false, countNode)[0];
+    value = getBestMove(nextBoardRep, moveToTest, [], depth - 1, countNode, !isMaximizer, alpha, beta, false)[0];
     if (countNode) countNode(); // Caller passes a callback that increments a counter. Can also be invoked in tests to evaluate efficiency.
 
     //Mini-max

@@ -214,9 +214,11 @@ export const shuffleBoard = (broadcast: SendMessage): AppThunk<void> =>
       board = makeMove(board, lastMove);
     }
     const newBoard = board.slice(0, numSquares) + boardSuffix;
+    const legalMoves = await engineWorker.getValidMoves(newBoard);
     dispatch(boardShuffled({
       board: newBoard,
       broadcast,
       lastMove,
+      legalMoves,
     }));
   };

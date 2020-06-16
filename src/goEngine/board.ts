@@ -183,7 +183,7 @@ export const getCurrentTurnBit = (board: string): number => {
 
 export const findLegalMoves = (board: string, history: string[] = []): number[] => {
     let pointer: number = 0;
-    const legalMoves: number[] = [];
+    const legalMoves: number[] = [null];
     const currentTurnBit = getCurrentTurnBit(board);
     const currentPieceType = board[currentTurnBit] === Color.Black ? Piece.White : Piece.Black;
 
@@ -341,14 +341,6 @@ export const filterIrrelevantSquaresAtRoot = (board: string, moves: number[]): n
         }
     }
 
-    let usingOneIrrelevant = false;
-
-    return moves.filter(pos => {
-        if (found[pos]) return true;
-        if (!usingOneIrrelevant) {
-            usingOneIrrelevant = true;
-            return true;
-        }
-        return false;
-    });
+    const randomMove = moves[Math.floor(Math.random() * moves.length)];
+    return [randomMove].concat(moves.filter(pos => found[pos] && pos !== randomMove));
 };

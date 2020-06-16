@@ -57,4 +57,5 @@ export type ShuffleBoardPayload = {
     broadcast?: (action: string) => void;
     board: string;
     lastMove: number;
+    legalMoves: number[];
 };
