@@ -43,7 +43,11 @@ export const getBestMove = (
   }
 
   let bestMove = null;
-  let bestMoveValue = isMaximizer ? -Infinity : Infinity;
+  let bestMoveValue = root ?
+    snapshotEvaluation(board) :
+    isMaximizer ?
+      -Infinity :
+      Infinity;
   let value;
 
   /*
@@ -89,5 +93,5 @@ export const getBestMove = (
     }
   }
 
-  return [bestMoveValue, bestMove || moves[0]];
+  return [bestMoveValue, bestMove];
 };
