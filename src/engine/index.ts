@@ -115,3 +115,52 @@ export const isCheck = (board: Board) => {
 
   return false;
 };
+
+export const fenToBoard = (fen: string): Board => {
+  const [
+    board,
+    currentColor,
+    castling,
+  ] = fen.split(' ');
+
+  const rows = board.split('/');
+  let convertedBoard = '0000000000';
+  rows.forEach((row, idx) => {
+    convertedBoard += '0';
+    row.split('').forEach(square => {
+      if (isNaN(Number(square))) {
+        convertedBoard += square;
+      } else {
+        for (let i = 0; i < Number(square); i++) {
+          convertedBoard += '-';
+        }
+      }
+    });
+    convertedBoard += '0';
+  });
+  convertedBoard += '0000000000';
+  convertedBoard += currentColor === 'b' ? '1' : '0';
+  const convertedCastling: number[] = [1, 1, 1, 1];
+  castling.split('').forEach(char => {
+    switch (char) {
+      case 'K':
+        convertedCastling[0] = 0;
+        break;
+      case 'Q':
+        convertedCastling[1] = 0;
+        break;
+      case 'k':
+        convertedCastling[2] = 0;
+        break;
+      case 'q':
+        convertedCastling[3] = 0;
+        break;
+    
+      default:
+        break;
+    }
+  });
+  convertedBoard += convertedCastling.join('');
+  convertedBoard += '000000';
+  return convertedBoard;
+};
