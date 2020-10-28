@@ -1,11 +1,11 @@
 {
   "name": "robtaussig_chess_engine",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "JavaScript Chess engine",
   "main": "dist/index.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist/ && tsc index.ts --outDir dist/ --declaration",
