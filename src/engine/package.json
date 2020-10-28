@@ -1,0 +1,23 @@
+{
+  "name": "robtaussig_chess_engine",
+  "version": "1.0.0",
+  "description": "JavaScript Chess engine",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist/ && tsc index.ts --outDir dist/ --declaration",
+    "push": "npm run build && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robtaussig/ChaosChess/tree/master/src/engine"
+  },
+  "author": "Robert Taussig <robert.taussig@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.0.5"
+  }
+}

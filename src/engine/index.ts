@@ -25,6 +25,7 @@ import {
   getCurrentTurn,
 } from './board';
 import { joinMoves } from './util';
+export { getBestMove } from './eval';
 
 export const findLegalMoves = (board: Board): Move[] => {
   const legalMoves: Move[] = [];
