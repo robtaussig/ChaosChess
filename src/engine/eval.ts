@@ -102,6 +102,12 @@ export const getBestMove = (
     if (countNode) countNode(); // Caller passes a callback that increments a counter. Can also be invoked in tests to evaluate efficiency.
     
     //Mini-max
+
+    //Add variation for moves evaluated as equal
+    if (value === bestMoveValue && Math.random() > 0.5) {
+      bestMoveValue = value;
+      bestMove = move;
+    }
     if (isMaximizer) {
       if (value > bestMoveValue) {
         bestMoveValue = value;
