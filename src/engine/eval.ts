@@ -73,7 +73,7 @@ export const getBestMove = (
   countNode?: () => void,
 ): [number, Move] => {
   if (depth === 0) {
-    const value = snapshotEvaluation(board) * (Math.random() > 0.5 ? 1 : 0.9);
+    const value = snapshotEvaluation(board) * (Math.random() > 0.5 ? 1 : 0.95);
     if (isMaximizer) {
       return [value, null];
     } else {
