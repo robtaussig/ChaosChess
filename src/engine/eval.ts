@@ -71,6 +71,7 @@ export const getBestMove = (
   beta = Infinity,
   root = true,
   countNode?: () => void,
+  limitMoves?: string[],
 ): [number, Move] => {
   if (depth === 0) {
     const value = snapshotEvaluation(board) * (Math.random() > 0.5 ? 1 : 0.95);
@@ -88,7 +89,7 @@ export const getBestMove = (
     Sorts moves at first level by a single-level-deep evaluation. Searching through the best branches early on
     increases likelihood of pruning future branches
   */
-  const legalMoves = findLegalMoves(board);
+  const legalMoves = limitMoves || findLegalMoves(board);
   const moves = root ? legalMoves.sort((a, b) => {
     const posA = snapshotEvaluation(testMove(a, board));
     const posB = snapshotEvaluation(testMove(b, board));

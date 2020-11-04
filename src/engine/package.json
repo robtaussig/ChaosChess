@@ -1,6 +1,6 @@
 {
   "name": "robtaussig_chess_engine",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "JavaScript Chess engine",
   "main": "dist/index.js",
   "files": [
