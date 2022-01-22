@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useMainScreenDashboardStyles } from './style';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import 'css.gg/icons/laptop.css';
 import 'css.gg/icons/games.css';
 import 'css.gg/icons/ruler.css';
@@ -9,10 +9,12 @@ import 'css.gg/icons/enter.css';
 import DashboardButton from './DashboardButton';
 import { setUpVsAI, setUpVsHuman } from '../../../redux/Game';
 import { useHistory } from 'react-router-dom';
+import { connectionSelector, ReadyState } from '../../../redux/Connection';
 
 export const MainScreenDashboard: FC = () => {
   const classes = useMainScreenDashboardStyles({});
   const [enterRoomId, setEnterRoomId] = useState(false);
+  const { status } = useSelector(connectionSelector);
   const [roomInput, setRoomInput] = useState('');
   const history = useHistory();
   const dispatch = useDispatch();
@@ -68,6 +70,7 @@ export const MainScreenDashboard: FC = () => {
         className={'vs-human'}
         label={'vs Human'}
         icon={'games'}
+        disabled={status !== ReadyState.OPEN}
         onClick={() => {
           dispatch(setUpVsHuman());
           history.push('/vs-human');

@@ -84,6 +84,6 @@ export const CHAOS_GAME_OPTIONS: [ChaosGameTypes, boolean][] = [
   [ChaosGameTypes.Normal, true],
   [ChaosGameTypes.Draft, false],
   [ChaosGameTypes.SevenKnights, true],
-  [ChaosGameTypes.RankedChaos, true],
+  [ChaosGameTypes.RankedChaos, false],
   [ChaosGameTypes.SemiChaos, true],
 ];
