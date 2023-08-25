@@ -26,6 +26,7 @@ import {
 } from './board';
 import { joinMoves } from './util';
 export { getBestMove } from './eval';
+export { makeMove } from './board';
 
 export const findLegalMoves = (board: Board): Move[] => {
   const legalMoves: Move[] = [];
